@@ -64,3 +64,16 @@
 - **PR #1 真跑**:`minimalist-essential` 补活预览(此前唯一 `files.preview=null` 的主题)+ 抬版本 1.0.1 → 分支 → 闸 → CI 绿 → squash 合并 → tag `pack/minimalist-essential@1.0.1`。回收链(harvest → gate → PR → tag)不再是纸面流程。
 - 收口文书:`HANDOFF.md`(接手六节:状态/约定/命令/缺口/文件位置)+ `CLOSEOUT.md`(交付物 + 迁移中修掉的 6 个真问题 + 未完成清单)。
 - 迁移中真问题全部留痕(惰性时间戳 / apply 漏拷 / CRLF×sha256 / 断言复刻规则自伤 / sanitize 改写 vendored / __pycache__ 折叠常量),见 CLOSEOUT §迁移中发现。
+
+## 2026-11-04 · 展示站上线 Cloudflare Pages(assets.ouuut.com)
+
+- **新建站点生成器** `scripts/build_site.py`(纯标准库):扫 `packs/*/pack.json` → `dist/`
+  (目录 + 29 详情页 + 12 子 demo 页 + 每包确定性 zip + sitemap/robots/llms/_headers/404/app.json/og.png)。
+  自带 `verify()`:包数 = 卡片数、详情页齐、预览文件在、zip 内含 pack.json、子 demo 页在、sitemap URL 数对得上、零外链子资源 —— 任一不符即非零退出,**CI 里等于不部署坏产物**。
+- **站点外壳零框架零外链** `site/site.css` + `site/site.js`(约 10KB):token 与排版刻度在构建时从库内 `ouuut-editorial` 包直接拷来(站自己就是取用示例);卡片跑包内真实 `preview/index.html`,IntersectionObserver 懒挂 + 并发上限 8 + 视口外卸载,WebGL 类点「运行预览」才建上下文;深浅切换用 `sai-assets-theme`(避开预览里的 `theme` 键)。
+- **部署** `site.yml`:push main → 闸 → 重建 catalog 校验 → 构建 → `wrangler pages deploy`;`preview.yml`:PR → `pr-<n>` 预览环境 + 回评地址。退役 `pages.yml` 并删除仓库 Pages(单一部署面)。
+- **域名** CF 项目 `sai-assets` + `assets.ouuut.com`(CNAME 手建,自动证书);线上实测:目录 200 且 29 卡、详情/子 demo/zip/css/js/robots/sitemap/llms 全 200,`sai-assets.pages.dev` 同时可用。
+- **验收口径落锁** `design-lock.json`(10 条 assertions)+ `concept.md` + `direction-approved.json` + `MASTER-CHECKLIST.md`(59 项裁剪版)+ `docs/adr/adr-0002-site-cloudflare-pages.md`。
+- **探针实测**(ego lite,`.private/ego/round-06…10.mjs`):对比度违例 0(深浅两模 × 目录/详情/代码区)、`scrollWidth-clientWidth = 0`(1440/500/390)、字号 5 档且最小 14px、外链子资源 0、pageerror 0;截图 `.private/shots/final-*.png`。
+- 过程中探针自己踩的两个坑(记一笔):把 `oklab()` 当 RGB 缩放算对比度 → 假失败 15 条;色卡底色用 `--surface` 半透明叠加到 ~20% → 浅色文字真掉到 4.05:1(已改不透明 tint)。
+- **待补**:C3 社交卡实测 / D3 Search Console / E8 Lighthouse 基线 / G3 Uptime Kuma 监控项 —— 见 `MASTER-CHECKLIST.md` 的未勾项。

@@ -677,6 +677,8 @@ def verify(out: Path, rows: list[dict]) -> None:
             bad.append(f"{f.name} 外链脚本 {m.group(1)}")
         for m in re.finditer(r'<iframe[^>]+src="(https?://[^"]+)"', html):
             bad.append(f"{f.name} 外链 iframe {m.group(1)}")
+    if not (out / "og.png").is_file():
+        bad.append("缺 og.png(分享卡)")
     n_url = (out / "sitemap.xml").read_text(encoding="utf-8").count("<url>")
     want = 2 + len(rows) + sum(len(r["demos"]) for r in rows) - 1
     if n_url != want:
@@ -697,7 +699,11 @@ def build(out: Path) -> None:
     (out / "downloads").mkdir()
     shutil.copytree(PACKS, out / "packs")
     for f in sorted(SHELL.glob("*")):
-        if f.is_file():
+        if not f.is_file():
+            continue
+        if f.name == "og.png":          # 分享卡放站根:og:image 指向 {SITE}/og.png
+            shutil.copy2(f, out / f.name)
+        else:
             shutil.copy2(f, out / "assets" / f.name)
     # 站点外壳直接吃库内 ouuut-editorial 的 token / 排版层(取用示例,不做第二份)
     ed = PACKS / "ouuut-editorial" / "css"

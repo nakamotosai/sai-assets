@@ -6,8 +6,8 @@
 ## 1 现在是什么状态(2026-11-04)
 
 - **M0/M1/M2 全部完成**,M3 除"真 PR 回收链"已跑通(PR #1 已 squash 合并),M4 只剩旧私仓归档与最终收尾。
-- 仓内 **29 个包**、闸全绿(`PASS gate: 0 findings, 29 packs, 27 assertions`)、`catalog.json` 6698B ≤ 8KB、Pages 墙 29 卡。
-- 两个 CI workflow:`gate.yml`(公开内容闸 + 断言)、`pages.yml`(闸 → 重建 catalog/墙 → 部署 Pages)。
+- 仓内 **29 个包**、闸全绿(`PASS gate: 0 findings, 29 packs, 27 assertions`)、`catalog.json` 6698B ≤ 8KB、展示站 **https://assets.ouuut.com** 29 卡(38 个可看面)。
+- 三个 CI workflow:`gate.yml`(公开内容闸 + 断言)、`site.yml`(闸 → 重建 catalog → `build_site.py` 构建自检 → `wrangler pages deploy`)、`preview.yml`(PR → `pr-<n>` 预览环境 + 回评地址)。旧 `pages.yml` 已退役,GitHub Pages 已下线。
 - 已发布 tag:`pack/ouuut-editorial@1.0.0`、`pack/minimalist-essential@1.0.1`。
 
 ## 2 关键约定(别踩)
@@ -15,6 +15,7 @@
 | 主题 | 约定 |
 |---|---|
 | 提交前 | **先 `git add -A` 再 `python scripts/gate.py`**——闸只扫 git 跟踪文件,未 add 的新文件不在扫描面 |
+| 站点 | `scripts/build_site.py` 扫 `packs/*/pack.json` 出 `dist/`(详情页/子 demo/zip/sitemap/llms/_headers),自带 `verify()`:任一不符即构建失败。CF 项目 `sai-assets`,域 `assets.ouuut.com`。 |
 | 规则 | 禁用形态的**字面量只有一份**在公开层 `schema/banned.json`;内部标识在本地 `.private/banned.local.json`(gitignore)。**包内断言不许复刻规则**(源码里出现该形态即被判自伤) |
 | 行尾 | 仓内统一 LF(`.gitattributes`)。**任何 sha256 必须"LF 归一后再算"**,否则 Windows 工作区(CRLF)与 CI 检出(LF)会算出两个值 |
 | 版本 | 包级 `pack.json.version`,只增不改;`versions.json` 若记录文件哈希,改文件必须同轮重算 |
@@ -25,7 +26,8 @@
 
 ```bash
 git add -A && python scripts/gate.py                      # 公开内容闸(必须绿)
-python scripts/build_catalog.py && python scripts/build_wall.py   # 重建目录与墙
+python scripts/build_catalog.py && python scripts/build_site.py   # 重建目录 + 站点(产物 dist/,自带 verify)
+python -m http.server 8791 --directory dist                       # 本地看站点
 python scripts/release.py <id> --push                     # 打 tag(内部先跑闸)
 python scripts/apply.py <id> --to <dir>                   # 拷进项目 + 打印 design-lock 片段
 python scripts/harvest.py <id> --from <src> --kind fx --category web-fx \

@@ -1,7 +1,7 @@
 # sai-assets · 可复用网页资产库(themes / web-fx / web-ui / fonts)
 
 > 一个包 = 一个能直接抄进项目的自洽单元:配色与字体、配对规则、断言、活预览。
-> 公开仓:`github.com/nakamotosai/sai-assets` · 预览墙:GitHub Pages
+> 公开仓:`github.com/nakamotosai/sai-assets` · 展示站:**https://assets.ouuut.com**(Cloudflare Pages,29 包带活预览与下载)
 > 事实源:nakotosai/gruvbox-theme(单包成品范例)、sai-assets `docs/PACK-CONTRACT.md`
 
 ## 状态
@@ -10,9 +10,13 @@
 - 里程碑树:`TRACK_TREE.md` · 范围白名单:`docs/WHITELIST.md` · 包契约:`docs/PACK-CONTRACT.md`
 - 决策记录:`docs/adr/adr-0001-single-repo-multi-pack-fresh-history.md`
 
-## 取用(三条通道,按零依赖优先)
+展示站:**https://assets.ouuut.com** —— 卡片里跑的就是包内真实的 `preview/index.html`,每包有详情页(切视口 / 代码页签 / 四路取用 / zip)。
+
+## 取用(四条通道,按零依赖优先)
 
 ```bash
+# 0) 人:直接打开展示站看效果(https://assets.ouuut.com),再决定抄哪个包
+
 # 1) 人 / agent:克隆后读目录,再进单包 SKILL.md
 git clone --depth 1 https://github.com/nakamotosai/sai-assets.git
 cat sai-assets/catalog.json            # 紧凑目录(≤8KB)
@@ -48,7 +52,8 @@ curl -O https://cdn.jsdelivr.net/gh/nakamotosai/sai-assets@pack/paper-editorial@
 ## 进度
 
 - **M0 建档拍板** ✅ 生产根 + 门规 + ADR-0001 + PACK 契约 v1 + 公开收录判据 `docs/SCOPE.md`
-- **M1 单包打通** ✅ 生成器 + 清洗闸 + catalog + 墙 + 公开仓 + Pages + skill 取用协议 + 一次真消费(`design-lock.assets[]` 已记版本)
+- **M1 单包打通** ✅ 生成器 + 清洗闸 + catalog + 公开仓 + skill 取用协议 + 一次真消费(`design-lock.assets[]` 已记版本)
+- **展示站** ✅ `https://assets.ouuut.com`:卡片跑包内真实预览、详情页可切视口 + 代码页签 + 四路取用、每包确定性 zip;加包即上站(preview/pr-<n> 预览环境)
 - **M2 存量迁移** ✅ 29 包:themes 14 · fonts 2 · web-fx 4 · web-ui 6 · fx-engines 1 · references 1 · video-motion 1(索引)
 - **M3 自动化** ⏳ CI 已绿(gate + pages);tag/release 可用;harvest → PR 回收链已备待跑一次真 PR
 - M4 私有侧收口 ⏳ 旧库已降级;待:旧私仓归档、最终 closeout

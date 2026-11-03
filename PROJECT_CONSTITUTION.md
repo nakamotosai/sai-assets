@@ -32,4 +32,4 @@
 | 素材 / 草稿(私有,本地) | 旧主题库(现为素材源,不进本仓) |
 | 设计规则(harness 级) | `skill://sai-frontend` + `skills/sai-frontend/references/` |
 | 消费落地 | 各项目 `design-lock.json.assets[]` |
-| 预览墙 | GitHub Pages(`https://nakamotosai.github.io/sai-assets/`) |
+| 展示站 | Cloudflare Pages(`https://assets.ouuut.com`;CF 项目 `sai-assets`,直传 `dist/`) |

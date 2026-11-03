@@ -26,7 +26,7 @@ M0 建档拍板 ──► M1 单包打通 ──► M2 存量迁移 ──► M3
 | 包生成器(theme JSON → tokens/css/usage/assert/SKILL) | `scripts/build_pack.py` 对 13 个主题跑通,产出落在 `packs/` |
 | 清洗闸 + alias 表 | `scripts/gate.py` 对全仓 0 命中;`schema/alias.json` 收录 12 组 |
 | catalog 生成器 | `catalog.json` ≤8KB,含 27 实体 + 2 索引 |
-| 预览墙(GitHub Pages) | 公开 URL 可开;修掉 id 去重 bug;references 上墙 |
+| 展示站 | ✅ `https://assets.ouuut.com`(Cloudflare Pages):卡片跑包内真预览、详情页切视口 + 代码页签 + 四路取用、每包 zip;旧 GitHub Pages 墙退役 |
 | 公开仓建立 + 首推 | `nakamotosai/sai-assets` public;首个 tag |
 | skill 取用协议 | `sai-frontend\SKILL.md` §1 重写为取用协议;`design-lock.json.assets[]` 口径落地 |
 | **真消费一次** | 一个真实项目里 `design-lock.json` 出现 `pack@version` + 断言输出入档 |
