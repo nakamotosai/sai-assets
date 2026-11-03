@@ -479,7 +479,7 @@ def render_detail(row: dict, rows: list[dict], updated: str) -> str:
       <span class="badge">{esc(CAT_CHIP.get(row['category'], row['category']))}</span>
       <span class="badge">{esc(row['license'])}</span></p>
     <p class="lede">{md_inline(row['when'] or row['one_liner'])}</p>
-    {f'<p class="notfor"><strong>不适用:</strong>{md_inline(row["not_for"])}</p>' if row['not_for'] else ''}
+    {f'<details class="notfor"><summary>不适用场景</summary><p>{md_inline(row["not_for"])}</p></details>' if row['not_for'] else ''}
   </header>
   <section class="stage-wrap">
     <div class="stage-bar">
