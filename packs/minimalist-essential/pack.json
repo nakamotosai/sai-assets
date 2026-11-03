@@ -4,7 +4,7 @@
   "title": "Minimalist Essential 极简 essentials",
   "kind": "theme",
   "category": "themes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "attribution": [
     {
@@ -32,7 +32,7 @@
     ],
     "usage": "docs/usage.md",
     "assert": "scripts/assert_tokens.py",
-    "preview": null
+    "preview": "preview/index.html"
   },
   "tags": [
     "light",
@@ -44,9 +44,12 @@
   "not_for": "禁用:为白而白的空洞页：无层级的空 = 荒，不是极简;低对比浅灰字：正文 <4.5:1、大字 <3:1 直接返工;桌面端也藏导航（汉堡）：可找性 > 完整性;把粗野当极简：粗野是叛逆版，不是删到本质;一屏多 CTA 轰炸 / 自动轮播 / 弹窗;装饰三件套叠加：分割线 / 阴影 / 圆角只用最低值三选一;字族 >2、字重 >3 档；全站裸色值 / 裸 px（必须走 token）",
   "default_variant": "minimalist-essential",
   "verified": {
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "how": "python packs/minimalist-essential/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens minimalist-essential | variants=1 keys=18 hex=17 rgba=0 effects=1 contrast=ink/bg=18.07 onAccent/accent=5.00 | not_in_palette=[]"
+    "evidence": "PASS assert_tokens minimalist-essential | variants=1 keys=18 hex=17 rgba=0 effects=1 contrast=ink/bg=18.07 onAccent/accent=5.00"
   },
-  "canonical_home": null
+  "canonical_home": null,
+  "changelog": [
+    "1.0.1 · 补活预览页(preview/index.html):极简系统自查页(一屏一任务 / 三点层级 / 六色板 / 反模式)"
+  ]
 }
