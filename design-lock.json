@@ -20,10 +20,10 @@
     ],
     "font_tiers_px": [
       14,
+      15,
       17,
-      20,
-      28,
-      55
+      22,
+      "clamp(2.1rem,4.6vw,3.9rem)"
     ],
     "min_text_px": 14,
     "space_scale_px": [
@@ -48,7 +48,10 @@
     },
     "live_iframe_cap": 14,
     "accent_ink_only": "彩色小字一律 --accent-ink / 向 --ink 混色,禁原色(#CD5545 在纸白底只有 3.80:1)",
-    "preview_mount": "滚动对账式(scroll/resize + rAF):先回收跑远的(±1.4 屏),再挂视口附近的;卸载一律放回带文案的占位,任何时刻不留空白块"
+    "preview_mount": "滚动对账式(scroll/resize + rAF):先回收跑远的(±1.4 屏),再挂视口附近的;卸载一律放回带文案的占位,任何时刻不留空白块",
+    "layout": "索引式(无卡片/无阴影/无圆角):行高 84px 起,五列栅格 48 / 1.35fr / 1.05fr / 64 / 96",
+    "preview_model": "首页悬停出右侧浮层(一次只跑一个 iframe,≥1100px 才出现);详情页单舞台,宽高双向 fit + 居中(窄视口成设备画框)",
+    "motion": "只做 opacity/transform;行入场 600ms;跨页 View Transitions 渐进增强;reduced-motion 全关"
   },
   "assertions": [
     {
@@ -129,11 +132,32 @@
       "how": "python scripts/build_site.py 的 verify()"
     },
     {
-      "id": "no-blank-thumb",
+      "id": "index-no-card",
       "kind": "probe",
-      "check": "滚动全程统计 .thumb 中既无 iframe 也无 .poster 的数量(有预览的卡)",
-      "threshold": "= 0",
-      "how": ".private/ego/round-28.mjs / round-30.mjs(线上),19 个位置实测 0"
+      "check": "首页不存在卡片容器(class=card)、无 box-shadow、无 border-radius>2px",
+      "threshold": "命中 = 0",
+      "how": "grep dist/index.html;探针读 computed style"
+    },
+    {
+      "id": "peek-single-iframe",
+      "kind": "probe",
+      "check": "首页任意时刻 iframe 数 ≤1(只有悬停浮层那一个)",
+      "threshold": "≤1",
+      "how": "ego 探针 document.querySelectorAll('iframe').length"
+    },
+    {
+      "id": "reveal-visible-without-js",
+      "kind": "probe",
+      "check": "html 无 .js 类时 .reveal 必须可见(打印/无 JS 兜底)",
+      "threshold": "opacity = 1",
+      "how": "探针读 computed opacity + @media print 规则"
+    },
+    {
+      "id": "stage-path-correct",
+      "kind": "probe",
+      "check": "详情页舞台 iframe 的 src 在 2 层深度解析后命中 packs/<id>/preview",
+      "threshold": "iframe contentDocument.title 非 Error response",
+      "how": "ego 探针读 iframe 文档标题"
     }
   ]
 }

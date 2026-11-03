@@ -24,5 +24,20 @@
   "evidence": {
     "screenshots": ".private/shots/final-home-dark.png / final-home-paper.png / final-detail-dark.png / final-detail-paper.png / final-home-390.png / final-detail-390.png",
     "probes": ".private/ego/probe.js + round-06/07/08/09/10.mjs(对比度 0 违例、ovx 0、字号 5 档、零外链子资源)"
+  },
+  "redesign_2026_11_04": {
+    "user_words": "主题库本身做的不高级 这是用来展示的 所以你本身得用最牛逼最高级 最有效果的方式来做这个前端展示 … 我喜欢极简风",
+    "chosen": "印刷索引:行 = 条目,悬停出右侧活预览浮层;详情页舞台前置;零卡片/零阴影/零圆角",
+    "references": [
+      "minimal.gallery —— 大标题 + 极简标签 + 大图流,几乎没有界面",
+      "recent.design / godly.website —— 作品优先、chrome 近乎为零,类别只是文字",
+      "reactbits.dev / 21st.dev —— 详情页代码页签与预览/代码切换",
+      "Linear / Vercel 文档站 —— 近黑底、发丝线、等宽元数据、小字号大写标签"
+    ],
+    "rejected": [
+      "继续用卡片墙(用户原话:卡片太多、显示不出来;卡片本身也是模板味来源)",
+      "瀑布流图片墙(需要构建期截图,且丢失“跑的是真预览”这个卖点)",
+      "把首页做成 3D/滚动长镜头(与极简取向冲突,且首屏 LCP 不可控)"
+    ]
   }
 }

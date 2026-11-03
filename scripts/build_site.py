@@ -263,7 +263,7 @@ def head(title: str, desc: str, canonical: str, *, depth: int, jsonld: str = "",
 <link rel="stylesheet" href="{up}assets/all.css{v}">
 <link rel="stylesheet" href="{up}assets/type.css{v}">
 <link rel="stylesheet" href="{up}assets/site.css{v}">
-<script>try{{var t=localStorage.getItem('sai-assets-theme');if(t)document.documentElement.dataset.theme=t;}}catch(e){{}}</script>
+<script>document.documentElement.classList.add('js');try{{var t=localStorage.getItem('sai-assets-theme');if(t)document.documentElement.dataset.theme=t;}}catch(e){{}}</script>
 {jsonld}<script src="{up}assets/site.js{v}" defer></script>
 </head>
 <body>
@@ -271,63 +271,49 @@ def head(title: str, desc: str, canonical: str, *, depth: int, jsonld: str = "",
 <header class="top">
   <div class="top-in">
     <a class="mark" href="{up}">sai-assets<span class="mark-sub">可复用网页资产库</span></a>
-    <button class="icon-btn theme-btn" id="theme-btn" type="button" aria-label="切换深浅色" title="切换深浅色">{THEME_ICON}</button>
-    <a class="ghost" href="{GH}">GitHub<span aria-hidden="true"> ↗</span></a>
+    <nav class="top-nav" aria-label="站点">
+      <a href="{up}#index">索引</a>
+      <a href="{up}catalog.json">catalog</a>
+      <a href="{GH}">源码</a>
+    </nav>
+    <div class="top-tools">
+      <button class="icon-btn" id="theme-btn" type="button" aria-label="切换深浅色" title="切换深浅色">{THEME_ICON}</button>
+      <a class="ghost" href="{GH}"><span class="txt">GitHub</span><span aria-hidden="true"> ↗</span></a>
+    </div>
   </div>
 </header>
 """
 
 
-def poster_style(row: dict) -> str:
-    sw = row["swatches"][:3] or ["#8A8A80"]
-    parts = [f"--p{i + 1}:{c}" for i, c in enumerate(sw)]
-    return ";".join(parts)
-
-
-def thumb_html(row: dict, up: str) -> str:
-    """缩略区:能跑的直接懒挂 iframe,WebGL 类点击才跑,无预览给色卡降级。"""
-    if not row["preview"]:
-        sw = "".join(f'<i style="background:{esc(c)}"></i>' for c in (row["swatches"][:6] or ["#8A8A80"]))
-        kind = "外部索引" if row["external"] else "无预览"
-        return (f'<div class="thumb no-preview" style="{poster_style(row)}">'
-                f'<div class="sw-strip">{sw}</div>'
-                f'<span class="poster-label">{esc(kind)} · 内容{'在本家仓库' if row["external"] else '为文档'}</span></div>')
-    rel = f'{up}packs/{row["id"]}/{row["preview"]}'
-    if row["heavy"]:
-        return (f'<div class="thumb" data-src="{esc(rel)}" data-heavy="1" style="{poster_style(row)}">'
-                f'<div class="poster"><span class="poster-label">WebGL 实时预览</span>'
-                f'<button class="run" type="button">运行预览</button></div></div>')
-    return (f'<div class="thumb" data-src="{esc(rel)}" style="{poster_style(row)}">'
-            f'<div class="poster"><span class="poster-label">载入预览…</span></div></div>')
-
-
-def acts_html(row: dict, up: str) -> str:
-    bits = [f'<a class="act" href="{up}p/{esc(row["id"])}/">详情</a>']
-    if row["preview"]:
-        bits.append(f'<a class="act" href="{up}packs/{esc(row["id"])}/{esc(row["preview"])}" '
-                    f'target="_blank" rel="noopener">预览<span aria-hidden="true"> ↗</span></a>')
-    if row["id"] in INDEX_ONLY and row["canonical_home"]:
-        bits.append(f'<a class="act" href="{esc(row["canonical_home"])}" target="_blank" rel="noopener">'
-                    f'本家仓库<span aria-hidden="true"> ↗</span></a>')
-    elif row["id"] not in INDEX_ONLY:
-        bits.append(f'<a class="act" href="{up}downloads/{esc(row["id"])}.zip" download>zip</a>')
-    return f'<div class="acts">{"".join(bits)}</div>'
-
-
-def card_html(row: dict) -> str:
-    tags = "".join(f'<li>{esc(t)}</li>' for t in row["tags"][:4])
+def row_html(row: dict, index: int) -> str:
+    """索引行:编号 / 名称+id / 一句话 / 类目 / 版本+箭头。悬停由 JS 唤起右侧预览。"""
+    src = f'packs/{row["id"]}/{row["preview"]}' if row["preview"] else ""
     search = " ".join([row["id"], row["title"], row["category"], " ".join(row["tags"]),
                        row["when"], row["one_liner"]]).lower()
-    return f"""<article class="card" id="card-{esc(row['id'])}" data-cat="{esc(row['category'])}" data-search="{esc(search)}">
-  <a class="thumb-link" href="p/{esc(row['id'])}/" tabindex="-1" aria-hidden="true">{thumb_html(row, '')}</a>
-  <div class="card-body">
-    <h3><a href="p/{esc(row['id'])}/">{esc(row['title'])}</a></h3>
-    <p class="ids"><code>{esc(row['id'])}</code><span class="ver">v{esc(row['version'])}</span></p>
-    <p class="when">{md_inline(row['when'] or row['one_liner'])}</p>
-    <ul class="tags">{tags}</ul>
-    {acts_html(row, '')}
-  </div>
-</article>"""
+    ext = " data-external" if row["id"] in INDEX_ONLY else ""
+    return (
+        f'<li class="row reveal" id="row-{esc(row["id"])}" data-cat="{esc(row["category"])}"'
+        f' data-search="{esc(search)}" data-src="{esc(src)}" data-heavy="{"1" if row["heavy"] else "0"}"'
+        f' data-title="{esc(row["title"])}" data-id="{esc(row["id"])}"{ext}>'
+        f'<a href="p/{esc(row["id"])}/">'
+        f'<span class="no">{index:02d}</span>'
+        f'<span class="name"><span class="dot" aria-hidden="true"></span>{esc(row["title"])}'
+        f'<small>{esc(row["id"])}</small></span>'
+        f'<span class="desc">{esc((row["when"] or row["one_liner"]).split(":")[0])}</span>'
+        f'<span class="cat">{esc(CAT_CHIP.get(row["category"], row["category"]))}</span>'
+        f'<span class="ver">v{esc(row["version"])}<span class="arrow" aria-hidden="true">→</span></span>'
+        f'</a></li>')
+
+
+def stage_html(row: dict, preview: str | None, heavy: bool, up: str = "") -> str:
+    if not preview:
+        return ('<div class="poster"><span>'
+                + ("外部索引 · 内容在其本家仓库" if row["id"] in INDEX_ONLY else "本包没有预览页")
+                + '</span></div>')
+    src = f'{up}packs/{row["id"]}/{preview}'
+    return (f'<div class="stage-inner" data-src="{esc(src)}" data-heavy="{"1" if heavy else "0"}">'
+            f'<div class="poster"><span>载入预览…</span>'
+            f'<button class="run" type="button">运行预览</button></div></div>')
 
 
 def install_html(row: dict, up: str) -> str:
@@ -371,11 +357,12 @@ def code_html(row: dict, up: str) -> str:
 
 def page_footer(up: str, updated: str) -> str:
     return f"""<footer class="foot">
-  <p>本站用库内 <code>ouuut-editorial</code> 包的 token 与排版刻度构建 —— 展示站本身就是取用示例。</p>
-  <p>内容许可见各包 <code>pack.json</code> 的 <code>license</code> 与 <code>attribution</code>;
-     外部包只做索引,内容在其本家。目录 <a href="{up}catalog.json">catalog.json</a> ·
-     站点清单 <a href="{up}assets/app.json">app.json</a> · <a href="{GH}">源码</a> ·
-     更新 {esc(updated)}</p>
+  <span>本站用库内 <code>ouuut-editorial</code> 包的 token 与字阶构建 —— 展示站本身就是取用示例。</span>
+  <span>许可见各包 <code>pack.json</code>;外部包只做索引。</span>
+  <span><a href="{up}catalog.json">catalog.json</a></span>
+  <span><a href="{up}assets/app.json">app.json</a></span>
+  <span><a href="{GH}">源码</a></span>
+  <span>更新 {esc(updated)}</span>
 </footer>
 """
 
@@ -384,12 +371,13 @@ def page_footer(up: str, updated: str) -> str:
 def render_home(rows: list[dict], updated: str) -> str:
     shown = [r for r in rows if r["category"] in CAT_ORDER]
     ordered = sorted(shown, key=lambda r: (CAT_ORDER.index(r["category"]), r["id"]))
-    cards = "\n".join(card_html(r) for r in ordered)
+    rows_html = "\n".join(row_html(r, i + 1) for i, r in enumerate(ordered))
     counts = {c: sum(1 for r in rows if r["category"] == c) for c in CAT_ORDER}
-    chips = ['<button class="chip on" type="button" data-cat="all">全部<em>%d</em></button>' % len(rows)]
+    chips = ['<button class="filter on" type="button" data-cat="all">全部<em>%d</em></button>' % len(rows)]
     for c in CAT_ORDER:
         if counts[c]:
-            chips.append(f'<button class="chip" type="button" data-cat="{c}">{esc(CAT_CHIP[c])}<em>{counts[c]}</em></button>')
+            chips.append(f'<button class="filter" type="button" data-cat="{c}">'
+                         f'{esc(CAT_CHIP[c])}<em>{counts[c]}</em></button>')
     n_surf = sum(surfaces(r) for r in rows)
     jsonld = ld({
         "@context": "https://schema.org", "@type": "WebSite", "name": "sai-assets",
@@ -399,32 +387,40 @@ def render_home(rows: list[dict], updated: str) -> str:
     })
     return (head("sai-assets · 可复用网页资产库",
                  f"{len(rows)} 个可复用网页资产包:{('、'.join(CAT_CHIP[c] for c in CAT_ORDER if counts[c]))}"
-                 f"。每包带活预览、配对规则、断言与下载。",
+                 f"。每一包 = 入口 + 产物 + 配对规则 + 断言,带活预览与整包下载。",
                  SITE + "/", depth=0, jsonld=jsonld)
             + f"""<main id="main">
   <section class="hero">
-    <h1>可复用网页资产库</h1>
-    <p class="lede">主题配色、排版配方、网页动效、UI 组件 —— 每一包 = 入口 + 产物 + 配对规则 + 断言。
-      下面是它们<strong>真实运行</strong>的样子:卡片里跑的就是包内那份 <code>preview/index.html</code>。</p>
-    <ul class="stats">
-      <li><b>{len(rows)}</b><span>个包</span></li>
-      <li><b>{n_surf}</b><span>个可看面</span></li>
-      <li><b>{len([c for c in CAT_ORDER if counts[c]])}</b><span>个类目</span></li>
-      <li><b>{esc(updated)}</b><span>最近更新</span></li>
-    </ul>
+    <div class="hero-top">
+      <div>
+        <h1>可复用的<em>网页资产库</em></h1>
+        <p class="lede">主题、排版、动效、组件 —— 每一包都是一份<strong>能当场试印</strong>的样张:
+          悬停任意一行,右边跑的就是它自己的预览页。</p>
+      </div>
+      <div class="counts">
+        <div><b>{len(rows)}</b><span>包</span></div>
+        <div><b>{n_surf}</b><span>可看面</span></div>
+        <div><b>{len([c for c in CAT_ORDER if counts[c]])}</b><span>类目</span></div>
+        <div><b>{esc(updated[5:])}</b><span>更新</span></div>
+      </div>
+    </div>
   </section>
-  <section class="controls">
-    <div class="chips" role="group" aria-label="按类目筛选">{"".join(chips)}</div>
+  <section class="toolbar" id="index">
+    <div class="filters" role="group" aria-label="按类目筛选">{"".join(chips)}</div>
     <div class="search">
       <label class="sr" for="q">搜索资产</label>
-      <input id="q" type="search" placeholder="搜索 id / 标签 / 场景(按 / 聚焦)" autocomplete="off">
+      <input id="q" type="search" placeholder="搜索 id / 标签 / 场景" autocomplete="off">
+      <kbd aria-hidden="true">/</kbd>
       <span class="hint" id="q-hint" aria-live="polite"></span>
     </div>
   </section>
-  <section class="grid" id="grid">
-{cards}
+  <section class="index">
+    <ol class="rows" id="rows">
+{rows_html}
+    </ol>
+    <p class="empty" id="empty" hidden>没有匹配的资产。清空搜索或换个类目再看看。</p>
   </section>
-  <p class="empty" id="empty" hidden>没有匹配的资产。清空搜索或换个类目再看看。</p>
+  <aside class="peek" id="peek" aria-hidden="true"></aside>
 </main>
 """
             + page_footer("", updated))
@@ -434,33 +430,31 @@ def render_detail(row: dict, rows: list[dict], updated: str) -> str:
     up = "../../"
     demos = ""
     if row["demos"]:
-        chips = "".join(f'<a class="chip" href="demo/{esc(d["slug"])}/">{esc(d["label"])}</a>' for d in row["demos"])
-        demos = f'<div class="chips demos" role="group" aria-label="子 demo">{chips}</div>'
-    stage = thumb_html(row, up)
+        chips = "".join(f'<a href="demo/{esc(d["slug"])}/">{esc(d["label"])}</a>' for d in row["demos"])
+        demos = f'<div class="demos" role="group" aria-label="子 demo">{chips}</div>'
+    stage = stage_html(row, row["preview"], row["heavy"], up)
     attrs = ""
     if row["attribution"]:
         items = "".join(
             f'<li>{esc(a.get("name", "—"))}'
             + (f' · <a href="{esc(a["url"])}" target="_blank" rel="noopener">来源</a>' if a.get("url") else "")
-            + f' · {esc(a.get("license", "—"))}<br><span class="muted">{esc(a.get("what", ""))}</span></li>'
+            + f' · {esc(a.get("license", "—"))}<div class="what">{esc(a.get("what", ""))}</div></li>'
             for a in row["attribution"])
-        attrs = f'<h2>归属与许可</h2><ul class="attr">{items}</ul>'
+        attrs = f'<div class="block"><h2>归属与许可</h2><ul class="attr">{items}</ul></div>'
     verified = ""
     if row["verified"]:
-        verified = (f'<h2>验证证据</h2><p class="muted">{esc(row["verified"].get("date", ""))} · '
+        verified = (f'<div class="block"><h2>验证证据</h2>'
+                    f'<p class="muted">{esc(row["verified"].get("date", ""))} · '
                     f'<code>{esc(row["verified"].get("how", ""))}</code></p>'
-                    f'<pre class="evidence"><code>{esc(row["verified"].get("evidence", ""))}</code></pre>')
+                    f'<pre class="evidence"><code>{esc(row["verified"].get("evidence", ""))}</code></pre></div>')
     meta_rows = [("类目", CAT_TITLE.get(row["category"], row["category"])),
                  ("版本", "v" + row["version"]),
                  ("许可", row["license"]),
                  ("规模", f'{row["files_n"]} 文件 · {row["kb"]} KB')]
     if row["origin"].get("project"):
-        meta_rows.append(("来源项目", f'{row["origin"].get("project")} · {row["origin"].get("path", "")}'))
+        meta_rows.append(("来源", f'{row["origin"].get("project")} · {row["origin"].get("path", "")}'))
     dl = "".join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in meta_rows)
     tags = "".join(f'<li>{esc(t)}</li>' for t in row["tags"])
-    dl_link = (f'<a class="btn" href="{esc(row["canonical_home"])}" target="_blank" rel="noopener">本家仓库 ↗</a>'
-               if row["id"] in INDEX_ONLY and row["canonical_home"]
-               else f'<a class="btn" href="{up}downloads/{esc(row["id"])}.zip" download>下载 zip</a>')
     jsonld = ld({
         "@context": "https://schema.org", "@type": "CreativeWork", "name": row["title"],
         "identifier": row["id"], "version": row["version"], "license": row["license"],
@@ -471,50 +465,50 @@ def render_detail(row: dict, rows: list[dict], updated: str) -> str:
                  f'{SITE}/p/{row["id"]}/', depth=2, jsonld=jsonld, og_type="article")
             + f"""<main id="main">
   <nav class="crumbs" aria-label="面包屑">
-    <a href="{up}">目录</a><span aria-hidden="true">/</span>
-    <a href="{up}#{esc(row['category'])}">{esc(CAT_TITLE.get(row['category'], row['category']))}</a>
+    <a href="{up}">索引</a><span aria-hidden="true">/</span>
+    <a href="{up}#{esc(row['category'])}">{esc(CAT_CHIP.get(row['category'], row['category']))}</a>
     <span aria-hidden="true">/</span><span aria-current="page">{esc(row['id'])}</span>
   </nav>
   <header class="item-head">
     <h1>{esc(row['title'])}</h1>
-    <p class="ids"><code>{esc(row['id'])}</code><span class="ver">v{esc(row['version'])}</span>
-      <span class="badge">{esc(CAT_CHIP.get(row['category'], row['category']))}</span>
-      <span class="badge">{esc(row['license'])}</span></p>
-    <p class="lede">{md_inline(row['when'] or row['one_liner'])}</p>
-    {f'<details class="notfor"><summary>不适用场景</summary><p>{md_inline(row["not_for"])}</p></details>' if row['not_for'] else ''}
+    <div class="item-meta">
+      <code>{esc(row['id'])}</code><span class="sep" aria-hidden="true">/</span>
+      <span>v{esc(row['version'])}</span><span class="sep" aria-hidden="true">/</span>
+      <span>{esc(row['license'])}</span><span class="sep" aria-hidden="true">/</span>
+      <span>{esc(CAT_TITLE.get(row['category'], row['category']))}</span><span class="sep" aria-hidden="true">/</span>
+      <span>{row['files_n']} 文件 · {row['kb']} KB</span>
+    </div>
   </header>
   <section class="stage-wrap">
-    <div class="stage-bar">
-      <div class="viewports" role="group" aria-label="预览视口">
-        <button class="vp on" type="button" data-w="1280">桌面</button>
-        <button class="vp" type="button" data-w="834">平板</button>
-        <button class="vp" type="button" data-w="390">手机</button>
-      </div>
-      {demos}
-      <div class="stage-tools">
-        <button class="btn small" type="button" id="reload">重新加载</button>
-        {f'<a class="btn small" href="{up}packs/{esc(row["id"])}/{esc(row["preview"])}" target="_blank" rel="noopener">新窗口 ↗</a>' if row['preview'] else ''}
-      </div>
+    <div class="stage-head">
+      <button class="on" type="button" data-w="1280">桌面</button>
+      <button type="button" data-w="834">平板</button>
+      <button type="button" data-w="390">手机</button>
+      <span class="divider" aria-hidden="true"></span>
+      <button type="button" id="reload">重新加载</button>
+      <span class="spacer"></span>
+      {f'<a href="{up}packs/{esc(row["id"])}/{esc(row["preview"])}" target="_blank" rel="noopener">新窗口 ↗</a>' if row['preview'] else ''}
     </div>
     <div class="stage" id="stage">{stage}</div>
-    <p class="muted stage-note">卡片与舞台里跑的是包内真实的预览页;WebGL 类需点“运行预览”才会建立渲染上下文。</p>
+    {demos}
   </section>
+  <div class="intro">
+    <p class="lede-row">{md_inline(row['when'] or row['one_liner'])}</p>
+    {f'<details class="notfor"><summary>不适用场景</summary><p>{md_inline(row["not_for"])}</p></details>' if row['not_for'] else ''}
+  </div>
   <div class="cols">
-    <section class="col-meta">
-      <h2>元数据</h2>
-      <dl class="meta">{dl}</dl>
-      <h2>标签</h2><ul class="tags">{tags}</ul>
+    <section>
+      <div class="block"><h2>元数据</h2><dl class="meta-list">{dl}</dl></div>
+      <div class="block"><h2>标签</h2><ul class="tags">{tags}</ul></div>
       {verified}
       {attrs}
     </section>
-    <section class="col-code">
-      <h2>取用方式</h2>
-      {install_html(row, up)}
-      <h2>源码与规则</h2>
-      <div class="code-box" data-pack="{esc(row['id'])}">{code_html(row, up)}</div>
+    <section>
+      <div class="block"><h2>取用</h2>{install_html(row, up)}</div>
+      <div class="block"><h2>源码与规则</h2><div class="code-box">{code_html(row, up)}</div></div>
     </section>
   </div>
-  <p class="back"><a href="{up}">← 回目录</a></p>
+  <p class="back"><a href="{up}">← 回索引</a></p>
 </main>
 """
             + page_footer(up, updated))
@@ -524,33 +518,30 @@ def render_demo(row: dict, demo: dict, updated: str) -> str:
     up = "../../../../"
     rel = f'{up}packs/{row["id"]}/{demo["path"]}'
     title = demo["label"] if row["id"] in demo["label"] else f'{demo["label"]} · {row["title"]}'
-    return (head(f'{title} · sai-assets',
-                 f'{row["title"]} 的子 demo:{demo["label"]}', f'{SITE}/p/{row["id"]}/demo/{demo["slug"]}/',
-                 depth=4)
+    return (head(f'{title} · sai-assets', f'{row["title"]} 的子 demo:{demo["label"]}',
+                 f'{SITE}/p/{row["id"]}/demo/{demo["slug"]}/', depth=4)
             + f"""<main id="main">
   <nav class="crumbs" aria-label="面包屑">
-    <a href="{up}">目录</a><span aria-hidden="true">/</span>
+    <a href="{up}">索引</a><span aria-hidden="true">/</span>
     <a href="{up}p/{esc(row['id'])}/">{esc(row['id'])}</a>
     <span aria-hidden="true">/</span><span aria-current="page">{esc(demo['label'])}</span>
   </nav>
   <header class="item-head">
     <h1>{esc(demo['label'])}</h1>
-    <p class="ids"><code>{esc(row['id'])}</code><span class="badge">子 demo</span></p>
-    <p class="lede">{md_inline(row['when'])}</p>
+    <div class="item-meta"><code>{esc(row['id'])}</code><span class="sep" aria-hidden="true">/</span><span>子 demo</span></div>
+    <p class="lede-row">{md_inline(row['when'])}</p>
   </header>
   <section class="stage-wrap">
-    <div class="stage-bar">
-      <div class="viewports" role="group" aria-label="预览视口">
-        <button class="vp on" type="button" data-w="1280">桌面</button>
-        <button class="vp" type="button" data-w="834">平板</button>
-        <button class="vp" type="button" data-w="390">手机</button>
-      </div>
-      <div class="stage-tools">
-        <button class="btn small" type="button" id="reload">重新加载</button>
-        <a class="btn small" href="{esc(rel)}" target="_blank" rel="noopener">新窗口 ↗</a>
-      </div>
+    <div class="stage-head">
+      <button class="on" type="button" data-w="1280">桌面</button>
+      <button type="button" data-w="834">平板</button>
+      <button type="button" data-w="390">手机</button>
+      <span class="divider" aria-hidden="true"></span>
+      <button type="button" id="reload">重新加载</button>
+      <span class="spacer"></span>
+      <a href="{esc(rel)}" target="_blank" rel="noopener">新窗口 ↗</a>
     </div>
-    <div class="stage" id="stage">{thumb_html({**row, 'preview': demo['path'], 'heavy': demo['heavy']}, up)}</div>
+    <div class="stage" id="stage">{stage_html({**row, 'id': row['id']}, demo['path'], demo['heavy'], up)}</div>
   </section>
   <p class="back"><a href="{up}p/{esc(row['id'])}/">← 回 {esc(row['id'])}</a></p>
 </main>
@@ -646,8 +637,9 @@ def verify(out: Path, rows: list[dict]) -> None:
     """构建自检:任一不成立即非零退出(CI 里等于阻断部署)。"""
     bad: list[str] = []
     home = (out / "index.html").read_text(encoding="utf-8")
-    if home.count('class="card"') != len(rows):
-        bad.append(f"首页卡片数 {home.count('class=\"card\"')} != 包数 {len(rows)}")
+    n_rows = home.count('class="row reveal"')
+    if n_rows != len(rows):
+        bad.append(f"索引行数 {n_rows} != 包数 {len(rows)}")
     for r in rows:
         page = out / "p" / r["id"] / "index.html"
         if not page.is_file():
