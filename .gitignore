@@ -7,3 +7,6 @@ _deposit_tmp/
 __pycache__/
 *.pyc
 .DS_Store
+
+# 在建中的包:完成并通过闸后再移出本行(闸先于提交)
+packs/references/
