@@ -1,0 +1,89 @@
+/* 墨河 · 深色单色蓝（群青） — 全部变体 + 基础 chrome */
+/* 近黑冷蓝底 + 单一色相 218–223° 明度梯；唯一有彩光是强调色 #6891d9；卡片半透明浮在 WebGL 墨河背景上；竖排书脊刊头（汉字竖排做书脊）；衬线标题 + 冷瓷白正文 */
+/* 含 :root:单主题整站直接链接本文件 */
+
+:root,
+[data-theme="mohe-mono-blue"],
+.theme-mohe-mono-blue {
+  color-scheme: dark;
+  --bg: #04070F;
+  --theme-bg: #04070F;
+  --surface: rgba(80,110,170,.10);
+  --theme-surface: rgba(80,110,170,.10);
+  --surface-2: #101B33;
+  --theme-surface-2: #101B33;
+  --border: rgba(104,145,217,.14);
+  --theme-border: rgba(104,145,217,.14);
+  --ink: #EAF0FA;
+  --theme-ink: #EAF0FA;
+  --ink-muted: #9EB0CC;
+  --theme-ink-muted: #9EB0CC;
+  --ink-dim: #9EB0CC;
+  --theme-ink-dim: #9EB0CC;
+  --accent: #6891d9;
+  --theme-accent: #6891d9;
+  --link: #9fbdf0;
+  --theme-link: #9fbdf0;
+  --panel: rgba(12,22,44,.20);
+  --theme-panel: rgba(12,22,44,.20);
+  --ink-faint: #6B7E9C;
+  --theme-ink-faint: #6B7E9C;
+  --border-strong: rgba(104,145,217,.34);
+  --theme-border-strong: rgba(104,145,217,.34);
+  --line: rgba(104,145,217,.14);
+  --theme-line: rgba(104,145,217,.14);
+  --void: #00000F;
+  --theme-void: #00000F;
+  --on-accent: #04070F;
+  --theme-on-accent: #04070F;
+  --radius-sm: 8px;
+  --theme-radius-sm: 8px;
+  --radius-md: 12px;
+  --theme-radius-md: 12px;
+  --radius-lg: 12px;
+  --theme-radius-lg: 12px;
+  --font-display: "Source Han Serif SC","Noto Serif SC",serif;
+  --theme-font-display: "Source Han Serif SC","Noto Serif SC",serif;
+  --font-body: "Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  --theme-font-body: "Noto Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",system-ui,sans-serif;
+  --font-mono: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --theme-font-mono: ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+
+/* 基础 chrome(opt-in):<body class="theme-apply"> 或 [data-theme-apply] 上底色与基础件 */
+.theme-apply,
+[data-theme-apply] {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: 1.6;
+}
+
+.theme-apply a,
+[data-theme-apply] a {
+  color: var(--link, var(--accent));
+}
+
+.theme-apply code,
+.theme-apply pre,
+[data-theme-apply] code,
+[data-theme-apply] pre {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: var(--code-bg, var(--surface2, var(--surface)));
+  border-radius: var(--radius-sm, 4px);
+}
+
+.theme-apply .panel,
+[data-theme-apply] .panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 6px);
+  box-shadow: none;
+}
+
+.theme-apply .btn-primary,
+[data-theme-apply] .btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-sm, 4px);
+}

@@ -1,0 +1,28 @@
+{
+  "id": "swiss-inverted",
+  "name": "Swiss Inverted（瑞士反色 / 暗色）",
+  "mode": "dark",
+  "signature": "暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红保持不变 —— 同字体两种墨极性",
+  "source": "themes/swiss-inverted.json",
+  "colors": {
+    "bg": "#121212",
+    "bgDeep": "#0E0E0E",
+    "surface": "#1A1A1A",
+    "surface2": "#222222",
+    "border": "#EDEBE6",
+    "hairline": "#5A5651",
+    "ink": "#EDEBE6",
+    "inkMuted": "#9A958D",
+    "inkDim": "#6B6862",
+    "accent": "#D8232A",
+    "accent2": "#E5544B",
+    "onAccent": "#FFFFFF",
+    "red": "#D8232A",
+    "gridRed": "#7A4A42",
+    "chipBg": "#EDEBE6",
+    "chipFg": "#121212",
+    "link": "#E5544B",
+    "codeBg": "#1F1F1F",
+    "shadow": "none"
+  }
+}

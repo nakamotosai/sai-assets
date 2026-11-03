@@ -1,0 +1,66 @@
+{
+  "id": "abyss-lab-record",
+  "name": "Abyss Lab Record 暗黑实验记录",
+  "mode": "dark",
+  "signature": "近黑底 + 工程网格 + 等宽 HUD + 单关键词橙，深色主叙事、纸面只做独立反转章节；面板全透明虚线检测框",
+  "colors": {
+    "bg": "#0B0B0E",
+    "surface": "#14141B",
+    "surface2": "#14161A",
+    "border": "rgba(245,242,234,0.16)",
+    "ink": "#F5F2EA",
+    "inkMuted": "#B8B4AC",
+    "inkDim": "#B8B4AC",
+    "accent": "#FF5A1F",
+    "accent2": "#FF7A33",
+    "red": "#FF3B1F",
+    "link": "#FF7A33",
+    "grid": "rgba(255,255,255,0.08)",
+    "glowW": "0 0 8px rgba(245,242,234,0.35), 0 0 24px rgba(245,242,234,0.16)",
+    "glowO": "0 0 8px rgba(255,90,31,0.55), 0 0 24px rgba(255,90,31,0.28), 0 0 64px rgba(255,90,31,0.16)",
+    "paperBg": "#F2EEE3",
+    "paperInk": "#1B1B18",
+    "paperStamp": "#E8491D",
+    "paperStampSmall": "#B23A00",
+    "paperField": "#FFFFFF",
+    "paperMuted": "#5C574D",
+    "shadow": "0 8px 32px rgba(0,0,0,0.45)",
+    "onAccent": "#1B1B18"
+  },
+  "fonts": {
+    "display": "\"Abyss Display\", \"Archivo Black\", \"Arial Narrow Bold\", \"Noto Sans SC\", sans-serif",
+    "body": "system-ui, \"Noto Sans SC\", \"Noto Sans\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "mono": "\"Abyss Mono\", \"JetBrains Mono\", \"IBM Plex Mono\", \"Noto Sans Mono\", \"Maple Mono NF CN\", \"Noto Sans SC\", \"Microsoft YaHei\", system-ui, sans-serif",
+    "hand": "\"Abyss Hand\", \"Segoe Script\", \"Brush Script MT\", \"Snell Roundhand\", \"Caveat\", \"Noto Sans SC\", \"Microsoft YaHei\", system-ui, sans-serif"
+  },
+  "radius": {
+    "sm": "8px",
+    "md": "8px",
+    "lg": "8px"
+  },
+  "derived": {
+    "bg": "bg",
+    "surface": "bgPanel",
+    "surface2": "bgRaise",
+    "border": "line",
+    "ink": "ink",
+    "inkMuted": "inkDim",
+    "inkDim": "inkDim",
+    "accent": "accent",
+    "accent2": "accentSoft",
+    "red": "danger",
+    "link": "accentSoft",
+    "onAccent": "paperInk"
+  },
+  "a11y": {
+    "contrast_min": 4.5,
+    "pairs": {
+      "ink/bg": 17.57,
+      "onAccent/accent": 5.54
+    },
+    "adjusted": true,
+    "notes": [
+      "源无可用 on-accent 配对;--on-accent 取源 paperInk(#1B1B18),配对 5.54:1"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "id": "ref-p6-no-table-timeline",
+  "name": "时间线禁表格",
+  "tag": "print",
+  "source_url": "https://blog.csdn.net/weixin_42466857/article/details/155575574",
+  "observed": "csdn 同源：主张为交互规范归纳，留。规范观测放行。",
+  "layout": "时间线用交互规范表达，禁表格",
+  "colorsDNA": null,
+  "matchTheme": "slow-ride-cream",
+  "when": "做时间线时禁表格（对 slide-master-senior 同款约束）。注：源站反爬未独立复核，待浏览器实读钉死。许可：观测放行。"
+}

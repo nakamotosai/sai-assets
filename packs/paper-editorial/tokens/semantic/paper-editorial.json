@@ -1,0 +1,68 @@
+{
+  "id": "paper-editorial",
+  "name": "Paper Editorial",
+  "mode": "light",
+  "signature": "纸感编辑：米白画布、墨色正文、刊头朱红",
+  "colors": {
+    "bg": "#F7F3EB",
+    "bgDeep": "#EFE9DF",
+    "surface": "#FFFCF7",
+    "surface2": "#EFE9DF",
+    "border": "#D4CDC2",
+    "ink": "#1A1714",
+    "inkMuted": "#6B6560",
+    "inkDim": "#8A847C",
+    "accent": "#C41E3A",
+    "accent2": "#9A1830",
+    "onAccent": "#FFFCF7",
+    "red": "#C41E3A",
+    "green": "#2F6B4F",
+    "aqua": "#3D6B6B",
+    "blue": "#2C4A6E",
+    "purple": "#6B4A6B",
+    "link": "#C41E3A",
+    "codeBg": "#EFE9DF",
+    "shadow": "none"
+  },
+  "fonts": {
+    "display": "\"Noto Serif SC\", \"Source Han Serif SC\", serif",
+    "body": "\"Noto Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "mono": "\"JetBrains Mono\", Consolas, monospace"
+  },
+  "radius": {
+    "sm": "2px",
+    "md": "4px",
+    "lg": "8px"
+  },
+  "derived": {
+    "bg": "bg",
+    "bgDeep": "bgDeep",
+    "surface": "surface",
+    "surface2": "surface2",
+    "border": "border",
+    "ink": "ink",
+    "inkMuted": "inkMuted",
+    "inkDim": "inkDim",
+    "accent": "accent",
+    "accent2": "accent2",
+    "onAccent": "onAccent",
+    "red": "red",
+    "green": "green",
+    "aqua": "aqua",
+    "blue": "blue",
+    "purple": "purple",
+    "link": "link",
+    "codeBg": "codeBg"
+  },
+  "a11y": {
+    "contrast_min": 4.5,
+    "pairs": {
+      "ink/bg": 16.13,
+      "onAccent/accent": 5.71
+    },
+    "adjusted": false,
+    "notes": [
+      "源里 --link 与 --accent 同为 #C41E3A(照源发;同屏同时出现时用 --accent-2 或下划线区分)"
+    ]
+  }
+}

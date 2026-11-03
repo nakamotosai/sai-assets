@@ -1,0 +1,28 @@
+{
+  "id": "saaaai-paper",
+  "name": "saaaai Paper",
+  "mode": "light",
+  "signature": "暖纸浅底 + 陶土 accent，主页 t6",
+  "source": "themes/saaaai-paper.json",
+  "colors": {
+    "bg": "#F5F2EC",
+    "bgDeep": "#EBE6DC",
+    "surface": "#FFFFFF",
+    "surface2": "#F8F5F0",
+    "border": "rgba(0,0,0,0.12)",
+    "ink": "#4A4A4A",
+    "inkMuted": "#6A6A6A",
+    "inkDim": "#8A8A8A",
+    "accent": "#CC7D5E",
+    "accent2": "#B85C3E",
+    "onAccent": "#FFFFFF",
+    "red": "#C64545",
+    "green": "#3D9A55",
+    "aqua": "#3D8A8A",
+    "blue": "#3D6A9A",
+    "purple": "#8A5A7A",
+    "link": "#CC7D5E",
+    "codeBg": "#1A1816",
+    "shadow": "0 10px 30px rgba(74,74,74,.10)"
+  }
+}

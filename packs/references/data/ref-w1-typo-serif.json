@@ -1,0 +1,11 @@
+{
+  "id": "ref-w1-typo-serif",
+  "name": "排印·编辑衬线（一屏一句）",
+  "tag": "web",
+  "source_url": "https://www.hontran.dev/",
+  "observed": "hontran.dev 实读200：评委视角 art direction / 静帧即海报 / 排印服务单一想法，与'衬线回归、一屏一句'主张一致。全留·观测级放行，不搬图不抄码。",
+  "layout": "一屏一句；衬线回归；排印服务单一想法",
+  "colorsDNA": null,
+  "matchTheme": "paper-editorial",
+  "when": "做纸媒/编辑风首屏标题时先对本条定调，再定字重与行距。许可：观测放行（不搬运原文/图/码）。"
+}

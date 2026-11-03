@@ -1,0 +1,97 @@
+/* Swiss Classic（瑞士国际主义） — 全部变体 + 基础 chrome */
+/* 暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次 */
+/* 含 :root:单主题整站直接链接本文件 */
+
+:root,
+[data-theme="swiss-classic"],
+.theme-swiss-classic {
+  color-scheme: light;
+  --bg: #EDEBE6;
+  --theme-bg: #EDEBE6;
+  --bg-deep: #DCDAD1;
+  --theme-bg-deep: #DCDAD1;
+  --surface: #F7F5F0;
+  --theme-surface: #F7F5F0;
+  --surface-2: #E4E1D9;
+  --theme-surface-2: #E4E1D9;
+  --border: #111111;
+  --theme-border: #111111;
+  --ink: #111111;
+  --theme-ink: #111111;
+  --ink-muted: #6B6862;
+  --theme-ink-muted: #6B6862;
+  --ink-dim: #4A4A4A;
+  --theme-ink-dim: #4A4A4A;
+  --accent: #D8232A;
+  --theme-accent: #D8232A;
+  --accent-2: #B72E25;
+  --theme-accent-2: #B72E25;
+  --on-accent: #FFFFFF;
+  --theme-on-accent: #FFFFFF;
+  --red: #D8232A;
+  --theme-red: #D8232A;
+  --link: #D8232A;
+  --theme-link: #D8232A;
+  --code-bg: #E4E1D9;
+  --theme-code-bg: #E4E1D9;
+  --hairline: #9A9995;
+  --theme-hairline: #9A9995;
+  --grid-red: #DB9382;
+  --theme-grid-red: #DB9382;
+  --chip-bg: #2A2A2A;
+  --theme-chip-bg: #2A2A2A;
+  --chip-fg: #F5F3EE;
+  --theme-chip-fg: #F5F3EE;
+  --shadow: none;
+  --theme-shadow: none;
+  --radius-sm: 0px;
+  --theme-radius-sm: 0px;
+  --radius-md: 4px;
+  --theme-radius-md: 4px;
+  --radius-lg: 6px;
+  --theme-radius-lg: 6px;
+  --font-display: "Helvetica Neue","Neue Haas Grotesk Display Pro",Helvetica,Inter,"Noto Sans SC","Source Han Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  --theme-font-display: "Helvetica Neue","Neue Haas Grotesk Display Pro",Helvetica,Inter,"Noto Sans SC","Source Han Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  --font-body: "Helvetica Neue","Neue Haas Grotesk Display Pro",Inter,"Noto Sans SC","Source Han Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  --theme-font-body: "Helvetica Neue","Neue Haas Grotesk Display Pro",Inter,"Noto Sans SC","Source Han Sans SC","PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  --font-mono: "JetBrains Mono",ui-monospace,monospace;
+  --theme-font-mono: "JetBrains Mono",ui-monospace,monospace;
+}
+
+/* 基础 chrome(opt-in):<body class="theme-apply"> 或 [data-theme-apply] 上底色与基础件 */
+.theme-apply,
+[data-theme-apply] {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: 1.6;
+}
+
+.theme-apply a,
+[data-theme-apply] a {
+  color: var(--link, var(--accent));
+}
+
+.theme-apply code,
+.theme-apply pre,
+[data-theme-apply] code,
+[data-theme-apply] pre {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: var(--code-bg, var(--surface2, var(--surface)));
+  border-radius: var(--radius-sm, 4px);
+}
+
+.theme-apply .panel,
+[data-theme-apply] .panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 6px);
+  box-shadow: var(--shadow, none);
+}
+
+.theme-apply .btn-primary,
+[data-theme-apply] .btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-sm, 4px);
+}

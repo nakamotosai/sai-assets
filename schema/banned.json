@@ -1,24 +1,20 @@
 {
   "schema": 1,
   "note": [
-    "本仓是公开仓:写进去的内容会被 fork / 缓存 / CDN 收录,不可撤回。本表即 scripts/gate.py 内容层闸的规则源。",
-    "每条规则:id(稳定标识,便于豁免留痕)/ pattern(Python re,逐行 search)/ why(为什么这条会阻断公开)/ allow(行级白名单)。",
-    "扫描面 = git 跟踪的文本文件(.md .json .html .css .js .py .yml);非 git 目录回退为遍历。两种情况都排除 .git/、node_modules/、.private/。",
-    "allow 的形状:{ path: 路径 glob, contains: 该行必须含有的子串 }。二者同时命中才放行,并且每次放行都会在闸的输出里打印。",
-    "放行面只有两处,别处不开:(a) exempt_files 里的规则表自身(它按定义逐字包含全部禁用串);(b) packs/*/upstream/** 里 vendored 第三方源码的原始版权/许可头(SPDX-License-Identifier、Copyright 行,按许可要求必须保留)。",
-    "两处放行都会打印:[exempt] 行与 [allow] 行,运行时可见,不做静默跳过。"
+    "本表是公开层:只放通用形态规则,不含任何内部标识(IP / 主机别名 / 客户代号 / 品牌词)——它自身是公开仓文件,写进去的内容不可撤回。",
+    "内部标识表放 .private/banned.local.json(gitignore,不进仓)。scripts/gate.py 启动时该文件存在即合并,并打印 [rules] 公开 N 条 + 本地 M 条;不存在则打印 [rules] 仅公开 N 条(本地补充表缺失)。",
+    "口径:.github/workflows/gate.yml 上的 CI 只跑公开层 = 最低保障;本地与发布前用合并层跑全量。",
+    "每条规则:id(稳定标识,便于豁免留痕)/ pattern(Python re,逐行 search)/ why(为什么这类形态会阻断公开)/ allow(行级白名单)。",
+    "pattern 一律写成不会命中规则表自身的形式(字符类包住要禁的尾字符),因此本表不含被禁字面量、也不需要任何文件豁免;exempt_files 因此为空。",
+    "allow 的形状:{ path: 路径 glob, contains: 该行必须含有的子串 };两者同时命中才放行,且每次放行都会打印 [allow] 行。",
+    "扫描面 = git 跟踪的文本文件(.md .json .html .css .js .py .yml);非 git 目录回退为遍历;两种情况都排除 .git/、node_modules/、.private/。"
   ],
-  "exempt_files": [
-    {
-      "path": "schema/banned.json",
-      "why": "规则表本身逐字写有全部禁用串,被扫必然自伤;它是规则源不是内容。"
-    }
-  ],
+  "exempt_files": [],
   "rules": [
     {
-      "id": "local-path-drive-users",
-      "pattern": "[A-Za-z]:[\\\\/]Users",
-      "why": "本机绝对路径(如 C:\\Users\\sai\\...)会暴露开发机用户名与目录结构。",
+      "id": "local-path-drive-root",
+      "pattern": "[A-Za-z]:[\\\\/](?![\\\\/])",
+      "why": "Windows 盘符绝对路径(单个字母 + 冒号 + 一个分隔符;分隔符后面再跟一个斜杠的情形按 URL 协议头处理,不在此列):只在单机成立,公开后是死链,并暴露本机目录名与用户名。",
       "allow": [
         {
           "path": "packs/*/upstream/**",
@@ -33,9 +29,9 @@
       ]
     },
     {
-      "id": "local-path-f-drive",
-      "pattern": "F:[\\\\/]",
-      "why": "作者素材库盘符路径(如 F:\\模板库\\...):既是本机信息,也暴露私有素材源的存在。",
+      "id": "local-path-drive-escaped",
+      "pattern": "[A-Za-z]:[\\\\]{2}",
+      "why": "JSON / 源码里转义写法的 Windows 盘符绝对路径(盘符冒号之后跟两个反斜杠):与本机未转义写法同属本机路径。",
       "allow": [
         {
           "path": "packs/*/upstream/**",
@@ -50,9 +46,9 @@
       ]
     },
     {
-      "id": "file-url",
-      "pattern": "file:///",
-      "why": "file:/// 只在单机文件系统里成立,公开后是死链,且常常携带绝对路径。",
+      "id": "local-path-file-url",
+      "pattern": "file:[/]{2,3}",
+      "why": "本机文件协议 URL(file 协议头接两三个斜杠):公开后不可用,且常带本机绝对路径。",
       "allow": [
         {
           "path": "packs/*/upstream/**",
@@ -67,150 +63,51 @@
       ]
     },
     {
-      "id": "lan-tailscale-ip",
-      "pattern": "100\\.86\\.60\\.101",
-      "why": "内网/Tailscale 主机地址,等于把私有网络拓扑贴到公网。",
+      "id": "lan-cgnat-address",
+      "pattern": "100\\.\\d+\\.\\d+\\.\\d+",
+      "why": "100.64/10 网段(CGNAT / 隧道组网):这类地址是私有网络拓扑,公开等于把内网入口贴到公网。",
       "allow": []
     },
     {
-      "id": "tailscale-domain",
+      "id": "lan-tunnel-domain",
       "pattern": "\\.ts\\.net",
-      "why": "Tailscale 内网域名(*.ts.net)属于私有网络,公开即暴露内网入口。",
+      "why": "隧道组网域名(私有组网产品提供的域名后缀):私有网络的入口地址,不进公开仓。",
       "allow": []
     },
     {
-      "id": "host-vps-jp",
-      "pattern": "vps-jp",
-      "why": "内网主机名,暴露私有服务器命名与存在。",
+      "id": "lan-loopback-port",
+      "pattern": "(127\\.0\\.0\\.1|localhost):\\d{2,5}",
+      "why": "本机回环地址后接端口:本机服务拓扑信息,与公开资产无关,公开后也是死链。",
       "allow": []
     },
     {
-      "id": "loopback-exposed-port",
-      "pattern": "127\\.0\\.0\\.1:8",
-      "why": "本机服务端口(本地代理/网关)是内网拓扑信息,与资产库无关。",
-      "allow": []
-    },
-    {
-      "id": "host-home-windows",
-      "pattern": "home-windows",
-      "why": "内网主机名,暴露私有机器命名。",
-      "allow": []
-    },
-    {
-      "id": "secret-openai-style-key",
+      "id": "secret-api-key-form",
       "pattern": "sk-[A-Za-z0-9]{16,}",
-      "why": "API key 形态的字符串。一旦进了公开 commit,即使立刻删掉也已被缓存/抓取,只能作废重发。",
+      "why": "API key 形态的字符串:一旦进了公开 commit 就已被缓存/抓取,即使立刻删掉也只能作废重发。",
       "allow": []
     },
     {
-      "id": "secret-github-token",
-      "pattern": "ghp_",
-      "why": "GitHub personal access token 前缀;公开即等于交出仓库写权限。",
+      "id": "secret-github-token-form",
+      "pattern": "ghp[_]",
+      "why": "代码托管平台的个人访问令牌前缀:公开等于交出仓库写权限。",
       "allow": []
     },
     {
-      "id": "secret-aws-access-key",
-      "pattern": "AKIA",
-      "why": "AWS access key id 前缀;公开即等于交出云资源。",
+      "id": "secret-aws-key-form",
+      "pattern": "AKI[A]",
+      "why": "云厂商访问密钥 id 前缀:公开等于交出对应云资源。",
       "allow": []
     },
     {
       "id": "secret-private-key-block",
       "pattern": "BEGIN [A-Z ]*PRIVATE KEY",
-      "why": "私钥块头(PEM);公开即等于交出对应身份的全部信任。",
+      "why": "PEM 私钥块头:公开等于交出对应身份的全部信任。",
       "allow": []
     },
     {
-      "id": "brand-anthropic",
-      "pattern": "Anthropic",
-      "why": "第三方品牌(Anthropic):主题原子里的模板残留文案,属于他人的品牌资产,不能挂在自家公开资产库上。",
-      "allow": [
-        {
-          "path": "packs/*/upstream/**",
-          "contains": "SPDX-License-Identifier",
-          "why": "vendored 第三方源码的 SPDX 许可头必须原样保留"
-        },
-        {
-          "path": "packs/*/upstream/**",
-          "contains": "Copyright",
-          "why": "vendored 第三方源码的版权头必须原样保留"
-        }
-      ]
-    },
-    {
-      "id": "brand-dario-amodei",
-      "pattern": "Dario Amodei",
-      "why": "第三方人物姓名:与资产库无关的个人信息,且容易被读成背书或关联。",
-      "allow": [
-        {
-          "path": "packs/*/upstream/**",
-          "contains": "SPDX-License-Identifier",
-          "why": "vendored 第三方源码的 SPDX 许可头必须原样保留"
-        },
-        {
-          "path": "packs/*/upstream/**",
-          "contains": "Copyright",
-          "why": "vendored 第三方源码的版权头必须原样保留"
-        }
-      ]
-    },
-    {
-      "id": "brand-claude-cn",
-      "pattern": "克劳德",
-      "why": "第三方品牌中文名:同 brand-anthropic,残留的品牌话术不得进公开仓。",
-      "allow": [
-        {
-          "path": "packs/*/upstream/**",
-          "contains": "SPDX-License-Identifier",
-          "why": "vendored 第三方源码的 SPDX 许可头必须原样保留"
-        },
-        {
-          "path": "packs/*/upstream/**",
-          "contains": "Copyright",
-          "why": "vendored 第三方源码的版权头必须原样保留"
-        }
-      ]
-    },
-    {
-      "id": "biz-domain-saaaai",
-      "pattern": "biz\\.saaaai\\.com",
-      "why": "自有业务域名:公开资产库不该指向私有业务端点。",
-      "allow": []
-    },
-    {
-      "id": "biz-cnjp-media",
-      "pattern": "中日自媒体",
-      "why": "自有业务线名称(客户/项目口径),属于私有项目信息,不进公开仓。",
-      "allow": []
-    },
-    {
-      "id": "biz-cnjpv4",
-      "pattern": "cnjpv4",
-      "why": "私有客户项目代号(该批 demo 含 18 家媒体 logo 与第三方原图,已列入不灌清单)。",
-      "allow": []
-    },
-    {
-      "id": "biz-cnjp-short",
-      "pattern": "cnjp-short",
-      "why": "私有客户/内部打样项目代号,不进公开仓。",
-      "allow": []
-    },
-    {
-      "id": "confidential-mark",
-      "pattern": "PRIVATE & CONFIDENTIAL",
-      "why": "内部/客户文档的保密标记:说明该文件来自客户交付物,整段内容都不该公开。",
-      "allow": []
-    },
-    {
-      "id": "thirdparty-source-logos",
-      "pattern": "SOURCE_LOGOS",
-      "why": "第三方媒体 logo 清单标记:真实媒体品牌资产不能随资产库分发。",
-      "allow": []
-    },
-    {
-      "id": "thirdparty-holo-mirror",
-      "pattern": "holo\\.ui8\\.dev",
-      "why": "外部站点镜像件的来源标记:该件自带禁止公开发布声明,公开即侵权。",
+      "id": "secret-password-assignment",
+      "pattern": "pass(word|wd)\\s*=",
+      "why": "明文口令赋值写法(pass 开头两种拼法后接等号):公开仓里出现即等于泄露凭据出处。",
       "allow": []
     }
   ]

@@ -1,6 +1,8 @@
 name: gate
 
 # 公开内容闸:任何 push / PR / 手触发都跑一遍 scripts/gate.py(三层:schema + 清洗 + 断言)。
+# 规则口径:CI 只加载公开层 schema/banned.json(通用形态规则)= **最低保障**;
+# 内部标识表在 .private/banned.local.json(不进仓),本地与发布前用合并层跑全量,闸会打印 [rules] 行说明本次加载了几条。
 # 只读仓内容,不推代码、不用 secrets。
 on: [push, pull_request, workflow_dispatch]
 

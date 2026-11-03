@@ -1,15 +1,81 @@
 {
  "schema": 1,
  "repo": "nakamotosai/sai-assets",
- "updated": "2026-11-03T13:48:36+00:00",
+ "updated": "2026-11-03T14:01:48+00:00",
  "base": "https://raw.githubusercontent.com/nakamotosai/sai-assets/main/",
  "how_to_use": "读本文件选包 → 取 base+path+<pack>/SKILL.md → 按其中 apply 步骤落地;项目侧用 python scripts/apply.py <id> --to <dir>",
  "categories": [
   {
    "id": "themes",
    "title": "主题 · 配色与字体",
-   "count": 2,
+   "count": 14,
    "items": [
+    {
+     "id": "abyss-lab-record",
+     "title": "Abyss Lab Record 暗黑实验记录",
+     "version": "1.0.0",
+     "one_liner": "近黑底 + 工程网格 + 等宽 HUD + 单关键词橙，深色主叙事、纸面只做独立反转章节；面板全透明虚线检测框;适用:近黑非纯黑底 + 单层工…",
+     "tags": [
+      "dark",
+      "theme",
+      "paper",
+      "mono",
+      "grid"
+     ],
+     "path": "packs/abyss-lab-record/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "fm-void",
+     "title": "FM Void · 全黑 void + 半透明等宽字",
+     "version": "1.0.0",
+     "one_liner": "全黑 void + 半透明等宽字；戏在 canvas 背景;适用:UI 字小、letter-spacing 宽;背景用 canvas 表演;静…",
+     "tags": [
+      "dark",
+      "theme",
+      "mono",
+      "void"
+     ],
+     "path": "packs/fm-void/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "minimalist-essential",
+     "title": "Minimalist Essential 极简 essentials",
+     "version": "1.0.0",
+     "one_liner": "删到不能再删：中性底 + 单强调色 + 8pt 网格 + 单列信息流；一屏一任务;适用:中性色做 90% 面积 + 1 个强调色只占 ≤10%…",
+     "tags": [
+      "light",
+      "theme",
+      "grid",
+      "minimal"
+     ],
+     "path": "packs/minimalist-essential/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "mohe-mono-blue",
+     "title": "墨河 · 深色单色蓝（群青）",
+     "version": "1.0.0",
+     "one_liner": "近黑冷蓝底 + 单一色相 218–223° 明度梯；唯一有彩光是强调色 #6891d9；卡片半透明浮在 WebGL 墨河背景上；竖排书脊刊头（…",
+     "tags": [
+      "dark",
+      "theme",
+      "ink",
+      "blue",
+      "serif"
+     ],
+     "path": "packs/mohe-mono-blue/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
     {
      "id": "ouuut-editorial",
      "title": "ouuut Editorial · 和色六景(纸白 / 炭黑)",
@@ -23,6 +89,139 @@
       "dual-theme"
      ],
      "path": "packs/ouuut-editorial/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "paper-editorial",
+     "title": "Paper Editorial · 纸感编辑：米白画布",
+     "version": "1.0.0",
+     "one_liner": "纸感编辑：米白画布、墨色正文、刊头朱红;适用:浅色 only;大标题衬线加粗;红只作强调不铺大底",
+     "tags": [
+      "light",
+      "theme",
+      "paper",
+      "ink",
+      "red"
+     ],
+     "path": "packs/paper-editorial/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "popart-neubrutal",
+     "title": "Pop Art · Neo Brutal · 奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色",
+     "version": "1.0.0",
+     "one_liner": "奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色;适用:4px 黑边;硬阴影无模糊;按下阴影收 2px",
+     "tags": [
+      "light",
+      "theme",
+      "paper",
+      "shadow",
+      "cream"
+     ],
+     "path": "packs/popart-neubrutal/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "saaaai-mono",
+     "title": "saaaai Mono · 近黑 void + 银灰 ink",
+     "version": "1.0.0",
+     "one_liner": "近黑 void + 银灰 ink + 等高线轮廓当 accent;适用:单色强调;留大负空间;contour 与 accent 可分离",
+     "tags": [
+      "dark",
+      "theme",
+      "void"
+     ],
+     "path": "packs/saaaai-mono/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "saaaai-paper",
+     "title": "saaaai Paper · 暖纸浅底 + 陶土 accent",
+     "version": "1.0.0",
+     "one_liner": "暖纸浅底 + 陶土 accent，主页 t6;适用:陶土作唯一 accent;浅底卡片白抬升",
+     "tags": [
+      "light",
+      "theme",
+      "paper",
+      "warm"
+     ],
+     "path": "packs/saaaai-paper/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "slow-ride-cream",
+     "title": "Slow Ride Cream 慢骑奶油",
+     "version": "1.0.0",
+     "one_liner": "暖奶油纸面 + 鼠尾草绿 + 番茄围巾，慢日子编辑风；拱形画框 + 双语微标签 + 一句文案;适用:纸面底色 + 深棕墨字，英文微标签全大写宽…",
+     "tags": [
+      "light",
+      "theme",
+      "paper",
+      "green",
+      "warm"
+     ],
+     "path": "packs/slow-ride-cream/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "swiss-classic",
+     "title": "Swiss Classic（瑞士国际主义）",
+     "version": "1.0.0",
+     "one_liner": "暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次;适用:暖色纸白（#EDEBE6）与暖黑（#111111），绝不用纯…",
+     "tags": [
+      "light",
+      "theme",
+      "paper",
+      "red",
+      "warm"
+     ],
+     "path": "packs/swiss-classic/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "swiss-inverted",
+     "title": "Swiss Inverted（瑞士反色 / 暗色）",
+     "version": "1.0.0",
+     "one_liner": "暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红保持不变 —— 同字体两种墨极性;适用:深色底用暖黑 #121212，绝不用纯 #000…",
+     "tags": [
+      "dark",
+      "theme",
+      "paper",
+      "ink",
+      "red"
+     ],
+     "path": "packs/swiss-inverted/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "tokyo-crime-dark",
+     "title": "Tokyo Crime Dark 暖黑数据图",
+     "version": "1.0.0",
+     "one_liner": "暖黑底 #16130e 配暖色顺序带：深色底上把 ColorBrewer YlOrRd 整体提亮 15% 修对比（断点不动），深棕分隔线代替白…",
+     "tags": [
+      "dark",
+      "theme",
+      "warm",
+      "map",
+      "dataviz"
+     ],
+     "path": "packs/tokyo-crime-dark/",
      "license": "MIT",
      "external": false,
      "home": null

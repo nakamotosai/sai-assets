@@ -1,0 +1,97 @@
+/* saaaai Mono — 全部变体 + 基础 chrome */
+/* 近黑 void + 银灰 ink + 等高线轮廓当 accent */
+/* 含 :root:单主题整站直接链接本文件 */
+
+:root,
+[data-theme="saaaai-mono"],
+.theme-saaaai-mono {
+  color-scheme: dark;
+  --bg: #06070A;
+  --theme-bg: #06070A;
+  --bg-deep: #040508;
+  --theme-bg-deep: #040508;
+  --surface: #0E0F14;
+  --theme-surface: #0E0F14;
+  --surface-2: #161820;
+  --theme-surface-2: #161820;
+  --border: rgba(255,255,255,0.12);
+  --theme-border: rgba(255,255,255,0.12);
+  --ink: #F4F4F5;
+  --theme-ink: #F4F4F5;
+  --ink-muted: #A8A8A8;
+  --theme-ink-muted: #A8A8A8;
+  --ink-dim: #8B8D94;
+  --theme-ink-dim: #8B8D94;
+  --accent: #E8E8EC;
+  --theme-accent: #E8E8EC;
+  --accent-2: #C8C8CC;
+  --theme-accent-2: #C8C8CC;
+  --on-accent: #06070A;
+  --theme-on-accent: #06070A;
+  --red: #FF2D7E;
+  --theme-red: #FF2D7E;
+  --green: #3DDC97;
+  --theme-green: #3DDC97;
+  --aqua: #00D4FF;
+  --theme-aqua: #00D4FF;
+  --blue: #00D4FF;
+  --theme-blue: #00D4FF;
+  --purple: #FF2D7E;
+  --theme-purple: #FF2D7E;
+  --link: #E8E8EC;
+  --theme-link: #E8E8EC;
+  --code-bg: #0E0F14;
+  --theme-code-bg: #0E0F14;
+  --shadow: 0 12px 40px rgba(0,0,0,.55);
+  --theme-shadow: 0 12px 40px rgba(0,0,0,.55);
+  --radius-sm: 4px;
+  --theme-radius-sm: 4px;
+  --radius-md: 8px;
+  --theme-radius-md: 8px;
+  --radius-lg: 12px;
+  --theme-radius-lg: 12px;
+  --font-display: "Klee One", "Noto Sans SC", sans-serif;
+  --theme-font-display: "Klee One", "Noto Sans SC", sans-serif;
+  --font-body: "Klee One", "Noto Sans SC", sans-serif;
+  --theme-font-body: "Klee One", "Noto Sans SC", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --theme-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* 基础 chrome(opt-in):<body class="theme-apply"> 或 [data-theme-apply] 上底色与基础件 */
+.theme-apply,
+[data-theme-apply] {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: 1.6;
+}
+
+.theme-apply a,
+[data-theme-apply] a {
+  color: var(--link, var(--accent));
+}
+
+.theme-apply code,
+.theme-apply pre,
+[data-theme-apply] code,
+[data-theme-apply] pre {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: var(--code-bg, var(--surface2, var(--surface)));
+  border-radius: var(--radius-sm, 4px);
+}
+
+.theme-apply .panel,
+[data-theme-apply] .panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 6px);
+  box-shadow: var(--shadow, 0 12px 40px rgba(0,0,0,.55));
+}
+
+.theme-apply .btn-primary,
+[data-theme-apply] .btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-sm, 4px);
+}

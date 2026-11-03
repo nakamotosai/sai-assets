@@ -48,7 +48,8 @@ description: Apply the ouuut Editorial palette (和色六景 · 纸白/炭黑) t
 | `tokens/index.json` | 变体与三个轴的目录 |
 | `tokens/semantic/<variant>.json` | 供 agent 读取的语义映射 |
 | `css/default.css` | 只含默认(纸白 + A),最快 apply |
-| `css/all.css` | 双模 + 四套色组 + 章节提色 |
+| `css/all.css` | 双模 + 四套色组 + 章节提色(含 `:root`,单主题直接应用) |
+| `css/themes.css` | 同上但**只出 `[data-theme]` 作用域**:与项目自带主题切换器并存时用这份 |
 | `css/type.css` | 字族 / 字号档 / 动效刻度(与配色正交) |
 | `docs/usage.md` | **配对规则 + 双模硬约束 + 反模式** |
 | `preview/index.html` | 活预览(含深浅切换与色组切换) |

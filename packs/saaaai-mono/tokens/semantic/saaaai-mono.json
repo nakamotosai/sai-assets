@@ -1,0 +1,68 @@
+{
+  "id": "saaaai-mono",
+  "name": "saaaai Mono",
+  "mode": "dark",
+  "signature": "近黑 void + 银灰 ink + 等高线轮廓当 accent",
+  "colors": {
+    "bg": "#06070A",
+    "bgDeep": "#040508",
+    "surface": "#0E0F14",
+    "surface2": "#161820",
+    "border": "rgba(255,255,255,0.12)",
+    "ink": "#F4F4F5",
+    "inkMuted": "#A8A8A8",
+    "inkDim": "#8B8D94",
+    "accent": "#E8E8EC",
+    "accent2": "#C8C8CC",
+    "onAccent": "#06070A",
+    "red": "#FF2D7E",
+    "green": "#3DDC97",
+    "aqua": "#00D4FF",
+    "blue": "#00D4FF",
+    "purple": "#FF2D7E",
+    "link": "#E8E8EC",
+    "codeBg": "#0E0F14",
+    "shadow": "0 12px 40px rgba(0,0,0,.55)"
+  },
+  "fonts": {
+    "display": "\"Klee One\", \"Noto Sans SC\", sans-serif",
+    "body": "\"Klee One\", \"Noto Sans SC\", sans-serif",
+    "mono": "\"JetBrains Mono\", ui-monospace, monospace"
+  },
+  "radius": {
+    "sm": "4px",
+    "md": "8px",
+    "lg": "12px"
+  },
+  "derived": {
+    "bg": "bg",
+    "bgDeep": "bgDeep",
+    "surface": "surface",
+    "surface2": "surface2",
+    "border": "border",
+    "ink": "ink",
+    "inkMuted": "inkMuted",
+    "inkDim": "inkDim",
+    "accent": "accent",
+    "accent2": "accent2",
+    "onAccent": "onAccent",
+    "red": "red",
+    "green": "green",
+    "aqua": "aqua",
+    "blue": "blue",
+    "purple": "purple",
+    "link": "link",
+    "codeBg": "codeBg"
+  },
+  "a11y": {
+    "contrast_min": 4.5,
+    "pairs": {
+      "ink/bg": 18.33,
+      "onAccent/accent": 16.48
+    },
+    "adjusted": false,
+    "notes": [
+      "源里 --link 与 --accent 同为 #E8E8EC(照源发;同屏同时出现时用 --accent-2 或下划线区分)"
+    ]
+  }
+}

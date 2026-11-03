@@ -1,0 +1,12 @@
+{
+  "default": "mohe-mono-blue",
+  "themes": [
+    {
+      "id": "mohe-mono-blue",
+      "name": "墨河 · 深色单色蓝（群青）",
+      "mode": "dark",
+      "path": "tokens/semantic/mohe-mono-blue.json",
+      "default": true
+    }
+  ]
+}

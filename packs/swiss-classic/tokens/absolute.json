@@ -1,0 +1,28 @@
+{
+  "id": "swiss-classic",
+  "name": "Swiss Classic（瑞士国际主义）",
+  "mode": "light",
+  "signature": "暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次",
+  "source": "themes/swiss-classic.json",
+  "colors": {
+    "bg": "#EDEBE6",
+    "bgDeep": "#DCDAD1",
+    "surface": "#F7F5F0",
+    "surface2": "#E4E1D9",
+    "border": "#111111",
+    "hairline": "#9A9995",
+    "ink": "#111111",
+    "inkMuted": "#6B6862",
+    "inkDim": "#4A4A4A",
+    "accent": "#D8232A",
+    "accent2": "#B72E25",
+    "onAccent": "#FFFFFF",
+    "red": "#D8232A",
+    "gridRed": "#DB9382",
+    "chipBg": "#2A2A2A",
+    "chipFg": "#F5F3EE",
+    "link": "#D8232A",
+    "codeBg": "#E4E1D9",
+    "shadow": "none"
+  }
+}

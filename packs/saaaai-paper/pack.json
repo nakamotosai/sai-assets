@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "id": "saaaai-paper",
+  "title": "saaaai Paper · 暖纸浅底 + 陶土 accent",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/saaaai-paper.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/saaaai-paper.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/saaaai-paper.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "light",
+    "theme",
+    "paper",
+    "warm"
+  ],
+  "when": "暖纸浅底 + 陶土 accent，主页 t6;适用:陶土作唯一 accent;浅底卡片白抬升",
+  "not_for": "禁用:和 Claude 色板完全照抄不改名;高饱和多色",
+  "default_variant": "saaaai-paper",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/saaaai-paper/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens saaaai-paper | variants=1 keys=19 hex=17 rgba=1 effects=1 contrast=ink/bg=7.93 onAccent/accent=4.53 | not_in_palette=[]"
+  },
+  "canonical_home": null,
+  "changelog": [
+    "1.0.0:语义层按 WCAG ≥4.5:1 修正 accent/on-accent 配对(见 tokens/semantic 的 a11y 与 docs/usage.md);tokens/absolute.json 未改。"
+  ]
+}

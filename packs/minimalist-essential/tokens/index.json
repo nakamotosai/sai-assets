@@ -1,0 +1,12 @@
+{
+  "default": "minimalist-essential",
+  "themes": [
+    {
+      "id": "minimalist-essential",
+      "name": "Minimalist Essential 极简 essentials",
+      "mode": "light",
+      "path": "tokens/semantic/minimalist-essential.json",
+      "default": true
+    }
+  ]
+}

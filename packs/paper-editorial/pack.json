@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "id": "paper-editorial",
+  "title": "Paper Editorial · 纸感编辑：米白画布",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/paper-editorial.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/paper-editorial.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/paper-editorial.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "light",
+    "theme",
+    "paper",
+    "ink",
+    "red",
+    "editorial"
+  ],
+  "when": "纸感编辑：米白画布、墨色正文、刊头朱红;适用:浅色 only;大标题衬线加粗;红只作强调不铺大底",
+  "not_for": "禁用:深色底;细字重大标题;文字贴边",
+  "default_variant": "paper-editorial",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/paper-editorial/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens paper-editorial | variants=1 keys=19 hex=18 rgba=0 effects=1 contrast=ink/bg=16.13 onAccent/accent=5.71 | not_in_palette=[]"
+  },
+  "canonical_home": null
+}

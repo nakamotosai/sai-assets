@@ -1,0 +1,56 @@
+{
+  "id": "mohe-mono-blue",
+  "name": "墨河 · 深色单色蓝（群青）",
+  "mode": "dark",
+  "signature": "近黑冷蓝底 + 单一色相 218–223° 明度梯；唯一有彩光是强调色 #6891d9；卡片半透明浮在 WebGL 墨河背景上；竖排书脊刊头（汉字竖排做书脊）；衬线标题 + 冷瓷白正文",
+  "colors": {
+    "bg": "#04070F",
+    "surface": "rgba(80,110,170,.10)",
+    "surface2": "#101B33",
+    "border": "rgba(104,145,217,.14)",
+    "ink": "#EAF0FA",
+    "inkMuted": "#9EB0CC",
+    "inkDim": "#9EB0CC",
+    "accent": "#6891d9",
+    "link": "#9fbdf0",
+    "panel": "rgba(12,22,44,.20)",
+    "inkFaint": "#6B7E9C",
+    "borderStrong": "rgba(104,145,217,.34)",
+    "line": "rgba(104,145,217,.14)",
+    "void": "#00000F",
+    "onAccent": "#04070F"
+  },
+  "fonts": {
+    "display": "\"Source Han Serif SC\",\"Noto Serif SC\",serif",
+    "body": "\"Noto Sans SC\",\"Noto Sans CJK SC\",\"Source Han Sans SC\",\"Microsoft YaHei\",system-ui,sans-serif",
+    "mono": "ui-monospace,SFMono-Regular,Menlo,Consolas,\"Liberation Mono\",monospace"
+  },
+  "radius": {
+    "sm": "8px",
+    "md": "12px",
+    "lg": "12px"
+  },
+  "derived": {
+    "bg": "bg",
+    "surface": "surface",
+    "surface2": "panelRaise",
+    "border": "border",
+    "ink": "ink",
+    "inkMuted": "inkDim",
+    "inkDim": "inkDim",
+    "accent": "accent",
+    "link": "accentInk",
+    "onAccent": "bg"
+  },
+  "a11y": {
+    "contrast_min": 4.5,
+    "pairs": {
+      "ink/bg": 17.6,
+      "onAccent/accent": 6.37
+    },
+    "adjusted": true,
+    "notes": [
+      "源无可用 on-accent 配对;--on-accent 取源 bg(#04070F),配对 6.37:1"
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "default": "swiss-classic",
+  "themes": [
+    {
+      "id": "swiss-classic",
+      "name": "Swiss Classic（瑞士国际主义）",
+      "mode": "light",
+      "path": "tokens/semantic/swiss-classic.json",
+      "default": true
+    }
+  ]
+}

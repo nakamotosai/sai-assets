@@ -1,0 +1,11 @@
+{
+  "id": "ref-n6-quanta",
+  "name": "Quanta Magazine·长文版式观测",
+  "tag": "news",
+  "source_url": "https://www.quantamagazine.org/",
+  "observed": "quantamagazine.org 首页实读200：Latest Articles横向流；大头图+超大衬线标题长文版式。观测归纳不搬码不抄文。得分10/12（2/2/1/2/1/2）。",
+  "layout": "大头图+超大衬线标题；Latest横向流",
+  "colorsDNA": null,
+  "matchTheme": "paper-editorial",
+  "when": "做长文版式时先对本条定头图与标题字阶。许可：观测归纳（不搬运原文/图/码）。"
+}

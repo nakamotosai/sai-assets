@@ -1,0 +1,11 @@
+{
+  "id": "ref-t2-render-pipeline",
+  "name": "RenderPipeline后处理",
+  "tag": "three",
+  "source_url": "https://threejsroadmap.com/",
+  "observed": "threejsroadmap 同源交叉：TSL / bloom / MRT 为官方技术路线归纳，留。一屏一效观测放行。",
+  "layout": "TSL；bloom；MRT；后处理管线",
+  "colorsDNA": null,
+  "matchTheme": "fm-void",
+  "when": "做后处理管线时按 TSL/bloom/MRT 路线选型。许可：观测放行。"
+}

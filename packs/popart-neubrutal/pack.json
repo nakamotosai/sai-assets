@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "id": "popart-neubrutal",
+  "title": "Pop Art · Neo Brutal · 奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/popart-neubrutal.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/popart-neubrutal.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/popart-neubrutal.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "light",
+    "theme",
+    "paper",
+    "shadow",
+    "cream"
+  ],
+  "when": "奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色;适用:4px 黑边;硬阴影无模糊;按下阴影收 2px",
+  "not_for": "禁用:柔光模糊阴影;细灰边框当主结构;渐变背景",
+  "default_variant": "popart-neubrutal",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/popart-neubrutal/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens popart-neubrutal | variants=1 keys=19 hex=18 rgba=0 effects=1 contrast=ink/bg=20.62 onAccent/accent=7.57 | not_in_palette=[]"
+  },
+  "canonical_home": null
+}

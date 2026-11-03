@@ -1,0 +1,12 @@
+{
+  "default": "paper-editorial",
+  "themes": [
+    {
+      "id": "paper-editorial",
+      "name": "Paper Editorial",
+      "mode": "light",
+      "path": "tokens/semantic/paper-editorial.json",
+      "default": true
+    }
+  ]
+}

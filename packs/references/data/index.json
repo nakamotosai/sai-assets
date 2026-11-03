@@ -1,0 +1,336 @@
+{
+ "schema": 1,
+ "pack": "references",
+ "version": "1.0.0",
+ "count": 40,
+ "groups": {
+  "web": 6,
+  "print": 7,
+  "three": 7,
+  "news": 15,
+  "swiss": 5
+ },
+ "fields": "id/name/tag/when/matchTheme/source_url;详情见 data/<id>.json",
+ "items": [
+  {
+   "id": "ref-w1-typo-serif",
+   "name": "排印·编辑衬线（一屏一句）",
+   "tag": "web",
+   "when": "做纸媒/编辑风首屏标题时先对本条定调，再定字重与行距。许可：观测放行（不搬运原文/图/码）。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://www.hontran.dev/"
+  },
+  {
+   "id": "ref-w2-typo-mono",
+   "name": "排印·等宽结构感",
+   "tag": "web",
+   "when": "做工具台/终端风界面时用等宽体系定结构感。许可：观测放行。",
+   "matchTheme": "gruvbox-dark",
+   "source_url": "https://www.hontran.dev/"
+  },
+  {
+   "id": "ref-w3-bento-whitespace",
+   "name": "Bento+留白",
+   "tag": "web",
+   "when": "做功能分区墙/选型墙时用 Bento+留白骨架。许可：观测放行。",
+   "matchTheme": "gruvbox-dark",
+   "source_url": "https://midrocket.com/en/guides/ui-design-trends-2026"
+  },
+  {
+   "id": "ref-w4-dark-cinematic",
+   "name": "深色优先电影感",
+   "tag": "web",
+   "when": "做深色电影感场景时先立 dark-first 基线与语义 token。许可：观测放行。",
+   "matchTheme": "fm-void",
+   "source_url": "https://midrocket.com/en/guides/ui-design-trends-2026"
+  },
+  {
+   "id": "ref-w5-light-warm",
+   "name": "浅色暖系",
+   "tag": "web",
+   "when": "做浅色暖系主题时用归纳 DNA 起步，hex 以自站实测为准（输入未给 hex，不硬填）。许可：观测放行。",
+   "matchTheme": "slow-ride-cream",
+   "source_url": "https://github.com/gztchan/awesome-design"
+  },
+  {
+   "id": "ref-w6-restrained-motion",
+   "name": "动效克制·滚动叙事",
+   "tag": "web",
+   "when": "任何主题做滚动叙事前先立克制基线并加 reduced-motion 兜底。注：motionkit/trivia 精确 URL 未在输入中给出，未另行钉死。许可：观测放行。",
+   "matchTheme": "all",
+   "source_url": "https://www.hontran.dev/"
+  },
+  {
+   "id": "ref-p1-title-floor",
+   "name": "大字号地板-标题",
+   "tag": "print",
+   "when": "做中老年/大字场景标题时先对地板值再定层级。许可：观测放行（规范归纳）。",
+   "matchTheme": "slow-ride-cream",
+   "source_url": "https://www.woshipm.com/pd/5105282.html"
+  },
+  {
+   "id": "ref-p2-body-floor",
+   "name": "大字号地板-正文",
+   "tag": "print",
+   "when": "做中老年正文时先对地板与对比度，再定行高。许可：观测放行。",
+   "matchTheme": "slow-ride-cream",
+   "source_url": "https://www.woshipm.com/pd/5105282.html"
+  },
+  {
+   "id": "ref-p3-paper-texture",
+   "name": "纸面质感",
+   "tag": "print",
+   "when": "做纸媒质感时用纹理叠加思路，色板自归纳。许可：观测放行。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://www.uisdc.com/web-paper-texture"
+  },
+  {
+   "id": "ref-p4-one-focal",
+   "name": "一页一视觉重心",
+   "tag": "print",
+   "when": "做杂志式版面时先定唯一视觉重心再排多栏。许可：观测放行（版式骨架可用，snippet 代码只当思路不入库）。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://freefrontend.com/css-magazine-layouts"
+  },
+  {
+   "id": "ref-p5-masthead",
+   "name": "刊头范式",
+   "tag": "print",
+   "when": "做刊头区时用非对称网格+留白定层级。许可：观测放行（代码只当思路）。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://freefrontend.com/css-magazine-layouts"
+  },
+  {
+   "id": "ref-p6-no-table-timeline",
+   "name": "时间线禁表格",
+   "tag": "print",
+   "when": "做时间线时禁表格（对 slide-master-senior 同款约束）。注：源站反爬未独立复核，待浏览器实读钉死。许可：观测放行。",
+   "matchTheme": "slow-ride-cream",
+   "source_url": "https://blog.csdn.net/weixin_42466857/article/details/155575574"
+  },
+  {
+   "id": "ref-p7-height-print",
+   "name": "高度预算与打印",
+   "tag": "print",
+   "when": "做需打印的研报/deck 先定高度预算再写 print 样式；Print.js 只作思路引用，真引入另核 MIT。许可：观测放行。",
+   "matchTheme": "slow-ride-cream",
+   "source_url": "https://juejin.cn/post/7398472542313611276"
+  },
+  {
+   "id": "ref-t1-wgpu-roughness",
+   "name": "WebGPU粗糙度反射",
+   "tag": "three",
+   "when": "做金属/玻璃反射材质时先看官方示例思路再写。许可：观测放行（用时以仓库 LICENSE 为准，上游 three.js 为 MIT）。",
+   "matchTheme": "fm-void",
+   "source_url": "https://threejs.org/examples/webgpu_reflection_roughness.html"
+  },
+  {
+   "id": "ref-t2-render-pipeline",
+   "name": "RenderPipeline后处理",
+   "tag": "three",
+   "when": "做后处理管线时按 TSL/bloom/MRT 路线选型。许可：观测放行。",
+   "matchTheme": "fm-void",
+   "source_url": "https://threejsroadmap.com/"
+  },
+  {
+   "id": "ref-t3-compute-galaxy",
+   "name": "Compute粒子星系",
+   "tag": "three",
+   "when": "做星系/大粒子数场景时走 Compute 路线。许可：观测放行。",
+   "matchTheme": "fm-void",
+   "source_url": "https://threejsroadmap.com/"
+  },
+  {
+   "id": "ref-t4-fluid-xray",
+   "name": "双场景流体X光",
+   "tag": "three",
+   "when": "做流体揭示转场时学思路；demo 源码不入库，用时按站内许可执行。许可：观测放行（源码禁入库）。",
+   "matchTheme": "fm-void",
+   "source_url": "https://tympanus.net/codrops/2026/03/23/building-a-dual-scene-fluid-x-ray-reveal-effect-in-three-js"
+  },
+  {
+   "id": "ref-t5-proc-geometry",
+   "name": "程序化几何WebGPU",
+   "tag": "three",
+   "when": "做程序化几何时学思路；源码不入库。许可：观测放行。",
+   "matchTheme": "fm-void",
+   "source_url": "https://tympanus.net/codrops/2026/08/11/exploring-procedural-geometry-with-three-js-and-webgpu/"
+  },
+  {
+   "id": "ref-t6-fluid-presets",
+   "name": "粒子流体10+预设+GPU诊断",
+   "tag": "three",
+   "when": "做 GPU 粒子流体时先跑预设画廊定效果与基线。许可：MIT 放行（模型 CC0，Stanford bunny 致谢，见 THIRD_PARTY_NOTICES.md）。",
+   "matchTheme": "fm-void",
+   "source_url": "https://github.com/dgreenheck/threejs-particle-fluids"
+  },
+  {
+   "id": "ref-t7-text-shatter",
+   "name": "交互文字碎裂TSL",
+   "tag": "three",
+   "when": "做文字碎裂一屏一效时学思路；源码不入库。许可：观测放行。",
+   "matchTheme": "fm-void",
+   "source_url": "https://tympanus.net/codrops/2025/07/22/interactive-text-destruction-with-three-js-webgpu-and-tsl/"
+  },
+  {
+   "id": "ref-n1-sspai",
+   "name": "少数派sspai·中文双栏信息站观测",
+   "tag": "news",
+   "when": "做中文双栏信息站时先对本条定信息密度与栏宽，再定字栈。许可：观测归纳（不搬运原文/图/码）。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://www.sspai.com/"
+  },
+  {
+   "id": "ref-n2-papermod",
+   "name": "Hugo PaperMod·信息站三布局+Fuse搜索",
+   "tag": "news",
+   "when": "信息站首选：三布局+Fuse搜索+零JS；中文先核i18n/zh再坐实2分。许可：MIT。",
+   "matchTheme": "saaaai-paper",
+   "source_url": "https://github.com/adityatelange/hugo-PaperMod"
+  },
+  {
+   "id": "ref-n3-ghost",
+   "name": "Ghost·新闻整站tag+作者归档+newsletter",
+   "tag": "news",
+   "when": "做新闻整站时先对本条定归档与投递结构。许可：MIT。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://github.com/TryGhost/Ghost"
+  },
+  {
+   "id": "ref-n4-tailnews",
+   "name": "Tailnews·报纸多栏+分类网格12页",
+   "tag": "news",
+   "when": "做新闻杂志站时先对本条定多栏与网格；上线留署名。许可：ThemeWagon Free（Credit required，留署名可用）。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://themewagon.com/themes/tailnews/"
+  },
+  {
+   "id": "ref-n5-propublica",
+   "name": "ProPublica·专题成组+数据工具区观测",
+   "tag": "news",
+   "when": "做新闻专题页成组呈现时先对本条定分组与工具区。许可：观测归纳（不搬运原文/图/码）。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://www.propublica.org/"
+  },
+  {
+   "id": "ref-n6-quanta",
+   "name": "Quanta Magazine·长文版式观测",
+   "tag": "news",
+   "when": "做长文版式时先对本条定头图与标题字阶。许可：观测归纳（不搬运原文/图/码）。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://www.quantamagazine.org/"
+  },
+  {
+   "id": "ref-n7-massively",
+   "name": "HTML5 UP Massively·三栏卡片+单栏长文",
+   "tag": "news",
+   "when": "做信息站/博客时先对本条定卡片与长文结构；上线留署名（去署名才$19）。许可：CC BY 3.0（留署名可用）。",
+   "matchTheme": "saaaai-paper",
+   "source_url": "https://html5up.net/massively"
+  },
+  {
+   "id": "ref-n8-miniflux",
+   "name": "Miniflux·聚合流Go单二进制参考",
+   "tag": "news",
+   "when": "做聚合流后端时先对本条定订阅与搜索结构；严审时中文暂记1直至补证。许可：Apache-2.0。",
+   "matchTheme": "saaaai-mono",
+   "source_url": "https://github.com/miniflux/v2"
+  },
+  {
+   "id": "ref-n9-cleanblog",
+   "name": "StartBootstrap Clean Blog·极简四页",
+   "tag": "news",
+   "when": "做极简信息站时先对本条定四页结构；汉化成本最低。许可：MIT。",
+   "matchTheme": "saaaai-paper",
+   "source_url": "https://startbootstrap.com/theme/clean-blog"
+  },
+  {
+   "id": "ref-n10-verge",
+   "name": "The Verge·快讯流+拼贴观测",
+   "tag": "news",
+   "when": "做快讯流时参考本条拼贴节奏；黑底块不进打印样式。许可：观测归纳（不搬运原文/图/码）。",
+   "matchTheme": "fm-void",
+   "source_url": "https://www.theverge.com/"
+  },
+  {
+   "id": "ref-n11-newsblur",
+   "name": "NewsBlur·聚合多视图参考",
+   "tag": "news",
+   "when": "做聚合多视图时参考本条；中文需另做。许可：MIT。",
+   "matchTheme": "saaaai-mono",
+   "source_url": "https://github.com/samuelclay/NewsBlur"
+  },
+  {
+   "id": "ref-n12-selfoss",
+   "name": "selfoss·轻量聚合参考（GPL注意）",
+   "tag": "news",
+   "when": "做轻量聚合时参考本条；分发改动须开源。许可：GPL-3.0（可商用，分发改动须开源，copyleft注意）。",
+   "matchTheme": "saaaai-mono",
+   "source_url": "https://github.com/fossar/selfoss"
+  },
+  {
+   "id": "ref-n13-clreq",
+   "name": "W3C clreq·中文排权版威依据（基准）",
+   "tag": "news",
+   "when": "全主题中文排版先对本条禁则与挤压规则。许可：W3C Document License。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://www.w3.org/TR/clreq/"
+  },
+  {
+   "id": "ref-n14-cntypeset",
+   "name": "中文排印参数双源·375基准（基准）",
+   "tag": "news",
+   "when": "全主题375中文先对本条字号行高行宽三值；纸底#FBFAF7字#2E2A25。许可：文章版权归作者，数字参数自写CSS。第二源：https://ftdesign.tw/how-to-do-web-page-layout-master-the-key-points/。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://imwsz.com/posts/chinese-typesetting-on-web"
+  },
+  {
+   "id": "ref-n15-notosanssc",
+   "name": "Noto Sans SC自托管·全主题字栈（基准）",
+   "tag": "news",
+   "when": "全主题中文先挂本字栈再调字重行距。第二源：https://www.npmjs.com/package/@fontsource/noto-sans-sc。许可：字体OFL-1.1+包MIT。",
+   "matchTheme": "paper-editorial",
+   "source_url": "https://github.com/jfcherng/Noto-Sans-SC-CSS"
+  },
+  {
+   "id": "ref-s1-grid-formula",
+   "name": "瑞士网格构造公式（Müller-Brockmann）",
+   "tag": "swiss",
+   "when": "做任何瑞士/编辑/海报网格时先按公式推导，别套死 12 栏（详见 components/swiss-grid-system.json）",
+   "matchTheme": "swiss-classic",
+   "source_url": "https://archive.org/stream/GridSystemsInGraphicDesignJosefMullerBrockmann/"
+  },
+  {
+   "id": "ref-s2-margins-canons",
+   "name": "边距经典比（Van de Graaf / MB / 黄金）",
+   "tag": "swiss",
+   "when": "印刷/海报/deck 定时先选一套 canon，别用均匀边距",
+   "matchTheme": "swiss-classic",
+   "source_url": "https://en.wikipedia.org/wiki/Canons_of_page_construction"
+  },
+  {
+   "id": "ref-s3-gerstner-compound",
+   "name": "Gerstner 复合网格与 mobile",
+   "tag": "swiss",
+   "when": "需要比均匀栏更有张力的编辑/门类版面时用复合网格",
+   "matchTheme": "swiss-classic",
+   "source_url": "https://en.wikipedia.org/wiki/Karl_Gerstner"
+  },
+  {
+   "id": "ref-s4-isotype",
+   "name": "Isotype 客观统计图形（Otto Neurath）",
+   "tag": "swiss",
+   "when": "做统计图/信息图时，数量用重复图元而非放大面积；配合 Tufte 数据墨水比",
+   "matchTheme": "swiss-classic",
+   "source_url": "https://en.wikipedia.org/wiki/Isotype_(picture_language)"
+  },
+  {
+   "id": "ref-s5-free-font-stack",
+   "name": "可合法打包的瑞士字体栈",
+   "tag": "swiss",
+   "when": "要交付可分发的瑞士风格作品时，用 Inter+思源黑体，别捆 Helvetica",
+   "matchTheme": "swiss-classic",
+   "source_url": "https://rsms.me/inter/"
+  }
+ ]
+}

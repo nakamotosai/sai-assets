@@ -1,0 +1,64 @@
+{
+  "id": "swiss-classic",
+  "name": "Swiss Classic（瑞士国际主义）",
+  "mode": "light",
+  "signature": "暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次",
+  "colors": {
+    "bg": "#EDEBE6",
+    "bgDeep": "#DCDAD1",
+    "surface": "#F7F5F0",
+    "surface2": "#E4E1D9",
+    "border": "#111111",
+    "ink": "#111111",
+    "inkMuted": "#6B6862",
+    "inkDim": "#4A4A4A",
+    "accent": "#D8232A",
+    "accent2": "#B72E25",
+    "onAccent": "#FFFFFF",
+    "red": "#D8232A",
+    "link": "#D8232A",
+    "codeBg": "#E4E1D9",
+    "hairline": "#9A9995",
+    "gridRed": "#DB9382",
+    "chipBg": "#2A2A2A",
+    "chipFg": "#F5F3EE",
+    "shadow": "none"
+  },
+  "fonts": {
+    "display": "\"Helvetica Neue\",\"Neue Haas Grotesk Display Pro\",Helvetica,Inter,\"Noto Sans SC\",\"Source Han Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif",
+    "body": "\"Helvetica Neue\",\"Neue Haas Grotesk Display Pro\",Inter,\"Noto Sans SC\",\"Source Han Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif",
+    "mono": "\"JetBrains Mono\",ui-monospace,monospace"
+  },
+  "radius": {
+    "sm": "0px",
+    "md": "4px",
+    "lg": "6px"
+  },
+  "derived": {
+    "bg": "bg",
+    "bgDeep": "bgDeep",
+    "surface": "surface",
+    "surface2": "surface2",
+    "border": "border",
+    "ink": "ink",
+    "inkMuted": "inkMuted",
+    "inkDim": "inkDim",
+    "accent": "accent",
+    "accent2": "accent2",
+    "onAccent": "onAccent",
+    "red": "red",
+    "link": "link",
+    "codeBg": "codeBg"
+  },
+  "a11y": {
+    "contrast_min": 4.5,
+    "pairs": {
+      "ink/bg": 15.85,
+      "onAccent/accent": 5.01
+    },
+    "adjusted": false,
+    "notes": [
+      "源里 --link 与 --accent 同为 #D8232A(照源发;同屏同时出现时用 --accent-2 或下划线区分)"
+    ]
+  }
+}

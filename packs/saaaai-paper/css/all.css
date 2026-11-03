@@ -1,0 +1,97 @@
+/* saaaai Paper — 全部变体 + 基础 chrome */
+/* 暖纸浅底 + 陶土 accent，主页 t6 */
+/* 含 :root:单主题整站直接链接本文件 */
+
+:root,
+[data-theme="saaaai-paper"],
+.theme-saaaai-paper {
+  color-scheme: light;
+  --bg: #F5F2EC;
+  --theme-bg: #F5F2EC;
+  --bg-deep: #EBE6DC;
+  --theme-bg-deep: #EBE6DC;
+  --surface: #FFFFFF;
+  --theme-surface: #FFFFFF;
+  --surface-2: #F8F5F0;
+  --theme-surface-2: #F8F5F0;
+  --border: rgba(0,0,0,0.12);
+  --theme-border: rgba(0,0,0,0.12);
+  --ink: #4A4A4A;
+  --theme-ink: #4A4A4A;
+  --ink-muted: #6A6A6A;
+  --theme-ink-muted: #6A6A6A;
+  --ink-dim: #8A8A8A;
+  --theme-ink-dim: #8A8A8A;
+  --accent: #B85C3E;
+  --theme-accent: #B85C3E;
+  --accent-2: #CC7D5E;
+  --theme-accent-2: #CC7D5E;
+  --on-accent: #FFFFFF;
+  --theme-on-accent: #FFFFFF;
+  --red: #C64545;
+  --theme-red: #C64545;
+  --green: #3D9A55;
+  --theme-green: #3D9A55;
+  --aqua: #3D8A8A;
+  --theme-aqua: #3D8A8A;
+  --blue: #3D6A9A;
+  --theme-blue: #3D6A9A;
+  --purple: #8A5A7A;
+  --theme-purple: #8A5A7A;
+  --link: #CC7D5E;
+  --theme-link: #CC7D5E;
+  --code-bg: #1A1816;
+  --theme-code-bg: #1A1816;
+  --shadow: 0 10px 30px rgba(74,74,74,.10);
+  --theme-shadow: 0 10px 30px rgba(74,74,74,.10);
+  --radius-sm: 4px;
+  --theme-radius-sm: 4px;
+  --radius-md: 8px;
+  --theme-radius-md: 8px;
+  --radius-lg: 12px;
+  --theme-radius-lg: 12px;
+  --font-display: "Klee One", "Noto Serif SC", serif;
+  --theme-font-display: "Klee One", "Noto Serif SC", serif;
+  --font-body: "Klee One", "Noto Sans SC", sans-serif;
+  --theme-font-body: "Klee One", "Noto Sans SC", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --theme-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* 基础 chrome(opt-in):<body class="theme-apply"> 或 [data-theme-apply] 上底色与基础件 */
+.theme-apply,
+[data-theme-apply] {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: 1.6;
+}
+
+.theme-apply a,
+[data-theme-apply] a {
+  color: var(--link, var(--accent));
+}
+
+.theme-apply code,
+.theme-apply pre,
+[data-theme-apply] code,
+[data-theme-apply] pre {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: var(--code-bg, var(--surface2, var(--surface)));
+  border-radius: var(--radius-sm, 4px);
+}
+
+.theme-apply .panel,
+[data-theme-apply] .panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 6px);
+  box-shadow: var(--shadow, 0 10px 30px rgba(74,74,74,.10));
+}
+
+.theme-apply .btn-primary,
+[data-theme-apply] .btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-sm, 4px);
+}

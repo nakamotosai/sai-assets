@@ -1,0 +1,12 @@
+{
+  "default": "slow-ride-cream",
+  "themes": [
+    {
+      "id": "slow-ride-cream",
+      "name": "Slow Ride Cream 慢骑奶油",
+      "mode": "light",
+      "path": "tokens/semantic/slow-ride-cream.json",
+      "default": true
+    }
+  ]
+}

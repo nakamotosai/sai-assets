@@ -1,0 +1,12 @@
+{
+  "default": "fm-void",
+  "themes": [
+    {
+      "id": "fm-void",
+      "name": "FM Void",
+      "mode": "dark",
+      "path": "tokens/semantic/fm-void.json",
+      "default": true
+    }
+  ]
+}

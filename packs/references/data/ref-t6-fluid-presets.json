@@ -1,0 +1,11 @@
+{
+  "id": "ref-t6-fluid-presets",
+  "name": "粒子流体10+预设+GPU诊断",
+  "tag": "three",
+  "source_url": "https://github.com/dgreenheck/threejs-particle-fluids",
+  "observed": "github dgreenheck 实读200：readme 列 Wave / Dam Break / Honey Bunny 等 10+ 预设 + npm ci / run dev，主张一致；明确要求 three r184+ WebGPU 无 WebGL fallback。一屏一效观测放行。",
+  "layout": "粒子流体 10+ 预设画廊；GPU 诊断；r184+ 无 fallback",
+  "colorsDNA": null,
+  "matchTheme": "fm-void",
+  "when": "做 GPU 粒子流体时先跑预设画廊定效果与基线。许可：MIT 放行（模型 CC0，Stanford bunny 致谢，见 THIRD_PARTY_NOTICES.md）。"
+}

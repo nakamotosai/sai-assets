@@ -1,0 +1,12 @@
+{
+  "default": "popart-neubrutal",
+  "themes": [
+    {
+      "id": "popart-neubrutal",
+      "name": "Pop Art · Neo Brutal",
+      "mode": "light",
+      "path": "tokens/semantic/popart-neubrutal.json",
+      "default": true
+    }
+  ]
+}

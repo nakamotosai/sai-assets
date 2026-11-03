@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "id": "minimalist-essential",
+  "title": "Minimalist Essential 极简 essentials",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/minimalist-essential.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/minimalist-essential.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/minimalist-essential.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": null
+  },
+  "tags": [
+    "light",
+    "theme",
+    "grid",
+    "minimal"
+  ],
+  "when": "删到不能再删：中性底 + 单强调色 + 8pt 网格 + 单列信息流；一屏一任务;适用:中性色做 90% 面积 + 1 个强调色只占 ≤10%，强调色只给主 CTA 与关键高亮;单无衬线家族 + ≤3 字重 + 等比字阶（12/14/16/20/24/32/48），Display 可用 clamp 流体;8pt 间距只用 4/8/16/24/32/48/64/96/128；section 上下只用 64/96/128（mobile 48/56/64）;单列信息流 + 大负空间 + 少而大的图 + 零装饰；正文单列 max-width 600-720px;首屏只答 1 个问题 + 只给 1 个主 CTA（落地页唯一可双 CTA 例外）;顶导 ≤5 项、深度 ≤3 层；超限进 mega / 着陆页 / 搜索 / 页脚;动效只动 transform/opacity：按压 100-150ms、切换 150-200ms、转场 200-300ms;内容多时靠折叠 + 搜索 + 本地导航 + 面包屑做密度极简，不靠留白最大化;留白占比 40-60% 是甜点，>75% 按空洞页返工",
+  "not_for": "禁用:为白而白的空洞页：无层级的空 = 荒，不是极简;低对比浅灰字：正文 <4.5:1、大字 <3:1 直接返工;桌面端也藏导航（汉堡）：可找性 > 完整性;把粗野当极简：粗野是叛逆版，不是删到本质;一屏多 CTA 轰炸 / 自动轮播 / 弹窗;装饰三件套叠加：分割线 / 阴影 / 圆角只用最低值三选一;字族 >2、字重 >3 档；全站裸色值 / 裸 px（必须走 token）",
+  "default_variant": "minimalist-essential",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/minimalist-essential/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens minimalist-essential | variants=1 keys=18 hex=17 rgba=0 effects=1 contrast=ink/bg=18.07 onAccent/accent=5.00 | not_in_palette=[]"
+  },
+  "canonical_home": null
+}

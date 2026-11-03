@@ -1,0 +1,12 @@
+{
+  "default": "tokyo-crime-dark",
+  "themes": [
+    {
+      "id": "tokyo-crime-dark",
+      "name": "Tokyo Crime Dark 暖黑数据图",
+      "mode": "dark",
+      "path": "tokens/semantic/tokyo-crime-dark.json",
+      "default": true
+    }
+  ]
+}

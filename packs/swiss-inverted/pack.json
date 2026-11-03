@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "id": "swiss-inverted",
+  "title": "Swiss Inverted（瑞士反色 / 暗色）",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/swiss-inverted.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/swiss-inverted.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/swiss-inverted.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "dark",
+    "theme",
+    "paper",
+    "ink",
+    "red",
+    "warm",
+    "swiss"
+  ],
+  "when": "暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红保持不变 —— 同字体两种墨极性;适用:深色底用暖黑 #121212，绝不用纯 #000;纸暖白 #EDEBE6 当墨色（不是纯白 #FFF）;层级仍靠明度差（surface 比 bg 亮一档）+ 发丝线，不用投影;红保持 #D8232A（反色时略提亮到 #E5544B 做小字链接以满足对比）;深色底禁细体衬线（锯齿糊）",
+  "not_for": "禁用:纯黑 #000 底、纯白 #FFF 字、冷灰;深色底上用 300 细字重;给深底加发光/霓虹/玻璃拟态;换第二个强调色",
+  "default_variant": "swiss-inverted",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/swiss-inverted/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens swiss-inverted | variants=1 keys=19 hex=18 rgba=0 effects=1 contrast=ink/bg=15.72 onAccent/accent=5.01 | not_in_palette=['green']"
+  },
+  "canonical_home": null
+}

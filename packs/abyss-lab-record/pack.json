@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "id": "abyss-lab-record",
+  "title": "Abyss Lab Record 暗黑实验记录",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/abyss-lab-record.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/abyss-lab-record.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/abyss-lab-record.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "dark",
+    "theme",
+    "paper",
+    "mono",
+    "grid",
+    "record"
+  ],
+  "when": "近黑底 + 工程网格 + 等宽 HUD + 单关键词橙，深色主叙事、纸面只做独立反转章节；面板全透明虚线检测框;适用:近黑非纯黑底 + 单层工程网格（body 一层，透明度 <=0.14，不压文字）;标题无衬线 800-900，中文降一档；等宽管数据 HUD + tabular-nums；手写只做英文短句点缀;橙色只染单关键词/危险数值/选中态/光源，单屏 <=10%;面板全透明 + 1px 白线/虚线边框，检测框分静态虚线与描边流动两种;纸面只做独立 data-theme=light 反转章节（表单卡 + 墨字 + 单枚橙章）;动效只动 transform/opacity 150-300ms，描边流动是唯一的描边动画且降级静止;mono 栈永不落回系统中文字体，裸 monospace/Menlo/Consolas 禁入生产栈",
+  "not_for": "禁用:衬线标题/正文（Georgia/Noto Serif/SimSun/宋体禁入）;面板实底色 + 投影（纸面表单卡除外）;整词橙色大标题（23/24 类必须降为关键词橙 + 描边混排）;描边空心字常驻正文（只许 display 大字，须验对比度）;低透明 mono 小字（须提到 14px 或提亮到 4.5:1）;为状态新增强调色（用下划线/字重/底色微变）",
+  "default_variant": "abyss-lab-record",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/abyss-lab-record/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens abyss-lab-record | variants=1 keys=22 hex=17 rgba=2 effects=3 contrast=ink/bg=17.57 onAccent/accent=5.54 | not_in_palette=['green']"
+  },
+  "canonical_home": null,
+  "changelog": [
+    "1.0.0:语义层按 WCAG ≥4.5:1 修正 accent/on-accent 配对(见 tokens/semantic 的 a11y 与 docs/usage.md);tokens/absolute.json 未改。"
+  ]
+}

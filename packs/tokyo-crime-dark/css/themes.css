@@ -1,0 +1,104 @@
+/* Tokyo Crime Dark 暖黑数据图 · 共存版:只出 [data-theme] / .theme-<id> 作用域,不含 :root
+   多主题应用(站点自带主题切换器)用这一份,避免全局覆盖项目自己的 token;
+   单主题直接应用请用 css/default.css。color-scheme 只在 [data-theme] 块里给。 */
+
+[data-theme="tokyo-crime-dark"],
+.theme-tokyo-crime-dark {
+  color-scheme: dark;
+  --bg: #16130e;
+  --theme-bg: #16130e;
+  --bg-deep: #0f0d09;
+  --theme-bg-deep: #0f0d09;
+  --surface: #211c14;
+  --theme-surface: #211c14;
+  --surface-2: #2c2417;
+  --theme-surface-2: #2c2417;
+  --border: #3a3128;
+  --theme-border: #3a3128;
+  --ink: #f5efe2;
+  --theme-ink: #f5efe2;
+  --ink-muted: #b8ab93;
+  --theme-ink-muted: #b8ab93;
+  --ink-dim: #8a7f6b;
+  --theme-ink-dim: #8a7f6b;
+  --accent: #fc4e2a;
+  --theme-accent: #fc4e2a;
+  --accent-2: #b30000;
+  --theme-accent-2: #b30000;
+  --on-accent: #16130e;
+  --theme-on-accent: #16130e;
+  --red: #e31a1c;
+  --theme-red: #e31a1c;
+  --green: #5d8a6a;
+  --theme-green: #5d8a6a;
+  --aqua: #6a9a8e;
+  --theme-aqua: #6a9a8e;
+  --blue: #7cc4ff;
+  --theme-blue: #7cc4ff;
+  --purple: #8a6a7a;
+  --theme-purple: #8a6a7a;
+  --link: #7cc4ff;
+  --theme-link: #7cc4ff;
+  --code-bg: #211c14;
+  --theme-code-bg: #211c14;
+  --shadow: 0 12px 32px rgba(0,0,0,.45);
+  --theme-shadow: 0 12px 32px rgba(0,0,0,.45);
+  --nodata: #4a4238;
+  --theme-nodata: #4a4238;
+  --nopop: #55504a;
+  --theme-nopop: #55504a;
+  --hi: #3a2c14;
+  --theme-hi: #3a2c14;
+  --mapbg: #16130e;
+  --theme-mapbg: #16130e;
+  --radius-sm: 8px;
+  --theme-radius-sm: 8px;
+  --radius-md: 10px;
+  --theme-radius-md: 10px;
+  --radius-lg: 12px;
+  --theme-radius-lg: 12px;
+  --font-display: "Noto Serif SC", "Songti SC", serif;
+  --theme-font-display: "Noto Serif SC", "Songti SC", serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --theme-font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --theme-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* 基础 chrome(opt-in):<body class="theme-apply"> 或 [data-theme-apply] 上底色与基础件 */
+.theme-apply,
+[data-theme-apply] {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: 1.6;
+}
+
+.theme-apply a,
+[data-theme-apply] a {
+  color: var(--link, var(--accent));
+}
+
+.theme-apply code,
+.theme-apply pre,
+[data-theme-apply] code,
+[data-theme-apply] pre {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: var(--code-bg, var(--surface2, var(--surface)));
+  border-radius: var(--radius-sm, 4px);
+}
+
+.theme-apply .panel,
+[data-theme-apply] .panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 6px);
+  box-shadow: var(--shadow, 0 12px 32px rgba(0,0,0,.45));
+}
+
+.theme-apply .btn-primary,
+[data-theme-apply] .btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-sm, 4px);
+}

@@ -1,0 +1,67 @@
+/* Default = tokyo-crime-dark — 只链接这一份即最快 apply */
+/* Tokyo Crime Dark 暖黑数据图 — 暖黑底 #16130e 配暖色顺序带：深色底上把 ColorBrewer YlOrRd 整体提亮 15% 修对比（断点不动），深棕分隔线代替白描边；数据密集型地图/图表的深色方案。 */
+/* 语义变量与 --theme-* 别名双发;字体/圆角透传源令牌 */
+
+:root,
+[data-theme="tokyo-crime-dark"],
+.theme-tokyo-crime-dark {
+  color-scheme: dark;
+  --bg: #16130e;
+  --theme-bg: #16130e;
+  --bg-deep: #0f0d09;
+  --theme-bg-deep: #0f0d09;
+  --surface: #211c14;
+  --theme-surface: #211c14;
+  --surface-2: #2c2417;
+  --theme-surface-2: #2c2417;
+  --border: #3a3128;
+  --theme-border: #3a3128;
+  --ink: #f5efe2;
+  --theme-ink: #f5efe2;
+  --ink-muted: #b8ab93;
+  --theme-ink-muted: #b8ab93;
+  --ink-dim: #8a7f6b;
+  --theme-ink-dim: #8a7f6b;
+  --accent: #fc4e2a;
+  --theme-accent: #fc4e2a;
+  --accent-2: #b30000;
+  --theme-accent-2: #b30000;
+  --on-accent: #16130e;
+  --theme-on-accent: #16130e;
+  --red: #e31a1c;
+  --theme-red: #e31a1c;
+  --green: #5d8a6a;
+  --theme-green: #5d8a6a;
+  --aqua: #6a9a8e;
+  --theme-aqua: #6a9a8e;
+  --blue: #7cc4ff;
+  --theme-blue: #7cc4ff;
+  --purple: #8a6a7a;
+  --theme-purple: #8a6a7a;
+  --link: #7cc4ff;
+  --theme-link: #7cc4ff;
+  --code-bg: #211c14;
+  --theme-code-bg: #211c14;
+  --shadow: 0 12px 32px rgba(0,0,0,.45);
+  --theme-shadow: 0 12px 32px rgba(0,0,0,.45);
+  --nodata: #4a4238;
+  --theme-nodata: #4a4238;
+  --nopop: #55504a;
+  --theme-nopop: #55504a;
+  --hi: #3a2c14;
+  --theme-hi: #3a2c14;
+  --mapbg: #16130e;
+  --theme-mapbg: #16130e;
+  --radius-sm: 8px;
+  --theme-radius-sm: 8px;
+  --radius-md: 10px;
+  --theme-radius-md: 10px;
+  --radius-lg: 12px;
+  --theme-radius-lg: 12px;
+  --font-display: "Noto Serif SC", "Songti SC", serif;
+  --theme-font-display: "Noto Serif SC", "Songti SC", serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --theme-font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --theme-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}

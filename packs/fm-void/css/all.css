@@ -1,0 +1,97 @@
+/* FM Void — 全部变体 + 基础 chrome */
+/* 全黑 void + 半透明等宽字；戏在 canvas 背景 */
+/* 含 :root:单主题整站直接链接本文件 */
+
+:root,
+[data-theme="fm-void"],
+.theme-fm-void {
+  color-scheme: dark;
+  --bg: #000000;
+  --theme-bg: #000000;
+  --bg-deep: #000000;
+  --theme-bg-deep: #000000;
+  --surface: rgba(255,255,255,0.04);
+  --theme-surface: rgba(255,255,255,0.04);
+  --surface-2: rgba(255,255,255,0.07);
+  --theme-surface-2: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.12);
+  --theme-border: rgba(255,255,255,0.12);
+  --ink: #f5f5f5;
+  --theme-ink: #f5f5f5;
+  --ink-muted: rgba(255,255,255,0.5);
+  --theme-ink-muted: rgba(255,255,255,0.5);
+  --ink-dim: rgba(255,255,255,0.35);
+  --theme-ink-dim: rgba(255,255,255,0.35);
+  --accent: #ffffff;
+  --theme-accent: #ffffff;
+  --accent-2: rgba(255,255,255,0.72);
+  --theme-accent-2: rgba(255,255,255,0.72);
+  --on-accent: #000000;
+  --theme-on-accent: #000000;
+  --red: #ff4d6d;
+  --theme-red: #ff4d6d;
+  --green: #7dffa3;
+  --theme-green: #7dffa3;
+  --aqua: #7dd3ff;
+  --theme-aqua: #7dd3ff;
+  --blue: #7dd3ff;
+  --theme-blue: #7dd3ff;
+  --purple: #d4a5ff;
+  --theme-purple: #d4a5ff;
+  --link: rgba(255,255,255,0.88);
+  --theme-link: rgba(255,255,255,0.88);
+  --code-bg: #0a0a0a;
+  --theme-code-bg: #0a0a0a;
+  --shadow: none;
+  --theme-shadow: none;
+  --radius-sm: 8px;
+  --theme-radius-sm: 8px;
+  --radius-md: 12px;
+  --theme-radius-md: 12px;
+  --radius-lg: 16px;
+  --theme-radius-lg: 16px;
+  --font-display: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --theme-font-display: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-body: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --theme-font-body: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --theme-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+/* 基础 chrome(opt-in):<body class="theme-apply"> 或 [data-theme-apply] 上底色与基础件 */
+.theme-apply,
+[data-theme-apply] {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: 1.6;
+}
+
+.theme-apply a,
+[data-theme-apply] a {
+  color: var(--link, var(--accent));
+}
+
+.theme-apply code,
+.theme-apply pre,
+[data-theme-apply] code,
+[data-theme-apply] pre {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: var(--code-bg, var(--surface2, var(--surface)));
+  border-radius: var(--radius-sm, 4px);
+}
+
+.theme-apply .panel,
+[data-theme-apply] .panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 6px);
+  box-shadow: var(--shadow, none);
+}
+
+.theme-apply .btn-primary,
+[data-theme-apply] .btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-sm, 4px);
+}

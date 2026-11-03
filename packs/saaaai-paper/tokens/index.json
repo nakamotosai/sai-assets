@@ -1,0 +1,12 @@
+{
+  "default": "saaaai-paper",
+  "themes": [
+    {
+      "id": "saaaai-paper",
+      "name": "saaaai Paper",
+      "mode": "light",
+      "path": "tokens/semantic/saaaai-paper.json",
+      "default": true
+    }
+  ]
+}

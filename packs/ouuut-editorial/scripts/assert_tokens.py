@@ -95,7 +95,7 @@ def main() -> None:
             if not (0.15 <= y <= 0.25):
                 fail(f"{name} {hexv} luminance Y={y:.3f} outside band [0.15, 0.25]")
 
-    for rel in ("css/default.css", "css/all.css", "css/type.css", "SKILL.md", "docs/usage.md", "preview/index.html"):
+    for rel in ("css/default.css", "css/all.css", "css/themes.css", "css/type.css", "SKILL.md", "docs/usage.md", "preview/index.html"):
         if not (ROOT / rel).is_file():
             fail(f"missing {rel}")
     if pack.get("default_variant") != "paper":

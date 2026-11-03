@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "id": "fm-void",
+  "title": "FM Void · 全黑 void + 半透明等宽字",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/fm-void.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/fm-void.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/fm-void.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "dark",
+    "theme",
+    "mono",
+    "void"
+  ],
+  "when": "全黑 void + 半透明等宽字；戏在 canvas 背景;适用:UI 字小、letter-spacing 宽;背景用 canvas 表演;静音用 GainNode 思路",
+  "not_for": "禁用:整屏 CSS 抖;第二层粒子堆叠;彩色 UI chrome",
+  "default_variant": "fm-void",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/fm-void/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens fm-void | variants=1 keys=19 hex=11 rgba=7 effects=1 contrast=ink/bg=19.26 onAccent/accent=21.00 | not_in_palette=[]"
+  },
+  "canonical_home": null
+}

@@ -1,0 +1,12 @@
+{
+  "default": "swiss-inverted",
+  "themes": [
+    {
+      "id": "swiss-inverted",
+      "name": "Swiss Inverted（瑞士反色 / 暗色）",
+      "mode": "dark",
+      "path": "tokens/semantic/swiss-inverted.json",
+      "default": true
+    }
+  ]
+}

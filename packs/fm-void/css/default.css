@@ -1,0 +1,59 @@
+/* Default = fm-void — 只链接这一份即最快 apply */
+/* FM Void — 全黑 void + 半透明等宽字；戏在 canvas 背景 */
+/* 语义变量与 --theme-* 别名双发;字体/圆角透传源令牌 */
+
+:root,
+[data-theme="fm-void"],
+.theme-fm-void {
+  color-scheme: dark;
+  --bg: #000000;
+  --theme-bg: #000000;
+  --bg-deep: #000000;
+  --theme-bg-deep: #000000;
+  --surface: rgba(255,255,255,0.04);
+  --theme-surface: rgba(255,255,255,0.04);
+  --surface-2: rgba(255,255,255,0.07);
+  --theme-surface-2: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.12);
+  --theme-border: rgba(255,255,255,0.12);
+  --ink: #f5f5f5;
+  --theme-ink: #f5f5f5;
+  --ink-muted: rgba(255,255,255,0.5);
+  --theme-ink-muted: rgba(255,255,255,0.5);
+  --ink-dim: rgba(255,255,255,0.35);
+  --theme-ink-dim: rgba(255,255,255,0.35);
+  --accent: #ffffff;
+  --theme-accent: #ffffff;
+  --accent-2: rgba(255,255,255,0.72);
+  --theme-accent-2: rgba(255,255,255,0.72);
+  --on-accent: #000000;
+  --theme-on-accent: #000000;
+  --red: #ff4d6d;
+  --theme-red: #ff4d6d;
+  --green: #7dffa3;
+  --theme-green: #7dffa3;
+  --aqua: #7dd3ff;
+  --theme-aqua: #7dd3ff;
+  --blue: #7dd3ff;
+  --theme-blue: #7dd3ff;
+  --purple: #d4a5ff;
+  --theme-purple: #d4a5ff;
+  --link: rgba(255,255,255,0.88);
+  --theme-link: rgba(255,255,255,0.88);
+  --code-bg: #0a0a0a;
+  --theme-code-bg: #0a0a0a;
+  --shadow: none;
+  --theme-shadow: none;
+  --radius-sm: 8px;
+  --theme-radius-sm: 8px;
+  --radius-md: 12px;
+  --theme-radius-md: 12px;
+  --radius-lg: 16px;
+  --theme-radius-lg: 16px;
+  --font-display: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --theme-font-display: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-body: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --theme-font-body: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --theme-font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}

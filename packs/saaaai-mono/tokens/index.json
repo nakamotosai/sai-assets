@@ -1,0 +1,12 @@
+{
+  "default": "saaaai-mono",
+  "themes": [
+    {
+      "id": "saaaai-mono",
+      "name": "saaaai Mono",
+      "mode": "dark",
+      "path": "tokens/semantic/saaaai-mono.json",
+      "default": true
+    }
+  ]
+}

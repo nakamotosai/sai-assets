@@ -1,0 +1,62 @@
+{
+  "id": "swiss-inverted",
+  "name": "Swiss Inverted（瑞士反色 / 暗色）",
+  "mode": "dark",
+  "signature": "暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红保持不变 —— 同字体两种墨极性",
+  "colors": {
+    "bg": "#121212",
+    "bgDeep": "#0E0E0E",
+    "surface": "#1A1A1A",
+    "surface2": "#222222",
+    "border": "#EDEBE6",
+    "ink": "#EDEBE6",
+    "inkMuted": "#9A958D",
+    "inkDim": "#6B6862",
+    "accent": "#D8232A",
+    "accent2": "#E5544B",
+    "onAccent": "#FFFFFF",
+    "red": "#D8232A",
+    "link": "#E5544B",
+    "codeBg": "#1F1F1F",
+    "hairline": "#5A5651",
+    "gridRed": "#7A4A42",
+    "chipBg": "#EDEBE6",
+    "chipFg": "#121212",
+    "shadow": "none"
+  },
+  "fonts": {
+    "display": "\"Helvetica Neue\",\"Neue Haas Grotesk Display Pro\",Helvetica,Inter,\"Noto Sans SC\",\"Source Han Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif",
+    "body": "\"Helvetica Neue\",\"Neue Haas Grotesk Display Pro\",Inter,\"Noto Sans SC\",\"Source Han Sans SC\",\"PingFang SC\",\"Microsoft YaHei\",Arial,sans-serif",
+    "mono": "\"JetBrains Mono\",ui-monospace,monospace"
+  },
+  "radius": {
+    "sm": "0px",
+    "md": "4px",
+    "lg": "6px"
+  },
+  "derived": {
+    "bg": "bg",
+    "bgDeep": "bgDeep",
+    "surface": "surface",
+    "surface2": "surface2",
+    "border": "border",
+    "ink": "ink",
+    "inkMuted": "inkMuted",
+    "inkDim": "inkDim",
+    "accent": "accent",
+    "accent2": "accent2",
+    "onAccent": "onAccent",
+    "red": "red",
+    "link": "link",
+    "codeBg": "codeBg"
+  },
+  "a11y": {
+    "contrast_min": 4.5,
+    "pairs": {
+      "ink/bg": 15.72,
+      "onAccent/accent": 5.01
+    },
+    "adjusted": false,
+    "notes": []
+  }
+}

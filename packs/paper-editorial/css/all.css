@@ -1,0 +1,97 @@
+/* Paper Editorial — 全部变体 + 基础 chrome */
+/* 纸感编辑：米白画布、墨色正文、刊头朱红 */
+/* 含 :root:单主题整站直接链接本文件 */
+
+:root,
+[data-theme="paper-editorial"],
+.theme-paper-editorial {
+  color-scheme: light;
+  --bg: #F7F3EB;
+  --theme-bg: #F7F3EB;
+  --bg-deep: #EFE9DF;
+  --theme-bg-deep: #EFE9DF;
+  --surface: #FFFCF7;
+  --theme-surface: #FFFCF7;
+  --surface-2: #EFE9DF;
+  --theme-surface-2: #EFE9DF;
+  --border: #D4CDC2;
+  --theme-border: #D4CDC2;
+  --ink: #1A1714;
+  --theme-ink: #1A1714;
+  --ink-muted: #6B6560;
+  --theme-ink-muted: #6B6560;
+  --ink-dim: #8A847C;
+  --theme-ink-dim: #8A847C;
+  --accent: #C41E3A;
+  --theme-accent: #C41E3A;
+  --accent-2: #9A1830;
+  --theme-accent-2: #9A1830;
+  --on-accent: #FFFCF7;
+  --theme-on-accent: #FFFCF7;
+  --red: #C41E3A;
+  --theme-red: #C41E3A;
+  --green: #2F6B4F;
+  --theme-green: #2F6B4F;
+  --aqua: #3D6B6B;
+  --theme-aqua: #3D6B6B;
+  --blue: #2C4A6E;
+  --theme-blue: #2C4A6E;
+  --purple: #6B4A6B;
+  --theme-purple: #6B4A6B;
+  --link: #C41E3A;
+  --theme-link: #C41E3A;
+  --code-bg: #EFE9DF;
+  --theme-code-bg: #EFE9DF;
+  --shadow: none;
+  --theme-shadow: none;
+  --radius-sm: 2px;
+  --theme-radius-sm: 2px;
+  --radius-md: 4px;
+  --theme-radius-md: 4px;
+  --radius-lg: 8px;
+  --theme-radius-lg: 8px;
+  --font-display: "Noto Serif SC", "Source Han Serif SC", serif;
+  --theme-font-display: "Noto Serif SC", "Source Han Serif SC", serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --theme-font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, monospace;
+  --theme-font-mono: "JetBrains Mono", Consolas, monospace;
+}
+
+/* 基础 chrome(opt-in):<body class="theme-apply"> 或 [data-theme-apply] 上底色与基础件 */
+.theme-apply,
+[data-theme-apply] {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: 1.6;
+}
+
+.theme-apply a,
+[data-theme-apply] a {
+  color: var(--link, var(--accent));
+}
+
+.theme-apply code,
+.theme-apply pre,
+[data-theme-apply] code,
+[data-theme-apply] pre {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: var(--code-bg, var(--surface2, var(--surface)));
+  border-radius: var(--radius-sm, 4px);
+}
+
+.theme-apply .panel,
+[data-theme-apply] .panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 6px);
+  box-shadow: var(--shadow, none);
+}
+
+.theme-apply .btn-primary,
+[data-theme-apply] .btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-sm, 4px);
+}

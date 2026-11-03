@@ -1,0 +1,11 @@
+{
+  "id": "ref-n1-sspai",
+  "name": "少数派sspai·中文双栏信息站观测",
+  "tag": "news",
+  "source_url": "https://www.sspai.com/",
+  "observed": "sspai.com 首页实读200：派早报+Matrix精选+双栏信息流；中文站自证中文2分无问题。观测归纳不搬码不抄文。得分11/12（2/2/2/2/2/1）。",
+  "layout": "中文双栏信息流；派早报头条区+Matrix精选卡片",
+  "colorsDNA": null,
+  "matchTheme": "paper-editorial",
+  "when": "做中文双栏信息站时先对本条定信息密度与栏宽，再定字栈。许可：观测归纳（不搬运原文/图/码）。"
+}

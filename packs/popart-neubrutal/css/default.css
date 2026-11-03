@@ -1,0 +1,59 @@
+/* Default = popart-neubrutal — 只链接这一份即最快 apply */
+/* Pop Art · Neo Brutal — 奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色 */
+/* 语义变量与 --theme-* 别名双发;字体/圆角透传源令牌 */
+
+:root,
+[data-theme="popart-neubrutal"],
+.theme-popart-neubrutal {
+  color-scheme: light;
+  --bg: #FFFDF5;
+  --theme-bg: #FFFDF5;
+  --bg-deep: #FFF6D8;
+  --theme-bg-deep: #FFF6D8;
+  --surface: #FFFFFF;
+  --theme-surface: #FFFFFF;
+  --surface-2: #FFF0F0;
+  --theme-surface-2: #FFF0F0;
+  --border: #000000;
+  --theme-border: #000000;
+  --ink: #000000;
+  --theme-ink: #000000;
+  --ink-muted: #333333;
+  --theme-ink-muted: #333333;
+  --ink-dim: #666666;
+  --theme-ink-dim: #666666;
+  --accent: #FF6B6B;
+  --theme-accent: #FF6B6B;
+  --accent-2: #FFD93D;
+  --theme-accent-2: #FFD93D;
+  --on-accent: #000000;
+  --theme-on-accent: #000000;
+  --red: #FF6B6B;
+  --theme-red: #FF6B6B;
+  --green: #6BCB77;
+  --theme-green: #6BCB77;
+  --aqua: #4D96FF;
+  --theme-aqua: #4D96FF;
+  --blue: #4D96FF;
+  --theme-blue: #4D96FF;
+  --purple: #C4B5FD;
+  --theme-purple: #C4B5FD;
+  --link: #000000;
+  --theme-link: #000000;
+  --code-bg: #FFF6D8;
+  --theme-code-bg: #FFF6D8;
+  --shadow: 6px 6px 0 #000000;
+  --theme-shadow: 6px 6px 0 #000000;
+  --radius-sm: 0px;
+  --theme-radius-sm: 0px;
+  --radius-md: 4px;
+  --theme-radius-md: 4px;
+  --radius-lg: 12px;
+  --theme-radius-lg: 12px;
+  --font-display: "Space Grotesk", "Arial Black", system-ui, sans-serif;
+  --theme-font-display: "Space Grotesk", "Arial Black", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --theme-font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "Space Mono", monospace;
+  --theme-font-mono: "Space Mono", monospace;
+}

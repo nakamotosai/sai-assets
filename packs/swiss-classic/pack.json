@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "id": "swiss-classic",
+  "title": "Swiss Classic（瑞士国际主义）",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/swiss-classic.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/swiss-classic.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/swiss-classic.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "light",
+    "theme",
+    "paper",
+    "red",
+    "warm",
+    "swiss"
+  ],
+  "when": "暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次;适用:暖色纸白（#EDEBE6）与暖黑（#111111），绝不用纯 #000 / 冷灰;强调红只做线/编号/单块几何形，覆盖率 ≤3%，落在预留空白里;一屏只有一个饱和色相，红不填正文;层次靠 1px 发丝线 + 明度差（bgDeep 托 surface），不用投影/渐变;大面积留白（≥35–45%），成块成区;不对称构图：一侧文字、一侧几何形",
+  "not_for": "禁用:两种强调色同屏;红铺大底 / 红填正文;box-shadow / 渐变 / 纹理 / 噪点 / 玻璃拟态;纯黑 #000、纯白 #FFF、冷灰;圆角 > 6px（唯一例外是底部居中字幕 chip）;对称居中构图",
+  "default_variant": "swiss-classic",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/swiss-classic/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens swiss-classic | variants=1 keys=19 hex=18 rgba=0 effects=1 contrast=ink/bg=15.85 onAccent/accent=5.01 | not_in_palette=['green']"
+  },
+  "canonical_home": null
+}

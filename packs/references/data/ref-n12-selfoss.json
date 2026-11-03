@@ -1,0 +1,11 @@
+{
+  "id": "ref-n12-selfoss",
+  "name": "selfoss·轻量聚合参考（GPL注意）",
+  "tag": "news",
+  "source_url": "https://github.com/fossar/selfoss",
+  "observed": "GitHub 实读200：source code is licensed under GNU GPL v3（Resources列GPL-3.0），非AGPL。轻量聚合：stream墙+文章页；打印弱。得分6/12（1/1/2/1/1/0）。",
+  "layout": "轻量聚合stream墙；文章页/打印弱",
+  "colorsDNA": null,
+  "matchTheme": "saaaai-mono",
+  "when": "做轻量聚合时参考本条；分发改动须开源。许可：GPL-3.0（可商用，分发改动须开源，copyleft注意）。"
+}

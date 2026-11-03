@@ -1,0 +1,94 @@
+/* Minimalist Essential 极简 essentials · 共存版:只出 [data-theme] / .theme-<id> 作用域,不含 :root
+   多主题应用(站点自带主题切换器)用这一份,避免全局覆盖项目自己的 token;
+   单主题直接应用请用 css/default.css。color-scheme 只在 [data-theme] 块里给。 */
+
+[data-theme="minimalist-essential"],
+.theme-minimalist-essential {
+  color-scheme: light;
+  --bg: #FAFAF8;
+  --theme-bg: #FAFAF8;
+  --bg-deep: #F1F0EC;
+  --theme-bg-deep: #F1F0EC;
+  --surface: #FFFFFF;
+  --theme-surface: #FFFFFF;
+  --surface-2: #F4F3EF;
+  --theme-surface-2: #F4F3EF;
+  --border: #E8E6E1;
+  --theme-border: #E8E6E1;
+  --ink: #111111;
+  --theme-ink: #111111;
+  --ink-muted: #6B6B6B;
+  --theme-ink-muted: #6B6B6B;
+  --ink-dim: #B5B5B5;
+  --theme-ink-dim: #B5B5B5;
+  --accent: #0F62FE;
+  --theme-accent: #0F62FE;
+  --accent-2: #0043CE;
+  --theme-accent-2: #0043CE;
+  --on-accent: #FFFFFF;
+  --theme-on-accent: #FFFFFF;
+  --red: #C81E1E;
+  --theme-red: #C81E1E;
+  --green: #1E7E34;
+  --theme-green: #1E7E34;
+  --blue: #0F62FE;
+  --theme-blue: #0F62FE;
+  --purple: #8E4EC6;
+  --theme-purple: #8E4EC6;
+  --link: #0F62FE;
+  --theme-link: #0F62FE;
+  --code-bg: #141414;
+  --theme-code-bg: #141414;
+  --shadow: 0 1px 2px rgba(0,0,0,.06);
+  --theme-shadow: 0 1px 2px rgba(0,0,0,.06);
+  --radius-lg: 10px;
+  --theme-radius-lg: 10px;
+  --radius-md: 10px;
+  --theme-radius-md: 10px;
+  --radius-sm: 6px;
+  --theme-radius-sm: 6px;
+  --font-body: "Inter", system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --theme-font-body: "Inter", system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-display: "Inter", system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --theme-font-display: "Inter", system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --theme-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* 基础 chrome(opt-in):<body class="theme-apply"> 或 [data-theme-apply] 上底色与基础件 */
+.theme-apply,
+[data-theme-apply] {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body, system-ui, sans-serif);
+  line-height: 1.6;
+}
+
+.theme-apply a,
+[data-theme-apply] a {
+  color: var(--link, var(--accent));
+}
+
+.theme-apply code,
+.theme-apply pre,
+[data-theme-apply] code,
+[data-theme-apply] pre {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  background: var(--code-bg, var(--surface2, var(--surface)));
+  border-radius: var(--radius-sm, 4px);
+}
+
+.theme-apply .panel,
+[data-theme-apply] .panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 6px);
+  box-shadow: var(--shadow, 0 1px 2px rgba(0,0,0,.06));
+}
+
+.theme-apply .btn-primary,
+[data-theme-apply] .btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-radius: var(--radius-sm, 4px);
+}

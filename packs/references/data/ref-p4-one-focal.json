@@ -1,0 +1,11 @@
+{
+  "id": "ref-p4-one-focal",
+  "name": "一页一视觉重心",
+  "tag": "print",
+  "source_url": "https://freefrontend.com/css-magazine-layouts",
+  "observed": "freefrontend 实读200：非对称多栏 CSS Grid + pull quote + 语义 figure，主张一致。规范观测放行。",
+  "layout": "非对称多栏 CSS Grid；pull quote；语义 figure；一页一重心",
+  "colorsDNA": null,
+  "matchTheme": "paper-editorial",
+  "when": "做杂志式版面时先定唯一视觉重心再排多栏。许可：观测放行（版式骨架可用，snippet 代码只当思路不入库）。"
+}

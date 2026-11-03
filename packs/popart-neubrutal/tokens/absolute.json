@@ -1,0 +1,28 @@
+{
+  "id": "popart-neubrutal",
+  "name": "Pop Art · Neo Brutal",
+  "mode": "light",
+  "signature": "奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色",
+  "source": "themes/popart-neubrutal.json",
+  "colors": {
+    "bg": "#FFFDF5",
+    "bgDeep": "#FFF6D8",
+    "surface": "#FFFFFF",
+    "surface2": "#FFF0F0",
+    "border": "#000000",
+    "ink": "#000000",
+    "inkMuted": "#333333",
+    "inkDim": "#666666",
+    "accent": "#FF6B6B",
+    "accent2": "#FFD93D",
+    "onAccent": "#000000",
+    "red": "#FF6B6B",
+    "green": "#6BCB77",
+    "aqua": "#4D96FF",
+    "blue": "#4D96FF",
+    "purple": "#C4B5FD",
+    "link": "#000000",
+    "codeBg": "#FFF6D8",
+    "shadow": "6px 6px 0 #000000"
+  }
+}

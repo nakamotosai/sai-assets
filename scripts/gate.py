@@ -4,9 +4,12 @@
 
 三层:
   1. schema  — 逐个 packs/*/pack.json 按 schema/pack.schema.json 校验(内置校验器,零依赖);
-               另查 files.* 列出的路径真实存在、origin.path 不是绝对路径。
+               另查 files.* 列出的路径真实存在、origin.path 不是绝对路径;
+               packs/*/pack.json 少于 1 个即报红(扫 0 个包不许报绿)。
   2. banned  — 扫 git 跟踪的文本文件(git ls-files -z;非 git 目录回退为遍历,两种情况都排除
                .git/、node_modules/、.private/),按 schema/banned.json 的规则找公开风险串。
+  3. assert  — 逐个 packs/*/scripts/assert_tokens.py 子进程执行(超时 120s),每包打印一行
+               `[assert] <pack>: PASS|退出码 N|超时`,失败回传尾部输出 ≤20 行。
 
 用法:
     python scripts/gate.py                  # 全仓三层闸
@@ -35,6 +38,7 @@ BANNED_RULES_PATH = REPO_ROOT / "schema" / "banned.json"
 PACKS_DIRNAME = "packs"
 SCAN_EXTS = {".md", ".json", ".html", ".css", ".js", ".py", ".yml"}
 SKIP_DIRS = {".git", "node_modules", ".private"}
+LOCAL_RULES_REL = ".private/banned.local.json"
 # 第三方 vendored 文件整块跳过(内容非本仓自产,任何串都不代表本仓泄漏);--scan-upstream 可解开。
 SKIP_PATH_GLOBS = ("packs/*/upstream/**",)
 
@@ -129,9 +133,13 @@ def _json_pointer(where: str) -> str:
 
 
 def check_packs(packs_dir: Path, pack_schema: dict) -> tuple[list, int]:
-    """返回 (schema findings, 包数)。"""
+    """返回 (schema findings, 包数);0 个包本身就是 findings(禁止扫 0 个包报绿)。"""
     findings: list = []
     pack_files = sorted(packs_dir.glob("*/pack.json")) if packs_dir.is_dir() else []
+    if not pack_files:
+        findings.append(
+            "[schema] packs/*/pack.json: 找到 0 个(至少须 1 个;扫 0 个包不许报绿)"
+        )
     for pack_json in pack_files:
         pack_id = pack_json.parent.name
         try:
@@ -173,6 +181,24 @@ def check_packs(packs_dir: Path, pack_schema: dict) -> tuple[list, int]:
 # 2. 清洗闸(禁用内容扫描)
 # --------------------------------------------------------------------------- #
 
+def load_rules(cfg: dict, root: Path) -> tuple[list, dict]:
+    """公开层规则 + 私有补充表(root/.private/banned.local.json,存在则合并,同 id 本地优先)。"""
+    merged: dict = {}
+    for rule in cfg.get("rules", []):
+        merged[rule["id"]] = rule
+    public_count = len(merged)
+    local_path = root / LOCAL_RULES_REL
+    meta = {"public": public_count, "local": 0}
+    if not local_path.is_file():
+        return list(merged.values()), meta
+    data = json.loads(local_path.read_text(encoding="utf-8"))
+    local_rules = data.get("rules", []) if isinstance(data, dict) else []
+    for rule in local_rules:
+        merged[rule["id"]] = rule
+    meta["local"] = len(local_rules)
+    return list(merged.values()), meta
+
+
 def _match_any_glob(rel: str, globs) -> str | None:
     for glob in globs:
         if fnmatch.fnmatchcase(rel, glob):
@@ -181,19 +207,21 @@ def _match_any_glob(rel: str, globs) -> str | None:
 
 
 def _scan_mode(root: Path) -> tuple[list[str] | None, str]:
-    """git 跟踪文件(相对 root 的 posix 路径)+ 模式名;非 git 环境返回 (None, "walk")。"""
+    """git 跟踪文件(相对 root 的 posix 路径)+ 模式名;不可用/索引为空时返回 (None, "walk")。"""
     try:
         proc = subprocess.run(
             ["git", "-C", str(root), "ls-files", "-z"],
             capture_output=True,
             timeout=60,
         )
-    except (OSError, subprocess.SubprocessError):
-        return None, "walk"
+    except (OSError, subprocess.SubprocessError) as exc:
+        return None, f"walk(git 不可用:{exc.__class__.__name__})"
     if proc.returncode != 0:
-        return None, "walk"
-    names = proc.stdout.decode("utf-8", errors="surrogateescape").split("\0")
-    return [name for name in names if name], "git"
+        return None, f"walk(不是 git 工作树:exit {proc.returncode})"
+    names = [name for name in proc.stdout.decode("utf-8", errors="surrogateescape").split("\0") if name]
+    if not names:
+        return None, "walk(git 索引为空 → 回退遍历,避免扫 0 个文件却报绿)"
+    return names, f"git ls-files({len(names)} 个文件)"
 
 
 def _candidate_rels(root: Path, stats: dict) -> list[str]:
@@ -233,10 +261,10 @@ def _snippet(line: str, start: int) -> str:
     return line[left:left + SNIPPET_MAX].strip()
 
 
-def scan_banned(root: Path, cfg: dict, scan_upstream: bool, exempt_files: list) -> tuple[list, list, list, dict]:
+def scan_banned(root: Path, rule_set: list, scan_upstream: bool, exempt_files: list) -> tuple[list, list, list, dict]:
     """返回 (findings, allow 命中, 豁免文件留痕, 扫描统计)。"""
     rules = []
-    for rule in cfg.get("rules", []):
+    for rule in rule_set:
         rules.append((
             rule["id"],
             re.compile(rule["pattern"]),
@@ -296,7 +324,8 @@ def scan_banned(root: Path, cfg: dict, scan_upstream: bool, exempt_files: list) 
 # --------------------------------------------------------------------------- #
 
 def run_assertions(packs_dir: Path) -> tuple[list, int]:
-    findings: list = []
+    """逐个包跑 scripts/assert_tokens.py;返回 (逐包结果(含失败尾部), 执行数)。"""
+    results: list = []
     scripts = sorted(packs_dir.glob("*/scripts/assert_tokens.py")) if packs_dir.is_dir() else []
     for script in scripts:
         pack_dir = script.parents[1]
@@ -312,15 +341,17 @@ def run_assertions(packs_dir: Path) -> tuple[list, int]:
                 timeout=ASSERT_TIMEOUT,
             )
         except subprocess.TimeoutExpired:
-            findings.append({
+            results.append({
                 "pack": pack_id,
+                "ok": False,
                 "detail": f"[assert] {pack_id}: 超时(>{ASSERT_TIMEOUT:.0f}s)",
                 "tail": [],
             })
             continue
         except OSError as exc:
-            findings.append({
+            results.append({
                 "pack": pack_id,
+                "ok": False,
                 "detail": f"[assert] {pack_id}: 无法执行({exc})",
                 "tail": [],
             })
@@ -328,12 +359,20 @@ def run_assertions(packs_dir: Path) -> tuple[list, int]:
         if proc.returncode != 0:
             combined = (proc.stdout or "") + (proc.stderr or "")
             tail = combined.strip().splitlines()[-ASSERT_TAIL_LINES:]
-            findings.append({
+            results.append({
                 "pack": pack_id,
+                "ok": False,
                 "detail": f"[assert] {pack_id}: 退出码 {proc.returncode}",
                 "tail": tail,
             })
-    return findings, len(scripts)
+        else:
+            results.append({
+                "pack": pack_id,
+                "ok": True,
+                "detail": f"[assert] {pack_id}: PASS",
+                "tail": [],
+            })
+    return results, len(scripts)
 
 
 # --------------------------------------------------------------------------- #
@@ -385,11 +424,20 @@ def main(argv=None) -> int:
     packs_dir = root / PACKS_DIRNAME
     exempt_files = banned_cfg.get("exempt_files", [])
 
+    try:
+        rule_set, rules_meta = load_rules(banned_cfg, root)
+        for rule in rule_set:
+            re.compile(rule["pattern"])
+    except (OSError, json.JSONDecodeError, KeyError, TypeError, re.error) as exc:
+        print(f"gate: 规则表不可用({LOCAL_RULES_REL} 或 schema/banned.json):{exc}", file=sys.stderr)
+        return 2
+
     schema_findings, pack_count = check_packs(packs_dir, pack_schema)
     banned_findings, allow_hits, exempt_hits, scan_stats = scan_banned(
-        root, banned_cfg, args.scan_upstream, exempt_files
+        root, rule_set, args.scan_upstream, exempt_files
     )
-    assert_findings, assert_count = run_assertions(packs_dir)
+    assert_results, assert_count = run_assertions(packs_dir)
+    assert_findings = [r for r in assert_results if not r["ok"]]
 
     total = len(schema_findings) + len(banned_findings) + len(assert_findings)
     ok = total == 0
@@ -401,22 +449,28 @@ def main(argv=None) -> int:
             "packs": pack_count,
             "assertions": assert_count,
             "scan_mode": scan_stats.get("scan_mode"),
+            "rules": rules_meta,
             "schema": schema_findings,
             "banned": banned_findings,
-            "assert": assert_findings,
+            "assert": assert_results,
             "allowed": allow_hits,
             "exempted": exempt_hits,
             "skipped_upstream_files": scan_stats.get("upstream", 0),
         }, ensure_ascii=False, indent=2))
         return 0 if ok else 1
 
+    print(f"[scan] {scan_stats.get('scan_mode', '?')}")
+    if rules_meta["local"]:
+        print(f"[rules] 公开 {rules_meta['public']} 条 + 本地 {rules_meta['local']} 条")
+    else:
+        print(f"[rules] 仅公开 {rules_meta['public']} 条(本地补充表缺失)")
     for detail in schema_findings:
         print(detail)
     for hit in banned_findings:
         print(f"[banned] {hit['file']}:{hit['line']}:{hit['rule']}: {hit['snippet']}")
-    for finding in assert_findings:
-        print(finding["detail"])
-        for line in finding["tail"]:
+    for result in assert_results:
+        print(result["detail"])
+        for line in result["tail"]:
             print(f"    {line}")
     for hit in exempt_hits:
         print(hit)

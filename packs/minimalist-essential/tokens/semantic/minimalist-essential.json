@@ -1,0 +1,66 @@
+{
+  "id": "minimalist-essential",
+  "name": "Minimalist Essential 极简 essentials",
+  "mode": "light",
+  "signature": "删到不能再删：中性底 + 单强调色 + 8pt 网格 + 单列信息流；一屏一任务",
+  "colors": {
+    "bg": "#FAFAF8",
+    "bgDeep": "#F1F0EC",
+    "surface": "#FFFFFF",
+    "surface2": "#F4F3EF",
+    "border": "#E8E6E1",
+    "ink": "#111111",
+    "inkMuted": "#6B6B6B",
+    "inkDim": "#B5B5B5",
+    "accent": "#0F62FE",
+    "accent2": "#0043CE",
+    "onAccent": "#FFFFFF",
+    "red": "#C81E1E",
+    "green": "#1E7E34",
+    "blue": "#0F62FE",
+    "purple": "#8E4EC6",
+    "link": "#0F62FE",
+    "codeBg": "#141414",
+    "shadow": "0 1px 2px rgba(0,0,0,.06)"
+  },
+  "fonts": {
+    "body": "\"Inter\", system-ui, \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "display": "\"Inter\", system-ui, \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "mono": "\"JetBrains Mono\", ui-monospace, monospace"
+  },
+  "radius": {
+    "lg": "10px",
+    "md": "10px",
+    "sm": "6px"
+  },
+  "derived": {
+    "bg": "bg",
+    "bgDeep": "bgDeep",
+    "surface": "surface",
+    "surface2": "surface2",
+    "border": "border",
+    "ink": "ink",
+    "inkMuted": "inkMuted",
+    "inkDim": "inkDim",
+    "accent": "accent",
+    "accent2": "accent2",
+    "onAccent": "onAccent",
+    "red": "red",
+    "green": "green",
+    "blue": "blue",
+    "purple": "purple",
+    "link": "link",
+    "codeBg": "codeBg"
+  },
+  "a11y": {
+    "contrast_min": 4.5,
+    "pairs": {
+      "ink/bg": 18.07,
+      "onAccent/accent": 5.0
+    },
+    "adjusted": false,
+    "notes": [
+      "源里 --link 与 --accent 同为 #0F62FE(照源发;同屏同时出现时用 --accent-2 或下划线区分)"
+    ]
+  }
+}

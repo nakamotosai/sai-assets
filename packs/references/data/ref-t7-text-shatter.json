@@ -1,0 +1,11 @@
+{
+  "id": "ref-t7-text-shatter",
+  "name": "交互文字碎裂TSL",
+  "tag": "three",
+  "source_url": "https://tympanus.net/codrops/2025/07/22/interactive-text-destruction-with-three-js-webgpu-and-tsl/",
+  "observed": "codrops 2025-07 教程，留。一屏一效观测放行。",
+  "layout": "交互文字碎裂；TSL",
+  "colorsDNA": null,
+  "matchTheme": "fm-void",
+  "when": "做文字碎裂一屏一效时学思路；源码不入库。许可：观测放行。"
+}

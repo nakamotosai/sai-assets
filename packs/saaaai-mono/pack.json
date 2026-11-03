@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "id": "saaaai-mono",
+  "title": "saaaai Mono · 近黑 void + 银灰 ink",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/saaaai-mono.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/saaaai-mono.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/saaaai-mono.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "dark",
+    "theme",
+    "void"
+  ],
+  "when": "近黑 void + 银灰 ink + 等高线轮廓当 accent;适用:单色强调;留大负空间;contour 与 accent 可分离",
+  "not_for": "禁用:彩虹装饰默认开;浅色 token 混进 t1",
+  "default_variant": "saaaai-mono",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/saaaai-mono/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens saaaai-mono | variants=1 keys=19 hex=17 rgba=1 effects=1 contrast=ink/bg=18.33 onAccent/accent=16.48 | not_in_palette=[]"
+  },
+  "canonical_home": null
+}

@@ -27,7 +27,7 @@ packs/<id>/
 
 | kind | 必填产物 | 说明 |
 |---|---|---|
-| `theme` | `tokens/` + `css/` + `docs/usage.md` + `scripts/assert_tokens.py` | 配色 + 字体 + 配对规则 |
+| `theme` | `tokens/` + `css/` + `docs/usage.md` + `scripts/assert_tokens.py` | 配色 + 字体 + 配对规则;`css/` 必含 `default.css(含 :root,单主题直用)` 与 `themes.css(只出 [data-theme] 作用域,多主题并存)` |
 | `fonts` | `docs/usage.md` + `tokens/`(字号/字距档) | 排版配方,无主题色 |
 | `fx` | `src/` + `preview/index.html` + `docs/usage.md` | 动效,含 apply 片段与性能口径 |
 | `ui` | `src/` + `preview/index.html` + `docs/usage.md` | 组件 |

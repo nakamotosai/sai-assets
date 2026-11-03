@@ -1,0 +1,11 @@
+{
+  "id": "ref-p7-height-print",
+  "name": "高度预算与打印",
+  "tag": "print",
+  "source_url": "https://juejin.cn/post/7398472542313611276",
+  "observed": "juejin 同源：@media print / @page 为通用 CSS 知识非独创代码，留。规范观测放行。",
+  "layout": "高度预算；@media print / @page 打印样式",
+  "colorsDNA": null,
+  "matchTheme": "slow-ride-cream",
+  "when": "做需打印的研报/deck 先定高度预算再写 print 样式；Print.js 只作思路引用，真引入另核 MIT。许可：观测放行。"
+}

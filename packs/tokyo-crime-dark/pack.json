@@ -1,0 +1,53 @@
+{
+  "schema": 1,
+  "id": "tokyo-crime-dark",
+  "title": "Tokyo Crime Dark 暖黑数据图",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/tokyo-crime-dark.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/tokyo-crime-dark.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/tokyo-crime-dark.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "dark",
+    "theme",
+    "warm",
+    "map",
+    "dataviz"
+  ],
+  "when": "暖黑底 #16130e 配暖色顺序带：深色底上把 ColorBrewer YlOrRd 整体提亮 15% 修对比（断点不动），深棕分隔线代替白描边；数据密集型地图/图表的深色方案。;适用:暖黑（#16130e 系）而非中性纯黑——配暖色带（YlOrRd/暖橙红）不发蓝、不发脏;顺序色带在深色底整体提亮 ~15%（逐通道 c+(255-c)*0.15），只深色生效；断点/档位/数据一字不改，保证跨主题同色=同危险度;深色底的地图分隔线用深棕 #3a3128，别用纯白——白线在暖黑上像网格噪点;无数据/无人口档单独给灰（#4a4238 / #55504a），别混进色带;顶栏按钮选中态反白改「强调色底 + 深字」（onAccent=bg），焦点环换成亮蓝 #7cc4ff 保证可见;localStorage 记住选择 + 默认浅色；切换不重建数据/不改断点，只重设色;深色独立调色，不把浅色 token 直接反相",
+  "not_for": "禁用:别用中性纯黑 #000/#111 配暖色带（冷暖打架，浅黄档发灰）;别为深色重算分档断点（会破坏跨主题/跨时间可比性）;别把地图描边留在纯白（暖黑底上白线过曝刺眼）;别在深色下沿用浅色的无数据浅灰 #eeeeee（会变成高亮块）",
+  "default_variant": "tokyo-crime-dark",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/tokyo-crime-dark/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens tokyo-crime-dark | variants=1 keys=23 hex=22 rgba=0 effects=1 contrast=ink/bg=16.17 onAccent/accent=5.52 | not_in_palette=[]"
+  },
+  "canonical_home": null
+}

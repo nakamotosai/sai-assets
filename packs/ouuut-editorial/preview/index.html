@@ -19,9 +19,10 @@
   button{font:inherit;color:var(--ink);background:var(--surface);border:0;border-radius:var(--btn-radius);padding:9px 14px;cursor:pointer}
   button[aria-pressed="true"]{background:var(--accent);color:var(--bg)}
   button.icon{width:44px;height:44px;padding:0;display:grid;place-items:center;background:transparent}
-  button.icon::after{content:"☀";font-size:15px;line-height:1}
-  [data-theme="charcoal"] button.icon::after,[data-theme="dark"] button.icon::after{content:"☾"}
-  .icon svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5}
+  button.icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+  .icon-moon{display:none}
+  [data-theme="charcoal"] .icon-sun,[data-theme="dark"] .icon-sun{display:none}
+  [data-theme="charcoal"] .icon-moon,[data-theme="dark"] .icon-moon{display:block}
   :focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
   .swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:calc(var(--gap)) 0}
   .sw{padding:18px 16px;border-radius:var(--radius)}
@@ -50,7 +51,10 @@
       <p class="lede">深浅只翻中性色,强调色两模共用;六章各取一色,层级靠留白与字号,不靠线与阴影。</p>
     </div>
     <div class="tools">
-      <button class="icon" id="theme-toggle" type="button" aria-label="切换深色模式"></button>
+      <button class="icon" id="theme-toggle" type="button" aria-label="切换深色模式">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.2M12 19.2v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.6 12h2.2M19.2 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.2A8.2 8.2 0 0 1 9.8 4a8.4 8.4 0 1 0 10.2 10.2z"/></svg>
+      </button>
       <button data-pal="a" aria-pressed="true" type="button">A 和色六景</button>
       <button data-pal="b" aria-pressed="false" type="button">B 矿物大地</button>
       <button data-pal="c" aria-pressed="false" type="button">C 双色印刷</button>
@@ -59,12 +63,12 @@
   </header>
 
   <section class="swatches" aria-label="六章颜色">
-    <div class="sw" style="background:var(--c-weather);color:var(--bg)"><b>青磁 · weather</b><span>#0C8B7A</span></div>
-    <div class="sw" style="background:var(--c-quake);color:var(--bg)"><b>山吹 · quake</b><span>#A77109</span></div>
-    <div class="sw" style="background:var(--c-crime);color:var(--bg)"><b>朱 · crime</b><span>#CD5545</span></div>
-    <div class="sw" style="background:var(--c-cabinet);color:var(--bg)"><b>藍 · cabinet</b><span>#3F7DCA</span></div>
-    <div class="sw" style="background:var(--c-housing);color:var(--bg)"><b>苔 · housing</b><span>#678618</span></div>
-    <div class="sw" style="background:var(--c-population);color:var(--bg)"><b>紫 · population</b><span>#A165AE</span></div>
+    <div class="sw" style="background:var(--c-weather);color:var(--bg)"><b>青磁 · weather</b><span data-hex="--c-weather">#0C8B7A</span></div>
+    <div class="sw" style="background:var(--c-quake);color:var(--bg)"><b>山吹 · quake</b><span data-hex="--c-quake">#A77109</span></div>
+    <div class="sw" style="background:var(--c-crime);color:var(--bg)"><b>朱 · crime</b><span data-hex="--c-crime">#CD5545</span></div>
+    <div class="sw" style="background:var(--c-cabinet);color:var(--bg)"><b>藍 · cabinet</b><span data-hex="--c-cabinet">#3F7DCA</span></div>
+    <div class="sw" style="background:var(--c-housing);color:var(--bg)"><b>苔 · housing</b><span data-hex="--c-housing">#678618</span></div>
+    <div class="sw" style="background:var(--c-population);color:var(--bg)"><b>紫 · population</b><span data-hex="--c-population">#A165AE</span></div>
   </section>
 
   <div class="row">
@@ -112,12 +116,19 @@
     try { localStorage.setItem(KEY, next); } catch (e) {}
     sync();
   });
+  function syncHex() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-hex]"), function (el) {
+      el.textContent = getComputedStyle(root).getPropertyValue(el.dataset.hex).trim();
+    });
+  }
+  syncHex();
   Array.prototype.forEach.call(document.querySelectorAll("[data-pal]"), function (b) {
     b.addEventListener("click", function () {
       root.setAttribute("data-palette", b.dataset.pal);
       Array.prototype.forEach.call(document.querySelectorAll("[data-pal]"), function (o) {
         o.setAttribute("aria-pressed", String(o === b));
       });
+      syncHex();
     });
   });
   Array.prototype.forEach.call(document.querySelectorAll("[data-chapter]"), function (b) {

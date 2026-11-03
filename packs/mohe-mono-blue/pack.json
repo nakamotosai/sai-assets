@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "id": "mohe-mono-blue",
+  "title": "墨河 · 深色单色蓝（群青）",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Sai Theme Lab · themes/mohe-mono-blue.json",
+      "license": "MIT",
+      "what": "原色板来源(旧库原子,只读取用)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "themes/mohe-mono-blue.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/mohe-mono-blue.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/all.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "dark",
+    "theme",
+    "ink",
+    "blue",
+    "serif",
+    "cool",
+    "monochrome",
+    "card"
+  ],
+  "when": "近黑冷蓝底 + 单一色相 218–223° 明度梯；唯一有彩光是强调色 #6891d9；卡片半透明浮在 WebGL 墨河背景上；竖排书脊刊头（汉字竖排做书脊）；衬线标题 + 冷瓷白正文;适用:整套 UI 只用一个色相（背景的 218–223° 蓝），深度靠明度梯而非新色相;强调色取背景中光带同 hue 同饱和（h218 s52）再抬明度，别用高饱和电蓝;卡片半透明（rgba(12,22,44,.20)）浮在背景上，让背景墨河透出来;分类色只用同色相的明度/微彩差（亮蓝/中蓝灰/近中性冷灰蓝/蓝），靠文字标签辨义;竖排书脊刊头：writing-mode:vertical-rl + text-orientation:upright，衬线 900 字重;深色底衬线标题可用，正文一律无衬线（衬线细体在深底会糊）",
+  "not_for": "禁用:4 个饱和分类色相（与蓝场打架，是「五颜六色」的根因）;高饱和电蓝强调色（h218 s86 = 读作另一个蓝）;在注释/代码里保留被 grep 的字符串（会让产物断言假红）;深色底用细体衬线正文（锯齿糊）",
+  "default_variant": "mohe-mono-blue",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/mohe-mono-blue/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens mohe-mono-blue | variants=1 keys=15 hex=10 rgba=5 effects=0 contrast=ink/bg=17.60 onAccent/accent=6.37 | not_in_palette=['red', 'green']"
+  },
+  "canonical_home": null,
+  "changelog": [
+    "1.0.0:语义层按 WCAG ≥4.5:1 修正 accent/on-accent 配对(见 tokens/semantic 的 a11y 与 docs/usage.md);tokens/absolute.json 未改。"
+  ]
+}

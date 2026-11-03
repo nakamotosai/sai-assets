@@ -1,0 +1,12 @@
+{
+  "default": "abyss-lab-record",
+  "themes": [
+    {
+      "id": "abyss-lab-record",
+      "name": "Abyss Lab Record 暗黑实验记录",
+      "mode": "dark",
+      "path": "tokens/semantic/abyss-lab-record.json",
+      "default": true
+    }
+  ]
+}

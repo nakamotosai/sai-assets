@@ -1,0 +1,83 @@
+/* Default = slow-ride-cream — 只链接这一份即最快 apply */
+/* Slow Ride Cream 慢骑奶油 — 暖奶油纸面 + 鼠尾草绿 + 番茄围巾，慢日子编辑风；拱形画框 + 双语微标签 + 一句文案 */
+/* 语义变量与 --theme-* 别名双发;字体/圆角透传源令牌 */
+
+:root,
+[data-theme="slow-ride-cream"],
+.theme-slow-ride-cream {
+  color-scheme: light;
+  --bg: #f6f1e7;
+  --theme-bg: #f6f1e7;
+  --bg-deep: #efe7d3;
+  --theme-bg-deep: #efe7d3;
+  --surface: #fffdf6;
+  --theme-surface: #fffdf6;
+  --surface-2: #f1e9d4;
+  --theme-surface-2: #f1e9d4;
+  --border: #e3d7bd;
+  --theme-border: #e3d7bd;
+  --ink: #493e31;
+  --theme-ink: #493e31;
+  --ink-muted: #93846c;
+  --theme-ink-muted: #93846c;
+  --ink-dim: #a89a7f;
+  --theme-ink-dim: #a89a7f;
+  --accent: #b34a32;
+  --theme-accent: #b34a32;
+  --accent-2: #d95f43;
+  --theme-accent-2: #d95f43;
+  --on-accent: #fffaf0;
+  --theme-on-accent: #fffaf0;
+  --red: #c64545;
+  --theme-red: #c64545;
+  --green: #5d8a6a;
+  --theme-green: #5d8a6a;
+  --aqua: #6a9a8e;
+  --theme-aqua: #6a9a8e;
+  --blue: #5a7a8a;
+  --theme-blue: #5a7a8a;
+  --purple: #8a6a7a;
+  --theme-purple: #8a6a7a;
+  --link: #356f65;
+  --theme-link: #356f65;
+  --code-bg: #2f4038;
+  --theme-code-bg: #2f4038;
+  --pine: #33544a;
+  --theme-pine: #33544a;
+  --bike: #356f65;
+  --theme-bike: #356f65;
+  --bike-dark: #3c4945;
+  --theme-bike-dark: #3c4945;
+  --sage: #8a9e78;
+  --theme-sage: #8a9e78;
+  --seafoam: #b9cdc0;
+  --theme-seafoam: #b9cdc0;
+  --dune: #e8d8b6;
+  --theme-dune: #e8d8b6;
+  --dune-deep: #deca9f;
+  --theme-dune-deep: #deca9f;
+  --sun: #edc67e;
+  --theme-sun: #edc67e;
+  --fur: #c69a61;
+  --theme-fur: #c69a61;
+  --fur-deep: #946538;
+  --theme-fur-deep: #946538;
+  --outline: #785536;
+  --theme-outline: #785536;
+  --shadow: 0 12px 32px rgba(73,62,49,.10);
+  --theme-shadow: 0 12px 32px rgba(73,62,49,.10);
+  --radius-sm: 8px;
+  --theme-radius-sm: 8px;
+  --radius-md: 16px;
+  --theme-radius-md: 16px;
+  --radius-lg: 24px;
+  --theme-radius-lg: 24px;
+  --radius-arch: 220px;
+  --theme-radius-arch: 220px;
+  --font-display: "Noto Serif SC", "Songti SC", serif;
+  --theme-font-display: "Noto Serif SC", "Songti SC", serif;
+  --font-body: ui-rounded, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --theme-font-body: ui-rounded, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --theme-font-mono: "JetBrains Mono", monospace;
+}

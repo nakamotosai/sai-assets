@@ -1,0 +1,28 @@
+{
+  "id": "fm-void",
+  "name": "FM Void",
+  "mode": "dark",
+  "signature": "全黑 void + 半透明等宽字；戏在 canvas 背景",
+  "source": "themes/fm-void.json",
+  "colors": {
+    "bg": "#000000",
+    "bgDeep": "#000000",
+    "surface": "rgba(255,255,255,0.04)",
+    "surface2": "rgba(255,255,255,0.07)",
+    "border": "rgba(255,255,255,0.12)",
+    "ink": "#f5f5f5",
+    "inkMuted": "rgba(255,255,255,0.5)",
+    "inkDim": "rgba(255,255,255,0.35)",
+    "accent": "#ffffff",
+    "accent2": "rgba(255,255,255,0.72)",
+    "onAccent": "#000000",
+    "red": "#ff4d6d",
+    "green": "#7dffa3",
+    "aqua": "#7dd3ff",
+    "blue": "#7dd3ff",
+    "purple": "#d4a5ff",
+    "link": "rgba(255,255,255,0.88)",
+    "codeBg": "#0a0a0a",
+    "shadow": "none"
+  }
+}
