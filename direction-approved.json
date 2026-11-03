@@ -15,6 +15,11 @@
     "shadcn/ui —— 预览/代码切换、安装命令可复制",
     "21st.dev —— 瀑布流密度与 hover 才动"
   ],
+  "ledger": {
+    "check": "1/8 撞 —— 与 2026-10-27 jewelry-site-lab 色板距离 0.026(<0.06)",
+    "decision": "刻意接受:色板 = 库内 ouuut-editorial 包 = 用户 2026-11-02 拍板的新站默认配色,dogfooding 是本站设计目标;骨架层不撞(卡片栅格 vs 单件商品页)",
+    "recorded": "design_ledger.py ledger add(2026-11-04,浅·暖纸 #F5F3ED)"
+  },
   "skipped": "§1.8 三方向六缩略图未单独出稿:方向与版式在方案阶段已逐条确认(用户两轮明确批准),视为同一项目内已选定方向后的迭代。若用户要换方向,重出三版真稿再选。",
   "evidence": {
     "screenshots": ".private/shots/final-home-dark.png / final-home-paper.png / final-detail-dark.png / final-detail-paper.png / final-home-390.png / final-detail-390.png",
