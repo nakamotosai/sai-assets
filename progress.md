@@ -58,3 +58,9 @@
 - 共享引擎去重:bg-fx 的 10 份 `engine.js` 合成 1 份;param-panel 以"带版本号的拷贝"分发(断言查版本 + LF 归一 sha256),堵住旧库"被拷 12 份后漂移"的坑。
 - 视觉:32 张 1440px 截图,除三个包的 WebGL 降级路径外 0 控制台报错;本机 ego 窗口 `getContext('webgl2')` 为 null,包内已做**显式环境闸**(可见说明、不假渲染),有 GPU 的环境为真画面(bg-fx 截图已证).
 - 待办口径:三方 vendored three.js 各包自带的决定记在 `docs/PACK-CONTRACT.md §7`。
+
+## 2026-11-04 · M3 关键一环跑通(真 PR)+ 收口文书
+
+- **PR #1 真跑**:`minimalist-essential` 补活预览(此前唯一 `files.preview=null` 的主题)+ 抬版本 1.0.1 → 分支 → 闸 → CI 绿 → squash 合并 → tag `pack/minimalist-essential@1.0.1`。回收链(harvest → gate → PR → tag)不再是纸面流程。
+- 收口文书:`HANDOFF.md`(接手六节:状态/约定/命令/缺口/文件位置)+ `CLOSEOUT.md`(交付物 + 迁移中修掉的 6 个真问题 + 未完成清单)。
+- 迁移中真问题全部留痕(惰性时间戳 / apply 漏拷 / CRLF×sha256 / 断言复刻规则自伤 / sanitize 改写 vendored / __pycache__ 折叠常量),见 CLOSEOUT §迁移中发现。
