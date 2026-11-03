@@ -12,7 +12,7 @@ description: "saaaai Mono(dark 近黑 void + 银灰 ink + 等高线轮廓当 acc
 
 ## When to use
 
-- 用户点名 saaaai Mono / `saaaai-mono` / saaaai Mono / saaaai-mono / 近黑 void + 银灰 ink + 等高线轮廓当 accent
+- 用户点名 saaaai Mono / saaaai-mono / 近黑 void + 银灰 ink + 等高线轮廓当 accent
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 单色强调
 - 需要 留大负空间

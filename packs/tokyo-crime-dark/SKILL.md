@@ -12,7 +12,7 @@ description: "Tokyo Crime Dark 暖黑数据图(dark 暖黑底 #16130e 配暖色�
 
 ## When to use
 
-- 用户点名 Tokyo Crime Dark 暖黑数据图 / `tokyo-crime-dark` / Tokyo Crime Dark 暖黑数据图 / tokyo-crime-dark / 暖黑底 #16130e 配暖色顺序带：深色底上把 ColorBrewer YlOrRd 整体提亮 15% 修对比（断点不动），深棕分隔线代替白描边；数据密集型地图/图表的深色方案。
+- 用户点名 Tokyo Crime Dark 暖黑数据图 / tokyo-crime-dark / 暖黑底 #16130e 配暖色顺序带：深色底上把 ColorBrewer YlOrRd 整体提亮 15% 修对比（断点不动），深棕分隔线代替白描边；数据密集型地图/图表的深色方案。
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 暖黑（#16130e 系）而非中性纯黑——配暖色带（YlOrRd/暖橙红）不发蓝、不发脏
 - 需要 顺序色带在深色底整体提亮 ~15%（逐通道 c+(255-c)*0.15），只深色生效；断点/档位/数据一字不改，保证跨主题同色=同危险度

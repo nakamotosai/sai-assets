@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -27,6 +28,19 @@ CATEGORIES = [
     ("references", "外部参考观测"),
     ("video-motion", "视频动效(索引)"),
 ]
+
+
+def stamp() -> str:
+    """确定性时间戳:取 HEAD 提交日期(CI 重建才能与提交一致;无 git 则用今天)。"""
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs"], cwd=ROOT,
+                             capture_output=True, text=True, timeout=10)
+        s = out.stdout.strip()
+        if len(s) == 10:
+            return s
+    except Exception:
+        pass
+    return dt.date.today().isoformat()
 
 
 def clip(text: str, n: int) -> str:
@@ -61,7 +75,7 @@ def collect() -> dict:
     return {
         "schema": 1,
         "repo": "nakamotosai/sai-assets",
-        "updated": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
+        "updated": stamp(),
         "base": BASE,
         "how_to_use": "读本文件选包 → 取 base+path+<pack>/SKILL.md → 按其中 apply 步骤落地;项目侧用 python scripts/apply.py <id> --to <dir>",
         "categories": cats,

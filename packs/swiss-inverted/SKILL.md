@@ -12,7 +12,7 @@ description: "Swiss Inverted（瑞士反色 / 暗色）(dark 暖黑纸底 + 暖�
 
 ## When to use
 
-- 用户点名 Swiss Inverted（瑞士反色 / 暗色） / `swiss-inverted` / Swiss Inverted（瑞士反色 / 暗色） / swiss-inverted / 暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红保持不变 —— 同字体两种墨极性
+- 用户点名 Swiss Inverted（瑞士反色 / 暗色） / swiss-inverted / 暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红保持不变 —— 同字体两种墨极性
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 深色底用暖黑 #121212，绝不用纯 #000
 - 需要 纸暖白 #EDEBE6 当墨色（不是纯白 #FFF）

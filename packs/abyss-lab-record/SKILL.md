@@ -12,7 +12,7 @@ description: "Abyss Lab Record 暗黑实验记录(dark 近黑底 + 工程网格 
 
 ## When to use
 
-- 用户点名 Abyss Lab Record 暗黑实验记录 / `abyss-lab-record` / Abyss Lab Record 暗黑实验记录 / abyss-lab-record / 近黑底 + 工程网格 + 等宽 HUD + 单关键词橙，深色主叙事、纸面只做独立反转章节；面板全透明虚线检测框
+- 用户点名 Abyss Lab Record 暗黑实验记录 / abyss-lab-record / 近黑底 + 工程网格 + 等宽 HUD + 单关键词橙，深色主叙事、纸面只做独立反转章节；面板全透明虚线检测框
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 近黑非纯黑底 + 单层工程网格（body 一层，透明度 <=0.14，不压文字）
 - 需要 标题无衬线 800-900，中文降一档；等宽管数据 HUD + tabular-nums；手写只做英文短句点缀

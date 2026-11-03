@@ -49,7 +49,7 @@
 | 主按钮 | `--accent` + `--on-accent` | 一个视区只放一个主 CTA;文字色必须用 `--on-accent`(实测 4.53:1) |
 | 链接 | `--link` | 链接一律用 `--link`;**强调色(`--accent`)不与链接同色** —— 本主题 `--link` = `#CC7D5E` 与 `--accent` = `#B85C3E` 不同值,可直接并置 |
 | 危险 / 破坏性 | `--red` | 删除、错误、警报 |
-| 成功 | `--green` | 通过、已完成  |
+| 成功 | `--green` | 通过、已完成 |
 | 页面底 | `--bg` / `--bg-deep` | 大底用 `--bg`,更深的分层用 `--bg-deep` |
 
 一行口径:正文 `--ink`,次要 `--ink-muted`/`--ink-dim`,卡面 `--surface`+`--border`,主按钮 `--accent`+`--on-accent`,链接 `--link`,危险 `--red`,成功 `--green`;强调色不做链接色。
@@ -89,7 +89,7 @@
 | `ink` on `bg` | 7.93:1 | ≥ 4.5:1 |
 | `onAccent` on `accent` | 4.53:1 | ≥ 4.5:1 |
 
-### 语义层修正记录(透明留痕)
+### 语义层留痕(透明记录)
 
 - 源 accent/onAccent 实测 3.15:1 < 4.5,按源色板把 --accent 改用 accent2(#B85C3E),配对 4.53:1
 

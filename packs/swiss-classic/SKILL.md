@@ -12,7 +12,7 @@ description: "Swiss Classic（瑞士国际主义）(light 暖米白纸底 + 暖�
 
 ## When to use
 
-- 用户点名 Swiss Classic（瑞士国际主义） / `swiss-classic` / Swiss Classic（瑞士国际主义） / swiss-classic / 暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次
+- 用户点名 Swiss Classic（瑞士国际主义） / swiss-classic / 暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 暖色纸白（#EDEBE6）与暖黑（#111111），绝不用纯 #000 / 冷灰
 - 需要 强调红只做线/编号/单块几何形，覆盖率 ≤3%，落在预留空白里

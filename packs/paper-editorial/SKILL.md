@@ -12,7 +12,7 @@ description: "Paper Editorial(light 纸感编辑：米白画布、墨色正文�
 
 ## When to use
 
-- 用户点名 Paper Editorial / `paper-editorial` / Paper Editorial / paper-editorial / 纸感编辑：米白画布、墨色正文、刊头朱红
+- 用户点名 Paper Editorial / paper-editorial / 纸感编辑：米白画布、墨色正文、刊头朱红
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 浅色 only
 - 需要 大标题衬线加粗

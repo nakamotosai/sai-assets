@@ -12,7 +12,7 @@ description: "Slow Ride Cream 慢骑奶油(light 暖奶油纸面 + 鼠尾草绿 
 
 ## When to use
 
-- 用户点名 Slow Ride Cream 慢骑奶油 / `slow-ride-cream` / Slow Ride Cream 慢骑奶油 / slow-ride-cream / 暖奶油纸面 + 鼠尾草绿 + 番茄围巾，慢日子编辑风；拱形画框 + 双语微标签 + 一句文案
+- 用户点名 Slow Ride Cream 慢骑奶油 / slow-ride-cream / 暖奶油纸面 + 鼠尾草绿 + 番茄围巾，慢日子编辑风；拱形画框 + 双语微标签 + 一句文案
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 纸面底色 + 深棕墨字，英文微标签全大写宽字距（如 MOTION STUDY — 001）
 - 需要 标题中文大字 + 一句短文案 + 一句慢生活 caption（风很轻/慢慢向前）

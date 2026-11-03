@@ -12,7 +12,7 @@ description: "FM Void(dark 全黑 void + 半透明等宽字；戏在 canvas 背�
 
 ## When to use
 
-- 用户点名 FM Void / `fm-void` / FM Void / fm-void / 全黑 void + 半透明等宽字；戏在 canvas 背景
+- 用户点名 FM Void / fm-void / 全黑 void + 半透明等宽字；戏在 canvas 背景
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 UI 字小、letter-spacing 宽
 - 需要 背景用 canvas 表演

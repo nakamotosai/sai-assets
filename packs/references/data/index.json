@@ -296,7 +296,7 @@
    "id": "ref-s1-grid-formula",
    "name": "瑞士网格构造公式（Müller-Brockmann）",
    "tag": "swiss",
-   "when": "做任何瑞士/编辑/海报网格时先按公式推导，别套死 12 栏（详见 components/swiss-grid-system.json）",
+   "when": "做任何瑞士/编辑/海报网格时先按公式推导，别套死 12 栏（详见本地实现文件）",
    "matchTheme": "swiss-classic",
    "source_url": "https://archive.org/stream/GridSystemsInGraphicDesignJosefMullerBrockmann/"
   },

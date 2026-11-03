@@ -12,7 +12,7 @@ description: "Pop Art · Neo Brutal(light 奶油底 + 厚黑描边 + 硬偏移�
 
 ## When to use
 
-- 用户点名 Pop Art · Neo Brutal / `popart-neubrutal` / Pop Art · Neo Brutal / popart-neubrutal / 奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色
+- 用户点名 Pop Art · Neo Brutal / popart-neubrutal / 奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 4px 黑边
 - 需要 硬阴影无模糊

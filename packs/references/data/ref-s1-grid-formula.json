@@ -7,5 +7,5 @@
   "layout": "构造法：字号行距定模块→量 N→定 k/g→解 m→回代；跨字号行高同模块；图上边压 cap-height、下边压 descender",
   "colorsDNA": null,
   "matchTheme": "swiss-classic",
-  "when": "做任何瑞士/编辑/海报网格时先按公式推导，别套死 12 栏（详见 components/swiss-grid-system.json）"
+  "when": "做任何瑞士/编辑/海报网格时先按公式推导，别套死 12 栏（详见本地实现文件）"
 }

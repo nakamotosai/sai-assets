@@ -430,8 +430,8 @@ USAGE_TEMPLATE = """# @@NAME@@ · 用法与配对规则
 | 卡面 / 面板 | `--surface` + `--border` | 卡底用 `--surface`,描边用 `--border`;需要抬升时 `--surface-2` |
 | 主按钮 | `--accent` + `--on-accent` | 一个视区只放一个主 CTA;文字色必须用 `--on-accent`(实测 @@ACCENT_RATIO@@:1) |
 | 链接 | `--link` | 链接一律用 `--link`;**强调色(`--accent`)不与链接同色** —— @@LINK_NOTE@@ |
-| 危险 / 破坏性 | `--red` | 删除、错误、警报 |
-| 成功 | `--green` | 通过、已完成 @@GREEN_NOTE@@ |
+| 危险 / 破坏性 | `--red` | 删除、错误、警报@@RED_NOTE@@ |
+| 成功 | `--green` | 通过、已完成@@GREEN_NOTE@@ |
 | 页面底 | `--bg` / `--bg-deep` | 大底用 `--bg`,更深的分层用 `--bg-deep` |
 
 一行口径:正文 `--ink`,次要 `--ink-muted`/`--ink-dim`,卡面 `--surface`+`--border`,主按钮 `--accent`+`--on-accent`,链接 `--link`,危险 `--red`,成功 `--green`;强调色不做链接色。
@@ -507,11 +507,18 @@ def usage_md(theme: dict, variant: dict) -> str:
         else f"本主题 `--link` = `{colors.get('link', '—')}` 与 `--accent` = `{colors.get('accent', '—')}` 不同值,可直接并置"
     )
     green_note = "" if "green" in colors else "(源色板无 green 角色,本包不发该变量)"
+    red_note = "" if "red" in colors else "(源色板无 red 角色,本包不发该变量)"
     a11y_note = ""
     if variant["a11y"]["notes"]:
-        a11y_note = "### 语义层修正记录(透明留痕)\n\n" + "\n".join(f"- {n}" for n in variant["a11y"]["notes"])
+        a11y_note = "### 语义层留痕(透明记录)\n\n" + "\n".join(f"- {n}" for n in variant["a11y"]["notes"])
     sources = theme.get("sources") or []
-    provenance = bullets([str(s) for s in sources], "- (源 JSON 未登记来源)")
+    provenance = bullets(
+        [
+            (f"本地来源(仅登记本机路径,已由 sanitize 处理):{s}" if re.match(r"^[A-Za-z]:[\\/]", str(s).strip()) else str(s))
+            for s in sources
+        ],
+        "- (源 JSON 未登记来源)",
+    )
 
     return render(USAGE_TEMPLATE, {
         "NAME": variant["name"],
@@ -528,6 +535,7 @@ def usage_md(theme: dict, variant: dict) -> str:
         "ACCENT_RATIO": accent_ratio,
         "LINK_NOTE": link_note,
         "GREEN_NOTE": green_note,
+        "RED_NOTE": red_note,
         "A11Y_NOTE": a11y_note,
         "PROVENANCE": provenance,
     })

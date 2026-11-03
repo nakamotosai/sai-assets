@@ -12,7 +12,7 @@ description: "Minimalist Essential 极简 essentials(light 删到不能再删：
 
 ## When to use
 
-- 用户点名 Minimalist Essential 极简 essentials / `minimalist-essential` / Minimalist Essential 极简 essentials / minimalist-essential / 删到不能再删：中性底 + 单强调色 + 8pt 网格 + 单列信息流；一屏一任务
+- 用户点名 Minimalist Essential 极简 essentials / minimalist-essential / 删到不能再删：中性底 + 单强调色 + 8pt 网格 + 单列信息流；一屏一任务
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 中性色做 90% 面积 + 1 个强调色只占 ≤10%，强调色只给主 CTA 与关键高亮
 - 需要 单无衬线家族 + ≤3 字重 + 等比字阶（12/14/16/20/24/32/48），Display 可用 clamp 流体

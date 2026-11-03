@@ -60,6 +60,21 @@ PAGE = """<!doctype html>
 """
 
 
+def stamp() -> str:
+    """确定性时间戳:取 HEAD 提交日期(CI 重建才能与提交一致;无 git 则用今天)。"""
+    import subprocess
+    try:
+        out = subprocess.run(["git", "log", "-1", "--format=%cs"], cwd=ROOT,
+                             capture_output=True, text=True, timeout=10)
+        s = out.stdout.strip()
+        if len(s) == 10:
+            return s
+    except Exception:
+        pass
+    import datetime as dt
+    return dt.date.today().isoformat()
+
+
 def swatches(pack_dir: Path, pack: dict) -> str:
     colors: list[str] = []
     abs_path = pack_dir / "tokens" / "absolute.json"
@@ -140,8 +155,7 @@ def main() -> None:
         blocks.append(f'<h2>{titles[cid]}<em>{len(bucket)} 个</em></h2><div class="grid">{cards}</div>')
 
     body = "\n".join(blocks) if blocks else '<p class="lede">还没有包。</p>'
-    import datetime as dt
-    updated = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%d")
+    updated = stamp()
     OUT.write_text(PAGE.format(total=len(packs), updated=updated, body=body), encoding="utf-8")
     print(f"PASS build_wall: {len(packs)} packs → index.html ({OUT.stat().st_size}B)")
 

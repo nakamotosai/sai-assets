@@ -12,7 +12,7 @@ description: "saaaai Paper(light 暖纸浅底 + 陶土 accent，主页 t6)。触
 
 ## When to use
 
-- 用户点名 saaaai Paper / `saaaai-paper` / saaaai Paper / saaaai-paper / 暖纸浅底 + 陶土 accent，主页 t6
+- 用户点名 saaaai Paper / saaaai-paper / 暖纸浅底 + 陶土 accent，主页 t6
 - 需要整套配色(bg / bg-deep / surface / ink / accent / 状态色)而不是单个色值
 - 需要 陶土作唯一 accent
 - 需要 浅底卡片白抬升

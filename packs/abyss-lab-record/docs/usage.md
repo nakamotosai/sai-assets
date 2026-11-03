@@ -52,7 +52,7 @@
 | 主按钮 | `--accent` + `--on-accent` | 一个视区只放一个主 CTA;文字色必须用 `--on-accent`(实测 5.54:1) |
 | 链接 | `--link` | 链接一律用 `--link`;**强调色(`--accent`)不与链接同色** —— 本主题 `--link` = `#FF7A33` 与 `--accent` = `#FF5A1F` 不同值,可直接并置 |
 | 危险 / 破坏性 | `--red` | 删除、错误、警报 |
-| 成功 | `--green` | 通过、已完成 (源色板无 green 角色,本包不发该变量) |
+| 成功 | `--green` | 通过、已完成(源色板无 green 角色,本包不发该变量) |
 | 页面底 | `--bg` / `--bg-deep` | 大底用 `--bg`,更深的分层用 `--bg-deep` |
 
 一行口径:正文 `--ink`,次要 `--ink-muted`/`--ink-dim`,卡面 `--surface`+`--border`,主按钮 `--accent`+`--on-accent`,链接 `--link`,危险 `--red`,成功 `--green`;强调色不做链接色。
@@ -102,7 +102,7 @@
 | `ink` on `bg` | 17.57:1 | ≥ 4.5:1 |
 | `onAccent` on `accent` | 5.54:1 | ≥ 4.5:1 |
 
-### 语义层修正记录(透明留痕)
+### 语义层留痕(透明记录)
 
 - 源无可用 on-accent 配对;--on-accent 取源 paperInk(#1B1B18),配对 5.54:1
 
