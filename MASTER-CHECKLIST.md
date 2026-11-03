@@ -43,8 +43,8 @@
 - [x] **E3 JS 体积与长任务** — `site.js` 单文件约 10 KB,无依赖、无框架、无 polyfill;`defer` 加载;卡片的 iframe 由 IntersectionObserver 控制,视口外立刻卸载。
 - [x] **E4 LCP 元素可被预扫描器发现** — LCP 是文本(h1/卡片标题),由 HTML 直出;iframe 是 `data-src` 懒挂,不参评 LCP。
 - [x] **E5 CLS 预留空间** — 卡片缩略区固定 `aspect-ratio: 4/3`,详情舞台由 JS 按视口比例设高(首帧即定高),iframe 挂载不移位。
-- [x] **E6 缓存策略** — `dist/_headers`:`/*` `max-age=300`,`/packs/*`、`/assets/*`、`/downloads/*` `max-age=3600`。
-- [x] **E7 发布即生效、验收带 cache-bust** — 每次 push 生成新 deployment(CF 边缘即时切换);验证命令带 `?cb=$(date +%s)` 避免把缓存滞后当故障。
+- [x] **E6 缓存策略** — `dist/_headers`:`/*` `max-age=300` + 安全头(实测生效);静态文件(`/assets/*`、`/robots.txt` 等)CF Pages 会用它自己的 `max-age=14400` 覆盖 `_headers` 里的 Cache-Control —— 因此外壳 CSS/JS 的 URL 带**内容哈希** `?v=<sha8>`(每次部署变),刷新即拿到新版,不靠缓存头。
+- [x] **E7 发布即生效、验收带 cache-bust** — 每次 push 生成新 deployment;外壳资源 URL 带内容哈希,HTML 变更即切换;验证命令另带 `?cb=$(date +%s)` 避免把边缘缓存滞后当故障。
 - [ ] **E8 Lighthouse(移动端)基线** — 待做:发布后跑一次记录 LCP/INP/CLS 数字并写进 `progress.md`。**发布后 24h 内补**。
 
 ## F 安全
