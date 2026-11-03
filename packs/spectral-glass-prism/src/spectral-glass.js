@@ -8,7 +8,7 @@
      2. 契约节点自检(#gpu / #html-bg-root / #html-bg-photo / #html-bg-foreground / #fallback),
         缺哪个就明确报出来,别让引擎静默拿到 null。
      3. 注入 <script> 起引擎;加载/启动失败只写进兜底面板。
-        (动态 import() 在 在本地文件页面会被 CORS 拦,所以这里用 script 标签而不是 import。)
+        (动态 import() 在本地文件页面会被 CORS 拦,所以这里用 script 标签而不是 import。)
 
    引擎的硬契约与参数面见 docs/usage.md;参数面板由引擎自带(右上角 Tweakpane)。
 */

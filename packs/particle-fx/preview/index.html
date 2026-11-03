@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#050505" />
+<title>particle-fx · 粒子效果六档</title>
+<link rel="stylesheet" href="../src/stage.css" />
+<style>
+  body { overflow: auto }
+  main { position: relative; z-index: 1; padding: 84px 20px 48px; max-width: 1040px; margin: 0 auto }
+  h2 { font-size: 15px; font-weight: 600; margin-bottom: 6px }
+  p.lead { color: var(--dim); font-size: 12px; max-width: 64ch; margin-bottom: 20px }
+  .cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) }
+  .card { display: block; text-decoration: none; color: var(--ink); border: 1px solid var(--line);
+    border-radius: 10px; padding: 16px; background: #0a0a0c; transition: border-color .15s, transform .15s }
+  .card:hover { border-color: #ffffff44; transform: translateY(-1px) }
+  .card b { display: block; font: 600 13px/1.4 ui-monospace, monospace; color: var(--gold); margin-bottom: 6px }
+  .card span { color: var(--dim); font-size: 12px }
+  .card em { display: block; margin-top: 8px; font-style: normal; font: 500 11px/1.5 ui-monospace, monospace; color: #6f6f69 }
+</style>
+</head>
+<body>
+<div class="hud">
+  <b>particle-fx</b> · 六档入口
+  <br><span class="dim">canvas 2D 轻量示意(零依赖);生产级粒子池见 <code>packs/fx-engines</code> 的 <code>src/fx.js</code>。</span>
+</div>
+
+<main>
+  <h2>六档粒子效果</h2>
+  <p class="lead">
+    每档一个独立预览页 + 标准调参板(<code>entry-boot.js</code> 挂载);参数定义在 <code>effects/&lt;id&gt;/params.json</code>,
+    形状由 <code>packs/fx-engines/src/param-panel.schema.json</code> 约束。
+  </p>
+  <div class="cards">
+    <a class="card" href="./text-push.html"><b>text-push</b><span>字形采样成点阵,光标推散、松手弹回。</span><em>particle-motions · 四档之一</em></a>
+    <a class="card" href="./starfield.html"><b>starfield</b><span>定种星场 + 微漂 + 闪烁,光标轻微加速。</span><em>particle-motions · 四档之一</em></a>
+    <a class="card" href="./galaxy.html"><b>galaxy</b><span>核球 + 对数螺线臂 + 盘雾,倾斜投影。</span><em>particle-motions · 四档之一</em></a>
+    <a class="card" href="./curl.html"><b>curl</b><span>正弦流场 + 5 个移动引力核,云絮卷动。</span><em>particle-motions · 四档之一</em></a>
+    <a class="card" href="./scroll-morph.html"><b>scroll-morph</b><span>粒子在散开与字形之间来回 morph。</span><em>独立实现 · 15 个参数</em></a>
+    <a class="card" href="./void-audio.html"><b>void-audio(可选)</b><span>黑洞盘 + 音频反应:麦克风 / 直播流 / 假频谱三档降级。</span><em>独立实现 · 需 WebGL</em></a>
+  </div>
+</main>
+
+<p class="hint">接线、音源降级、验版本:见 <code>docs/usage.md</code>。</p>
+</body>
+</html>

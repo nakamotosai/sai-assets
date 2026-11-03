@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <title>page-transition · text-three(Three 粒子字)</title>
+  <link rel="stylesheet" href="../src/text-three.css" />
+  <link rel="stylesheet" href="../src/param-panel.css" />
+  <link rel="stylesheet" href="../src/stage.css" />
+  <style>
+    .pg-nav { left: 50%; transform: translateX(-50%); bottom: auto; top: 14px; justify-content: center }
+  </style>
+</head>
+<body>
+<canvas id="c" aria-hidden="true"></canvas>
+
+  <aside class="picker" id="picker">
+    <h1>Three.js Text FX</h1>
+    <p class="lead">
+      WebGL 切屏文字。合同同 CSS 版:<b>慢、整块完整路径、上下双向对称</b>。
+      与粒子池更合拍的是 <b>T1 粒子组字</b> / <b>T2 散射重组</b>;T0 是 3D 字板位移,T3 景深,T4 流线汇字。
+    </p>
+    <div class="speed-box">
+      <div class="lbl">速度</div>
+      <div class="row" id="speedRow">
+        <button type="button" data-ms="1800">1.8s</button>
+        <button type="button" data-ms="2600" class="on">2.6s</button>
+        <button type="button" data-ms="3600">3.6s</button>
+        <button type="button" data-ms="4800">4.8s</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="tools">
+    <button type="button" class="primary" id="btnReplay">重放</button>
+    <button type="button" id="btnSave">选定保存</button>
+    <a href="./section-travel.html">DOM 版</a>
+    <a href="./index.html">回索引</a>
+  </div>
+  <nav class="rail" id="rail"></nav>
+  <div class="prog" id="prog"></div>
+  <p class="hint">Three.js · 慢位移 · 下切↑ / 上切↓ · 等动画完再切</p>
+
+  <nav class="pg-nav">
+    <a href="./index.html">索引</a>
+    <a href="./vt-a.html">vt-layer A</a>
+    <a href="./vt-b.html">vt-layer B</a>
+    <a href="./section-travel.html">section-travel</a>
+    <a href="./text-three.html" class="on">text-three</a>
+  </nav>
+
+  <script type="module" src="../src/text-three.js"></script>
+  <script type="module">
+    import { bootPreview } from '../src/lab-boot.js';
+    import { applyTextParams } from '../src/text-three.js';
+
+    bootPreview({
+      slug: 'text-three',
+      title: 'text-three · 参数',
+      apply: applyTextParams,
+      panelOpts: { corner: 'br', collapsed: true, panelId: 'tt' },
+    });
+  </script>
+</body>
+</html>

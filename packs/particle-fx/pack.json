@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "id": "particle-fx",
+  "title": "particle-fx · 粒子效果六档",
+  "kind": "fx",
+  "category": "web-fx",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "sai demo 存档 · particle-text-push / starfield-drift / galaxy-disk / curl-fluid",
+      "license": "MIT",
+      "what": "四个 canvas 变体的来源实现(四份内容一致,本包收敛为一份 particle-motions.js)"
+    },
+    {
+      "name": "sai demo 存档 · particle-scroll-morph",
+      "license": "MIT",
+      "what": "滚动组字实现的来源(2D 近似版;生产 three 版在源项目内,未随包分发)"
+    },
+    {
+      "name": "sai demo 存档 · fm-void-audio",
+      "license": "MIT",
+      "what": "音频反应档的来源:黑洞盘 shader(void-fx.js)+ 能量映射(电台固定流改为 ?stream= 可选)"
+    },
+    {
+      "name": "three.js",
+      "url": "https://threejs.org",
+      "license": "MIT",
+      "what": "upstream/three.module.js(r170,保留 SPDX 头),音频反应档的 WebGL 依赖"
+    }
+  ],
+  "origin": {
+    "project": "saaaai-homepage",
+    "path": "demos/particle-text-push",
+    "derived_from": "demos/fm-void-audio"
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/particle-motions.js",
+      "src/concepts/text-push.js",
+      "src/concepts/starfield.js",
+      "src/concepts/galaxy.js",
+      "src/concepts/curl.js",
+      "src/concepts/scroll-morph.js",
+      "src/concepts/void-fx.js",
+      "src/concepts/void-audio.js",
+      "src/entry-boot.js",
+      "src/util.js",
+      "src/param-panel.js",
+      "src/versions.json",
+      "effects/text-push/params.json",
+      "effects/starfield/params.json",
+      "effects/galaxy/params.json",
+      "effects/curl/params.json",
+      "effects/scroll-morph/params.json",
+      "effects/void-audio/params.json"
+    ],
+    "css": [
+      "src/stage.css",
+      "src/param-panel.css"
+    ],
+    "upstream": [
+      "upstream/three.module.js"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "particles",
+    "canvas",
+    "webgl",
+    "audio-reactive",
+    "starfield",
+    "galaxy",
+    "morph",
+    "zero-dependency"
+  ],
+  "when": "页面需要一层轻量粒子:字标粒子组字、星野背景、银河盘视觉、云絮流场、散开↔组字 morph,或音频驱动的黑洞盘;要求零构建、无框架依赖",
+  "not_for": "生产级高密度 three.js 粒子池(用 fx-engines 的 src/fx.js)、满屏背景 + bloom/ACES 后处理(用 bg-fx)、页面与文字过场(用 page-transition)",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/particle-fx/scripts/assert_tokens.py(六档对齐 + 版本 + sha256 + 参数一致性)+ preview/galaxy.html、preview/index.html、preview/void-audio.html 在 Chrome 打开",
+    "evidence": "PASS assert_tokens particle-fx"
+  },
+  "canonical_home": null,
+  "changelog": [
+    "1.0.0 — 首版:四档 canvas 变体(收敛为一份实现)+ 滚动组字 + 音频反应档(音源三档降级)+ 标准调参板 + 版本/sha256 验版本"
+  ]
+}

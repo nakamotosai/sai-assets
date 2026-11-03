@@ -50,7 +50,7 @@ plate / diamond)共享同一引擎;本包给的是**可直接抄走的宿主壳 
 
 1. 拷 `src/spectral-glass.{css,js}` 与 `upstream/spectral-glass/engine.js`(保持目录相对关系:`src/` 与 `upstream/` 同级,宿主用的是 `../upstream/...`)。
 2. 页面里铺契约节点:`<canvas id="gpu" layoutsubtree>` 包住 `#html-bg-root`(`#html-bg-photo` + `#html-bg-foreground`),画布外留一个 `#fallback`。**id 一个都不能改名**。
-3. 引样式与 `<script src="src/spectral-glass.js" defer></script>`(普通脚本,`本地直开可用(双击 preview/index.html));宿主会自动探测,不满足就只出兜底,不加载引擎。
+3. 引样式与 `<script src="src/spectral-glass.js" defer></script>`(普通脚本,`双击打开本地文件即可);宿主会自动探测,不满足就只出兜底,不加载引擎。
 4. 要自己控制时机:`await window.spectralGlass.probe()`,不 ok 就别 `mount()`。
 5. 换成自己的内容:文字轨里的文案随便改,但**别删节点**;底图想自持就替换 `#html-bg-photo` 的地址来源(默认是引擎写入 Picsum)。
 6. 自检:`python scripts/assert_tokens.py`;真机页面里确认 `documentElement[data-sg-state]` 从 `probing` 走到 `live`,且控制台干净。

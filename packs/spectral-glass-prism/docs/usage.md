@@ -54,8 +54,8 @@ WebGPU 真玻璃光谱色散:**SDF raymarching + 逐波长 Cauchy 色散 + 进�
 
 `preview/index.html` 就是这三步的完整示例,可直接抄骨架。
 
-宿主是**普通脚本不是 ES module**(引擎本身也是无 import/export 的 IIFE bundle):这样 本地直开 双击打开就能跑,
-不需要先起本地服务器 —— 动态 `import()` 在 本地直开 下会被 CORS 拦。
+宿主是**普通脚本不是 ES module**(引擎本身也是无 import/export 的 IIFE bundle):这样双击打开本地文件就能跑,
+不需要先起本地服务器 —— 动态 `import()` 在本地文件页面会被 CORS 拦。
 
 ## 引擎的硬契约(改了就坏)
 
@@ -101,6 +101,12 @@ document.documentElement.dataset.sgState; // 同 state,CSS 可挂 [data-sg-state
 | `paused` | 暂停;TAA 在暂停时逐帧收敛 |
 
 快捷键:`Z`(按住)强制 N=3 · `空格`随机摆位 · `R` 换底图 · `T/S/B/F` 钻石视角 · `H` 显隐参数面板。URL 加 `?perf` 会在支持 timestamp query 的机器上打印 GPU ms。
+
+## 首帧与联网行为(实测)
+
+- **首帧要等 5–15 秒**:引擎在第一次绘制前会先取底图、编 WGSL、建管线。这段时间画面是全黑的、页面上只有底部署名条 —— 属正常,不是卡死。判据是 `documentElement[data-sg-state]` 已经是 `live`,且右上角 Tweakpane 面板出现。
+- **底图与 HDR 都是运行期外链**:Picsum(`picsum.photos`)与 Poly Haven(`dl.polyhaven.org`)。能连上就正常;连不上时引擎会退回渐变并弹提示条(此时控制台会留下一条引擎自己的 `console.error`,那是 vendored 引擎的行为,不是宿主的)。
+- **引擎的取图请求没有超时**:网络"黑洞"(能建连但一直不回)会让首帧永远不来,此时既没有渐变兜底、也没有报错 —— 看起来就是纯黑。要更强壮的兜底,得改引擎(去上游 fork),宿主的探测与兜底只覆盖"没有 WebGPU / 没有适配器 / 脚本加载失败"三种。
 
 ## 反模式
 

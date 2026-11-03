@@ -12,19 +12,19 @@ import * as THREE from './three.module.js';
 
     const SECTIONS = [
       {
-        k: 'Who',
-        h1: '中本蔡',
-        lines: ['日本东京在住', '创意技术 · 内容创作'],
+        k: 'Intro',
+        h1: 'ASSETS',
+        lines: ['Three 粒子字过场', '慢 · 整路径 · 双向对称'],
       },
       {
-        k: 'Projects',
+        k: 'Works',
         h1: '作品',
-        lines: ['公开产品与内容入口', 'saaaai FM · 3D 震源'],
+        lines: ['公开产品与内容入口', '示例项目甲 · 示例项目乙'],
       },
       {
         k: 'About',
         h1: '联系',
-        lines: ['邮件 · X · 站内', 'hello@saaaai.com'],
+        lines: ['邮件 · 社交 · 站内', 'hello@example.com'],
       },
     ];
 
@@ -36,14 +36,18 @@ import * as THREE from './three.module.js';
       { id: 'ribbon',  name: 'T4 · 流线汇字',     d: '粒子沿弧线汇入字形，像被吸进字里' },
     ];
 
-    const STORE = 'saaaai_section_text_fx_three_v1';
-    const SPEED_KEY = 'saaaai_section_text_fx_three_speed_ms';
+    const STORE = 'ptfx_text_three_v1';
+    const SPEED_KEY = 'ptfx_text_three_speed_ms';
 
     let fx = 'glyph';
     let durMs = 2600;
     let sec = 0;
     let locked = false;
     let anim = null; // { t0, dur, from, to, dir, mode }
+
+    /** 预览调参板驱动的两项(源件里这两个参数没接上,本包把它接进采样密度与点材质)。 */
+    export const textParams = { density: 0.8, glow: 0.6 };
+    const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     try {
       const s = localStorage.getItem(STORE);
@@ -222,7 +226,7 @@ import * as THREE from './three.module.js';
     function buildPoints(secData, kind) {
       const g = new THREE.Group();
       const cv = makeTextCanvas(secData, { scale: 1 });
-      const target = sampleCanvas(cv, kind === 'ribbon' ? 2200 : 3200);
+      const target = sampleCanvas(cv, Math.round((kind === 'ribbon' ? 2200 : 3200) * textParams.density));
       const n = target.length / 3;
       const pos = new Float32Array(n * 3);
       const home = target.slice();
@@ -238,9 +242,9 @@ import * as THREE from './three.module.js';
       geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
       const mat = new THREE.PointsMaterial({
         color: kind === 'ribbon' ? GOLD : WHITE,
-        size: kind === 'scatter' ? 0.09 : 0.07,
+        size: (kind === 'scatter' ? 0.09 : 0.07) * (0.5 + textParams.glow * 1.2),
         transparent: true,
-        opacity: 0.92,
+        opacity: Math.min(1, 0.5 + textParams.glow * 0.7),
         depthWrite: false,
         sizeAttenuation: true,
       });
@@ -309,7 +313,14 @@ import * as THREE from './three.module.js';
       });
     }
 
-    // ── 动画：双向慢位移 ──
+    // ── 动画：双向慢位移 / 调参板回调 ──
+    /** 预览调参板回调:改密度/辉光后重建当前形态(重采样一次字形,成本低)。 */
+    export function applyTextParams(values = {}) {
+      if (values.density != null) textParams.density = Number(values.density);
+      if (values.glow != null) textParams.glow = Number(values.glow);
+      rebuildSectionMeshes();
+    }
+
     const TRAVEL_Y = 14; // 世界单位，约大半屏
 
     function particleStartPos(i, home, seed, dir, mode) {
@@ -492,9 +503,11 @@ import * as THREE from './three.module.js';
     resize();
 
     function tick(now) {
-      // 星空微漂
-      stars.rotation.y = now * 0.00002;
-      stars.rotation.x = Math.sin(now * 0.00005) * 0.02;
+      if (!REDUCED) {
+        // 星空微漂(减少动态时不动)
+        stars.rotation.y = now * 0.00002;
+        stars.rotation.x = Math.sin(now * 0.00005) * 0.02;
+      }
 
       if (anim) {
         const p = (now - anim.t0) / anim.dur;
@@ -517,7 +530,7 @@ import * as THREE from './three.module.js';
       } else {
         // idle 微呼吸
         const g = sectionGroups[sec];
-        if (g?.userData?.kind === 'depth') {
+        if (!REDUCED && g?.userData?.kind === 'depth') {
           g.position.y = Math.sin(now * 0.0006) * 0.08;
         }
       }

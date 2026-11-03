@@ -37,7 +37,7 @@ BANNED_RULES_PATH = REPO_ROOT / "schema" / "banned.json"
 
 PACKS_DIRNAME = "packs"
 SCAN_EXTS = {".md", ".json", ".html", ".css", ".js", ".py", ".yml"}
-SKIP_DIRS = {".git", "node_modules", ".private"}
+SKIP_DIRS = {".git", "node_modules", ".private", "__pycache__", ".venv", "out", "dist"}
 LOCAL_RULES_REL = ".private/banned.local.json"
 # 第三方 vendored 文件整块跳过(内容非本仓自产,任何串都不代表本仓泄漏);--scan-upstream 可解开。
 SKIP_PATH_GLOBS = ("packs/*/upstream/**",)

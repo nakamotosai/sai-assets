@@ -52,7 +52,7 @@
     "dark",
     "hero"
   ],
-  "when": "需要一块**三维**、有物理感的空间效果:体波测地线盘(three.js 实时渲染体积薄盘,可拖转环视、20 个参数)或粒子黑洞(Canvas2D 纯粒子吸积盘 + 引力吸入,零 WebGL 依赖,8 组盘样式预设)。适合展厅墙、deck 封面、科幻/暗色主题的首屏,以及需要「可被人拖着看」的三维玩具。取用面:体波 = src/blackhole-waves.js + upstream/three.module.js(1.3MB);粒子 = src/blackhole-particles.js(零依赖,两个文件各自独立,互不 import)。性能口径:体波 renderer.setPixelRatio 封顶 1.75、按「画质」参数降到 1.2;粒子 DPR 封顶 2;两者都是 rAF 循环,页隐藏时由浏览器自动停帧,帧间隔 dt 封顶 0.05s 防回前台跳帧;粒子密度/测地线步数(steps)是主要开销旋钮。无障碍口径:两个效果**都没有**内置 prefers-reduced-motion 分支(见 docs/usage.md §无障碍 的补丁片段),动效强烈,必须在页面层自己加停帧开关。",
+  "when": "需要一块**三维**、有物理感的空间效果:体波测地线盘(three.js 实时渲染体积薄盘,可拖转环视、面板 19 个参数)或粒子黑洞(Canvas2D 纯粒子吸积盘 + 引力吸入,零 WebGL 依赖,8 组盘样式预设)。适合展厅墙、deck 封面、科幻/暗色主题的首屏,以及需要「可被人拖着看」的三维玩具。取用面:体波 = src/blackhole-waves.js + upstream/three.module.js(1.3MB);粒子 = src/blackhole-particles.js(零依赖,两个文件各自独立,互不 import)。性能口径:体波 renderer.setPixelRatio 封顶 1.75、按「画质」参数降到 1.2;粒子 DPR 封顶 2;两者都是 rAF 循环,页隐藏时由浏览器自动停帧,帧间隔 dt 封顶 0.05s 防回前台跳帧;粒子密度/测地线步数(steps)是主要开销旋钮。无障碍口径:两个效果**都没有**内置 prefers-reduced-motion 分支(见 docs/usage.md §无障碍 的补丁片段),动效强烈,必须在页面层自己加停帧开关。",
   "not_for": "禁用:① 移动端首屏且首帧 LCP 敏感(体波要下载 1.3MB 的 three.js 并编译着色器,粒子要预建数万粒子);② 需要 reduced-motion 自动静态帧的场景(本包不内置,必须自己打补丁,见 usage.md);③ 长文阅读页的背景(体波是强光焦点,会和正文抢视线);④ 无 WebGL2 又要用体波(粒子版是 Canvas2D 兜底首选,但两者不共享 API);⑤ 把 three.module.js 再拷第二份进项目(要么整包引用本包 upstream/,要么用你们自己的 three.js 版本,别在仓里出现第二份 1.3MB 副本)。",
   "verified": {
     "date": "2026-11-03",

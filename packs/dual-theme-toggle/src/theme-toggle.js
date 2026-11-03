@@ -52,12 +52,13 @@
     var choice = (v === 'light' || v === 'dark') ? v : null;
 
     function paint() {
+      // 先落存储再算生效值:反过来的话 data-resolved / aria-label 会读到自己刚落笔前的旧值
+      if (persist !== false) write(choice);
       // data-theme 只在"用户选过"时存在;没有它就由 CSS 的 @media 跟随系统
       if (choice) R.setAttribute('data-theme', choice);
       else R.removeAttribute('data-theme');
       // data-resolved 永远反映实际生效值,给图标与页面脚本用
       R.setAttribute('data-resolved', resolvedValue());
-      if (persist !== false) write(choice);
       label();
     }
 
@@ -68,7 +69,8 @@
       paint();
     }
     R.dispatchEvent(new CustomEvent('themechange', {
-      detail: { theme: resolvedValue(), explicit: !!choice }
+      // 不用 resolvedValue():视图过渡下 paint 是异步跑的,这里读会拿到旧值
+      detail: { theme: choice || (mq.matches ? 'light' : 'dark'), explicit: !!choice }
     }));
   }
 

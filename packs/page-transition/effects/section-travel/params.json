@@ -1,0 +1,22 @@
+{
+  "slug": "section-travel",
+  "version": 1,
+  "defaults": { "dur": 2.6, "travel": 78, "variant": "chars" },
+  "schema": [
+    { "key": "dur", "label": "时长 s", "type": "range", "min": 0.8, "max": 4.0, "step": 0.1 },
+    { "key": "travel", "label": "位移 vh", "type": "range", "min": 20, "max": 100, "step": 1 },
+    {
+      "key": "variant",
+      "label": "变体",
+      "type": "select",
+      "options": [
+        { "value": "chars", "label": "9 · 整块上推 + 字粒(推荐)" },
+        { "value": "travel", "label": "纯整块上推" },
+        { "value": "stagger", "label": "整块 + 行阶梯" },
+        { "value": "blur", "label": "整块 + 解模糊" },
+        { "value": "stroke", "label": "整块 + 描边填色" },
+        { "value": "shine", "label": "整块 + 金线扫" }
+      ]
+    }
+  ]
+}

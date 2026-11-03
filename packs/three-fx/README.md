@@ -14,7 +14,7 @@
 
 ```
 upstream/three.module.js   three.js r170(MIT,保留 SPDX 头,全包只此一份)
-src/blackhole-waves.js     体波:20 参数 · 性能旋钮 steps / particleDensity / quality(DPR≤1.75)
+src/blackhole-waves.js     体波:面板 19 个参数(默认值另含 4 个进阶项 inner/outer/beam/starDrift)· 性能旋钮 steps / particleDensity / quality(DPR≤1.75)
 src/blackhole-particles.js 粒子:11 参数 · 性能旋钮 density(DPR≤2)
 src/param-panel.js         浮动面板:按 params.json 的 schema 生成原生控件,键盘可达
 ```

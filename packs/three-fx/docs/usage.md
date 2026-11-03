@@ -45,7 +45,10 @@
 
 ## 参数
 
-### `blackhole-waves`(20 个,`effects/blackhole-waves/params.json`)
+### `blackhole-waves`(面板 19 个,`effects/blackhole-waves/params.json`)
+
+> `defaults` 里另有 4 个**未上面板**的进阶项:`inner` / `outer`(盘内外半径)、`beam`(盘面亮度增益)、
+> `starDrift`(背景星漂移)——模块会读,但面板不生成控件,要改就直接改 json。
 
 | key | 默认 | 范围 | 含义 / 怎么调 |
 |---|---|---|---|

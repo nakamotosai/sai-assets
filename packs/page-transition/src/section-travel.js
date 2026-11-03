@@ -13,8 +13,8 @@
       { id: 'shine',   name: '整块 + 金线扫',       d: '到位后标题扫光' },
     ];
 
-    const STORE = 'saaaai_section_text_fx_v1';
-    const SPEED_KEY = 'saaaai_section_text_fx_speed_ms';
+    const STORE = 'ptfx_section_travel_v1';
+    const SPEED_KEY = 'ptfx_section_travel_speed_ms';
     const stages = [...document.querySelectorAll('.stage')];
     const picker = document.getElementById('picker');
     const rail = document.getElementById('rail');
@@ -141,6 +141,21 @@
       });
       applyFxAttr();
       if (replay) replayCurrent();
+    }
+
+    /** 调参板回调:时长(s)/位移(vh)/变体 直接落到 CSS 变量与内部锁表时长上。 */
+    export function applyTravelParams(values = {}) {
+      if (values.dur != null) {
+        const ms = Math.round(Number(values.dur) * 1000);
+        if (Number.isFinite(ms) && ms >= 200) {
+          durMs = ms;
+          applyDuration();
+        }
+      }
+      if (values.travel != null) {
+        document.documentElement.style.setProperty('--travel', Number(values.travel) + 'vh');
+      }
+      if (values.variant && values.variant !== fx) selectFx(values.variant, true);
     }
 
     function syncChrome(n) {

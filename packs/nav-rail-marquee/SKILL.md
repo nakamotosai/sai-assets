@@ -30,7 +30,7 @@ description: Add an edge-chrome navigation trio to a single-page site — a vert
 | `src/nav-rail.js` | 无依赖经典脚本:当前态同步、点击跳转、滚动联动、键盘移动焦点、进度线宽度 |
 | `preview/index.html` | 整屏舞台 + 四段占位内容,可直接双击打开 |
 | `docs/usage.md` | 接入步骤 + 参数表 + 标记契约 + 无障碍硬项 + 反模式 |
-| `scripts/assert_tokens.py` | 自检:元数据 / 引用解析 / 产物 / 文档关键词 / 脱敏扫描 |
+| `scripts/assert_tokens.py` | 自检:元数据 / 声明路径 / 引用解析 / 产物非空 / 文档与实现标记 |
 
 ## Agent apply steps
 

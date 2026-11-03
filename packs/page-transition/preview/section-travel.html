@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <title>page-transition · section-travel(DOM 整块上推/散射)</title>
+  <link rel="stylesheet" href="../src/section-travel.css" />
+  <link rel="stylesheet" href="../src/param-panel.css" />
+  <link rel="stylesheet" href="../src/stage.css" />
+  <style>
+    /* 这一页左栏/右栏都被源件占了:把页内导航放顶部居中,调参板收成右下角方块 */
+    .pg-nav { left: 50%; transform: translateX(-50%); bottom: auto; top: 14px; justify-content: center }
+  </style>
+</head>
+<body>
+<div id="sky"><canvas id="stars" aria-hidden="true"></canvas></div>
+
+  <aside class="picker" id="picker">
+    <h1>Travel Text FX</h1>
+    <p class="lead">
+      <b>整块慢位移</b>:往下切 = 新从底推上来、旧往上离开;
+      <b>往上切同样完整</b> = 新从顶推下来、旧往下离开。默认约 2.6s,可再拧慢。
+      右侧面板里的「变体」决定叠在位移上的细节(字粒 / 阶梯 / 解模糊 / 描边 / 扫光)。
+    </p>
+    <div class="speed-box" id="speedBox">
+      <div class="lbl">速度(全程位移)</div>
+      <div class="row">
+        <button type="button" data-ms="1800">偏快 1.8s</button>
+        <button type="button" data-ms="2600" class="on">慢 2.6s</button>
+        <button type="button" data-ms="3600">更慢 3.6s</button>
+        <button type="button" data-ms="4800">极慢 4.8s</button>
+      </div>
+      <p class="note">默认慢。动画中途请等完再切,否则会打断过程。</p>
+    </div>
+  </aside>
+
+  <div class="tools">
+    <button type="button" class="primary" id="btnReplay">重放本段</button>
+    <button type="button" id="btnSave">选定保存</button>
+    <a href="./index.html">回索引</a>
+  </div>
+
+  <nav class="rail" id="rail"></nav>
+  <div class="prog" id="prog"></div>
+  <p class="hint-bottom">慢位移 · 下切底进 / 上切顶进 · 等动画完再切</p>
+
+  <nav class="pg-nav">
+    <a href="./index.html">索引</a>
+    <a href="./vt-a.html">vt-layer A</a>
+    <a href="./vt-b.html">vt-layer B</a>
+    <a href="./section-travel.html" class="on">section-travel</a>
+    <a href="./text-three.html">text-three</a>
+  </nav>
+
+  <section class="stage is-active" data-i="0" id="s0">
+    <div class="panel">
+      <div class="k fx-item">Intro</div>
+      <h1 class="fx-item">ASSETS</h1>
+      <p class="blurb fx-item">公开资产库 · 过场效果示例文案</p>
+      <p class="meta fx-item">section-travel · 整块上推 + 字粒</p>
+    </div>
+  </section>
+
+  <section class="stage" data-i="1" id="s1">
+    <div class="panel">
+      <div class="k fx-item">Works</div>
+      <h1 class="fx-item">作品</h1>
+      <p class="blurb fx-item">示例项目入口。点标题打开。</p>
+      <div class="list fx-item" aria-hidden="true">
+        <span>示例项目甲</span>
+        <span>示例项目乙</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" data-i="2" id="s2">
+    <div class="panel">
+      <div class="k fx-item">Contact</div>
+      <h1 class="fx-item">联系</h1>
+      <p class="blurb fx-item">邮件 · 社交 · 站内留言。合作与闲聊都欢迎。</p>
+      <p class="meta fx-item">hello@example.com</p>
+    </div>
+  </section>
+
+  <script type="module" src="../src/section-travel.js"></script>
+  <script type="module">
+    import { bootPreview } from '../src/lab-boot.js';
+    import { applyTravelParams } from '../src/section-travel.js';
+
+    bootPreview({
+      slug: 'section-travel',
+      title: 'section-travel · 参数',
+      apply: applyTravelParams,
+      panelOpts: { corner: 'br', collapsed: true, panelId: 'st' },
+    });
+  </script>
+</body>
+</html>

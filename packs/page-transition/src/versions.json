@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "note": [
+    "本包交付文件的版本 + sha256 + 来源 + 许可。任何一件拷贝进项目都必须记下版本号与 sha256。",
+    "param-panel.js / param-panel.css 是 packs/fx-engines 的同一份(同版本同 sha256):要改面板请改 fx-engines 再整份替换。",
+    "three.module.js 是第三方 vendored(MIT,保留 SPDX 头),只给 text-three 一档用;升级要同步这里的 version 与 sha256。",
+    "自检:python scripts/assert_tokens.py —— 重算 sha256 比对,不符即 FAIL。"
+  ],
+  "files": [
+    {
+      "file": "src/vt-layer.css",
+      "version": "1.0.0",
+      "sha256": "0e6ffba6f3680d96dd20f3f186d5b5dbdbc51ec1535e8befe480318976f2abb6",
+      "source": "本机 demo 存档 demos/view-transition-layer/view-transition-layer.css(时长/位移改为可被 --vt-* 覆盖)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/bg-boot.js",
+      "version": "1.0.0",
+      "sha256": "839b7d789a0eb2ece09dd847a9ec181d924815494303b0eeacb3d720aad6a75d",
+      "source": "本机 demo 存档 demos/view-transition-layer/bg-boot.js",
+      "license": "MIT"
+    },
+    {
+      "file": "src/starfield-bg.js",
+      "version": "1.0.0",
+      "sha256": "a5b0b737bdfa1a840d484b2780c725eeb772dd142b2fad2eec561a4b9e09ead9",
+      "source": "本机 demo 存档 demos/view-transition-layer/bg.js(演示用零依赖星空)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/section-travel.js",
+      "version": "1.0.0",
+      "sha256": "ca5992436735b7af6a561685caeaa76bc90aac396e9e44bc8587c87e36649444",
+      "source": "本机 demo 存档 demos/section-text-fx/main.js(取参改为导出 applyTravelParams,存储键中性化)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/section-travel.css",
+      "version": "1.0.0",
+      "sha256": "05492adb9ea5fe20929b5f2728cc198a24ad61307cdc484b3cc60c0b81bfe832",
+      "source": "本机 demo 存档 demos/section-text-fx/styles.css",
+      "license": "MIT"
+    },
+    {
+      "file": "src/text-three.js",
+      "version": "1.0.0",
+      "sha256": "91064cbbc4ccbc31792ef57b68288bc62045ffe35b9b6d09ecc35d9499956bac",
+      "source": "本机 demo 存档 demos/section-text-fx-three/main.js(文案中性化 + density/glow 真正接进采样与材质 + 减少动态)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/text-three.css",
+      "version": "1.0.0",
+      "sha256": "173964b9af8e43886a9072d226f1c48d9e5ea5840290d6cd6ddfdcd60b107242",
+      "source": "本机 demo 存档 demos/section-text-fx-three/styles.css",
+      "license": "MIT"
+    },
+    {
+      "file": "src/param-panel.js",
+      "version": "2.0.0",
+      "sha256": "aa1eac14fbd9f31324513b68096ea0ba77c989b7e2618084f42f3cc536fb6e68",
+      "source": "packs/fx-engines/src/param-panel.js(唯一权威副本,整份拷贝)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/param-panel.css",
+      "version": "2.0.0",
+      "sha256": "d42d4c3ffef44d469ef5ddb3abe4f85c0499a987758b5fc4fa2c88a1bf03a020",
+      "source": "packs/fx-engines/src/param-panel.css(唯一权威副本,整份拷贝)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/lab-boot.js",
+      "version": "1.0.0",
+      "sha256": "efcc709355704102d7674c670938e696483006549ea077f9cfaf7a512190f30c",
+      "source": "本包自产:预览页接线(params.json → 调参板 → CSS 变量 / 参数)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/stage.css",
+      "version": "1.0.0",
+      "sha256": "73a7e41a434792d90e2ae399deed7c6d85580625373ce55140b44639d2d07c4b",
+      "source": "本包自产:预览页共用导航/提示 chrome",
+      "license": "MIT"
+    },
+    {
+      "file": "upstream/three.module.js",
+      "version": "r170",
+      "sha256": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+      "source": "three.js r170 ES module build(Copyright 2010-2024 Three.js Authors,SPDX-License-Identifier: MIT,许可头原样保留)",
+      "license": "MIT"
+    }
+  ]
+}

@@ -111,3 +111,10 @@ packs/<id>/
 | 发布 | `python scripts/release.py <id> [--push]` | 打 tag 前强制 gate 绿;tag 名 `pack/<id>@<version>`;外部包跳过 |
 | 消费 | `apply.py` / raw URL / clone | 消费后项目 `design-lock.json.assets[]` 记 `pack`/`version`/`sha` |
 | 回收 | 项目里改好的资产回 harvest → PR | 禁在公开仓之外留第二份副本 |
+
+## 7 第三方 vendored 依赖的口径(2026-11-03 拍板)
+
+- **每个包自带自己的 vendored 依赖**(如 `three-fx/upstream/three.module.js`),**不做仓级共享 `upstream/` 池**。
+  理由:包要能被 `apply.py` 整包抄进项目、也要能被 raw/jsDelivr 单包取用;共享池会让"单包"不再自洽。
+- 代价已知:同一个 `three.module.js` 在多个包里各一份(当前 3 份 ≈ 3.9MB)。体积可接受,换取自洽与零安装取用。
+- 硬约束:vendored 文件**必须保留原始许可头**(`@license` / `Copyright` / `SPDX-License-Identifier`),并在 `pack.json.attribution` 登记 name/url/license;`gate.py` 默认整块跳过 `packs/*/upstream/**`(需要时用 `--scan-upstream` 解开),`sanitize.py` 同口径跳过。

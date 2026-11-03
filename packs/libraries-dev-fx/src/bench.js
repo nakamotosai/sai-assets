@@ -3,8 +3,8 @@
  * 拆自 demos/libraries-dev-fx/index.html 的内联 module script。
  *
  * 两个刻意的选择:
- * 1) 以普通脚本(<script defer>)加载,CDN 依赖全部走动态 import() —— 这样 本地直开 直开
- *    也能成立(module 脚本在 在本地文件页面会被 CORS 拦掉),且 importmap 对动态 import 同样生效。
+ * 1) 以普通脚本(<script defer>)加载,CDN 依赖全部走动态 import() —— 这样本地直开
+ *    也能成立(module 脚本在本地文件页面会被 CORS 拦掉),且 importmap 对动态 import 同样生效。
  * 2) 五个组件各自独立 try/catch:任一加载失败只把红字写进对应 stage,
  *    不产生未捕获错误(控制台 0 报错是硬项)。 */
 
@@ -57,6 +57,33 @@
     if (!el) return;
     el.innerHTML = '';
     el.appendChild(node);
+  }
+
+  /* 环境不满足时的中性说明(不是红字错误:这不是加载失败,是这台机器给不了能力) */
+  function skip(stageId, msg) {
+    const el = document.getElementById(stageId);
+    if (!el) return;
+    el.innerHTML = '';
+    const s = document.createElement('status');
+    s.className = 'skip';
+    s.textContent = '⏭ ' + msg;
+    el.appendChild(s);
+  }
+
+  /* three.js 系组件要 WebGL:先探一次,不给就整格跳过。
+     不探的话,组件内部创建上下文会抛错、而且是 React 渲染期抛的(异步),外层 try/catch 接不住,
+     控制台就会留下 uncaught error。 */
+  function hasWebGL() {
+    try {
+      const c = document.createElement('canvas');
+      const gl = c.getContext('webgl2') || c.getContext('webgl') || c.getContext('experimental-webgl');
+      if (!gl) return false;
+      const lose = gl.getExtension('WEBGL_lose_context');
+      if (lose) lose.loseContext();
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   function failAll(e) {
@@ -166,8 +193,12 @@
       } catch (e) { fail(CDN.metal.stage, CDN.metal.pkg, e); }
     }
 
-    /* ---------- 5. Image FX:pixels-organic + 占位图 ---------- */
+    /* ---------- 5. Image FX:pixels-organic + 占位图(需要 WebGL) ---------- */
     async function imageFxDemo() {
+      if (!hasWebGL()) {
+        skip(CDN.image.stage, '本浏览器没有可用的 WebGL,img-fx(three.js 滤镜)跳过;其余四格不受影响。');
+        return;
+      }
       try {
         const mod = await import(CDN.image.url);
         const ImageGeneration = mod.ImageGeneration;

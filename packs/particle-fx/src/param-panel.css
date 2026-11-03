@@ -1,0 +1,354 @@
+/* Sai Theme Lab · floating param panel v2
+ * 顶标签 / 中参数 / 底动作 · 可拖可缩放 · 无可见滚动条 · gruvbox 壳
+ */
+.tl-param-panel {
+  --tl-bg: #1d2021;
+  --tl-bg-2: #282828;
+  --tl-fg: #ebdbb2;
+  --tl-muted: #a89984;
+  --tl-accent: #fe8019;
+  --tl-border: #504945;
+  --tl-swatch-ring: #fbf1c7;
+  position: fixed;
+  z-index: 99999;
+  width: min(420px, calc(100vw - 24px));
+  height: min(72vh, 640px);
+  min-width: 340px;
+  min-height: 320px;
+  max-width: min(560px, calc(100vw - 16px));
+  max-height: min(90vh, 900px);
+  display: flex;
+  flex-direction: column;
+  background: var(--tl-bg);
+  color: var(--tl-fg);
+  border: 1px solid var(--tl-border);
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  font: 14px/1.45 "Noto Sans SC", "Segoe UI", system-ui, sans-serif;
+  backdrop-filter: blur(12px);
+  user-select: none;
+  overflow: hidden;
+}
+
+.tl-param-panel[data-corner="br"] { right: 14px; bottom: 14px; }
+.tl-param-panel[data-corner="bl"] { left: 14px; bottom: 14px; }
+.tl-param-panel[data-corner="tr"] { right: 14px; top: 14px; }
+.tl-param-panel[data-corner="tl"] { left: 14px; top: 14px; }
+
+/* Wall / iframe embed: compact + default collapsed */
+.tl-param-panel.is-embed {
+  width: min(280px, calc(100vw - 16px));
+  height: auto;
+  max-height: min(48vh, 360px);
+  min-width: 200px;
+  min-height: 0;
+  font-size: 13px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+}
+.tl-param-panel.is-embed .tl-param-panel__resize {
+  display: none;
+}
+
+/* dock FAB: whole panel collapses to bottom-right square */
+.tl-param-panel.is-collapsed {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  min-height: 56px !important;
+  max-width: 56px !important;
+  max-height: 56px !important;
+  right: 14px !important;
+  bottom: 14px !important;
+  left: auto !important;
+  top: auto !important;
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.96;
+}
+.tl-param-panel.is-collapsed:hover {
+  opacity: 1;
+  border-color: var(--tl-accent);
+}
+.tl-param-panel.is-collapsed .tl-param-panel__head,
+.tl-param-panel.is-collapsed .tl-param-panel__tabs,
+.tl-param-panel.is-collapsed .tl-param-panel__body,
+.tl-param-panel.is-collapsed .tl-param-panel__foot,
+.tl-param-panel.is-collapsed .tl-param-panel__resize {
+  display: none !important;
+}
+.tl-param-panel__fab {
+  display: none;
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  border: 0;
+  background: linear-gradient(145deg, #3c3836, #1d2021);
+  color: var(--tl-accent);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font: inherit;
+}
+.tl-param-panel.is-collapsed .tl-param-panel__fab {
+  display: flex;
+}
+.tl-param-panel__fab-mark {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--tl-fg);
+}
+.tl-param-panel__fab:hover .tl-param-panel__fab-mark {
+  color: var(--tl-accent);
+}
+
+.tl-param-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--tl-bg-2);
+  border-bottom: 1px solid var(--tl-border);
+  cursor: grab;
+  flex: 0 0 auto;
+}
+.tl-param-panel__head:active { cursor: grabbing; }
+.tl-param-panel__title {
+  flex: 1;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tl-param-panel__tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  padding: 8px 10px 0;
+  flex: 0 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tl-param-panel__tabs::-webkit-scrollbar { width: 0; height: 0; display: none; }
+.tl-param-panel__tab {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--tl-muted);
+  border-radius: 8px 8px 0 0;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.tl-param-panel__tab:hover {
+  color: var(--tl-fg);
+  background: color-mix(in srgb, var(--tl-bg-2) 80%, transparent);
+}
+.tl-param-panel__tab.is-active {
+  color: var(--tl-fg);
+  background: var(--tl-bg-2);
+  border-color: var(--tl-border);
+  border-bottom-color: var(--tl-bg-2);
+}
+
+.tl-param-panel__btn {
+  appearance: none;
+  border: 1px solid var(--tl-border);
+  background: transparent;
+  color: var(--tl-fg);
+  border-radius: 8px;
+  padding: 7px 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1.35;
+}
+.tl-param-panel__btn:hover {
+  border-color: var(--tl-accent);
+  color: var(--tl-accent);
+}
+.tl-param-panel__btn--accent {
+  border-color: color-mix(in srgb, var(--tl-accent) 55%, var(--tl-border));
+  background: color-mix(in srgb, var(--tl-accent) 14%, transparent);
+  color: var(--tl-accent);
+}
+.tl-param-panel__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.tl-param-panel__btn--icon {
+  min-width: 34px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.tl-param-panel__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--tl-bg-2);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.tl-param-panel__body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.tl-param-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 10px;
+  align-items: center;
+}
+.tl-param-row label {
+  grid-column: 1 / -1;
+  color: var(--tl-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.tl-param-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--tl-accent);
+  height: 22px;
+}
+.tl-param-row input[type="number"],
+.tl-param-row input[type="text"],
+.tl-param-row select {
+  width: 100%;
+  grid-column: 1 / -1;
+  background: var(--tl-bg);
+  border: 1px solid var(--tl-border);
+  color: var(--tl-fg);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 14px;
+}
+.tl-param-row select {
+  cursor: pointer;
+}
+.tl-param-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--tl-accent);
+  justify-self: start;
+}
+.tl-param-val {
+  color: var(--tl-accent);
+  font-variant-numeric: tabular-nums;
+  min-width: 3.6em;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* gruvbox swatch grid — no free color picker */
+.tl-param-swatches {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tl-param-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: 2px solid color-mix(in srgb, var(--tl-border) 80%, #000);
+  cursor: pointer;
+  padding: 0;
+  appearance: none;
+  background: var(--sw, #282828);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.tl-param-swatch:hover {
+  transform: scale(1.06);
+}
+.tl-param-swatch.is-active {
+  border-color: var(--tl-swatch-ring);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--tl-accent) 70%, transparent),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+.tl-param-swatch-meta {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--tl-muted);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+.tl-param-panel__foot {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--tl-border);
+  background: var(--tl-bg);
+}
+.tl-param-panel__foot-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tl-param-panel__foot-row .tl-param-panel__btn {
+  flex: 1 1 auto;
+  min-width: 6.5em;
+  text-align: center;
+}
+.tl-param-panel__foot-row--primary .tl-param-panel__btn {
+  min-height: 38px;
+}
+
+.tl-param-panel__resize {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  background:
+    linear-gradient(
+      135deg,
+      transparent 0 46%,
+      var(--tl-muted) 46% 54%,
+      transparent 54% 70%,
+      var(--tl-muted) 70% 78%,
+      transparent 78%
+    );
+  opacity: 0.75;
+}
+.tl-param-panel__resize:hover {
+  opacity: 1;
+}
+
+/* select + option contrast — Windows native dropdown needs explicit option colors */
+.tl-param-row select,
+.tl-param-board select {
+  background: var(--tl-bg, #1d2021) !important;
+  color: var(--tl-fg, #ebdbb2) !important;
+  color-scheme: dark;
+}
+.tl-param-row select option,
+.tl-param-row select optgroup,
+.tl-param-board select option,
+.tl-param-board select optgroup {
+  background-color: #1d2021;
+  color: #ebdbb2;
+}

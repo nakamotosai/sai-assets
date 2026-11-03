@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0d0f14" />
+<title>page-transition · vt-layer(页 A)</title>
+<link rel="stylesheet" href="../src/vt-layer.css" />
+<link rel="stylesheet" href="../src/stage.css" />
+<link rel="stylesheet" href="../src/param-panel.css" />
+<style>
+  :root { --bg:#0d0f14; --card:#161a22; --line:#2a3140; --fg:#e8e6e3; --dim:#9aa3b0; --acc:#7dd3fc }
+  html { color-scheme: dark }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font: 15px/1.65 "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif }
+  #bg { position:fixed; inset:0; z-index:0; pointer-events:none }
+  .wrap { position:relative; z-index:1; max-width:960px; margin:0 auto; padding:48px 24px 96px }
+  h1 { font-size:26px; margin:0 0 6px }
+  .sub { color:var(--dim); font-size:14px; margin-bottom:28px; max-width:72ch }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px }
+  button { font:inherit; font-size:13px; padding:7px 14px; border-radius:6px; border:1px solid var(--line);
+    background:transparent; color:var(--dim); cursor:pointer; transition:border-color .2s, color .2s }
+  button:hover { border-color:var(--acc); color:var(--acc) }
+  button.on { border-color:var(--acc); color:var(--acc); background:rgba(125,211,252,.08) }
+  .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; min-height:104px }
+  .card h3 { margin:0 0 6px; font-size:16px }
+  .card p { margin:0; color:var(--dim); font-size:13px }
+  a.go { display:inline-block; margin:26px 0 0; color:var(--acc); font-weight:600 }
+  .overlay { position:fixed; inset:0; z-index:9; background:rgba(6,8,12,.92); display:none }
+  .overlay .box { max-width:520px; margin:14vh auto; background:var(--card); border:1px solid var(--line);
+    border-radius:12px; padding:28px }
+  @media (max-width:720px){ .grid { grid-template-columns:1fr } }
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <h1>跨页动效层 · 页 <span style="color:var(--acc)">A</span></h1>
+  <div class="sub">
+    点下面的链接翻页看整页过渡;点分组按钮看卡片进出场;点卡片看弹层开合。<br>
+    背景是同一片星空 —— 翻页时应该「接着动」,不该重排、不该消失。
+  </div>
+
+  <div class="bar" id="bar">
+    <button class="on" data-k="all">全部 <span id="n"></span></button>
+    <button data-k="a">甲组</button>
+    <button data-k="b">乙组</button>
+    <button data-k="c">丙组</button>
+    <button id="open">打开弹层</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <a class="go" href="./vt-b.html">→ 去 B 页(整页过渡)</a>
+</div>
+
+<div class="overlay" id="ov" role="dialog" aria-modal="true">
+  <div class="box">
+    <h2 style="margin:0 0 8px">弹层</h2>
+    <p style="color:var(--dim);margin:0 0 18px">开合都走 opacity + display(allow-discrete),没有「啪」地一跳。</p>
+    <button id="close">关闭</button>
+  </div>
+</div>
+
+<nav class="pg-nav">
+  <a href="./index.html">索引</a>
+  <a href="./vt-a.html" class="on">vt-layer A</a>
+  <a href="./vt-b.html">vt-layer B</a>
+  <a href="./section-travel.html">section-travel</a>
+  <a href="./text-three.html">text-three</a>
+</nav>
+<p class="pg-tip">卡片进出场只改 inline <code>display</code>;重排路径要挂 <code>.vt-skip</code></p>
+
+<script>
+  (function () {
+    var g = document.getElementById('grid'), bar = document.getElementById('bar'), n = document.getElementById('n');
+    var K = ['a', 'b', 'c'], html = '';
+    for (var i = 1; i <= 24; i++) {
+      var k = K[i % 3];
+      html += '<article class="card" data-k="' + k + '"><h3>卡片 ' + i + '</h3><p>' + k + ' 组 · 点我看弹层</p></article>';
+    }
+    g.innerHTML = html;
+
+    var all = [].slice.call(g.querySelectorAll('.card'));
+    function apply(k) {
+      var shown = 0;
+      all.forEach(function (c) {
+        var vis = (k === 'all' || c.dataset.k === k);
+        if (vis) shown++;
+        // 只改 inline display —— 退场由 CSS 的 .card[style*="display: none"] 拿到目标值,display 延迟翻转
+        if (vis) { c.classList.remove('vt-skip'); c.style.display = ''; }
+        else { c.classList.add('vt-skip'); c.style.display = 'none'; }
+      });
+      n.textContent = shown;
+    }
+    bar.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-k]');
+      if (!b) return;
+      [].forEach.call(bar.querySelectorAll('button[data-k]'), function (x) { x.classList.toggle('on', x === b); });
+      apply(b.dataset.k);
+    });
+    apply('all');
+
+    var ov = document.getElementById('ov');
+    document.getElementById('open').addEventListener('click', function () { ov.classList.add('on'); });
+    document.getElementById('close').addEventListener('click', function () { ov.classList.remove('on'); });
+    ov.addEventListener('click', function (e) { if (e.target === ov) ov.classList.remove('on'); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape') ov.classList.remove('on'); });
+    g.addEventListener('click', function (e) { if (e.target.closest('.card')) ov.classList.add('on'); });
+  })();
+</script>
+
+<script src="../src/bg-boot.js" data-module="../src/starfield-bg.js" data-mount="mountBg" data-opacity="0.85"></script>
+
+<script type="module">
+  import { bootPreview } from '../src/lab-boot.js';
+
+  // vt-layer 的可调项就是三个 CSS 变量(改完 A/B 两页都生效,localStorage 同名)
+  bootPreview({
+    slug: 'vt-layer',
+    corner: 'br',
+    title: 'vt-layer · 参数',
+    apply(values) {
+      const root = document.documentElement.style;
+      root.setProperty('--vt-old-ms', values.oldMs + 'ms');
+      root.setProperty('--vt-new-ms', values.newMs + 'ms');
+      root.setProperty('--vt-rise', values.rise + 'px');
+    },
+  });
+</script>
+</body>
+</html>

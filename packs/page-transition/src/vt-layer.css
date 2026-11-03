@@ -1,7 +1,9 @@
 /* ============================================================
-   view-transition-layer.css — 多页静态站的「翻页 + 页内」动效层
-   出处：2026-10-02 biz.saaaai.com 策展改版（用户：「都要带动画过度，全部都要」）
-   零依赖，直接 link 进每一页（新旧文档都要有）。
+   vt-layer.css — 多页静态站的「翻页 + 页内」动效层(pack: page-transition)
+   来源:本机 demo 存档 demos/view-transition-layer(2026-10 的策展站改版沉淀)。
+   零依赖:每一页 link 这一份,新旧文档都要有。
+   可调项走 CSS 变量(预览页的调参板会写它们):
+     --vt-old-ms 旧页淡出时长 · --vt-new-ms 新页淡入时长 · --vt-rise 新页上浮距离
    ============================================================ */
 
 /* --- 1. 跨页：同源导航自动接管视图过渡 --- */
@@ -17,11 +19,11 @@
 ::view-transition-old(bg) { animation: none; }
 ::view-transition-new(bg) { animation: none; }
 
-/* 整页：旧页淡出，新页淡入并轻微上浮 */
-::view-transition-old(root) { animation: 190ms ease both vt-out; }
-::view-transition-new(root) { animation: 330ms cubic-bezier(.22,.61,.36,1) both vt-in; }
+/* 整页:旧页淡出,新页淡入并轻微上浮(时长/位移可被 --vt-* 覆盖) */
+::view-transition-old(root) { animation: var(--vt-old-ms, 190ms) ease both vt-out; }
+::view-transition-new(root) { animation: var(--vt-new-ms, 330ms) cubic-bezier(.22,.61,.36,1) both vt-in; }
 @keyframes vt-out { from { opacity: 1 } to { opacity: 0 } }
-@keyframes vt-in  { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
+@keyframes vt-in  { from { opacity: 0; transform: translateY(var(--vt-rise, 14px)) } to { opacity: 1; transform: none } }
 
 /* --- 2. 页内卡片：进场 + 退场（display 也能过渡） --- */
 .card {

@@ -14,7 +14,7 @@ description: Run the Libraries.dev "tasting bench" — five React effect compone
 ## When to use
 
 - 选型:想在同一页对比 border-beam / thinking-orbs / liquid-gooey / metal-fx / img-fx 五个特效。
-- 演示:给非开发者看"这个动效到底长什么样",不想装 node_modules、不想起服务器(本地直开即可(双击打开))。
+- 演示:给非开发者看"这个动效到底长什么样",不想装 node_modules、不想起服务器(双击打开即可)。
 - 抄外壳:需要一个"每格独立加载 + 局部失败红字"的展示骨架,把里面的组件换成自己的库。
 
 ## When not to use
@@ -47,7 +47,7 @@ description: Run the Libraries.dev "tasting bench" — five React effect compone
 
 - 五个 stage 一个都不能少:`stage-beam` / `stage-orbs` / `stage-gooey` / `stage-metal` / `stage-image`。
 - 每个 demo **必须**独立 `try/catch`,失败只写红字进对应 stage;**禁止**未捕获错误、禁止静默失败。
-- importmap 必须出现在 `src/bench.js` 之前;脚本用普通 `<script defer>` + 动态 `import()`,以便 本地直开成立。
+- importmap 必须出现在 `src/bench.js` 之前;脚本用普通 `<script defer>` + 动态 `import()`,以便双击打开本地文件也成立。
 - 相对引用只许指向本包 `src/`(不许 `../` 越出包目录);外链只许 `https://`(禁 http / 本机 / 内网)。
 - 保留 MIT 声明与 Libraries.dev 署名(`pack.json.attribution`、`README.md`、`preview` 页脚、`docs/usage.md`)。
 - 消费后必须在项目 `design-lock.json` 记 `assets[]`(`pack`/`version`/`sha`)。

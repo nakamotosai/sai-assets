@@ -175,7 +175,7 @@ def check_params_schema(keys: list[str]) -> int:
 
 
 ATTR_RE = re.compile(r"""(?:src|href)\s*=\s*["']([^"']+)["']""", re.I)
-URLFN_RE = re.compile(r"""url\(\s*(['"]?)([^)'"]+)\1\s*\)""", re.I)
+URLFN_RE = re.compile(r"""(?<![\w-])url\(\s*(['"]?)([^)'"]+)\1\s*\)""", re.I)
 
 
 def check_preview_refs() -> tuple[int, int]:

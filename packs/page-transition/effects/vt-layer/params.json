@@ -1,0 +1,10 @@
+{
+  "slug": "vt-layer",
+  "version": 1,
+  "defaults": { "oldMs": 190, "newMs": 330, "rise": 14 },
+  "schema": [
+    { "key": "oldMs", "label": "旧页淡出 ms", "type": "range", "min": 80, "max": 500, "step": 10 },
+    { "key": "newMs", "label": "新页淡入 ms", "type": "range", "min": 120, "max": 800, "step": 10 },
+    { "key": "rise", "label": "新页上浮 px", "type": "range", "min": 0, "max": 60, "step": 1 }
+  ]
+}

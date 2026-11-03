@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#050508" />
+<title>particle-fx · void-audio(音频反应 · 可选 entry)</title>
+<link rel="stylesheet" href="../src/stage.css" />
+<link rel="stylesheet" href="../src/param-panel.css" />
+<style>.hint { display: none }</style>
+</head>
+<body>
+<div id="app"></div>
+
+<div class="hud">
+  <b>void-audio</b> · 音频反应(可选)
+  <br><span class="dim">
+    音源三档:<b>假频谱</b>(默认,零权限)· <b>麦克风</b>(需授权,只分析不播放)· <b>直播流</b>(需给 <code>?stream=https://…</code>,且音频流放行 CORS)。
+    被拒/失败自动回落假频谱。盘纹与相机锁死,只有星空跟高频与鼓点。
+  </span>
+</div>
+
+<nav class="entries">
+  <a href="./index.html">索引</a>
+  <a href="./text-push.html">text-push</a>
+  <a href="./starfield.html">starfield</a>
+  <a href="./galaxy.html">galaxy</a>
+  <a href="./curl.html">curl</a>
+  <a href="./scroll-morph.html">scroll-morph</a>
+  <a href="./void-audio.html" class="on">void-audio</a>
+</nav>
+
+<p class="hint">实现:<code>src/concepts/void-audio.js</code> + <code>src/concepts/void-fx.js</code> + <code>upstream/three.module.js</code></p>
+
+<script type="module">
+  import { bootEntry } from '../src/entry-boot.js';
+  import { mount } from '../src/concepts/void-audio.js';
+
+  // panel:false —— void-audio 自己挂面板(它要接管「拖视角 → 回写面板」这条同步)
+  bootEntry({
+    slug: 'void-audio',
+    mount,
+    container: document.getElementById('app'),
+    panel: false,
+  });
+</script>
+</body>
+</html>

@@ -281,7 +281,7 @@ export function mount(host, params) {
 
   const panelApi = mountParamPanel({
     params: structuredClone(params),
-    corner: "bl",
+    corner: "tr",
     title: "void-audio · 参数",
     storageKey: "themelab.void-audio.v1.params",
     onChange: (values) => {

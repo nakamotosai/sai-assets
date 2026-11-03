@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#050505" />
+<title>particle-fx · text-push(粒子组字)</title>
+<link rel="stylesheet" href="../src/stage.css" />
+<link rel="stylesheet" href="../src/param-panel.css" />
+</head>
+<body>
+<canvas id="stage" aria-label="particle text push"></canvas>
+
+<div class="hud">
+  <b>text-push</b> · 粒子组字
+  <br><span class="dim">字标实时采样成点阵;光标推散、松手弹回(<code>pointermove</code> 才驱动)。</span>
+</div>
+
+<nav class="entries">
+  <a href="./index.html">索引</a>
+  <a href="./text-push.html" class="on">text-push</a>
+  <a href="./starfield.html">starfield</a>
+  <a href="./galaxy.html">galaxy</a>
+  <a href="./curl.html">curl</a>
+  <a href="./scroll-morph.html">scroll-morph</a>
+  <a href="./void-audio.html">void-audio</a>
+</nav>
+
+<p class="hint">实现:<code>src/concepts/text-push.js</code> → <code>src/particle-motions.js</code></p>
+
+<script type="module">
+  import { bootEntry } from '../src/entry-boot.js';
+  import { mount } from '../src/concepts/text-push.js';
+
+  bootEntry({
+    slug: 'text-push',
+    mount,
+    container: document.getElementById('stage'),
+    title: 'text-push · 参数',
+    corner: 'br',
+  });
+</script>
+</body>
+</html>

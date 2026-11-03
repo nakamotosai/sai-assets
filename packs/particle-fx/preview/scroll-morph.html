@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#050508" />
+<title>particle-fx · scroll-morph(滚动组字)</title>
+<link rel="stylesheet" href="../src/stage.css" />
+<link rel="stylesheet" href="../src/param-panel.css" />
+</head>
+<body>
+<div id="stage"></div>
+
+<div class="hud">
+  <b>scroll-morph</b> · 滚动组字
+  <br><span class="dim">粒子在「散开」与「字形」两端来回 morph(自动循环 6.5s);坠落 / 爆破 / 缩放都参与中间态。</span>
+</div>
+
+<nav class="entries">
+  <a href="./index.html">索引</a>
+  <a href="./text-push.html">text-push</a>
+  <a href="./starfield.html">starfield</a>
+  <a href="./galaxy.html">galaxy</a>
+  <a href="./curl.html">curl</a>
+  <a href="./scroll-morph.html" class="on">scroll-morph</a>
+  <a href="./void-audio.html">void-audio</a>
+</nav>
+
+<p class="hint">实现:<code>src/concepts/scroll-morph.js</code>(count / text / textScale 变了才重建点阵)</p>
+
+<script type="module">
+  import { bootEntry } from '../src/entry-boot.js';
+  import { mount } from '../src/concepts/scroll-morph.js';
+
+  bootEntry({
+    slug: 'scroll-morph',
+    mount,
+    container: document.getElementById('stage'),
+    title: 'scroll-morph · 参数',
+    corner: 'br',
+  });
+</script>
+</body>
+</html>

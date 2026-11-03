@@ -54,7 +54,7 @@
 
 `src/bench.js` 靠 `document.getElementById` 找 stage、靠 `CDN` 表决定拉哪个包,**加第六个试吃项 = 加一格结构 + 加一条 `CDN` 记录 + 加一个 demo 函数**。
 
-直接用 双击打开 `preview/index.html` 即可(脚本是普通 `<script defer>`,不是 module,所以不会被 本地文件源(null origin)的 CORS 规则拦掉;
+直接双击打开 `preview/index.html` 即可(脚本是普通 `<script defer>`,不是 module,所以不会被本地文件源(null origin)的 CORS 规则拦掉;
 
 模块本身走动态 `import()`,本地文件页面对 https 的跨源请求按 CORS 通配许可)。不需要任何本地服务器、构建或安装。
 
@@ -69,6 +69,7 @@
 | `img-fx` 只有底块没有图 | picsum.photos 被墙 | 改 `images` 数组换成自己可访问的图源 |
 
 失败是**局部**的:任一组件加载失败只把红字写进对应 stage,不抛未捕获错误,其余四个照常跑。
+| 本机/浏览器没有 WebGL(例如软件渲染被禁用) | img-fx(three.js 滤镜)整格显示「⏭ 已跳过」中性说明,**不报错**;其余四格照常 |
 
 ## 参数与文件表
 

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0d0f14" />
+<title>page-transition · vt-layer(页 B)</title>
+<link rel="stylesheet" href="../src/vt-layer.css" />
+<link rel="stylesheet" href="../src/stage.css" />
+<link rel="stylesheet" href="../src/param-panel.css" />
+<style>
+  :root { --bg:#0d0f14; --card:#171c1a; --line:#2d3a34; --fg:#e6e8e6; --dim:#98a5a0; --acc:#a5d6a7 }
+  html { color-scheme: dark }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font: 15px/1.65 "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif }
+  #bg { position:fixed; inset:0; z-index:0; pointer-events:none }
+  .wrap { position:relative; z-index:1; max-width:960px; margin:0 auto; padding:48px 24px 96px }
+  h1 { font-size:26px; margin:0 0 6px }
+  .sub { color:var(--dim); font-size:14px; margin-bottom:28px; max-width:72ch }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px }
+  button { font:inherit; font-size:13px; padding:7px 14px; border-radius:6px; border:1px solid var(--line);
+    background:transparent; color:var(--dim); cursor:pointer; transition:border-color .2s, color .2s }
+  button:hover { border-color:var(--acc); color:var(--acc) }
+  button.on { border-color:var(--acc); color:var(--acc); background:rgba(165,214,167,.08) }
+  .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:18px; min-height:112px }
+  .card h3 { margin:0 0 6px; font-size:16px }
+  .card p { margin:0; color:var(--dim); font-size:13px }
+  a.go { display:inline-block; margin:26px 0 0; color:var(--acc); font-weight:600 }
+  .overlay { position:fixed; inset:0; z-index:9; background:rgba(6,8,12,.92); display:none }
+  .overlay .box { max-width:520px; margin:14vh auto; background:var(--card); border:1px solid var(--line);
+    border-radius:12px; padding:28px }
+  @media (max-width:720px){ .grid { grid-template-columns:1fr } }
+</style>
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <h1>跨页动效层 · 页 <span style="color:var(--acc)">B</span></h1>
+  <div class="sub">
+    这一页故意换一套配色与栅格:翻页过渡里旧页淡出、新页淡入上浮,而背景星空必须「不断档」——
+    同一片 canvas 在新旧两帧都保持可见,盖住新文档首帧的空窗。
+  </div>
+
+  <div class="bar" id="bar">
+    <button class="on" data-k="all">全部 <span id="n"></span></button>
+    <button data-k="x">X 组</button>
+    <button data-k="y">Y 组</button>
+    <button id="open">打开弹层</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <a class="go" href="./vt-a.html">← 回 A 页(整页过渡)</a>
+</div>
+
+<div class="overlay" id="ov" role="dialog" aria-modal="true">
+  <div class="box">
+    <h2 style="margin:0 0 8px">弹层(B 页)</h2>
+    <p style="color:var(--dim);margin:0 0 18px">同一份 CSS:开合都走 opacity + display 的 allow-discrete。</p>
+    <button id="close">关闭</button>
+  </div>
+</div>
+
+<nav class="pg-nav">
+  <a href="./index.html">索引</a>
+  <a href="./vt-a.html">vt-layer A</a>
+  <a href="./vt-b.html" class="on">vt-layer B</a>
+  <a href="./section-travel.html">section-travel</a>
+  <a href="./text-three.html">text-three</a>
+</nav>
+<p class="pg-tip">背景层单独成组(<code>::view-transition-group(bg)</code>)不参与交叉淡化</p>
+
+<script>
+  (function () {
+    var g = document.getElementById('grid'), bar = document.getElementById('bar'), n = document.getElementById('n');
+    var K = ['x', 'y'], html = '';
+    for (var i = 1; i <= 12; i++) {
+      var k = K[i % 2];
+      html += '<article class="card" data-k="' + k + '"><h3>B 卡片 ' + i + '</h3><p>' + k + ' 组 · 点我看弹层</p></article>';
+    }
+    g.innerHTML = html;
+
+    var all = [].slice.call(g.querySelectorAll('.card'));
+    function apply(k) {
+      var shown = 0;
+      all.forEach(function (c) {
+        var vis = (k === 'all' || c.dataset.k === k);
+        if (vis) shown++;
+        if (vis) { c.classList.remove('vt-skip'); c.style.display = ''; }
+        else { c.classList.add('vt-skip'); c.style.display = 'none'; }
+      });
+      n.textContent = shown;
+    }
+    bar.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-k]');
+      if (!b) return;
+      [].forEach.call(bar.querySelectorAll('button[data-k]'), function (x) { x.classList.toggle('on', x === b); });
+      apply(b.dataset.k);
+    });
+    apply('all');
+
+    var ov = document.getElementById('ov');
+    document.getElementById('open').addEventListener('click', function () { ov.classList.add('on'); });
+    document.getElementById('close').addEventListener('click', function () { ov.classList.remove('on'); });
+    ov.addEventListener('click', function (e) { if (e.target === ov) ov.classList.remove('on'); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape') ov.classList.remove('on'); });
+    g.addEventListener('click', function (e) { if (e.target.closest('.card')) ov.classList.add('on'); });
+  })();
+</script>
+
+<script src="../src/bg-boot.js" data-module="../src/starfield-bg.js" data-mount="mountBg" data-opacity="0.85"></script>
+
+<script type="module">
+  import { bootPreview } from '../src/lab-boot.js';
+
+  bootPreview({
+    slug: 'vt-layer',
+    corner: 'br',
+    title: 'vt-layer · 参数',
+    apply(values) {
+      const root = document.documentElement.style;
+      root.setProperty('--vt-old-ms', values.oldMs + 'ms');
+      root.setProperty('--vt-new-ms', values.newMs + 'ms');
+      root.setProperty('--vt-rise', values.rise + 'px');
+    },
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "note": [
+    "本包交付文件的版本 + sha256 + 来源 + 许可。任何一件拷贝进项目都必须保留文件头版本常量,并记下同版本号与 sha256。",
+    "param-panel.js / param-panel.css 是 packs/fx-engines 的同一份(同版本同 sha256):要改面板请改 fx-engines 再整份替换本包副本。",
+    "particle-motions.js 源库里曾有四份内容相同的手拷副本(四个 demo 各一份),本包收敛为一份并带版本常量。",
+    "自检:python scripts/assert_tokens.py —— 重算 sha256 比对,不符即 FAIL。"
+  ],
+  "files": [
+    {
+      "file": "src/particle-motions.js",
+      "version": "1.0.0",
+      "sha256": "d68eee0c39d68d2cebf251246a731475010ce8c6bf345f4b7bbd25d5fcfb5691",
+      "source": "本机 demo 存档:particle-text-push / starfield-drift / galaxy-disk / curl-fluid(四份原件内容一致)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/param-panel.js",
+      "version": "2.0.0",
+      "sha256": "aa1eac14fbd9f31324513b68096ea0ba77c989b7e2618084f42f3cc536fb6e68",
+      "source": "packs/fx-engines/src/param-panel.js(唯一权威副本,整份拷贝)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/param-panel.css",
+      "version": "2.0.0",
+      "sha256": "d42d4c3ffef44d469ef5ddb3abe4f85c0499a987758b5fc4fa2c88a1bf03a020",
+      "source": "packs/fx-engines/src/param-panel.css(唯一权威副本,整份拷贝)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/concepts/void-fx.js",
+      "version": "1.0.0",
+      "sha256": "5e67d585f073cf19602890fab40080e627ab7b61c4d98fd161e084f22a1291b6",
+      "source": "本机 demo 存档 demos/fm-void-audio/void-fx.js(黑洞盘 shader 渲染器)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/concepts/void-audio.js",
+      "version": "1.0.0",
+      "sha256": "7895f6124c5189c3a65368b4cd95d543407524a50dc34dd05a7a8c6f6bd65302",
+      "source": "本包自产:音频反应接线(音源三档 + 失败降级 + 面板视角同步)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/concepts/text-push.js",
+      "version": "1.0.0",
+      "sha256": "867d3e7d1385fd5328c6da3b83dcd3d1d3b1036685114c149b0f01ac1dae4586",
+      "source": "本包自产:entry 接线(源件 main.js 的面板/取参部分已移交 entry-boot.js)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/concepts/starfield.js",
+      "version": "1.0.0",
+      "sha256": "dc4d73b9db653492fdd7269b86c1d07b12c3d353f3d2e90810032ce8f9f63f76",
+      "source": "本包自产:entry 接线",
+      "license": "MIT"
+    },
+    {
+      "file": "src/concepts/galaxy.js",
+      "version": "1.0.0",
+      "sha256": "4a135bb47196c9be3ef30660c646626e2f7f8ca3f30006a835e5aa8bcaecfbe1",
+      "source": "本包自产:entry 接线",
+      "license": "MIT"
+    },
+    {
+      "file": "src/concepts/curl.js",
+      "version": "1.0.0",
+      "sha256": "9d7ce6b856a9892c3d13d1e4faebef1393418e56168a4476fa5886995883d282",
+      "source": "本包自产:entry 接线",
+      "license": "MIT"
+    },
+    {
+      "file": "src/concepts/scroll-morph.js",
+      "version": "1.0.0",
+      "sha256": "796e0767ef08b2a5c0938d9d03a39d2687356f7ff3aa9a32223dc536062bbc5c",
+      "source": "本机 demo 存档 demos/particle-scroll-morph(改为 mount/update/destroy 接口 + 减少动态降级)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/entry-boot.js",
+      "version": "1.0.0",
+      "sha256": "8b2ebf564fe03dd88bd8d15521204af7336ddd87a480def8307e6acf6a37779c",
+      "source": "本包自产:预览页共用接线(params.json → 调参板 → mount)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/util.js",
+      "version": "1.0.0",
+      "sha256": "2d9813492de57c48a7b55bd1ee2e4f9e955cc92c1dd6d144274edd8b85539320",
+      "source": "本包自产:hexToRgb / reducedMotion / coalesce",
+      "license": "MIT"
+    },
+    {
+      "file": "src/stage.css",
+      "version": "1.0.0",
+      "sha256": "1a6e6d99ed7e13d5050883219fd71cbe56a46bf13d65a1e57aafbcef95955b50",
+      "source": "本包自产:预览页共用舞台样式(含音频档频谱条与按钮组)",
+      "license": "MIT"
+    }
+  ]
+}

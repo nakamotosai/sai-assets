@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0d0f14" />
+<title>page-transition · 过场三档</title>
+<link rel="stylesheet" href="../src/stage.css" />
+<style>
+  body { min-height: 100%; background: #0d0f14; color: var(--pt-ink);
+    font: 400 14px/1.7 "Segoe UI", "PingFang SC", system-ui, sans-serif;
+    padding: 56px 20px 64px; }
+  main { max-width: 1000px; margin: 0 auto }
+  h1 { font-size: 20px; font-weight: 600; margin-bottom: 6px }
+  p.lead { color: var(--pt-dim); font-size: 13px; max-width: 70ch; margin-bottom: 8px }
+  p.warn { color: var(--pt-gold); font-size: 12px; margin-bottom: 22px }
+  .cards { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) }
+  .card { display: block; text-decoration: none; color: var(--pt-ink); border: 1px solid var(--pt-line);
+    border-radius: 10px; padding: 16px; background: #14161c }
+  .card:hover { border-color: #ffffff44 }
+  .card b { display: block; font: 600 13px/1.4 ui-monospace, Consolas, monospace; color: var(--pt-gold); margin-bottom: 6px }
+  .card span { color: var(--pt-dim); font-size: 12px }
+  .card em { display: block; margin-top: 8px; font-style: normal; font: 500 11px/1.5 ui-monospace, Consolas, monospace; color: #6b6f79 }
+  table { margin-top: 26px; border-collapse: collapse; width: 100%; font-size: 12px }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid #ffffff14; vertical-align: top }
+  th { color: var(--pt-dim); font-weight: 500 }
+</style>
+</head>
+<body>
+<main>
+  <h1>page-transition · 过场三档</h1>
+  <p class="lead">
+    同一件事的三档做法:<b>① 原生 View Transitions API</b>(零 JS,跨文档翻页 + 页内进出场)、
+    <b>② 主包体过场</b>(DOM 整块上推/散射,不依赖浏览器支持)、<b>③ 文字粒子</b>(Three 粒子字,最重但最像「星池」)。
+  </p>
+  <p class="warn">预览必须经 http 服务打开(ES module 与跨文档视图过渡都不在直接双击打开的页面上生效)。</p>
+
+  <div class="cards">
+    <a class="card" href="./vt-a.html"><b>vt-layer</b><span>跨文档视图过渡 + 背景层跨页连续 + 卡片进出场 + 弹层开合。零 JS,只 link 一份 CSS。</span><em>首选 · 支持度视浏览器 · preview/vt-a.html ⇄ vt-b.html</em></a>
+    <a class="card" href="./section-travel.html"><b>section-travel</b><span>整屏 DOM 整块位移(下切底进 / 上切顶进),再叠字粒、阶梯、解模糊等细节。</span><em>兜底档 · 纯 CSS/DOM · 6 个变体</em></a>
+    <a class="card" href="./text-three.html"><b>text-three</b><span>Three 粒子字:字形采样成粒子,从屏外飞入 / 炸散重组 / 流线汇入。</span><em>重档 · 包内 vendor three r170 · 5 个形态</em></a>
+  </div>
+
+  <table>
+    <tr><th>档</th><th>实现</th><th>参数</th><th>代价</th></tr>
+    <tr><td>vt-layer</td><td><code>src/vt-layer.css</code> + <code>src/bg-boot.js</code> + <code>src/starfield-bg.js</code></td><td>淡出/淡入时长、上浮距离</td><td>0 KB JS(背景层另算)</td></tr>
+    <tr><td>section-travel</td><td><code>src/section-travel.js</code> + <code>src/section-travel.css</code></td><td>时长、位移、变体</td><td>1 份 CSS + 1 份 JS</td></tr>
+    <tr><td>text-three</td><td><code>src/text-three.js</code> + <code>upstream/three.module.js</code></td><td>粒子密度、辉光</td><td>three 运行时的体积与首帧成本</td></tr>
+  </table>
+
+  <p class="pg-tip" style="position:static;text-align:left;margin-top:24px">选型与接线见 <code>docs/usage.md</code>。</p>
+</main>
+</body>
+</html>

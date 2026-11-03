@@ -1,0 +1,16 @@
+/* stage.css — page-transition 预览页共用的舞台 chrome(只此一份)。
+   只做「页内导航 + 角标 + 提示」;三个效果的视觉各自在自己的 css 里。 */
+:root { color-scheme: dark; --pt-ink: #ece7dd; --pt-dim: #8d8a83; --pt-gold: #c4a574; --pt-line: #ffffff1f; }
+* { margin: 0; padding: 0; box-sizing: border-box }
+
+.pg-nav { position: fixed; z-index: 30; left: 14px; bottom: 14px; display: flex; flex-wrap: wrap; gap: 6px;
+  max-width: min(70ch, calc(100vw - 40px)) }
+.pg-nav a { font: 500 12px/1 "Segoe UI", "PingFang SC", system-ui, sans-serif; color: var(--pt-dim);
+  background: #000000b3; border: 1px solid var(--pt-line); border-radius: 999px; padding: 7px 13px;
+  text-decoration: none; transition: color .15s, border-color .15s }
+.pg-nav a:hover { color: var(--pt-ink); border-color: #ffffff44 }
+.pg-nav a.on { color: #0b0b0b; background: var(--pt-gold); border-color: var(--pt-gold); font-weight: 600 }
+
+.pg-tip { position: fixed; z-index: 20; right: 14px; bottom: 14px; max-width: 42ch; text-align: right;
+  color: var(--pt-dim); font: 500 11px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; pointer-events: none }
+.pg-tip code { color: var(--pt-ink) }

@@ -22,6 +22,7 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import json
 import re
 import sys
@@ -30,7 +31,10 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_CONFIG = REPO_ROOT / "schema" / "sanitize.json"
 DEFAULT_PACKS = REPO_ROOT / "packs"
-SKIP_DIRS = {".git", "node_modules"}
+SKIP_DIRS = {".git", "node_modules", "__pycache__", ".private", ".venv", "out", "dist"}
+# 第三方原文目录:与 gate.py 同口径跳过(改写 vendored 源码会毁语义、也违反保留 SPDX/原文的约定)
+SKIP_PATH_GLOBS = ("packs/*/upstream/**",)
+REPO_ROOT = Path(__file__).resolve().parents[1]
 PLACEHOLDER = re.compile(r"\$\{(tagline|tagline_short)\}")
 PREVIEW_LEN = 46
 
@@ -134,6 +138,12 @@ def iter_text_files(root: Path, cfg: dict):
         candidates = []
         for path in sorted(root.rglob("*")):
             if any(part in SKIP_DIRS for part in path.parts):
+                continue
+            try:
+                rel_repo = path.resolve().relative_to(REPO_ROOT).as_posix()
+            except ValueError:
+                rel_repo = path.as_posix()
+            if any(fnmatch.fnmatchcase(rel_repo, g) for g in SKIP_PATH_GLOBS):
                 continue
             if path.is_file():
                 candidates.append(path)

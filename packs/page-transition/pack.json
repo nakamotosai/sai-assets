@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "id": "page-transition",
+  "title": "page-transition · 过场三档(原生 API / DOM 整块 / Three 粒子字)",
+  "kind": "fx",
+  "category": "web-fx",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "sai demo 存档 · view-transition-layer",
+      "license": "MIT",
+      "what": "跨文档视图过渡层 + 背景层跨页连续 + 页内卡片/弹层/懒加载进出场"
+    },
+    {
+      "name": "sai demo 存档 · section-text-fx",
+      "license": "MIT",
+      "what": "DOM 整块上推/散射过场与六个变体(字粒/阶梯/解模糊/描边/扫光)"
+    },
+    {
+      "name": "sai demo 存档 · section-text-fx-three",
+      "license": "MIT",
+      "what": "Three 粒子字过场(五形态:字板位移/粒子组字/散射重组/景深/流线汇字)"
+    },
+    {
+      "name": "three.js",
+      "url": "https://threejs.org",
+      "license": "MIT",
+      "what": "upstream/three.module.js(r170,保留 SPDX-License-Identifier 与版权头),只给 text-three 一档"
+    },
+    {
+      "name": "sai 组件库 · components/param-panel(v2)",
+      "license": "MIT",
+      "what": "预览页调参板本体(整份拷贝自 packs/fx-engines,同版本 sha256)"
+    }
+  ],
+  "origin": {
+    "project": "saaaai-homepage",
+    "path": "demos/view-transition-layer",
+    "derived_from": "demos/section-text-fx-three"
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/vt-layer.css",
+      "src/bg-boot.js",
+      "src/starfield-bg.js",
+      "src/section-travel.js",
+      "src/text-three.js",
+      "src/lab-boot.js",
+      "src/param-panel.js",
+      "src/versions.json",
+      "effects/vt-layer/params.json",
+      "effects/section-travel/params.json",
+      "effects/text-three/params.json"
+    ],
+    "css": [
+      "src/section-travel.css",
+      "src/text-three.css",
+      "src/param-panel.css",
+      "src/stage.css"
+    ],
+    "upstream": [
+      "upstream/three.module.js"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "view-transitions",
+    "page-transition",
+    "cross-document",
+    "three",
+    "particle-text",
+    "css-only",
+    "reduced-motion"
+  ],
+  "when": "静态站/长页需要过场:多页站翻页过渡与页内进出场(原生 View Transitions)、不想依赖新 API 的整块 DOM 位移过场、或字标要变成粒子飞入/炸散/流线汇入",
+  "not_for": "单元素淡入上浮(一条 CSS transition 就够)、满屏 WebGL 背景(bg-fx)、生产级粒子池(fx-engines 的 fx.js)、React/Vue 路由过渡封装",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/page-transition/scripts/assert_tokens.py(三档对齐 + 版本 + sha256 + three 头)+ preview/index.html、vt-a.html、section-travel.html 经本地 http 服务在 Chrome 打开",
+    "evidence": "PASS assert_tokens page-transition"
+  },
+  "canonical_home": null,
+  "changelog": [
+    "1.0.0 — 首版:vt-layer(跨页 + 页内,时长走 --vt-*)+ section-travel(六变体,applyTravelParams)+ text-three(五形态,density/glow 真正生效)+ three r170 vendor + 标准调参板"
+  ]
+}
