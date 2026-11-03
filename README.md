@@ -76,3 +76,5 @@ python scripts/build_catalog.py && python scripts/build_site.py && git add -A &&
 - `TRACK_TREE.md` 里程碑与验收 · `SPEC.md` / `PLAN.md` 当前里程碑
 - `progress.md` 会话流水 · `HANDOFF.md` 接手(首次收口时生成)
 - 素材源(私有,本地):旧主题库 → 只作素材与草稿,不再是公开资产真相源
+
+<!-- preview pipeline smoke: 2026-11-03T17:14:44Z -->
