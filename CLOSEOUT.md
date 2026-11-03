@@ -77,6 +77,11 @@
 5. **`og:image` 指向站根但文件拷进了 `/assets/`** → 线上 404,已改为拷到站根并进 verify。
 6. **CF zone 级 Web Analytics 自动注入 beacon** → 自定义域的 HTML 上多一条 `static.cloudflareinsights.com` 请求(`pages.dev` 上没有)。**不自决关掉**:关的是 zone 级开关,会影响同 zone 其他站;已记入 `MASTER-CHECKLIST` D1 与 `design-lock` 的 `edge-injected-beacon` 条。
 
+## 上线后修复(2026-11-04,用户实测反馈)
+
+- **卡片空白**:旧池用 IntersectionObserver 的边沿事件,卸载时只删 iframe 不放回占位,快速滚动后可见卡片会变成空白渐变。改为滚动对账式池(scroll/resize + rAF,回收 ±1.4 屏外、上限 14),卸载一律放回带文案的占位;实测 19 个滚动位置空白块 = 0。缩略区同时改 16:10(同屏多看一档)。
+- **gruvbox 去外部化**:内容整体入库 `packs/gruvbox-dark@2.0.0`(css 5 / tokens 12 / preview / docs / SKILL / assert / references),包内断言自跑 PASS(themes=10 absolute=36);旧仓 `nakamotosai/gruvbox-theme` 已归档。仓内只剩 `video-motion` 一个外部索引(Remotion 工程,运行模型不同)。
+
 ## 未完成(明确留档)
 
 - `MASTER-CHECKLIST.md` 未勾 5 项:C3(社交卡平台实测)、D3(Search Console/Bing 验证)、E8(Lighthouse 移动端基线)、G3(Uptime Kuma 监控项)、J6(发布后 24h/首周巡检)。都不阻断首发。
