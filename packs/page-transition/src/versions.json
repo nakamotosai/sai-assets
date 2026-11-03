@@ -31,28 +31,28 @@
     {
       "file": "src/section-travel.js",
       "version": "1.0.0",
-      "sha256": "ca5992436735b7af6a561685caeaa76bc90aac396e9e44bc8587c87e36649444",
+      "sha256": "c54ccd9fe40bc5579bbf7a5846aa8e930f9c1e932201a3a928de0fb59243269a",
       "source": "本机 demo 存档 demos/section-text-fx/main.js(取参改为导出 applyTravelParams,存储键中性化)",
       "license": "MIT"
     },
     {
       "file": "src/section-travel.css",
       "version": "1.0.0",
-      "sha256": "05492adb9ea5fe20929b5f2728cc198a24ad61307cdc484b3cc60c0b81bfe832",
+      "sha256": "717b7e20da2526c2a8e360dc7d05a1b745275e6023b87a4b2c57232443ad0823",
       "source": "本机 demo 存档 demos/section-text-fx/styles.css",
       "license": "MIT"
     },
     {
       "file": "src/text-three.js",
       "version": "1.0.0",
-      "sha256": "daa36a41e9d306418922cae3ec039b2eef7230ae05cb35c18e62b1c636f19625",
+      "sha256": "6b1d97eb1271563d0f41261aec0d335e08034e57eb7dc2e3145052e6b43751e8",
       "source": "本机 demo 存档 demos/section-text-fx-three/main.js(文案中性化 + density/glow 真正接进采样与材质 + 减少动态)",
       "license": "MIT"
     },
     {
       "file": "src/text-three.css",
       "version": "1.0.0",
-      "sha256": "173964b9af8e43886a9072d226f1c48d9e5ea5840290d6cd6ddfdcd60b107242",
+      "sha256": "56939c7d84e15d2f1ccd0647f451e4cc050cbfd8894d477eae20ae062348f7a6",
       "source": "本机 demo 存档 demos/section-text-fx-three/styles.css",
       "license": "MIT"
     },
@@ -66,7 +66,7 @@
     {
       "file": "src/param-panel.css",
       "version": "2.0.0",
-      "sha256": "d42d4c3ffef44d469ef5ddb3abe4f85c0499a987758b5fc4fa2c88a1bf03a020",
+      "sha256": "07636e34ee3924e4febf6e14a9a46387b4e0f363c220a96a7be2de79d0306969",
       "source": "packs/fx-engines/src/param-panel.css(唯一权威副本,整份拷贝)",
       "license": "MIT"
     },

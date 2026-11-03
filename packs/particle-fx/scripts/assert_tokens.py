@@ -59,7 +59,10 @@ def read_json(rel: str):
 
 
 def sha256(rel: str) -> str:
-    return hashlib.sha256((ROOT / rel).read_bytes()).hexdigest()
+    """跨平台一致:先归一到 LF 再算哈希 —— Windows 工作区是 CRLF、CI 检出的仓库内容是 LF,
+    同一份内容否则会算出两个哈希(2026-11-03 CI 首跑即撞上)。"""
+    data = (ROOT / rel).read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def js_const(rel: str, name: str) -> str:

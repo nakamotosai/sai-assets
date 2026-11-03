@@ -60,18 +60,22 @@
       // data-resolved 永远反映实际生效值,给图标与页面脚本用
       R.setAttribute('data-resolved', resolvedValue());
       label();
+      // 事件必须在**颜色已经改完**之后派发:视图过渡下 paint 是异步回调,
+      // 写在 startViewTransition 后面的话,监听者读到的还是旧值(stale read 实测踩过)
+      R.dispatchEvent(new CustomEvent('themechange', {
+        detail: { theme: choice || (mq.matches ? 'light' : 'dark'), explicit: !!choice }
+      }));
     }
 
+    // 视图过渡只在这个页面真的看得见时才起:后台/被遮挡的页面拿不到帧,
+    // 过渡会停在旧快照上(DOM 已改、屏幕还是老颜色)。看不见就别起,直接同步落笔。
     if (document.startViewTransition &&
+        document.visibilityState === 'visible' &&
         !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       try { document.startViewTransition(paint); } catch (e) { paint(); }
     } else {
       paint();
     }
-    R.dispatchEvent(new CustomEvent('themechange', {
-      // 不用 resolvedValue():视图过渡下 paint 是异步跑的,这里读会拿到旧值
-      detail: { theme: choice || (mq.matches ? 'light' : 'dark'), explicit: !!choice }
-    }));
   }
 
   function label() {

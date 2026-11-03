@@ -9,7 +9,7 @@
     {
       "file": "src/fx.js",
       "version": "1.0.0",
-      "sha256": "6a3054dbc01497d10adaf6f24070278553ab31ac4b9db9fcffc2817439582215",
+      "sha256": "60b187d833b11cee58da14cc3fabf10367866e4be96cac1016bbaf5c3159634a",
       "source": "本机 demo 存档 demos/shared-fx-engine/fx.js(C-layouts / C-gold 两套首页共用)",
       "license": "MIT"
     },
@@ -23,7 +23,7 @@
     {
       "file": "src/param-panel.css",
       "version": "2.0.0",
-      "sha256": "d42d4c3ffef44d469ef5ddb3abe4f85c0499a987758b5fc4fa2c88a1bf03a020",
+      "sha256": "07636e34ee3924e4febf6e14a9a46387b4e0f363c220a96a7be2de79d0306969",
       "source": "本机组件库 components/param-panel/param-panel.css(v2)",
       "license": "MIT"
     },
