@@ -77,3 +77,10 @@
 - **探针实测**(ego lite,`.private/ego/round-06…10.mjs`):对比度违例 0(深浅两模 × 目录/详情/代码区)、`scrollWidth-clientWidth = 0`(1440/500/390)、字号 5 档且最小 14px、外链子资源 0、pageerror 0;截图 `.private/shots/final-*.png`。
 - 过程中探针自己踩的两个坑(记一笔):把 `oklab()` 当 RGB 缩放算对比度 → 假失败 15 条;色卡底色用 `--surface` 半透明叠加到 ~20% → 浅色文字真掉到 4.05:1(已改不透明 tint)。
 - **待补**:C3 社交卡实测 / D3 Search Console / E8 Lighthouse 基线 / G3 Uptime Kuma 监控项 —— 见 `MASTER-CHECKLIST.md` 的未勾项。
+
+## 2026-11-04 · 自动导入管线端到端验证
+
+- **加包即上站**:临时包 `packs/zz-smoke-test/` → push → CI(site)构建 → 线上目录 **30 卡**、详情页标题正确、`/downloads/zz-smoke-test.zip` 200(2124B)、`app.json` 收录 → 删除该包再 push → 回到 **29 卡**、详情页与 zip 均 404。两条方向都实测过。
+- **闸真的会拦**:第一次推冒烟包时忘了重建 `catalog.json`,site workflow 直接红在「catalog 新鲜度」这一步,**没有部署**;错误信息就是"请本地重建后提交"。这就是设计意图,不是故障。
+- 文档补齐:README「加一个包(自动上站)」三步;HANDOFF 关键约定表同一行(漏了 ① 会被 CI 拦)。
+- PR 预览环境:另开 `smoke/preview-test` 分支 + PR #2 验证 `preview.yml`(构建 → `pr-2` 预览别名 → 回评),验证后关闭并删分支。

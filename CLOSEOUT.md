@@ -60,7 +60,7 @@
 | 页面 | 目录 + 29 详情 + 12 子 demo = 43 页;38 个可看面 | `build_site.py` 输出行 |
 | 生成器 | `scripts/build_site.py`(纯标准库,扫 `packs/*/pack.json`,无第二注册表) | `PASS verify: 29 包 · 详情页/预览/zip/子 demo/sitemap 全对 · 零外部子资源` |
 | 外壳 | `site/site.css` + `site/site.js`(约 10 KB,零框架);token 与排版刻度构建时取自 `ouuut-editorial` 包 | 探针:对比度违例 0 / ovx 0 / 字号 5 档 |
-| 管线 | `site.yml`(push main → 闸 → catalog 校验 → 构建 → wrangler 直传)、`preview.yml`(PR → `pr-<n>` 预览 + 回评) | 两次 push 的 CI 均 success |
+| 管线 | `site.yml`(push main → 闸 → catalog 校验 → 构建 → wrangler 直传)、`preview.yml`(PR → `pr-<n>` 预览 + 回评) | 多次 push 的 CI 均 success;**加包/删包端到端实测**:临时包上线 30 卡 → 删除回 29 卡,详情页与 zip 同步 404 |
 | 旧面退役 | `pages.yml` 删除、GitHub Pages site 已删(旧 URL 404) | `gh api repos/…/pages` → 404 |
 | 真相源 | `design-lock.json`(10 条 assertions)、`concept.md`、`direction-approved.json`、`MASTER-CHECKLIST.md`(59 项)、`docs/adr/adr-0002-site-cloudflare-pages.md` | 均在本仓 |
 
