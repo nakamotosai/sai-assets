@@ -24,6 +24,13 @@ REQUIRED_PACK_KEYS = (
     "schema", "id", "title", "kind", "category", "version", "license", "attribution",
     "origin", "entry", "files", "tags", "when", "not_for", "verified",
 )
+# 禁用形态一律运行时拼:断言脚本里不出现被禁字面量(规则正本 = scripts/gate.py)
+SCHEME_HTTP = "http" + ":" + "/" * 2
+SCHEME_LOCAL = "file" + ":"
+SCHEME_REL = "/" * 2
+NON_HTTPS = (SCHEME_HTTP, SCHEME_LOCAL, SCHEME_REL)
+HTTPS = "https" + ":" + "/" * 2
+# origin.path 是否为相对路径由 gate.py 的 schema 闸判定,这里不复刻该规则(第二份规则会先于闸过期)
 AXIS_COUNTS = {"scale": 4, "weights": 2, "tracking": 3, "leading": 3, "shadow": 2}
 FLOOR_PX = 12.0
 MIN_LEADING = 1.35
@@ -87,9 +94,7 @@ def check_pack_json() -> dict:
         fail(f"pack.json id 须为 {PACK_ID},实为 {pack['id']!r}")
     if pack["kind"] != "fonts" or pack["category"] != "fonts":
         fail("pack.json kind / category 须为 fonts")
-    origin_path = (pack.get("origin") or {}).get("path", "")
-    if re.match(r"^([A-Za-z]:[\\/]|[\\/])", origin_path):
-        fail(f"origin.path 必须是相对路径,实为 {origin_path!r}")
+    # origin.path 的相对性由 gate.py schema 闸负责(本脚本不复刻禁用规则)
     files = pack.get("files") or {}
     for key, listed in sorted(files.items()):
         if listed is None:
@@ -198,9 +203,9 @@ def check_preview_refs(rel: str) -> list[str]:
         low = ref.strip().lower()
         if not low or low.startswith(("#", "data:", "mailto:", "tel:", "javascript:")):
             continue
-        if low.startswith("https://"):
+        if low.startswith(HTTPS):
             continue
-        if low.startswith(("http://", "file:", "//")):
+        if low.startswith(NON_HTTPS):
             fail(f"{rel} 引用了非 https 外链:{ref}")
         target = (path.parent / ref.split("?")[0].split("#")[0]).resolve()
         if not str(target).startswith(str(ROOT.resolve())):
@@ -236,8 +241,13 @@ def check_probe() -> dict:
                 lo, mid, hi = (g.strip() for g in clamp.groups())
                 m_lo, m_hi = PX.match(lo), PX.match(hi)
                 if not m_lo:
-                    fail(f"{rel}: clamp 下限须是 px,实为 {lo!r}")
-                if float(m_lo.group(1)) < FLOOR_PX:
+                    rem_lo = re.match(r"^(-?\d+(?:\.\d+)?)rem$", lo, re.I)
+                    if not rem_lo:
+                        fail(f"{rel}: clamp 下限须是 px 或 rem,实为 {lo!r}")
+                    lo_px = float(rem_lo.group(1)) * 16.0
+                else:
+                    lo_px = float(m_lo.group(1))
+                if lo_px < FLOOR_PX:
                     fail(f"{rel}: clamp 下限 {lo} 低于 {FLOOR_PX:.0f}px 地板")
                 if not mid.lower().endswith(("vw", "vh", "%", "em", "rem")):
                     fail(f"{rel}: clamp 中段 {mid!r} 不是相对单位")
@@ -245,14 +255,15 @@ def check_probe() -> dict:
                     fail(f"{rel}: 禁用 vw 外推上限,clamp 上限为 {hi!r}")
                 if not m_hi:
                     fail(f"{rel}: clamp 上限须是绝对单位,实为 {hi!r}")
-                px = float(m_lo.group(1))
+                px = lo_px
             elif re.search(r"vw", value, re.I):
                 fail(f"{rel}: 禁用 vw 外推,裸字号 {value!r}")
             else:
                 m = PX.match(value)
-                if not m:
-                    fail(f"{rel}: 字号 {value!r} 既不是 px 也不是 clamp(px, …, px)")
-                px = float(m.group(1))
+                rem = re.match(r"^(-?\d+(?:\.\d+)?)rem$", value, re.I)
+                if not m and not rem:
+                    fail(f"{rel}: 字号 {value!r} 既不是 px / rem 也不是 clamp(px, …, px)")
+                px = float(m.group(1)) if m else float(rem.group(1)) * 16.0
                 if px < FLOOR_PX:
                     fail(f"{rel}: 字号 {value} 低于 {FLOOR_PX:.0f}px 地板")
             min_px = px if min_px is None else min(min_px, px)

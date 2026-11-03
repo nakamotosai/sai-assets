@@ -1,0 +1,48 @@
+/* stage.css — particle-fx 全部预览页共用的舞台样式(只此一份)。
+   全屏 canvas + 角标 HUD + 一行提示 + entry 之间互跳的导航。 */
+:root { color-scheme: dark; --ink: #e8e4dc; --dim: #8a8a84; --gold: #e8c578; --line: #ffffff1f; }
+* { margin: 0; padding: 0; box-sizing: border-box }
+html, body { height: 100%; overflow: hidden; background: #050505; color: var(--ink);
+  font: 400 13px/1.6 "Segoe UI", "PingFang SC", system-ui, sans-serif }
+
+#stage, .void-stage { position: fixed; inset: 0; z-index: 0 }
+#stage canvas, .void-stage canvas { display: block; width: 100%; height: 100% }
+
+.hud { position: fixed; z-index: 5; left: 14px; top: 12px; max-width: min(62ch, calc(100vw - 240px));
+  background: #000000b3; border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px;
+  font: 500 12px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing: .02em }
+.hud b { color: var(--gold); font-weight: 600 }
+.hud a { color: var(--ink); text-decoration: none; border-bottom: 1px solid #ffffff33 }
+.hud a:hover { border-bottom-color: var(--gold) }
+.hud .dim { color: var(--dim) }
+
+nav.entries { position: fixed; z-index: 6; left: 14px; bottom: 14px; display: flex; flex-wrap: wrap;
+  gap: 6px; max-width: min(70ch, calc(100vw - 40px)) }
+nav.entries a { font-size: 12px; color: var(--dim); background: #000000a6; border: 1px solid var(--line);
+  border-radius: 999px; padding: 5px 12px; text-decoration: none; transition: color .15s, border-color .15s }
+nav.entries a:hover { color: var(--ink); border-color: #ffffff44 }
+nav.entries a.on { color: #0b0b0b; background: var(--gold); border-color: var(--gold); font-weight: 600 }
+
+.hint { position: fixed; z-index: 5; right: 14px; top: 12px; max-width: 44ch; text-align: right;
+  color: var(--dim); font: 500 11px/1.6 ui-monospace, monospace; pointer-events: none }
+.hint code { color: var(--ink) }
+
+/* ── 音频 entry(void-audio)专用:频谱条 + 底部按钮组 ── */
+.void-hud { position: fixed; z-index: 5; left: 50%; transform: translateX(-50%); top: 14px;
+  color: var(--dim); font: 500 11px/1.5 ui-monospace, monospace; letter-spacing: .1em; pointer-events: none }
+.void-bars { position: fixed; z-index: 5; left: 50%; transform: translateX(-50%); bottom: 74px;
+  display: flex; align-items: flex-end; gap: 3px; pointer-events: none }
+.void-bars i { display: block; width: 3px; height: 4px; background: #ffffffb0; border-radius: 2px; transition: height .08s linear }
+.void-dock { position: fixed; z-index: 6; left: 50%; transform: translateX(-50%); bottom: 18px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+  max-width: calc(100vw - 40px) }
+.void-dock button { font: inherit; font-size: 12px; letter-spacing: .04em; color: rgba(255,255,255,.72);
+  background: #000000b3; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; cursor: pointer }
+.void-dock button:hover:not(:disabled) { color: #fff; border-color: #ffffff55 }
+.void-dock button.on { color: #0b0b0b; background: var(--gold); border-color: var(--gold); font-weight: 600 }
+.void-dock button:disabled { opacity: .38; cursor: not-allowed }
+.void-meta { color: var(--gold); font: 500 11px/1.5 ui-monospace, monospace; letter-spacing: .04em }
+
+@media (prefers-reduced-motion: reduce) {
+  .hint::after { content: " · 已开启「减少动态」:只渲染一帧静态画面"; color: var(--ink) }
+}

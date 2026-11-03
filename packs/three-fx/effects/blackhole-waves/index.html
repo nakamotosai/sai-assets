@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blackhole Waves · 体波测地线盘 · three-fx</title>
+<meta name="description" content="体积薄盘 + 径向外推波 + 开普勒差速旋臂 + 多普勒左右冷热差;three.js WebGL 实时渲染,面板可调 20 个参数。" />
+<link rel="stylesheet" href="../../src/stage.css" />
+<link rel="stylesheet" href="../../src/param-panel.css" />
+<script type="x-shader/x-vertex" id="pt-vert">
+    attribute float size;
+    attribute vec3 customColor;
+    varying vec3 vColor;
+    void main() {
+      vColor = customColor;
+      vec4 mv = modelViewMatrix * vec4(position, 1.0);
+      gl_PointSize = size * (400.0 / max(0.001, -mv.z));
+      gl_Position = projectionMatrix * mv;
+    }
+  </script>
+<script type="x-shader/x-fragment" id="pt-frag">
+    uniform sampler2D pointTexture;
+    varying vec3 vColor;
+    void main() {
+      vec4 t = texture2D(pointTexture, gl_PointCoord);
+      if (t.a < 0.05) discard;
+      gl_FragColor = vec4(vColor, 1.0) * t;
+    }
+  </script>
+</head>
+<body>
+<div id="magic" aria-label="体波测地线盘:体积薄盘 + 径向外推波,可拖转环视"></div>
+<div class="hud" id="hud">体波测地线盘 · 拖转环视</div>
+<p class="hint">左键拖转 · 滚轮远近 · 右键滚转。面板里「纹理流速」是盘面外推波的主开关,「显示模式」切测地线 / 纯粒子 / 混合。参数默认值见 <code>params.json</code>。</p>
+<a class="wall" href="../../preview/index.html">← three-fx 索引</a>
+<script type="module" src="../../src/blackhole-waves.js"></script>
+</body>
+</html>

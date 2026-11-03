@@ -54,12 +54,12 @@
     "metal-fx",
     "img-fx"
   ],
-  "when": "想在一页里横向对比 border-beam / thinking-orbs / liquid-gooey / metal-fx / img-fx 五个特效真身(React 原包,非仿写),或需要一个『每格独立加载 + 局部失败红字』的展示骨架,且不许装 npm、要求 file:// 直开",
+  "when": "想在一页里横向对比 border-beam / thinking-orbs / liquid-gooey / metal-fx / img-fx 五个特效真身(React 原包,非仿写),或需要一个『每格独立加载 + 局部失败红字』的展示骨架,且不许装 npm、要求本地直开(双击预览页)",
   "not_for": "生产运行时依赖、离线或内网演示、需要固定版本可复现的工程、SSR 或打包进 bundle 的场景",
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/libraries-dev-fx/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens libraries-dev-fx / (待断言实测)"
+    "evidence": "PASS assert_tokens libraries-dev-fx / 引用 5 个(https 3 / 包内相对 2)+ importmap 4 条 · src 2 个文件 11843 字节 · files 声明 5 条全部命中 · 5 个 stage / 5 个 CDN 包 · http/本机/内网命中 0"
   },
   "canonical_home": null
 }

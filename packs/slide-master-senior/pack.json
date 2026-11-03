@@ -1,0 +1,48 @@
+{
+  "schema": 1,
+  "id": "slide-master-senior",
+  "title": "Slide Master Senior · 中老年大字号母版(封面 + 时间线)",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "sai-theme-lab · demos/slide-master-senior(母版演示)",
+      "license": "MIT",
+      "what": "1920×1080 两页母版的排版配方(封面双轨 + 时间线)与翻页脚本的原始实现"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "demos/slide-master-senior",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/deck.css",
+      "src/deck.js"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "slide-deck",
+    "presentation",
+    "print-to-pdf",
+    "large-type",
+    "accessibility",
+    "timeline",
+    "1920x1080"
+  ],
+  "when": "做 1920×1080 演示母版 / 讲义 / 可打印 PDF:封面页与行程时间线页、中老年与低视力受众的大字号正文、键盘与滚轮翻页并同步页码",
+  "not_for": "密集数据图表页、需要转场动画与视频的营销 Demo、手机竖屏流式长页",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/slide-master-senior/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens slide-master-senior / refs 2(全部包内相对引用,0 外链) · src 2 文件 12116 字节 · 声明产物 5 个 32054 字节 · 2 页 1920x1080 · license MIT · 禁用串命中 0"
+  },
+  "canonical_home": null
+}

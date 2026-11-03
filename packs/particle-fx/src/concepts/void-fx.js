@@ -1,5 +1,5 @@
 /**
- * FM Void FX · 卡冈图亚测地线盘（第四背景）
+ * void-fx.js · 黑洞测地线盘（第四背景）
  *
  * 用法：
  *   import { createVoidFx } from './void-fx.js';
@@ -8,15 +8,16 @@
  *   fx.setEnergy({ bass, subBass, mid, high, level, hit, hitStrength });
  *   fx.render(dt);
  *   // 显隐：fx.setVisible(true/false)
- *   // 拖视角：默认绑 container pointer（与 FM beast 同）
+ *   // 拖视角:默认绑 container pointer
  *
- * 音频映射（与 getBgEnergy 字段对齐）：
- *   盘纹 / 尺寸 / 增益 / 曝光 / 相机 → 完全锁死，音乐绝不碰（用户：整洞放大难受）
- *   high/mid/hit → 仅星空（闪/密/正向慢旋）
- * 构图：屏幕中心缩小版（uZoom + 固定 orbit.dist）
- *
- * 不上生产：仅本地预览/可拷进 fm-radio www 作第四 mode。
+ * 音频映射(与 getBgEnergy 字段对齐):
+ *   盘纹 / 尺寸 / 增益 / 曝光 / 相机 → 完全锁死
+ *   high/mid/hit → 仅星空(闪/密/正向慢旋)
+ * 构图:屏幕中心缩小版(uZoom + 固定 orbit.dist)
  */
+/** 渲染器版本:拷贝/复用方按此比对(见 src/versions.json)。 */
+export const VOID_FX_VERSION = '1.0.0';
+
 export function createVoidFx(container, THREE, opts = {}) {
   const quality = Math.max(0.45, Math.min(1.4, Number(opts.quality ?? 0.9)));
   const steps = Math.round(Number(opts.steps ?? 44));

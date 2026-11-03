@@ -9,7 +9,7 @@
 <!-- 脚本之前必须有 importmap:react / react-dom/client / three / htm → esm.sh -->
 ```
 
-- 活预览:[`preview/index.html`](preview/index.html)(可直接 `file://` 打开,无需本地服务器)
+- 活预览:[`preview/index.html`](preview/index.html)(可直接双击打开,无需本地服务器)
 - 用法 / 导出名 / 失败排查 / 反模式:[`docs/usage.md`](docs/usage.md) · agent 入口:[`SKILL.md`](SKILL.md)
 - 自检:`python packs/libraries-dev-fx/scripts/assert_tokens.py`
 

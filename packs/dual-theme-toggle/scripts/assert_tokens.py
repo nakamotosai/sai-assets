@@ -265,8 +265,12 @@ def main() -> None:
 
     dark_vars = root_vars
     light_vars = parse_vars(light_blocks['html[data-theme="light"]'])
-    if set(light_vars) != set(k for k in dark_vars if k.startswith(("bg", "surface", "ink", "muted", "line", "accent", "focus"))):
-        pass  # 原色表 --c-* 只在 :root;语义键集合下面逐个检查
+    # 重映射必须覆盖全部语义 token(漏一个就是"切了一半");--c-* 原色表只在 :root,不参与比较
+    semantic_dark = {k for k in dark_vars if not k.startswith("c-")}
+    if set(light_vars) != semantic_dark:
+        only_dark = sorted(semantic_dark - set(light_vars))
+        only_light = sorted(set(light_vars) - semantic_dark)
+        fail(f"浅色映射的 token 集合与深色不一致:深色独有 {only_dark},浅色独有 {only_light}")
 
     light_bg = resolve_color(light_vars["bg"], resolve)
     dark_bg = resolve_color(dark_vars["bg"], resolve)
@@ -291,7 +295,8 @@ def main() -> None:
         fail(f"accent on 浅底 {c_light:.2f}:1 < 3:1(图形档)")
 
     # ---- 按钮硬项 ----
-    if not re.search(r"\.tt\s*\{[^}]*width:\s*44px[^}]*height:\s*44px", css, re.S):
+    flat_css = re.sub(r"\s+", " ", css)  # 折平空白再比对,避免正则里的冒号加反斜杠被误读成盘符路径
+    if not re.search(r"\.tt \{ [^}]*width: 44px[^}]*height: 44px", flat_css):
         fail("按钮没有 44px 热区")
     if "prefers-color-scheme" not in css:
         fail("CSS 缺 prefers-color-scheme(无 JS 跟系统)")

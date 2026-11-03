@@ -1,0 +1,60 @@
+{
+  "slug": "blackhole-waves",
+  "version": 10,
+  "defaults": {
+    "mode": "测地线连续盘",
+    "temp": 5200,
+    "inner": 1.9,
+    "outer": 8.5,
+    "opacity": 0.88,
+    "doppler": 0.55,
+    "beam": 2.4,
+    "gain": 2.1,
+    "contrast": 1.55,
+    "wind": 6.5,
+    "spin": 5.5,
+    "waveSpeed": 4.5,
+    "waveFreq": 5.0,
+    "diskThick": 0.08,
+    "exposure": 1.4,
+    "starGain": 0.7,
+    "starDrift": 1.0,
+    "steps": 52,
+    "fov": 40,
+    "quality": 1.0,
+    "particleDensity": 1.0,
+    "particleSpin": 1.5,
+    "dotScale": 1.2
+  },
+  "schema": [
+    {
+      "key": "mode",
+      "label": "显示模式",
+      "type": "select",
+      "options": [
+        "测地线连续盘",
+        "测地线·转速加强",
+        "纯粒子盘",
+        "混合·底盘+飞尘"
+      ]
+    },
+    { "key": "waveSpeed", "label": "纹理流速", "type": "range", "min": 0, "max": 12, "step": 0.1 },
+    { "key": "spin", "label": "盘转速", "type": "range", "min": 0.5, "max": 14, "step": 0.1 },
+    { "key": "wind", "label": "螺旋臂", "type": "range", "min": 0, "max": 12, "step": 0.1 },
+    { "key": "contrast", "label": "条纹对比", "type": "range", "min": 0.3, "max": 2.4, "step": 0.05 },
+    { "key": "waveFreq", "label": "条纹细度", "type": "range", "min": 1.5, "max": 8, "step": 0.1 },
+    { "key": "diskThick", "label": "盘厚度", "type": "range", "min": 0.03, "max": 0.25, "step": 0.01 },
+    { "key": "temp", "label": "盘色温K", "type": "range", "min": 2500, "max": 12000, "step": 50 },
+    { "key": "opacity", "label": "盘浓度", "type": "range", "min": 0.2, "max": 1, "step": 0.02 },
+    { "key": "doppler", "label": "多普勒", "type": "range", "min": 0, "max": 1, "step": 0.02 },
+    { "key": "gain", "label": "盘增益", "type": "range", "min": 0.5, "max": 3.5, "step": 0.05 },
+    { "key": "exposure", "label": "曝光", "type": "range", "min": 0.5, "max": 2.5, "step": 0.05 },
+    { "key": "starGain", "label": "背景星亮度", "type": "range", "min": 0, "max": 1.4, "step": 0.05 },
+    { "key": "steps", "label": "测地线步数", "type": "range", "min": 28, "max": 72, "step": 1 },
+    { "key": "fov", "label": "视场角", "type": "range", "min": 28, "max": 70, "step": 1 },
+    { "key": "particleSpin", "label": "粒子转速倍率", "type": "range", "min": 0.3, "max": 3.5, "step": 0.05 },
+    { "key": "particleDensity", "label": "粒子密度", "type": "range", "min": 0.4, "max": 1.5, "step": 0.05 },
+    { "key": "dotScale", "label": "粒子点大小", "type": "range", "min": 0.5, "max": 2.4, "step": 0.05 },
+    { "key": "quality", "label": "画质", "type": "range", "min": 0.5, "max": 1.5, "step": 0.05 }
+  ]
+}

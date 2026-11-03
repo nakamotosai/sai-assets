@@ -32,11 +32,9 @@
 
    ```html
    <div class="nr" data-nav-rail>
+     <!-- 两份逐字等长(各重复到超过一屏高),两份之间不留空白字符 -->
      <div class="nr-marquee" aria-hidden="true">
-       <div class="nr-marquee__track">
-         <span>WHO · WORKS · DEMOS · ABOUT · example.com · </span>
-         <span>WHO · WORKS · DEMOS · ABOUT · example.com · </span>
-       </div>
+       <div class="nr-marquee__track"><span>WHO · WORKS · DEMOS · ABOUT · example.com · WHO · WORKS · DEMOS · ABOUT · example.com · </span><span>WHO · WORKS · DEMOS · ABOUT · example.com · WHO · WORKS · DEMOS · ABOUT · example.com · </span></div>
      </div>
 
      <nav class="nr-top" data-nr-top aria-label="主导航">
@@ -102,7 +100,7 @@ CSS 变量(写在 `.nr` 上,或任何包住它的祖先元素上):
 | `--nr-bar-h` / `--nr-bar-h-on` | `18px` / `40px` | 任意长度 | 段轨条形常态高 / 当前态高 |
 | `--nr-prog-h` | `2px` | 任意长度 | 底部进度线高 |
 | `--nr-t` | `.4s` | 任意时长 | 过渡时长(减少动效时归零) |
-| `--nr-gutter` / `--nr-top-offset` | `14px` / `14px` | 任意长度 | 段轨距右边 / 顶导航距上边 |
+| `--nr-gutter` / `--nr-top-offset` | `24px` / `14px` | 任意长度 | 段轨距右边 / 顶导航距上边(段轨默认要让开滚动条槽位) |
 
 脚本选项(`NavRail.init(root, options)`):
 
@@ -123,6 +121,8 @@ CSS 变量(写在 `.nr` 上,或任何包住它的祖先元素上):
 | `data-nr-stage` | 滚动容器 | 观察器与滚动兜底的根;省略则退回页面滚动 |
 | `data-nr-progress` / `data-nr-bar` | 进度线容器 / 内层条 | 脚本写 `width` 与 `--nr-progress` |
 
+映射说明:顶导航只有 3 项(`works` / `demos` / `contact`),段轨有 4 段(`WHO` / `WORKS` / `DEMOS` / `ABOUT`)。同步按 `data-nr-target` 的值配对,所以 `contact` 与 `about` 是同一段 —— 当前段是 `who` 时只有段轨那一项亮(顶导航没有对应项)。要全量一一对应,给顶导航补一个 `data-nr-target="who"` 的按钮即可,脚本不需要改。
+
 进度算法:`宽度 = (当前段序号 + 1) / 段数 × 100%` —— 四个段就是 25% / 50% / 75% / 100%,由脚本在每次状态同步时写入;CSS 里那 25% 只是脚本接管前的一帧兜底。
 
 ## 无障碍硬项
@@ -137,6 +137,7 @@ CSS 变量(写在 `.nr` 上,或任何包住它的祖先元素上):
 ## 反模式
 
 - **把跑马灯当正内容**:它是装饰层,`aria-hidden` + `pointer-events: none`;别往里放必须读到的信息(域名、电话、关键提示)。
+- **两份内容之间留了空白**:轨道里两份之间夹了换行或缩进,在竖排里会折成一个空格 = 循环接缝处一条可见的缝;两份必须逐字等长且首尾相接(还要保证每一份本身超过一屏高,否则底部会露空)。
 - **改小命中区**:为了"看起来更细"把 `--nr-hit` 调到 44px 以下,或者给段轨按钮加负 margin 收掉热区 —— 触屏直接点不中。
 - **两处导航各写一套状态**:用 CSS `:hover` 自己模拟当前态、绕开 `aria-current`,结果是"看起来亮了但读屏不知道",键盘用户也跟丢。当前态永远走 `aria-current="page"`,由脚本统一写。
 - **进度线写静态宽度**:每段都写死 25%(或写死 33%)只是装饰;段数一变就错。宽度只由脚本按段数算。
@@ -144,6 +145,7 @@ CSS 变量(写在 `.nr` 上,或任何包住它的祖先元素上):
 - **靠 `data-nr-target` 之外的自定义属性**:脚本只认契约里的属性名,自创属性不会被同步。
 - **段数变了忘了改 `aria-valuemax`**:脚本会在首次同步时按实际段数覆写,但如果你把进度线换成非标准结构,记得自己维护。
 - **在 `prefers-reduced-motion` 下只停一部分**:必须同时停掉跑马灯动画、过渡与平滑滚动,只停一个等于没停。
+- **忽略滚动条槽位**:段轨是 `position: fixed`,不会自动让开内部滚动容器的滚动条;把 `--nr-gutter` 调到 24px 以下会让段轨条压在滚动条上,滚动条出现/消失还会左右跳。要么留够 `--nr-gutter`,要么给滚动容器 `scrollbar-gutter: stable`(预览就是这么做的)。
 - **用跑马灯来测性能**:它只是 `transform` 位移动画;真正的重活留给背景效果包,别把别的动效塞进这条轨道。
 
 ## 来源与许可

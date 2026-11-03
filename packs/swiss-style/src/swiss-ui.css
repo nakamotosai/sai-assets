@@ -268,7 +268,7 @@
   height: 48px;
   border-bottom: 1px solid var(--hairline);
 }
-.sw-bars i { flex: 1; align-self: flex-end; background: var(--hairline); }
+.sw-bars i { flex: 1; align-self: flex-end; height: var(--h, 40%); background: var(--hairline); }
 .sw-bars i.is-hi { background: var(--accent); }
 @media (max-width: 767px) {
   .sw-multiples { grid-template-columns: repeat(2, minmax(0, 1fr)); }

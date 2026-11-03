@@ -38,7 +38,7 @@ description: Build 1920×1080 slide masters (cover page + timeline page) for sen
 |---|---|
 | `src/deck.css` | 令牌(:root)+ 页卡 + 顶栏/眉标/按钮/页脚条 + 封面页 + 时间线页 + `@page` 打印规则 |
 | `src/deck.js` | 翻页(键盘/滚轮)、页码同步(`NN / TT`)、窄视口等比缩放(`--deck-fit`)、reduced-motion 直接跳页;无依赖 |
-| `preview/index.html` | 两页母版活预览(封面 + 时间线),`file://` 直开可用 |
+| `preview/index.html` | 两页母版活预览(封面 + 时间线),双击即开、不经任何 http 服务 |
 | `docs/usage.md` | 接入片段、变量/选项表、排版硬结论、换色、反模式 |
 | `scripts/assert_tokens.py` | 断言:pack.json / 引用可达 / src 非空 / 文档口径 / 禁用词 |
 
@@ -61,6 +61,6 @@ description: Build 1920×1080 slide masters (cover page + timeline page) for sen
 - 强调色面积 **<10%**(眉标/日期/主按钮);`--accent` 同时满足 6 位 hex 与中等偏深亮度。
 - 颜色与字号全走 `:root` 令牌,组件里不写死 hex。
 - 页面上**不放浮动控件/悬浮面板**;打印规则保持 `@page 1920x1080` + `.page { page-break-after: always }`。
-- 预览必须 `file://` 直开可用:相对路径引用,禁 `fetch()`、禁绝对路径、禁外部 CDN。
+- 预览必须双击即开、不经任何 http 服务:相对路径引用,禁 `fetch()`、禁绝对路径、禁外部 CDN。
 - `prefers-reduced-motion: reduce` 下翻页用 `instant`(不做平滑滚动)。
 - 消费后必须在项目 `design-lock.json` 记 `assets[]`(`pack`/`version`/`sha`)。

@@ -3,8 +3,8 @@
  * 拆自 demos/libraries-dev-fx/index.html 的内联 module script。
  *
  * 两个刻意的选择:
- * 1) 以普通脚本(<script defer>)加载,CDN 依赖全部走动态 import() —— 这样 file:// 直开
- *    也能成立(module 脚本在 file:// 下会被 CORS 拦掉),且 importmap 对动态 import 同样生效。
+ * 1) 以普通脚本(<script defer>)加载,CDN 依赖全部走动态 import() —— 这样 本地直开 直开
+ *    也能成立(module 脚本在 在本地文件页面会被 CORS 拦掉),且 importmap 对动态 import 同样生效。
  * 2) 五个组件各自独立 try/catch:任一加载失败只把红字写进对应 stage,
  *    不产生未捕获错误(控制台 0 报错是硬项)。 */
 

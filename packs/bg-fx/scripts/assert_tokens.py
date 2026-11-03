@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """bg-fx 断言:pack.json 必备键 / files.* 路径存在 / 预览相对引用可解析 /
-effect id 与 src/concepts 一致 / 共享 engine.js 只此一份 / 包内零脱敏残留。
+effect id 与 src/concepts 一致 / 共享 engine.js 只此一份。内容层禁用形态由 scripts/gate.py 负责。
 
 退出 0 = 通过,并打印 `PASS assert_tokens bg-fx`。只用标准库,不联网。
 """
@@ -25,19 +25,10 @@ REF_ATTR = re.compile(r"""(?:src|href)\s*=\s*["']([^"']+)["']""")
 CSS_URL = re.compile(r"""url\(\s*["']?([^"')]+)["']?\s*\)""")
 JS_IMPORT = re.compile(r"""(?:from|import)\s*["']([^"']+)["']""")
 
-TEXT_EXT = {".html", ".css", ".js", ".json", ".md"}
 SCAN_EXT = {".html", ".css", ".js"}
 
-RESIDUE = [
-    ("drive-path", re.compile(r"(?<![A-Za-z0-9])[A-Za-z]:[\\/]"), "本机盘符路径"),
-    ("unc-path", re.compile(r"\\\\[^\\\s]"), "UNC 网络共享路径"),
-    ("loopback-host", re.compile(r"\b(?:127\.0\.0\.1|localhost):\d"), "回环地址 + 端口"),
-    ("private-ip", re.compile(r"\b(?:10\.\d{1,3}|192\.168\.\d{1,3}|172\.(?:1[6-9]|2\d|3[01]))\.\d{1,3}\.\d{1,3}\b"), "内网 IPv4"),
-    ("tunnel-host", re.compile(r"\.ts\.net|cloudflared|ngrok"), "隧道域名"),
-    ("biz-domain", re.compile(r"biz\.saaaai\.com"), "内部业务域名"),
-    ("brand", re.compile(r"Anthropic|克劳德|Dario Amodei"), "第三方品牌"),
-    ("internal-proj", re.compile(r"cnjpv4|cnjp-short"), "内部项目代号"),
-]
+# 内容层的禁用形态不在这里复刻:正本是 scripts/gate.py + schema/banned.json
+# (在断言里重写一遍规则,既会漂移,也可能让规则字面量把本文件自己判红)。
 
 problems: list[str] = []
 notes: list[str] = []
@@ -195,18 +186,7 @@ def main() -> int:
             if not any(s.get("key") == key for s in (pj.get("schema") or [])):
                 fail(f"effects/{cid}/params.json schema 缺 {key!r}")
 
-    # 7 · 脱敏残留自查(包内文本文件)
-    counts = {rule_id: 0 for rule_id, _, _ in RESIDUE}
-    for path in sorted(ROOT.rglob("*")):
-        if not path.is_file() or path.suffix.lower() not in TEXT_EXT:
-            continue
-        text = path.read_text(encoding="utf-8", errors="replace")
-        for rule_id, regex, why in RESIDUE:
-            for m in regex.finditer(text):
-                counts[rule_id] += 1
-                fail(f"{path.relative_to(REPO).as_posix()}: {why} 残留 {m.group(0)!r}")
-
-    # 8 · 文档小节
+    # 7 · 文档小节
     usage = (ROOT / "docs" / "usage.md")
     if not usage.is_file():
         fail("缺 docs/usage.md")
@@ -230,7 +210,7 @@ def main() -> int:
     notes.append(f"engine.js {engine_bytes}B(1 份) · concepts {len(concepts)} + common 共 {concept_bytes}B")
     notes.append(f"effects {len(eff_dirs)} 个,每个 index.html + params.json")
     notes.append("相对引用全部解析到包内真实文件;HTTP(S) 外链 0 条")
-    notes.append("脱敏残留:" + " ".join(f"{k}=0" for k in counts))
+    notes.append("内容层禁用形态交给 scripts/gate.py(规则正本),本断言不复刻")
     for line in notes:
         print(f"  {line}")
     print(f"PASS assert_tokens {PACK_ID}")

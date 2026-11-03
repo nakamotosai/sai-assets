@@ -7,7 +7,5 @@
 <script src="src/deck.js" defer></script>
 ```
 
-- 活预览:`preview/index.html`(1440 视口下页卡仍是 16:9,`file://` 直开可用)
-- 接入与排版口径:`docs/usage.md` · agent 入口:`SKILL.md`
-- 自检:`python scripts/assert_tokens.py`
-- 许可:MIT(归属见 `pack.json.attribution`)
+- 活预览:`preview/index.html`(1440 视口下页卡仍是 16:9,双击即开、不经任何 http 服务)· 接入与排版口径:`docs/usage.md` · agent 入口:`SKILL.md`
+- 自检:`python scripts/assert_tokens.py` · 许可:MIT(归属见 `pack.json.attribution`)

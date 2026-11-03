@@ -27,7 +27,7 @@
 
   function closestButton(node, root) {
     while (node && node !== root) {
-      if (node.nodeType === 1 && node.hasAttribute && node.hasAttribute('data-nr-target')) return node;
+      if (node.hasAttribute && node.hasAttribute('data-nr-target')) return node;
       node = node.parentNode;
     }
     return null;
@@ -57,6 +57,9 @@
     });
     this.activeId = null;
     this._io = null;
+    this._onScroll = null;
+    this._click = this._onClick.bind(this);
+    this._key = this._onKeydown.bind(this);
     this.mount();
   }
 
@@ -70,11 +73,11 @@
   NavRail.prototype.mount = function () {
     var i;
     for (i = 0; i < this.buttons.length; i++) {
-      this.buttons[i].addEventListener('click', this._onClick.bind(this));
+      this.buttons[i].addEventListener('click', this._click);
     }
     if (this.opts.keyboard) {
-      if (this.rail) this.rail.addEventListener('keydown', this._onKeydown.bind(this));
-      if (this.top) this.top.addEventListener('keydown', this._onKeydown.bind(this));
+      if (this.rail) this.rail.addEventListener('keydown', this._key);
+      if (this.top) this.top.addEventListener('keydown', this._key);
     }
     var initial = null;
     for (i = 0; i < this.buttons.length; i++) {
@@ -202,6 +205,12 @@
   };
 
   NavRail.prototype.destroy = function () {
+    var i;
+    for (i = 0; i < this.buttons.length; i++) {
+      this.buttons[i].removeEventListener('click', this._click);
+    }
+    if (this.rail) this.rail.removeEventListener('keydown', this._key);
+    if (this.top) this.top.removeEventListener('keydown', this._key);
     if (this._io) {
       this._io.disconnect();
       this._io = null;
@@ -210,6 +219,7 @@
       (this.stage || global).removeEventListener('scroll', this._onScroll);
       this._onScroll = null;
     }
+    if (this.root.__nr === this) this.root.__nr = null;
     return this;
   };
 

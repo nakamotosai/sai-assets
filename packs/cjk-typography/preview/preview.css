@@ -1,0 +1,97 @@
+/* cjk-typography · 活预览样式(预览不拉 CDN 字体,字重与字形靠系统栈近似;
+   三选字体的真实差异要到项目里挂上各自分片 CSS 才可见) */
+:root {
+  --f-sans: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --f-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
+  --f-mono: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+  --bg: #f7f6f3;
+  --ink: #1a1a16;
+  --muted: #5b5a53;
+  --line: rgba(26, 26, 22, 0.12);
+  --surface: rgba(26, 26, 22, 0.04);
+  --mk: #b8452f;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 56px 24px 96px; }
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+
+h1 { font-size: 34px; line-height: 1.3; font-weight: 700; margin: 0 0 12px; }
+
+.lede { font-size: 17px; line-height: 1.75; color: var(--muted); max-width: 42ch; margin: 0; }
+
+h2 { font-size: 21px; line-height: 1.35; font-weight: 700; margin: 0 0 16px; }
+
+section { margin-top: 56px; }
+
+.scenes { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+
+.scene { background: var(--surface); padding: 22px; }
+.scene.wide { grid-column: 1 / -1; }
+
+.tag {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+.tag b { color: var(--mk); font-weight: 700; }
+
+/* 工具台 */
+.c-h1 { font-size: 18px; line-height: 1.35; font-weight: 600; margin: 0 0 8px; }
+.c-body { font-size: 14px; line-height: 1.7; margin: 0 0 8px; font-variant-numeric: tabular-nums; }
+.c-meta { font-family: var(--f-mono); font-size: 12px; line-height: 1.5; color: var(--muted); margin: 0; letter-spacing: 0; }
+
+/* 纸媒 / 电视 1920 */
+.p-h1 { font-family: var(--f-serif); font-size: 72px; line-height: 1.1; font-weight: 700; margin: 0 0 12px; }
+.p-body { font-size: 40px; line-height: 1.35; margin: 0 0 12px; }
+.p-meta { font-size: 26px; line-height: 1.4; color: var(--muted); margin: 0; }
+
+/* 营销落地 */
+.m-h1 { font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; letter-spacing: -0.02em; font-weight: 700; margin: 0 0 12px; }
+.m-body { font-size: 17px; line-height: 1.6; margin: 0 0 10px; }
+.m-meta { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin: 0; }
+
+.faces { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.face { background: var(--surface); padding: 22px; }
+.face .name { font-size: 16px; font-weight: 700; margin: 0 0 6px; }
+.face .lic { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mk); margin: 0 0 14px; }
+.face .demo { font-size: 22px; line-height: 1.6; margin: 0 0 10px; }
+.face .src { font-family: var(--f-mono); font-size: 12px; line-height: 1.6; color: var(--muted); margin: 0; word-break: break-all; }
+.w150 { font-weight: 200; }
+.w300 { font-weight: 300; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+td.k { font-weight: 700; white-space: nowrap; }
+td .spec { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+
+.rules { padding-left: 20px; }
+.rules li { margin-bottom: 8px; }
+.rules code, p code { font-family: var(--f-mono); font-size: 12px; }
+.mk { color: var(--mk); font-weight: 700; }
+footer { margin-top: 64px; color: var(--muted); font-size: 14px; }

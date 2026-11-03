@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "id": "swiss-style",
+  "title": "Swiss Style · 国际主义平面设计风格(版式与构件)",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Josef Müller-Brockmann · Grid Systems in Graphic Design / Raster Systeme(Niggli)",
+      "url": "https://www.niggli.ch",
+      "license": "reference-only",
+      "what": "可推导模块网格的构造公式、字段/栏术语与经典边距比"
+    },
+    {
+      "name": "Karl Gerstner · Designing Programmes",
+      "license": "reference-only",
+      "what": "复合网格(两套规则网格叠加)与 mobile 版式程序"
+    },
+    {
+      "name": "Otto Neurath · Isotype;Edward Tufte · The Visual Display of Quantitative Information",
+      "license": "reference-only",
+      "what": "等大图元计数与数据墨水比 / small multiples 原则"
+    },
+    {
+      "name": "Inter",
+      "url": "https://rsms.me/inter/",
+      "license": "SIL OFL-1.1",
+      "what": "字体回退链中的开源怪诞体等价(可合法打包)"
+    },
+    {
+      "name": "Noto Sans SC / Source Han Sans 思源黑体",
+      "url": "https://fonts.google.com/noto",
+      "license": "SIL OFL-1.1",
+      "what": "中文黑体回退(可合法打包)"
+    }
+  ],
+  "origin": {
+    "project": "swiss-style-pack",
+    "path": "demos/swiss-style",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/swiss-grid.css",
+      "src/swiss-ui.css",
+      "src/swiss-layouts.css",
+      "src/swiss-motion.js"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "swiss",
+    "international-typographic-style",
+    "grid",
+    "12-column",
+    "baseline",
+    "layout",
+    "ui",
+    "isotype",
+    "minimal"
+  ],
+  "when": "瑞士 / 国际主义风格的版式与构件:可推导的模块网格(12 栏 + 8pt 基线 + 复合网格)、直角平涂控件、五套版式骨架(海报/deck/跨页/报告封面/落地 hero)、Isotype 与 small multiples 图元;配色由主题包 swiss-classic / swiss-inverted 提供,本包只给版式与构件",
+  "not_for": "配色包(配色请用主题包 swiss-classic / swiss-inverted);需要渐变 / 阴影 / 玻璃拟态、圆角胶囊、居中大标题、一屏多个强调色的营销落地页;攀比装饰插画填满空间的版式",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/swiss-style/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens swiss-style / 引用 4 个 · 声明路径 7 个 · src 文件 4 个 · 共 31592 字节 · kind=ui category=web-ui"
+  },
+  "canonical_home": null
+}

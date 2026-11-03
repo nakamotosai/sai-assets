@@ -1,0 +1,217 @@
+/* spectral-glass-prism · spectral-glass.css
+   宿主页样式:全屏舞台 + 左侧文字轨 + 底部署名条 + 兜底面板。
+   ⚠ 下面这几条是**上游引擎的硬契约**,不是审美选择:引擎按 id 取节点
+   (#gpu / #html-bg-root / #html-bg-photo / #html-bg-foreground / #fallback),
+   且 #gpu 必须是 100vw/100vh 的画布、#html-bg-root 必须 absolute 铺满,否则取景与拖拽会错位。
+   改这几条之前先读 docs/usage.md 的「硬契约」一节。 */
+
+:root {
+  --sg-bg: #05070d;
+  --sg-photo-fallback: linear-gradient(165deg, #3a2848 0%, #0c4a5c 40%, #0a1620 100%);
+  --sg-ink: #f4f0e8;
+  --sg-dim: rgba(244, 240, 232, .62);
+  --sg-accent: #ffd4a0;
+  --sg-rail-max: 56rem;
+  --sg-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --sg-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #000;
+  color: #fff;
+  font-family: var(--sg-font);
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* ---- 舞台 ---- */
+#gpu {
+  display: block;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  /* iOS Safari:挡住页面滚动/缩放,竖向拖拽才会交给引擎的 attachDrag */
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* 画在画布里的 DOM 背景层:只在支持 CanvasDrawElement 的 Chrome 里会被光栅化,
+   其他浏览器里它仍然是引擎的取景尺寸来源,别删。 */
+#html-bg-root {
+  position: absolute;
+  inset: 0;
+  min-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  background: #0c0c10;
+}
+
+#html-bg-root.html-bg--gradient-fallback { background: var(--sg-photo-fallback); }
+
+#html-bg-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+}
+
+#html-bg-photo[hidden] { display: none; }
+
+/* ---- 左侧文字轨(可滚动;右侧留给引擎自带的参数面板)---- */
+#html-bg-foreground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  width: min(100%, var(--sg-rail-max));
+  max-width: 78vw;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  padding: max(14px, 2.4vmin) max(20px, 2.6vmin) max(24px, 4vmin) max(18px, 2.4vmin);
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  outline: none;
+  color: var(--sg-ink);
+  text-shadow: 0 .08em .25em rgba(0, 0, 0, .85), 0 .02em .06em #000;
+  pointer-events: auto;
+  background: linear-gradient(90deg,
+      rgba(4, 6, 14, .82) 0%,
+      rgba(5, 7, 18, .58) 28%,
+      rgba(4, 6, 12, .28) 55%,
+      rgba(0, 0, 0, 0) 100%);
+  border-radius: 0 6px 6px 0;
+}
+
+#html-bg-foreground::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+/* ---- 文字轨里的排版(与上游同一套类名,别改类名:引擎不看它们,但预览会用)---- */
+.html-t-hero {
+  margin: 0 0 .1em;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 2.2vw + .75rem, 2.9rem);
+  line-height: 1.1;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #fff8f0;
+}
+
+.html-t-mono {
+  margin: .12em 0 .5em;
+  font-family: var(--sg-mono);
+  font-size: clamp(.8rem, .5vw + .5rem, 1.02rem);
+  line-height: 1.4;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #a8d4ff;
+}
+
+.html-t-h3 {
+  margin: 1em 0 .4em;
+  font-size: clamp(1.05rem, .45vw + .75rem, 1.3rem);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--sg-accent);
+  border-bottom: 1px solid rgba(255, 212, 160, .25);
+  padding-bottom: .25em;
+}
+
+.html-t-h3:first-of-type { margin-top: .4em; }
+
+.html-t-lead {
+  margin: .35em 0 .5em;
+  font-size: clamp(1.05rem, .45vw + .75rem, 1.3rem);
+  line-height: 1.55;
+  font-weight: 500;
+  color: #e8e4dc;
+}
+
+.html-t-body {
+  margin: .4em 0 .55em;
+  font-size: clamp(.95rem, .35vw + .7rem, 1.1rem);
+  line-height: 1.6;
+  color: #c8c4b8;
+}
+
+.html-t-list { margin: .35em 0 .5em 1.1em; padding: 0; font-size: clamp(.9rem, .3vw + .7rem, 1.05rem); line-height: 1.6; color: #b8b4a8; }
+.html-t-list.tight { margin-top: .2em; }
+.html-t-list li { margin-bottom: .2em; }
+
+.html-t-credit {
+  margin: .65em 0 .5em;
+  font-size: clamp(.75rem, .2vw + .6rem, .9rem);
+  line-height: 1.6;
+  letter-spacing: .04em;
+  color: rgba(255, 255, 255, .55);
+}
+
+.html-t-kicker {
+  margin: .4em 0 .25em;
+  font-size: clamp(.9rem, .4vw + .65rem, 1.05rem);
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--sg-accent);
+}
+
+/* ---- 底部署名条(画布之外的真实 DOM:任何浏览器都看得见)---- */
+#sg-credit {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: baseline;
+  padding: 8px 14px;
+  font-family: var(--sg-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: var(--sg-dim);
+  background: linear-gradient(0deg, rgba(2, 3, 7, .92), rgba(2, 3, 7, 0));
+  pointer-events: none;
+}
+
+#sg-credit b { color: var(--sg-ink); font-weight: 600; }
+#sg-credit a { color: var(--sg-accent); text-decoration: none; border-bottom: 1px solid rgba(255, 212, 160, .35); pointer-events: auto; }
+
+/* ---- 兜底面板:没有 WebGPU / 没有适配器 / 引擎起不来时显示 ---- */
+#fallback {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--sg-ink);
+  background: var(--sg-photo-fallback);
+}
+
+#fallback.visible { display: flex; }
+#fallback code { font-family: var(--sg-mono); color: var(--sg-accent); }
+#fallback .fb-in { max-width: 46rem; }
+#fallback h1 { margin: 0 0 .4em; font-size: 20px; letter-spacing: .04em; text-transform: uppercase; }
+#fallback p { margin: .4em 0; color: var(--sg-dim); }

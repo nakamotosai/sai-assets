@@ -1,0 +1,69 @@
+{
+  "schema": 1,
+  "id": "spectral-glass-prism",
+  "title": "Spectral Glass Prism · WebGPU 真玻璃光谱色散",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Spectral Glass(Saqoosha)",
+      "url": "https://github.com/saqoosha/Spectral-Glass",
+      "license": "MIT",
+      "what": "引擎本体(WebGPU 光谱色散:SDF raymarching + 逐波长 Cauchy 色散 + CIE 1931 合成)。构建产物原样 vendored 于 upstream/spectral-glass/engine.js,许可原文见同目录 LICENSE"
+    },
+    {
+      "name": "Poly Haven HDRIs",
+      "url": "https://polyhaven.com",
+      "license": "CC0-1.0",
+      "what": "可选 HDR 环境贴图(背景/折射/反射共用同一张全景);运行期按需下载,本仓不转载任何 HDR 文件"
+    },
+    {
+      "name": "Lorem Picsum",
+      "url": "https://picsum.photos",
+      "license": "第三方占位图服务",
+      "what": "默认底图与「换一张图」的照片来源;运行期取图,本仓不转载照片"
+    }
+  ],
+  "origin": {
+    "project": "asset-library",
+    "path": "demos/spectral-glass-prism",
+    "derived_from": "Spectral Glass(Saqoosha,MIT)的 vite 构建产物 + 本仓新写的宿主壳"
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/spectral-glass.js",
+      "src/spectral-glass.css"
+    ],
+    "upstream": [
+      "upstream/spectral-glass/engine.js",
+      "upstream/spectral-glass/LICENSE",
+      "upstream/spectral-glass/NOTICE.md"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "webgpu",
+    "glass",
+    "dispersion",
+    "refraction",
+    "raymarching",
+    "sdf",
+    "spectral",
+    "cie-1931",
+    "diamond",
+    "vendored"
+  ],
+  "when": "落地页 / 作品集要一块能拖能转、有真火彩的实时玻璃舞台;或需要一个 WebGPU 画布引擎与宿主页面的契约样板(能力探测 → 节点自检 → 动态加载 → 兜底)",
+  "not_for": "必须兼容无 WebGPU 浏览器或低端机的商业页面;要改引擎内部算法(应 fork 上游重新构建);首屏以文本与 SEO 为主的页面",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/spectral-glass-prism/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens spectral-glass-prism(见本仓 gate 输出;引擎 347813 字节 vendored,契约节点 5/5,宿主先探测后加载)"
+  },
+  "canonical_home": null
+}

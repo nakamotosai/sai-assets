@@ -48,7 +48,7 @@
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/dual-theme-toggle/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens dual-theme-toggle(见本仓 gate 输出;实测对比度与 preview 引用数在 docs/usage.md)"
+    "evidence": "PASS assert_tokens dual-theme-toggle / ink·muted·accent-ink on bg: 浅 15.73·6.24·4.89 / 深 16.20·7.47·5.78;accent #CD5545 Y=0.199(深底 4.58:1 / 浅底 3.80:1);两处浅色映射逐字一致;preview 引用 3 个全部解析"
   },
   "canonical_home": null
 }

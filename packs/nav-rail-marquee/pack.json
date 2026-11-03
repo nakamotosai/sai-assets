@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "id": "nav-rail-marquee",
+  "title": "Nav Rail Marquee · 左竖排跑马灯 + 顶导航 + 右段轨",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "saaaai-homepage · 导航 chrome demo",
+      "license": "MIT",
+      "what": "结构原型:左竖排竖向跑马灯(vertical-rl 无缝循环)、顶部居中小写导航、右侧段落轨(当前条加长发光)、底部进度线的标记与交互"
+    },
+    {
+      "name": "sai-assets PACK-CONTRACT v1",
+      "license": "MIT",
+      "what": "包形状、pack.json 字段与断言最低集的规则来源"
+    }
+  ],
+  "origin": {
+    "project": "saaaai-homepage",
+    "path": "demos/nav-rail-marquee",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/nav-rail.css",
+      "src/nav-rail.js"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "navigation",
+    "marquee",
+    "vertical",
+    "section-rail",
+    "progress-line",
+    "a11y",
+    "keyboard",
+    "monospace",
+    "dark"
+  ],
+  "when": "单页作品集 / 工作室首页 / 长页叙事需要一层压在画面四角、不抢内容的导航 chrome:左竖排跑马灯 + 顶部居中小写导航 + 右侧段轨 + 底部进度线,并要求「当前段」在两处导航与进度线上同步、无障碍硬项齐备",
+  "not_for": "多级菜单 / 下拉与面包屑、后台表单密集面板、需要 0-100% 连续滚动进度的场景、浅色纸质长文阅读页",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/nav-rail-marquee/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens nav-rail-marquee / 引用 2 个(包内 2 · https 0)· src 文件 2 个(14716 字节)· 声明路径 5 个全部存在 · 段落 4 段 · 可点项 7 个覆盖 4 段 · docs 关键词 9/9 · 脱敏规则 10 条扫 8 文件 0 命中;另以最小 DOM 桩在 Node 上跑通:点顶导航 demos → 两处 active + 75%,点段轨 ABOUT → 顶导航同步 + 100%,滚动联动 → 50%,减少动效下 scrollIntoView 降级为 auto,destroy 解绑全部监听"
+  },
+  "canonical_home": null
+}

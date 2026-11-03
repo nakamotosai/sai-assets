@@ -1,8 +1,10 @@
-/**
- * Theme Lab · particle motion previews
- * Source: F:\saaaai-homepage demos/C-gold-flow + shared/fx.js
- * Wall 用 2D canvas 轻量示意，非生产 Three 池（生产见 saaaai-homepage）。
- */
+// particle-motions.js — 4 个 2D canvas 粒子变体(text-push / starfield / galaxy / curl)
+// 来源:本机 demo 存档(particle-text-push · starfield-drift · galaxy-disk · curl-fluid 四份原件内容一致)。
+// 定位:轻量示意(零依赖 2D canvas),生产 Three 粒子池见 packs/fx-engines 的 fx.js。
+// 约定:每个变体只吃 opts.density/spin/dotScale/text/goldRgb/whiteRgb;返回值是「停表」函数。
+/** 变体实现版本:源库曾有四份内容相同的手拷副本,这里用版本常量 + versions.json 的 sha256 防漂移。 */
+export const PARTICLE_MOTIONS_VERSION = '1.0.0';
+
 export function startParticleMotion(canvas, variant, opts = {}) {
   const reduced = !!opts.reduced;
   const ctx = canvas.getContext("2d");
@@ -17,7 +19,7 @@ export function startParticleMotion(canvas, variant, opts = {}) {
   // opts: density, spin, text, dotScale, goldRgb, whiteRgb
   const density = Math.max(0.35, Math.min(2.5, Number(opts.density) || 1));
   const spinOpt = Number(opts.spin);
-  const demoText = String(opts.text || "nakamotosai").slice(0, 32) || "nakamotosai";
+  const demoText = String(opts.text || "ASSETS").slice(0, 32) || "ASSETS";
   const dotScale = Math.max(0.4, Math.min(3, Number(opts.dotScale) || 1));
   const GOLD = Array.isArray(opts.goldRgb) ? opts.goldRgb : [232, 197, 120];
   const WHITE = Array.isArray(opts.whiteRgb) ? opts.whiteRgb : [240, 242, 248];

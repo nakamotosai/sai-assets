@@ -1,0 +1,80 @@
+{
+  "slug": "void-audio",
+  "version": 1,
+  "defaults": {
+    "react": 1.05,
+    "highStar": 1.8,
+    "hitKick": 1.45,
+
+    "star": 1.85,
+    "starDensity": 1,
+    "starSize": 0.95,
+    "starTwinkle": 1.8,
+    "starSpin": 0.115,
+    "starAudio": 2.1,
+    "starPop": 1.8,
+
+    "temp": 5150,
+    "gain": 2.7,
+    "expo": 1.55,
+    "contr": 2,
+    "opac": 0.74,
+    "dopp": 1,
+    "beam": 3.1,
+    "wind": 1.9,
+    "speed": 2.5,
+    "wave": 3.4,
+    "waveFreq": 6.9,
+    "thick": 0.18,
+    "inner": 2,
+    "outer": 7.5,
+    "tilt": 0.12,
+
+    "zoom": 2.15,
+    "fov": 35,
+    "pitch": 0.35,
+    "yaw": 1.1,
+    "dist": 16.2,
+
+    "steps": 39,
+    "quality": 0.8
+  },
+  "schema": [
+    { "key": "react", "label": "总响应", "type": "range", "min": 0, "max": 1.8, "step": 0.05, "tab": "音频映射" },
+    { "key": "highStar", "label": "高频→星空", "type": "range", "min": 0, "max": 2.5, "step": 0.05, "tab": "音频映射" },
+    { "key": "hitKick", "label": "鼓点→星空", "type": "range", "min": 0, "max": 2, "step": 0.05, "tab": "音频映射" },
+
+    { "key": "star", "label": "星亮度", "type": "range", "min": 0, "max": 3.5, "step": 0.05, "tab": "星空" },
+    { "key": "starDensity", "label": "星密度", "type": "range", "min": 0, "max": 1, "step": 0.02, "tab": "星空" },
+    { "key": "starSize", "label": "星点大小", "type": "range", "min": 0.4, "max": 2.5, "step": 0.05, "tab": "星空" },
+    { "key": "starTwinkle", "label": "闪烁幅度", "type": "range", "min": 0, "max": 2.5, "step": 0.05, "tab": "星空" },
+    { "key": "starSpin", "label": "星空自转", "type": "range", "min": 0, "max": 0.15, "step": 0.005, "tab": "星空" },
+    { "key": "starAudio", "label": "星·音频增益", "type": "range", "min": 0, "max": 2.5, "step": 0.05, "tab": "星空" },
+    { "key": "starPop", "label": "鼓点星爆", "type": "range", "min": 0, "max": 2, "step": 0.05, "tab": "星空" },
+
+    { "key": "temp", "label": "色温 K", "type": "range", "min": 2500, "max": 12000, "step": 50, "tab": "吸积盘" },
+    { "key": "gain", "label": "盘增益", "type": "range", "min": 0.3, "max": 4, "step": 0.05, "tab": "吸积盘" },
+    { "key": "expo", "label": "曝光", "type": "range", "min": 0.5, "max": 2.5, "step": 0.05, "tab": "吸积盘" },
+    { "key": "contr", "label": "纹理对比", "type": "range", "min": 0.4, "max": 2.8, "step": 0.05, "tab": "吸积盘" },
+    { "key": "opac", "label": "盘不透明度", "type": "range", "min": 0.2, "max": 1, "step": 0.02, "tab": "吸积盘" },
+    { "key": "dopp", "label": "多普勒", "type": "range", "min": 0, "max": 1, "step": 0.02, "tab": "吸积盘" },
+    { "key": "beam", "label": "聚束", "type": "range", "min": 0.5, "max": 5, "step": 0.1, "tab": "吸积盘" },
+    { "key": "wind", "label": "旋臂 wind", "type": "range", "min": 0, "max": 14, "step": 0.1, "tab": "吸积盘" },
+    { "key": "speed", "label": "角向转速", "type": "range", "min": 0.5, "max": 12, "step": 0.1, "tab": "吸积盘" },
+    { "key": "wave", "label": "波纹基速", "type": "range", "min": 0, "max": 12, "step": 0.1, "tab": "吸积盘" },
+    { "key": "waveFreq", "label": "条纹细度", "type": "range", "min": 1.5, "max": 8, "step": 0.1, "tab": "吸积盘" },
+    { "key": "thick", "label": "盘厚度", "type": "range", "min": 0.03, "max": 0.25, "step": 0.01, "tab": "吸积盘" },
+    { "key": "inner", "label": "内缘 r", "type": "range", "min": 1.5, "max": 3.5, "step": 0.05, "tab": "吸积盘" },
+    { "key": "outer", "label": "外缘 r", "type": "range", "min": 4, "max": 16, "step": 0.1, "tab": "吸积盘" },
+    { "key": "tilt", "label": "盘倾斜 tilt", "type": "range", "min": -1.2, "max": 1.2, "step": 0.01, "tab": "吸积盘" },
+
+    { "key": "zoom", "label": "画面缩放", "type": "range", "min": 0.85, "max": 2.6, "step": 0.05, "tab": "构图" },
+    { "key": "fov", "label": "FOV°", "type": "range", "min": 24, "max": 60, "step": 1, "tab": "构图" },
+    { "key": "pitch", "label": "视角仰角(斜视)", "type": "range", "min": -0.2, "max": 1.2, "step": 0.01, "tab": "构图" },
+    { "key": "yaw", "label": "视角方位", "type": "range", "min": -3.14, "max": 3.14, "step": 0.02, "tab": "构图" },
+    { "key": "dist", "label": "相机距离", "type": "range", "min": 10, "max": 32, "step": 0.2, "tab": "构图" },
+
+    { "key": "steps", "label": "测地线步数", "type": "range", "min": 28, "max": 56, "step": 1, "tab": "性能" },
+    { "key": "quality", "label": "画质 dpr", "type": "range", "min": 0.5, "max": 1.3, "step": 0.05, "tab": "性能" }
+  ]
+}

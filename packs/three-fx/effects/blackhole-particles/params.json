@@ -1,0 +1,108 @@
+{
+  "slug": "blackhole-particles",
+  "version": 1,
+  "defaults": {
+    "style": "经典（侧视薄盘）",
+    "density": 1.0,
+    "holeSize": 0.55,
+    "diskOpacity": 0.85,
+    "doppler": 0.55,
+    "spin": 1.0,
+    "gravity": 1.0,
+    "starGain": 0.55,
+    "exposure": 1.15,
+    "followMouse": true,
+    "autoCycle": false
+  },
+  "schema": [
+    {
+      "key": "style",
+      "label": "盘样式预设",
+      "type": "select",
+      "options": [
+        "炼狱（烈焰）",
+        "经典（侧视薄盘）",
+        "M87* 甜甜圈",
+        "正面余烬",
+        "类星体",
+        "耀变体",
+        "纯透镜（只扭曲）",
+        "禅意（柔和）"
+      ]
+    },
+    {
+      "key": "density",
+      "label": "粒子密度",
+      "type": "range",
+      "min": 0.4,
+      "max": 2.0,
+      "step": 0.05
+    },
+    {
+      "key": "holeSize",
+      "label": "视界大小",
+      "type": "range",
+      "min": 0.2,
+      "max": 1.0,
+      "step": 0.02
+    },
+    {
+      "key": "diskOpacity",
+      "label": "光环浓度",
+      "type": "range",
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.02
+    },
+    {
+      "key": "doppler",
+      "label": "左右冷热",
+      "type": "range",
+      "min": 0.0,
+      "max": 1.0,
+      "step": 0.02
+    },
+    {
+      "key": "spin",
+      "label": "盘转速",
+      "type": "range",
+      "min": 0.2,
+      "max": 2.5,
+      "step": 0.05
+    },
+    {
+      "key": "gravity",
+      "label": "吸入强度",
+      "type": "range",
+      "min": 0.2,
+      "max": 2.5,
+      "step": 0.05
+    },
+    {
+      "key": "starGain",
+      "label": "星空亮度",
+      "type": "range",
+      "min": 0.1,
+      "max": 1.2,
+      "step": 0.05
+    },
+    {
+      "key": "exposure",
+      "label": "曝光",
+      "type": "range",
+      "min": 0.5,
+      "max": 2.0,
+      "step": 0.05
+    },
+    {
+      "key": "followMouse",
+      "label": "视界跟随指针",
+      "type": "checkbox"
+    },
+    {
+      "key": "autoCycle",
+      "label": "自动轮换样式",
+      "type": "checkbox"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+/* stage.css — three-fx 两个效果页共用的舞台样式(只此一份)。
+   两个效果底色都是近黑,共用一个 HUD/提示/返回链的壳,效果本身全在各自的渲染器里。 */
+:root { color-scheme: dark }
+* { margin: 0; padding: 0; box-sizing: border-box }
+html, body {
+  margin: 0; width: 100%; height: 100%; overflow: hidden;
+  background: #000; color: #e8e6dd;
+  font: 400 12px/1.5 ui-monospace, SFMono-Regular, Menlo, "Noto Sans SC", monospace;
+}
+
+/* WebGL 页(blackhole-waves)挂载点 */
+#magic { position: fixed; inset: 0; width: 100%; height: 100% }
+/* Canvas2D 页(blackhole-particles)画布 */
+#stage { position: fixed; inset: 0; width: 100%; height: 100%; display: block; background: #050608 }
+
+.hud {
+  position: fixed; top: 14px; left: 16px; z-index: 5;
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(232, 197, 109, .75); pointer-events: none;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, .85);
+}
+.hud strong { color: #f3d68a; font-weight: 600 }
+
+.wall {
+  position: fixed; top: 12px; right: 16px; z-index: 5;
+  font-size: 11px; letter-spacing: .08em; color: #cfc9bd; text-decoration: none;
+  border-bottom: 1px solid #cfc9bd55; padding-bottom: 2px;
+}
+.wall:hover { border-bottom-color: #cfc9bd }
+
+.hint {
+  position: fixed; bottom: 12px; right: 16px; z-index: 5; max-width: 44ch;
+  font-size: 11px; line-height: 1.6; letter-spacing: .04em; text-align: right;
+  color: #8b877e; background: #0009; padding: 6px 10px; border-radius: 6px;
+}
+.hint code { color: #cfc9bd }

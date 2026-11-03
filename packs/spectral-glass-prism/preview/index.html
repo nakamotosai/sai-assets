@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Spectral Glass Prism · WebGPU 光谱色散</title>
+<!-- 宿主样式:舞台几何 + 文字轨 + 署名条 + 兜底面板 -->
+<link rel="stylesheet" href="../src/spectral-glass.css" />
+</head>
+<body>
+<!-- ⚠ 节点 id 是上游引擎的硬契约(#gpu / #html-bg-root / #html-bg-photo / #html-bg-foreground / #fallback),别改名 -->
+<canvas id="gpu" layoutsubtree>
+  <div id="html-bg-root" class="html-bg-root">
+    <img id="html-bg-photo" class="html-bg-photo" alt="" width="1920" height="1080" crossorigin="anonymous" hidden />
+    <div id="html-bg-foreground" class="html-bg-foreground" title="左侧文字轨(可滚动);右上角是引擎自带的参数面板;中间空区可拖拽玻璃">
+      <h1 class="html-t-hero">Spectral Glass</h1>
+      <p class="html-t-mono">WebGPU · 逐波长色散 · 五形状共享同一折射引擎</p>
+
+      <h2 class="html-t-h3">这是什么</h2>
+      <p class="html-t-lead">
+        用 <strong>SDF raymarching</strong> 在 WebGPU 上渲真玻璃:逐波长 Cauchy 色散 + 进出两次折射 +
+        <strong>CIE 1931</strong> 光谱合成,白光进、连续彩虹出。
+      </p>
+      <p class="html-t-body">
+        不是"把 R/G/B 的 IOR 各挪一点"那种三色带近似 —— 真玻璃是连续谱。默认场景采样
+        <code>N = 16</code>;按住 <strong>Z</strong> 强制降到 <code>N = 3</code>,两条彩虹的差别肉眼可辨。
+      </p>
+
+      <h2 class="html-t-h3">五种形状</h2>
+      <ul class="html-t-list">
+        <li><strong>pill</strong> 悬浮胶囊(液态玻璃那一路)</li>
+        <li><strong>prism</strong> 三棱镜(白光进、彩虹出最直观)</li>
+        <li><strong>cube</strong> 旋转立方</li>
+        <li><strong>plate</strong> 起伏波纹板</li>
+        <li><strong>diamond</strong> 明亮式切工:内部全反射链(TIR)逐次反射直到解析出射,火彩就从这里来</li>
+      </ul>
+
+      <h2 class="html-t-h3">操作</h2>
+      <ul class="html-t-list tight">
+        <li><strong>拖拽</strong>形状 —— 挪位置</li>
+        <li><strong>Z</strong>(按住)—— 切成 N=3,看假彩虹</li>
+        <li><strong>空格</strong> —— 随机重新摆位</li>
+        <li><strong>R</strong> —— 换一张 Picsum 底图(未开 HDR 环境贴图时)</li>
+        <li><strong>T / S / B / F</strong> —— 钻石视角预设</li>
+        <li><strong>右上角面板</strong> —— IOR / Abbe / 采样数 / 形状 / 背景 / 材质 / 环境 / 抗锯齿</li>
+      </ul>
+
+      <h2 class="html-t-h3">性能口径</h2>
+      <p class="html-t-body">
+        两遍:便宜的全屏 bg + history,再叠一层实例化 3D proxy;重折射只发生在轮廓内。
+        背景像素很便宜,逐 λ 循环在 proxy 轮廓里最贵 —— 采样数 <code>N</code> 是唯一的成本旋钮。
+        加 <code>?perf</code> 会在有 timestamp query 的机器上打印 GPU ms。
+      </p>
+
+      <h2 class="html-t-h3">这里跑的是谁</h2>
+      <p class="html-t-body">
+        页面外壳、能力探测、兜底与署名是本仓 <code>src/spectral-glass.js</code> 的;
+        引擎本体是上游构建产物,原样放在 <code>upstream/spectral-glass/engine.js</code>(MIT)。
+        想看源码实现请去上游仓库,别改 vendored 文件 —— 要改就自己 fork 后重新构建。
+      </p>
+      <p class="html-t-credit">上游:Spectral-Glass(Saqoosha,MIT)· HDR 环境贴图:Poly Haven(CC0)· 占位照片:Lorem Picsum</p>
+    </div>
+  </div>
+</canvas>
+
+<div id="sg-credit">
+  <span><b>spectral-glass-prism</b></span>
+  <span>引擎 upstream/spectral-glass/engine.js(MIT,Saqoosha)</span>
+  <span>HDR: Poly Haven CC0 · 照片: Lorem Picsum</span>
+  <span>宿主: src/spectral-glass.js</span>
+</div>
+
+<div id="fallback">
+  <div class="fb-in">
+    <h1>正在探测 WebGPU…</h1>
+    <p>这个演示需要 Chrome / Edge 120+ 或 Safari 18+。</p>
+  </div>
+</div>
+
+<!-- ③ 引导:自动探测 + 起引擎(不满足条件就只出兜底,不加载引擎)。普通脚本 —— 双击打开本地文件也能跑 -->
+<script src="../src/spectral-glass.js" defer></script>
+</body>
+</html>

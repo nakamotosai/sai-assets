@@ -1,0 +1,11 @@
+{
+  "slug": "galaxy",
+  "version": 1,
+  "defaults": { "density": 1.0, "dotScale": 1.0, "spin": 0.14, "gold": "#e8c578" },
+  "schema": [
+    { "key": "density", "label": "星数密度", "type": "range", "min": 0.4, "max": 2.0, "step": 0.05 },
+    { "key": "dotScale", "label": "点大小", "type": "range", "min": 0.5, "max": 2.5, "step": 0.05 },
+    { "key": "spin", "label": "图案转速", "type": "range", "min": 0.02, "max": 0.4, "step": 0.01 },
+    { "key": "gold", "label": "盘色", "type": "swatch", "swatches": ["#e8c578", "#c4a574", "#f0f2f8", "#7dd3fc", "#d3869b"] }
+  ]
+}

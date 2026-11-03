@@ -57,7 +57,7 @@
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/cjk-typography/scripts/assert_tokens.py",
-    "evidence": "PENDING"
+    "evidence": "PASS assert_tokens cjk-typography / 三场景 console · print-1920 · landing 数字与源卡冻结值一致 / 免费清单 3 条逐条带「字体名 | 许可 | 来源」(OFL-1.1 · Apache-2.0 · Unlicense,上游主页标待核)/ preview 23 条字号声明最小 12px;负例 7/7 判失败(许可待核 / 清单行缺来源 / 场景数字漂移 / 11px / body 混 serif / 上游未标待核 / 候选数不足)"
   },
   "canonical_home": null
 }

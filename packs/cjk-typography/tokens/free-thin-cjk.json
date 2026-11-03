@@ -17,7 +17,8 @@
         "checked": "2026-10-06 实查 npm 与 CDN:unicode-range 101 片",
         "upstream_home": "待核(未联网核对上游项目主页)"
       },
-      "pick": "中性稳妥;首屏 150 / 其余 300"
+      "pick": "中性稳妥;首屏 150 / 其余 300",
+      "license_note": "Google/Noto 官方即 OFL-1.1;已见的 npm 分发同许可。"
     },
     {
       "id": "misans",
@@ -33,7 +34,8 @@
         "checked": "2026-10-06 实查 npm 与 CDN:80KB CSS,unicode-range 分片",
         "upstream_home": "待核(未联网核对上游项目主页)"
       },
-      "pick": "许可最宽松时选它"
+      "pick": "许可最宽松时选它",
+      "license_note": "许可 id 取自 npm 包 misans@5.0.0 的声明;小米上游字体许可页未联网核对(不确定是否等同 Apache-2.0),正式对外分发前须核。"
     },
     {
       "id": "harmonyos-sans-sc",
@@ -49,7 +51,8 @@
         "checked": "2026-10-06 实查 npm 与 CDN:82 片,unicode-range 分片",
         "upstream_home": "待核(未联网核对上游项目主页)"
       },
-      "pick": "要几何方正时选它"
+      "pick": "要几何方正时选它",
+      "license_note": "上游许可页未核,须核。"
     }
   ],
   "latin": "\"Inter\", var(--f-sans) —— 拉丁走 Inter,中文自然落到中文栈",

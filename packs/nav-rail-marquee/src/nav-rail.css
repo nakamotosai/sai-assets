@@ -23,7 +23,7 @@
 
   /* 尺寸 */
   --nr-hit: 44px;         /* 每个可点项的最小命中区(无障碍硬项,别改小) */
-  --nr-gutter: 14px;      /* 右侧段轨距边 */
+  --nr-gutter: 24px;      /* 右侧段轨距边:≥24px 才能让开滚动条槽位 */
   --nr-top-offset: 14px;  /* 顶部导航距上边 */
   --nr-rail-gap: 16px;
   --nr-bar-w: 2px;        /* 段轨条形宽 */
@@ -64,7 +64,8 @@
   will-change: transform;
 }
 
-/* 轨道里放两份等长内容,位移 -50% 后与起点像素一致 → 无缝 */
+/* 轨道里放两份逐字等长的内容(每份重复到超过一屏高),位移 -50% 后与起点像素一致 → 无缝;
+   两份之间不要留空白字符(换行 / 缩进会折成一个空格,在竖排里就是一条缝)。 */
 @keyframes nr-mq-scroll {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(0, -50%, 0); }

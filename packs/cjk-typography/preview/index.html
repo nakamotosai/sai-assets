@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CJK Typography · 中文排版四件套(预览)</title>
+<link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <p class="eyebrow">font pack · cjk-typography v1.0.0</p>
+    <h1>中文排版四件套:回退栈 · 字号总表 · 系统栈 · 免费细体</h1>
+    <p class="lede">先定场景与字族,再谈档位。档位(几档、多细、多宽、多高、几层影)在 cjk-thin-type-system。</p>
+  </header>
+
+  <section>
+    <h2>三场景字号对照</h2>
+    <div class="scenes">
+      <div class="scene">
+        <p class="tag">场景 <b>工具台</b> · h1 15–22px / body 14px / meta 11–12px</p>
+        <p class="c-h1">控制台标题 18px</p>
+        <p class="c-body">正文 14px,数字开 tabular-nums:12,480 / 3.7% / 08:15。零 Web 字体优先。</p>
+        <p class="c-meta">meta 12px(中文取上限)· code 11–13px</p>
+      </div>
+      <div class="scene">
+        <p class="tag">场景 <b>营销落地</b> · h1 clamp(2rem–7rem) 负字距 / body 16–17px</p>
+        <p class="m-h1">营销主标</p>
+        <p class="m-body">正文 17px,行高 1.6:中文安全栈兜底,拉丁走 Inter。</p>
+        <p class="m-meta">mono eyebrow · ls .16em</p>
+      </div>
+      <div class="scene wide">
+        <p class="tag">场景 <b>纸媒 / 电视 1920</b> · h1 64–110px / body ≥40px / meta ≥26px</p>
+        <p class="p-h1">纸媒标题:真字重衬线</p>
+        <p class="p-body">正文四十像素起,远看才立得住。</p>
+        <p class="p-meta">UI / 脚注 ≥26px</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>免费细体中文三选:许可明确才进清单</h2>
+    <div class="faces">
+      <div class="face">
+        <p class="name">Noto Sans SC(可变)</p>
+        <p class="lic">OFL-1.1</p>
+        <p class="demo w150">中文要细,首屏压得住的 150</p>
+        <p class="src">npm @fontsource-variable/noto-sans-sc@5.3.0 · 可变 100–900 · 101 片 unicode-range</p>
+      </div>
+      <div class="face">
+        <p class="name">MiSans VF</p>
+        <p class="lic">Apache-2.0</p>
+        <p class="demo w300">许可最宽松的一份,其余一律 300</p>
+        <p class="src">npm misans@5.0.0 · 可变 150–700 · 80KB CSS 分片</p>
+      </div>
+      <div class="face">
+        <p class="name">HarmonyOS Sans SC</p>
+        <p class="lic">Unlicense</p>
+        <p class="demo w300">几何方正,横向更好对齐</p>
+        <p class="src">npm harmonyos-sans-sc-webfont-splitted@1.1.0 · Light 300 · 82 片</p>
+      </div>
+    </div>
+    <p class="tag" style="margin-top:14px">上游项目主页未联网核对 → 标「待核」;CDN 与 npm 路径为 2026-10-06 实查</p>
+  </section>
+
+  <section>
+    <h2>回退栈与地板</h2>
+    <table>
+      <thead>
+        <tr><th scope="col">角色</th><th scope="col">栈</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="k">正文 / UI</td><td><span class="spec">"Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif</span></td></tr>
+        <tr><td class="k">长文阅读</td><td><span class="spec">"Noto Serif SC", "Source Han Serif SC", "Songti SC", serif</span></td></tr>
+        <tr><td class="k">等宽</td><td><span class="spec">"JetBrains Mono", "Maple Mono NF CN", ui-monospace, monospace</span></td></tr>
+        <tr><td class="k">工具台系统栈</td><td><span class="spec">system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif</span></td></tr>
+      </tbody>
+    </table>
+    <ul class="rules" style="margin-top:16px">
+      <li>正文 16px(移动 15px)· 卡片 14px · 角标 12px · 整页可读最小 14px;卡片禁 9 / 10 / 11 / 13px。</li>
+      <li>中文 11–15px 不许挂 300 以下(<span class="mk">300 陷阱</span>:笔画溶解);禁加粗宋体冒充黑体。</li>
+      <li>中文正文禁 <code>letter-spacing</code>、禁两端对齐;长文衬线行高 ≥1.6。</li>
+      <li><code>serif</code> / 宋体 / SimSun 禁入 body 回退栈;有 @font-face 必须挂 SC 安全回落。</li>
+      <li>上 Web 字体必须子集化 + <code>font-display:swap</code>(CDN 直连 1.5–2.4MB → 子集化 20–40KB)。</li>
+      <li>禁推荐需盗版 / 破解的商业字体文件 —— 清单里一条都没有。</li>
+    </ul>
+  </section>
+
+  <footer>字体许可与来源见 tokens/free-thin-cjk.json · 断言:<code>python scripts/assert_tokens.py</code> · MIT</footer>
+</main>
+</body>
+</html>

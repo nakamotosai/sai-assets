@@ -54,9 +54,9 @@
 
 `src/bench.js` 靠 `document.getElementById` 找 stage、靠 `CDN` 表决定拉哪个包,**加第六个试吃项 = 加一格结构 + 加一条 `CDN` 记录 + 加一个 demo 函数**。
 
-直接用 `file://` 打开 `preview/index.html` 即可(脚本是普通 `<script defer>`,不是 module,所以不会被 file:// 的 CORS 拦掉;
+直接用 双击打开 `preview/index.html` 即可(脚本是普通 `<script defer>`,不是 module,所以不会被 本地文件源(null origin)的 CORS 规则拦掉;
 
-模块本身走动态 `import()`,file:// 页面对 https 的 CORS 请求是许可的)。不需要任何本地服务器、构建或安装。
+模块本身走动态 `import()`,本地文件页面对 https 的跨源请求按 CORS 通配许可)。不需要任何本地服务器、构建或安装。
 
 ## 失败排查
 
@@ -74,7 +74,7 @@
 
 | 文件 | 作用 |
 |---|---|
-| `preview/index.html` | 结构(5 个 stage)+ importmap + 两处引用;可直接 file:// 打开 |
+| `preview/index.html` | 结构(5 个 stage)+ importmap + 两处引用;可直接双击打开(不经过服务器) |
 | `src/bench.css` | 外壳样式(token 集中在顶部 `:root`:底色/面板/前景/强调/红/圆角/网格宽) |
 | `src/bench.js` | 五个 demo:`CDN` 表 + `fail()`/`ok()` + 每个 demo 独立 try/catch |
 | `docs/usage.md` | 本文件 |

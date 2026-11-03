@@ -7,7 +7,7 @@
     "article": "\"Noto Serif SC\", \"Source Han Serif SC\", \"Songti SC\", serif",
     "mono": "\"JetBrains Mono\", \"Maple Mono NF CN\", ui-monospace, monospace"
   },
-  "css": "body{font-family:\"Noto Sans SC\",\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",sans-serif;font-display:swap;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}\narticle{font-family:\"Noto Serif SC\",\"Source Han Serif SC\",\"Songti SC\",serif}\np{line-height:1.75;letter-spacing:.02em;font-size:16px}\n@media(min-width:1024px){p{font-size:17px}}",
+  "css": "body{font-family:'Noto Sans SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;font-display:swap;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}\narticle{font-family:'Noto Serif SC','Source Han Serif SC','Songti SC',serif}\np{line-height:1.75;letter-spacing:.02em;font-size:16px}\n@media(min-width:1024px){p{font-size:17px}}",
   "weights": "正文 400–500 · 强调 700 · 禁 11–15px 中文用 300(笔画溶解「300 陷阱」)· 禁加粗宋体冒充黑体",
   "sizes": "正文 16px(移动 15px)· 次级 / 卡片 14px · 角标 12px · 整页可读最小 14px · 卡片禁 9 / 10 / 11 / 13px · 标题 20px 起、层级差 ≥4px",
   "line_height": "中文正文 1.7–1.8 · 长文衬线 ≥1.6",

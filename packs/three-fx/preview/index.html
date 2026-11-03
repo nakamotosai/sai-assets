@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>three-fx · 三维特效两件</title>
+<meta name="description" content="three-fx 索引墙:体波测地线盘(three.js WebGL 光线步进)与粒子黑洞(Canvas2D 纯粒子),two independent effect pages, no iframe." />
+<style>
+  :root{
+    color-scheme: dark;
+    --bg:#050608; --panel:#0c0e12; --line:#1c2027; --ink:#e8e6dd; --dim:#8b877e; --faint:#57575399;
+    --gold:#e8c56d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink); min-height:100vh;
+    font:400 15px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI","Noto Sans SC",sans-serif;
+    padding:64px 28px 80px;
+  }
+  .wrap{max-width:1000px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:32px}
+  .kicker{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.24em;
+    text-transform:uppercase;color:#8b877e;margin-bottom:14px}
+  h1{font-size:clamp(26px,4.4vw,42px);font-weight:600;letter-spacing:-.015em;line-height:1.15}
+  h1 small{display:block;font-size:14px;font-weight:400;color:var(--dim);letter-spacing:0;margin-top:10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:18px}
+  .card{
+    position:relative;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+    padding:22px 22px 20px 26px;display:flex;flex-direction:column;gap:12px;
+    transition:border-color .18s ease,transform .18s ease;
+  }
+  .card:hover{border-color:#3a3f4b;transform:translateY(-2px)}
+  .card::before{content:"";position:absolute;left:0;top:16px;bottom:16px;width:3px;border-radius:0 3px 3px 0;
+    background:linear-gradient(180deg,var(--gold),#8a6a24)}
+  .card h2{font-size:18px;font-weight:600;letter-spacing:-.01em}
+  .card h2 span{display:block;font-size:12.5px;font-weight:400;color:var(--dim);margin-top:4px;letter-spacing:0}
+  .card ul{list-style:none;font-size:13px;line-height:1.75;color:var(--dim)}
+  .card li::before{content:"· ";color:#6d6a63}
+  .meta{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font:500 10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;
+    color:#7b7873;border:1px solid var(--line);border-radius:999px;padding:5px 8px}
+  .card a{margin-top:auto;font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;
+    color:var(--ink);text-decoration:none;border-bottom:1px solid #3a4050;align-self:flex-start;padding-bottom:2px}
+  .card a:hover{border-bottom-color:var(--ink)}
+  footer{margin-top:40px;border-top:1px solid var(--line);padding-top:20px;color:#7b7873;
+    font:500 12px/1.9 ui-monospace,SFMono-Regular,Menlo,monospace}
+  footer code{color:#a8a49c}
+  @media (prefers-reduced-motion: reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">web-fx · three-fx</div>
+    <h1>三维特效两件
+      <small>一个用 three.js 实时步进测地线盘,一个用 Canvas2D 跑纯粒子吸积盘——两种运行模型,各自独立打开</small>
+    </h1>
+  </header>
+
+  <main class="grid">
+    <article class="card">
+      <h2>Blackhole Waves<span>体波测地线盘</span></h2>
+      <ul>
+        <li>体积薄盘(高斯厚度):侧视不再退化成刀片条纹</li>
+        <li>径向外推波 <code>waveSpeed</code>:盘面纹理外推,不是画同心环</li>
+        <li>开普勒差速 Ω ∝ r<sup>-1.5</sup> 拧出螺旋臂 + 多普勒左右冷热差</li>
+        <li>四模式:测地线连续盘 / 转速加强 / 纯粒子 / 混合</li>
+      </ul>
+      <div class="meta">
+        <span class="tag">three.js r170</span>
+        <span class="tag">WebGL2</span>
+        <span class="tag">20 参数</span>
+        <span class="tag">upstream 1.3MB</span>
+      </div>
+      <a href="../effects/blackhole-waves/index.html">打开 effect 页 →</a>
+    </article>
+
+    <article class="card">
+      <h2>Blackhole Particles<span>粒子黑洞</span></h2>
+      <ul>
+        <li>开普勒轨道吸积盘 + 缓慢径向衰减 + 风噪声</li>
+        <li>星尘自由漂移 + 1/r 引力吸入、越界重生</li>
+        <li>视界黑盘 + 光子环(1.5–2.2 视界半径)粒子加密</li>
+        <li>多普勒:轨道速度投影决定左右黑体色偏</li>
+      </ul>
+      <div class="meta">
+        <span class="tag">Canvas2D</span>
+        <span class="tag">零依赖</span>
+        <span class="tag">8 组预设</span>
+        <span class="tag">11 参数</span>
+      </div>
+      <a href="../effects/blackhole-particles/index.html">打开 effect 页 →</a>
+    </article>
+  </main>
+
+  <footer>
+    每张卡链到独立效果页(无 iframe);参数默认值在各效果目录的 <code>params.json</code>,
+    页面左下角有可拖动的调参面板。<br>
+    <code>upstream/three.module.js</code> = three.js r170(MIT,保留 SPDX 头,只此一份)·
+    性能:DPR 上限 1.75(体波)/ 2.0(粒子),rAF 循环(页隐藏时由浏览器自动停帧)。
+  </footer>
+</div>
+</body>
+</html>

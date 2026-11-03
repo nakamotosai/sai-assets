@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "pack": "swiss-style",
+  "note": "源规格机读留存(网格 / 控件 / 版式 / 数据图元 / 字体 / 动效)。人读提炼见 docs/usage.md;本文件不进 pack.json.files.src。",
+  "specs": {
+    "grid-system": {
+      "id": "swiss-grid-system",
+      "name": "可推导模块网格 + 8pt 基线",
+      "sources": [
+        "Josef Müller-Brockmann《Grid Systems in Graphic Design / Raster Systeme》(Niggli)",
+        "Karl Gerstner《Designing Programmes》复合网格",
+        "Van de Graaf canon / Tschichold"
+      ],
+      "terminology": {
+        "Spalte(栏/column)": "垂直文字列;网页说的「12 栏」是这个",
+        "Rasterfeld(Feld/字段)": "栏 × N 行构成的最小放置单元;元素落在字段上",
+        "关键": "MB 书的「8–32」是字段不是栏;「12 栏」是网页惯例,非 MB 规则"
+      },
+      "construction": {
+        "formula": "列深(行) = k·m + (k−1)·g = N → 每字段行数 m = floor((N − (k−1)·g) / k)",
+        "variables": "N=栏深总行数;k=字段数;g=字段间空行数(一般取 1);m=每字段含整行数",
+        "workedExample": "N=57, k=4, g=1 → m=floor((57−3)/4)=13 → 实际列深 4×13+3=55 行",
+        "flexibility": "同一正文区可切多种字段数:53 行→9×5 或 6×8;69 行→12×4 / 10×5 / 6×9 / 5×11 / 4×14",
+        "registerRule": "所有字号行高必须是同一模块 M 的整数倍(正文10+2=12=M;图注6+6=12;标题20+4=24=2M)",
+        "imageRule": "图片上边缘压 cap-height 线、下边缘压 descender 线;尺寸取整数个字段",
+        "columnWidth": "阅读距离 30–35cm,一行 7–10 西文词 / 30–36 汉字;栏越窄→字越小"
+      },
+      "margins": {
+        "VanDeGraaf": "2:3:4:6(内:上:外:下);正文区高=页宽;页宽高各 9 等分",
+        "MullerBrockmann": "1:1.5:2:3",
+        "golden": "3:5:5:8",
+        "medieval": "1:1:2:3"
+      },
+      "compoundGrid": {
+        "note": "两套规则网格叠加 → 不等宽节奏列(Gerstner)",
+        "examples": ["2 栏叠 3 栏 → 2|1|1|2", "3 栏叠 4 栏 → 3|1|2|2|1|3", "4 栏叠 5 栏 → 4|1|3|2|2|3|1|4"]
+      },
+      "tokens": {
+        "canvas": "1920×1080(屏幕基准);印刷用 A 系列 1:√2",
+        "margin": "120px(屏幕);印刷按经典比",
+        "columns": "网页惯例 12 栏;印刷/开本按内容定(可变 8–32 字段)",
+        "gutter": "24px = 1 主基线",
+        "baseline": "24px 主基线(8pt×3);子网格 8px",
+        "spacing": "4/8/12/16/24/32/48/64/96(4pt 底网格)",
+        "singleAxis": "一切左对齐到唯一垂直轴"
+      },
+      "responsive": [
+        { "breakpoint": ">=1280px", "cols": 12, "gutter": "24px", "margin": "120px" },
+        { "breakpoint": "768-1279px", "cols": 12, "gutter": "20px", "margin": "64px" },
+        { "breakpoint": "480-767px", "cols": 6, "gutter": "16px", "margin": "32px" },
+        { "breakpoint": "<480px", "cols": 4, "gutter": "16px", "margin": "16px" }
+      ],
+      "do": [
+        "按内容推导网格(用构造公式),而不是套一个固定 12 栏",
+        "所有元素注册到同一垂直模块;图的上/下边压 cap-height/descender",
+        "间距落 4pt 网格;行高落 24px 主基线倍数",
+        "成品藏网格线,教学时才画出来"
+      ],
+      "dont": [
+        "把「12 栏」当瑞士定式",
+        "只当视觉概念、目测摆放(必须真在 CSS Grid 里)",
+        "把规则线的 border-width 顶掉下方内容的基线",
+        "把网格线留到成品里"
+      ]
+    },
+    "ui": {
+      "id": "swiss-ui",
+      "name": "瑞士 UI 控件集(按钮/输入/表格/导航/标签)",
+      "desc": "直角、平涂、细线分隔、单一结构红。控件只用 ink / bg / accent 三色,层级靠明度差与 1px 线,禁阴影渐变。所有尺寸落 8pt 网格。",
+      "rules": [
+        "控件直角(圆角 ≤4px);禁胶囊、禁大圆角",
+        "层级用明度差 + 1px 线,禁 box-shadow / 渐变 / 玻璃拟态",
+        "红只做焦点态 / 选中态 / 主按钮 hover,不做大面积填充",
+        "焦点必须可见(focus-visible),对比 ≥3:1(无障碍硬闸)",
+        "所有 padding/高度落在 8pt 网格(8/16/24...)",
+        "表格用发丝横线不用竖线;密集列表才画线,稀疏用间距分组"
+      ]
+    },
+    "layouts": {
+      "id": "swiss-layouts",
+      "name": "瑞士版式骨架集(海报 / deck / 跨页 / 报告封面 / 落地 hero)",
+      "templates": [
+        { "name": "海报 Poster (A 系列 1:√2)", "grid": "12 栏 × 8pt 基线;四边距 1:1.5:2:3", "structure": "顶部主规则 + 编号;中上大标题跨 1/9;右下单元几何形跨 9/13;左下信息块" },
+        { "name": "Deck 幻灯片 (16:9)", "grid": "12 栏 × 24px 沟槽;左右 120px", "structure": "页眉四点轴;大标题靠上三分之一;正文 1/7;页脚 4 栏" },
+        { "name": "跨页 Spread (A4 对开)", "grid": "4 字段 × 8 行;内边距最小", "structure": "左页主图跨 2 字段 + 图注贴下伸线;右页正文 measure 30–36 汉字" },
+        { "name": "报告封面 Cover", "grid": "12 栏;大留白", "structure": "左上编号+分类;中部大写标题跨 1/9;右下期次/日期;一条结构红线" },
+        { "name": "落地页 Hero", "grid": "12 栏响应式;移动 4 栏", "structure": "左标题右几何形(不对称);下方规则线 + 四栏价值点;全页 flush-left" }
+      ],
+      "rules": [
+        "每屏至少 35–45% 留白,成块不是均撒",
+        "标题靠上、信息左轴统一",
+        "不对称构图:一侧文字一侧几何",
+        "禁底部大片留白"
+      ]
+    },
+    "dataviz": {
+      "id": "swiss-dataviz",
+      "name": "信息设计(Isotype + Tufte)",
+      "sources": ["Otto Neurath / Isotype(维也纳方法)", "Edward Tufte《The Visual Display of Quantitative Information》"],
+      "isotype": {
+        "principle": "用重复的等大图元表示数量,绝不放大单个图元来表数量;必须有「1 图 = N」图例。",
+        "style": "暖米底 + 平黑剪影 + 单一饱和红作计量单位;无渐变无阴影"
+      },
+      "tufte": {
+        "principles": [
+          "数据墨水比最大化:擦掉一切非数据墨水",
+          "Lie Factor ≈ 1(图形变化比例 = 数据变化比例)",
+          "Small multiples 小倍数图:同一坐标系重复小图便于比较",
+          "Sparkline 迷你趋势线",
+          "细灰网格线,不用粗黑框"
+        ]
+      },
+      "rules": [
+        "图表网格线用浅灰,不喧宾夺主",
+        "红只标一个数据系列或一个高亮点",
+        "禁 3D 饼图 / 渐变填充 / 阴影",
+        "坐标轴标签 flush-left,数字用 tabular",
+        "教学/讲解时网格线可从「藏」切到「显」"
+      ]
+    },
+    "type": {
+      "id": "swiss-grotesque",
+      "name": "字体配方(中性怪诞体 + 中文黑体)",
+      "weights": "拉丁:400 正文 / 700–800 标题(禁 300 小字)。中文:400–500 正文 / 900 大标题。全站 ≤2 家族、≤3 字重。",
+      "sizes": "拉丁大标题 150–200px;中文大标题 64–120px;副题 24–40px;正文 18–32px;微标签 11–22px;编号 13–15px。屏内字号跳跃 ≥1.5×。",
+      "lineHeight": "拉丁正文 1.5;中文正文 1.6–1.8;标题 0.9–1.05。",
+      "letterSpacing": "拉丁大标题 -0.03em;中文标题 0 ~ +0.01em(禁负值);中文小标签 +0.05~+0.1em。",
+      "features": [
+        "笔画粗细均匀、高 x-height 的怪诞体骨架 = 「中性冷静」",
+        "数字一律拉丁等宽(tabular figures),不用中文全角数字",
+        "双语文排:拉丁术语 + 中文术语成对同基线",
+        "标点全角:。「」『』;破折号 ——;书名号《》",
+        "禁:衬线/圆体/书法/手写/斜体;禁 11–15px 中文用 300",
+        "免费等价:Inter(OFL-1.1);中文 Noto Sans SC / 思源黑体(OFL-1.1,须子集化 + font-display:swap)",
+        "系统 Helvetica Neue / PingFang 只进回退链做本地增强,禁 @font-face 随包分发"
+      ]
+    },
+    "motion": {
+      "id": "swiss-motion",
+      "name": "瑞士动效(派生,非官方规范)",
+      "disclaimer": "derived, not canon —— 不存在官方「瑞士风格动效系统」;瑞士风格是静态印刷方法。下列规则是从实践中派生的,不要把规则当作历史史实引用。",
+      "tokens": {
+        "duration": { "fast": "150–200ms", "base": "200–400ms", "slow": "400–600ms" },
+        "easing": { "enter": "cubic-bezier(.2,.8,.2,1) 短促 ease-out", "exit": "ease-in 更短" },
+        "forbidden": ["弹跳 bounce", "旋转 > 10°", "弹性/overshoot 过冲", "长时间 > 800ms 的动画"]
+      },
+      "recipes": [
+        "计数入位:编号从 0 滚到目标值定格",
+        "卡片归格 fly-and-settle:满幅卡缩进网格槽,兄弟卡两侧飞入(FLIP)",
+        "列表错峰揭示:每行延迟 60–100ms",
+        "网格显影→隐藏:教学网格线 fade in/out",
+        "A/B 重排:justify → left 实时 reflow",
+        "冻结锚点换标题:大数字不动,只换下面的词",
+        "注释层叠加:版式冻结,红标注层 opacity 切换",
+        "马赛克瀑布:章节卡从中心 scale 进网格槽"
+      ],
+      "a11y": "必须尊重 prefers-reduced-motion:@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}};动效只动 transform/opacity,不动 layout。"
+    }
+  }
+}

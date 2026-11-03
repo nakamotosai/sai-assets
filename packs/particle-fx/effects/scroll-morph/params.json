@@ -1,0 +1,40 @@
+{
+  "slug": "scroll-morph",
+  "version": 1,
+  "defaults": {
+    "count": 13000,
+    "size": 0.055,
+    "glow": 1.75,
+    "opacity": 0.65,
+    "glowOpacity": 0.2,
+    "fall": 8.9,
+    "burst": 7.7,
+    "stagger": 0.5,
+    "breathe": 0.06,
+    "ambient": 0.35,
+    "ambientSpeed": 0.9,
+    "turbulence": 0.45,
+    "scrollSmooth": 15.5,
+    "textScale": 2.2,
+    "text": "ASSETS"
+  },
+  "schema": [
+    { "key": "count", "label": "粒子数", "type": "range", "min": 2000, "max": 40000, "step": 500, "tab": "规模" },
+    { "key": "size", "label": "点大小", "type": "range", "min": 0.01, "max": 0.55, "step": 0.005, "tab": "规模" },
+    { "key": "glow", "label": "光晕半径", "type": "range", "min": 0, "max": 4, "step": 0.05, "tab": "规模" },
+    { "key": "opacity", "label": "点不透明度", "type": "range", "min": 0.05, "max": 1, "step": 0.01, "tab": "规模" },
+    { "key": "glowOpacity", "label": "光晕不透明度", "type": "range", "min": 0, "max": 0.8, "step": 0.01, "tab": "规模" },
+
+    { "key": "fall", "label": "坠落", "type": "range", "min": 0, "max": 18, "step": 0.1, "tab": "运动" },
+    { "key": "burst", "label": "爆破", "type": "range", "min": 0, "max": 14, "step": 0.1, "tab": "运动" },
+    { "key": "stagger", "label": "错峰", "type": "range", "min": 0, "max": 0.75, "step": 0.01, "tab": "运动" },
+    { "key": "breathe", "label": "呼吸", "type": "range", "min": 0, "max": 0.3, "step": 0.005, "tab": "运动" },
+    { "key": "ambient", "label": "环境漂移", "type": "range", "min": 0, "max": 1.2, "step": 0.02, "tab": "运动" },
+    { "key": "ambientSpeed", "label": "漂移速度", "type": "range", "min": 0.05, "max": 4, "step": 0.05, "tab": "运动" },
+    { "key": "turbulence", "label": "湍流", "type": "range", "min": 0, "max": 1.5, "step": 0.02, "tab": "运动" },
+    { "key": "scrollSmooth", "label": "跟随平滑", "type": "range", "min": 2, "max": 30, "step": 0.5, "tab": "运动" },
+
+    { "key": "text", "label": "字标", "type": "text", "tab": "字" },
+    { "key": "textScale", "label": "字标缩放", "type": "range", "min": 0.5, "max": 3, "step": 0.05, "tab": "字" }
+  ]
+}

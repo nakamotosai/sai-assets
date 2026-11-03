@@ -1,0 +1,11 @@
+{
+  "slug": "text-push",
+  "version": 1,
+  "defaults": { "density": 1.0, "dotScale": 1.0, "text": "ASSETS", "gold": "#e8c578" },
+  "schema": [
+    { "key": "density", "label": "密度", "type": "range", "min": 0.4, "max": 2.0, "step": 0.05 },
+    { "key": "dotScale", "label": "点大小", "type": "range", "min": 0.5, "max": 2.5, "step": 0.05 },
+    { "key": "text", "label": "字标(采样成点阵)", "type": "text" },
+    { "key": "gold", "label": "粒子色", "type": "swatch", "swatches": ["#e8c578", "#c4a574", "#f0f2f8", "#7dd3fc", "#d3869b"] }
+  ]
+}

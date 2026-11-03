@@ -1,0 +1,10 @@
+{
+  "slug": "curl",
+  "version": 1,
+  "defaults": { "density": 1.0, "dotScale": 1.0, "gold": "#e8c578" },
+  "schema": [
+    { "key": "density", "label": "密度", "type": "range", "min": 0.4, "max": 2.0, "step": 0.05 },
+    { "key": "dotScale", "label": "点大小", "type": "range", "min": 0.5, "max": 2.5, "step": 0.05 },
+    { "key": "gold", "label": "云色", "type": "swatch", "swatches": ["#e8c578", "#c4a574", "#f0f2f8", "#7dd3fc", "#d3869b"] }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "id": "fx-engines",
+  "title": "fx-engines · 粒子引擎 + 悬浮调参板(底座)",
+  "kind": "fx",
+  "category": "fx-engines",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "sai demo 存档 · demos/shared-fx-engine",
+      "license": "MIT",
+      "what": "粒子引擎 fx.js 的来源实现:6 个「会动」fx(Beast 涟漪/吸引子/Curl/活字尘/银河盘/喷泉环)+ FX_PARAM_DEFAULTS"
+    },
+    {
+      "name": "sai 组件库 · components/param-panel(v2)",
+      "license": "MIT",
+      "what": "悬浮调参板 js/css/schema 的来源实现;旧库被拷 12 份并各自漂移,本包收敛为唯一权威副本并加版本常量"
+    },
+    {
+      "name": "three.js",
+      "url": "https://threejs.org",
+      "license": "MIT",
+      "what": "仅作为生产接线示例里 Points/BufferGeometry 的用法参照;本包不含 three 源码"
+    }
+  ],
+  "origin": {
+    "project": "saaaai-homepage",
+    "path": "demos/shared-fx-engine",
+    "derived_from": "components/param-panel"
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/fx.js",
+      "src/param-panel.js",
+      "src/param-panel.schema.json",
+      "src/versions.json",
+      "src/engine-demo.js",
+      "src/panel-demo.js",
+      "effects/fx-engine/params.json"
+    ],
+    "css": [
+      "src/param-panel.css",
+      "preview/stage.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "particles",
+    "engine",
+    "param-panel",
+    "schema",
+    "versioned",
+    "canvas",
+    "webgl"
+  ],
+  "when": "需要持续仿真的粒子效果(径向波前/吸引子/Curl 流场/活字尘/银河盘/喷泉环)、或需要一块 schema 驱动的悬浮调参板;项目里已有多份 param-panel 副本在漂移时换成本包唯一副本",
+  "not_for": "只要静态背景或满屏 bloom/ACES 后处理链(用 bg-fx)、页面与文字过场(用 page-transition)、React/框架组件化封装",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/fx-engines/scripts/assert_tokens.py(版本+sha256+params schema+预览引用)+ preview/index.html、preview/param-panel.html 在 Chrome 打开",
+    "evidence": "PASS assert_tokens fx-engines"
+  },
+  "canonical_home": null,
+  "changelog": [
+    "1.0.0 — 首版:fx.js 引擎(6 fx)+ param-panel v2 + 版本常量/sha256 验版本 + 两个活预览"
+  ]
+}

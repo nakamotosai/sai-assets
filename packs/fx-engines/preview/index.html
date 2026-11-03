@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#05060a" />
+<title>fx-engines · 粒子引擎(6 fx)+ 悬浮调参板</title>
+<link rel="stylesheet" href="./stage.css" />
+<link rel="stylesheet" href="../src/param-panel.css" />
+</head>
+<body>
+<canvas id="stage" aria-label="fx engine demo"></canvas>
+
+<div class="hud">
+  <b>fx-engines</b> <span class="ver">v<span id="ver">—</span></span> · <span id="fxname">—</span>
+  <br><span class="ver">makeFx(id, n, label, params) · 每帧 tick() 出位置 · 2D 正交投影仅为验证引擎</span>
+</div>
+
+<div class="picker" id="picker" role="group" aria-label="切换 fx"></div>
+
+<p class="hint">
+  6 个 fx 跑的是同一份 <code>src/fx.js</code>;左下角换 fx,调参板改参数(改了立刻生效)。
+  <br>生产接线是 three.js <code>Points</code> + 后处理链,见 <code>docs/usage.md</code>。
+</p>
+
+<script type="module">
+  import { FX_ENGINE_VERSION } from '../src/fx.js';
+  import { mountEngineDemo } from '../src/engine-demo.js';
+  import { mountParamPanel } from '../src/param-panel.js';
+
+  const canvas = document.getElementById('stage');
+  const params = await (await fetch('../effects/fx-engine/params.json')).json();
+  document.getElementById('ver').textContent = FX_ENGINE_VERSION;
+
+  const demo = mountEngineDemo(canvas, {
+    fx: 4,
+    n: params.defaults.n,
+    params: params.defaults,
+    label: 'ASSETS',
+  });
+
+  const picker = document.getElementById('picker');
+  const nameEl = document.getElementById('fxname');
+  const buttons = demo.meta.map((m) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.fx = String(m.id);
+    b.textContent = `${m.id} · ${m.name}`;
+    b.title = `${m.en} — ${m.blurb}`;
+    b.addEventListener('click', () => {
+      const meta = demo.setFx(m.id);
+      nameEl.textContent = `${meta.name}(${meta.en})`;
+      for (const other of buttons) other.classList.toggle('on', other === b);
+    });
+    picker.appendChild(b);
+    return b;
+  });
+  buttons[4].click();
+
+  mountParamPanel({
+    params,
+    corner: 'tr',
+    title: 'fx-engine · 参数',
+    storageKey: 'themelab.fx-engine.v1.params',
+    onChange(values) {
+      demo.setCount(values.n);
+      demo.setParams(values);
+    },
+  });
+</script>
+</body>
+</html>

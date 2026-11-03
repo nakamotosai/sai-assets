@@ -1,0 +1,36 @@
+{
+  "slug": "fx-engine",
+  "version": 1,
+  "defaults": {
+    "n": 6000,
+    "galTilt": 32,
+    "galYaw": 18,
+    "galRadius": 36,
+    "galSpin": 0.18,
+    "galArms": 2,
+    "galPitch": 22,
+    "galScatter": 0.38,
+    "galBulge": 0.22,
+    "galCoreBright": 1.0,
+    "curlSpeed": 8,
+    "curlScale": 0.06,
+    "curlTurb": 0.35
+  },
+  "schema": [
+    { "key": "n", "label": "粒子数 n", "type": "range", "min": 1000, "max": 20000, "step": 500, "tab": "通用" },
+
+    { "key": "galTilt", "label": "galTilt 俯仰°", "type": "range", "min": 0, "max": 80, "step": 1, "tab": "银河" },
+    { "key": "galYaw", "label": "galYaw 水平°", "type": "range", "min": -180, "max": 180, "step": 1, "tab": "银河" },
+    { "key": "galRadius", "label": "galRadius 盘半径", "type": "range", "min": 20, "max": 60, "step": 1, "tab": "银河" },
+    { "key": "galSpin", "label": "galSpin 图案转速", "type": "range", "min": 0, "max": 0.6, "step": 0.01, "tab": "银河" },
+    { "key": "galArms", "label": "galArms 臂数", "type": "range", "min": 2, "max": 8, "step": 1, "tab": "银河" },
+    { "key": "galPitch", "label": "galPitch 螺距角°", "type": "range", "min": 12, "max": 40, "step": 1, "tab": "银河" },
+    { "key": "galScatter", "label": "galScatter 臂半宽", "type": "range", "min": 0.05, "max": 0.8, "step": 0.01, "tab": "银河" },
+    { "key": "galBulge", "label": "galBulge 核球占比", "type": "range", "min": 0.05, "max": 0.45, "step": 0.01, "tab": "银河" },
+    { "key": "galCoreBright", "label": "galCoreBright 核亮度", "type": "range", "min": 0.2, "max": 3, "step": 0.05, "tab": "银河" },
+
+    { "key": "curlSpeed", "label": "curlSpeed 流速", "type": "range", "min": 0.5, "max": 20, "step": 0.5, "tab": "Curl" },
+    { "key": "curlScale", "label": "curlScale 噪声尺度", "type": "range", "min": 0.01, "max": 0.2, "step": 0.005, "tab": "Curl" },
+    { "key": "curlTurb", "label": "curlTurb 打散", "type": "range", "min": 0, "max": 1, "step": 0.02, "tab": "Curl" }
+  ]
+}

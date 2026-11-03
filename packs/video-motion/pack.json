@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "id": "video-motion",
+  "title": "Video Motion · mv-studio(外部包 · 只索引)",
+  "kind": "meta",
+  "category": "video-motion",
+  "version": "1.0.0",
+  "license": "本仓只有索引条目、不含内容;内容许可随本家(外部工程为私有 / UNLICENSED,渲染框架另有其上游条款)",
+  "attribution": [
+    {
+      "name": "mv-studio(外部视频工程)",
+      "license": "UNLICENSED · 私有工程(2026-11-03 起有私有远端 nakamotosai/mv-studio;内容不公开)",
+      "what": "被索引的内容本体:15 个成品 archetype + 1 个 Placeholder 兜底 = 16 个注册项、riso 风格包、beat / motion 库"
+    },
+    {
+      "name": "Remotion",
+      "url": "https://www.remotion.dev/docs/the-fundamentals",
+      "license": "上游自有许可(部分实体需公司授权,条款见上游)",
+      "what": "该工程的渲染框架(4.0.539):React + Remotion CLI,与网页运行时不同,故只索引不承载"
+    }
+  ],
+  "origin": {
+    "project": "mv-studio",
+    "path": "mv-studio/",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [],
+    "css": [],
+    "src": [],
+    "upstream": [],
+    "usage": null,
+    "assert": null,
+    "preview": null
+  },
+  "tags": [
+    "video-motion",
+    "remotion",
+    "index-only",
+    "external",
+    "music-video",
+    "archetypes",
+    "riso"
+  ],
+  "when": "要把一首歌排成一支「印刷质感」的 MV / 歌词影像时:该工程的 16 个 archetype 覆盖开场标题板、最响的标题行、单张照片推镜、剪贴簿拼贴、动态歌词排版、单据清单、印章、表盘、纸片倾泻、静态诗行(含竖排)、注解图、对白气泡、真实音频频谱、圆形遮罩过场、结尾署名板与兜底占位;riso 风格包给整套四色孔版印刷外观(四色专色 + 暖色纸 + 半调网点 + 故意套印错位 + 点阵字);beat / motion 库把节拍网格与摄影机关键帧接到镜头上。要网页动效或 CSS 片段时不要来这里。",
+  "not_for": "当网页动效用(走 web-fx 类包)、当 CSS / JS 片段抄进网页(渲染模型不同:React + Remotion CLI,帧驱动而非 DOM)、或期望在本仓直接读到源码 —— 本仓只有索引条目,内容在外部工程里",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-03",
+    "how": "本仓只做索引、未复制任何内容:清点外部工程结构(16 个 archetype 注册项 + riso 风格包 + beat / motion 库)后落一行索引;可达性检查记在 evidence",
+    "evidence": "本机私有、无远端、仅索引:外部工程只存在于本机(mv-studio,单 commit、零备份、无 git 远端),故 canonical_home = null;本仓 packs/video-motion 内 files 全空、零内容复制;补齐双远端后回填 canonical_home 并重跑 schema 校验"
+  },
+  "canonical_home": null,
+  "external": true,
+  "changelog": [
+    "1.0.0 · 作为外部包登记索引:内容不在本仓,canonical_home 暂为 null(外部工程无远端),补远端后回填"
+  ]
+}

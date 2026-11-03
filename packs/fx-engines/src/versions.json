@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "note": [
+    "本包交付文件的版本 + sha256 + 来源 + 许可。消费者拷贝任何一件时必须:保留文件头版本常量,并在项目侧记下同版本号与 sha256。",
+    "自检:python scripts/assert_tokens.py —— 重算 sha256 与这里比对,不符即 FAIL(手改过 / 拿了旧版都跑不过)。",
+    "抬版本规则:行为或接口改动 → minor;只修 bug → patch;删 fx 或改 FX_PARAM_DEFAULTS 默认值 → major。"
+  ],
+  "files": [
+    {
+      "file": "src/fx.js",
+      "version": "1.0.0",
+      "sha256": "6a3054dbc01497d10adaf6f24070278553ab31ac4b9db9fcffc2817439582215",
+      "source": "本机 demo 存档 demos/shared-fx-engine/fx.js(C-layouts / C-gold 两套首页共用)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/param-panel.js",
+      "version": "2.0.0",
+      "sha256": "aa1eac14fbd9f31324513b68096ea0ba77c989b7e2618084f42f3cc536fb6e68",
+      "source": "本机组件库 components/param-panel/param-panel.js(v2,旧库被拷 12 份并漂移,本仓收敛为唯一副本)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/param-panel.css",
+      "version": "2.0.0",
+      "sha256": "d42d4c3ffef44d469ef5ddb3abe4f85c0499a987758b5fc4fa2c88a1bf03a020",
+      "source": "本机组件库 components/param-panel/param-panel.css(v2)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/param-panel.schema.json",
+      "version": "1.0.0",
+      "sha256": "77a35c349e19abd0ed0c9567df289f0391512066138c50efb14840dd8e16d511",
+      "source": "本机组件库 components/param-panel/params.schema.json(params.json 的形状约束)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/engine-demo.js",
+      "version": "1.0.0",
+      "sha256": "85ccc5cb3e303ec813b27a12b08bae834398fbaafb32d10e25ee09b0d1cb23cf",
+      "source": "本包自产:引擎的 2D 正交参考消费者(只为验证引擎本身)",
+      "license": "MIT"
+    },
+    {
+      "file": "src/panel-demo.js",
+      "version": "1.0.0",
+      "sha256": "b76c096a368a8445bbd8ab8dc1d2a2b62cc0cb53f032d85a849b4d7b427c6c07",
+      "source": "本包自产:调参板全字段示例 + apply() 样张",
+      "license": "MIT"
+    }
+  ]
+}
