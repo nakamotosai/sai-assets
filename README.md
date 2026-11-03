@@ -33,20 +33,25 @@ curl -O https://cdn.jsdelivr.net/gh/nakamotosai/sai-assets@pack/paper-editorial@
 
 ## 类目
 
-| 类目 | 内容 | 数量 |
-|---|---|---|
-| `themes` | 主题:配色 + 字体 + 配对规则 + 变体 | 13 实体 + 1 索引(gruvbox-theme) |
-| `fonts` | 中文排版配方(细体语言 / 字号档 / 免费字体清单) | 2 |
-| `web-fx` | 背景动效(10 个 WebGL2 效果共享引擎)、过场、粒子、三维 | 4 |
-| `web-ui` | 调参底座、深浅切换、deck 母版、WebGPU 玻璃、导航、瑞士风格包 | 7 |
-| `references` | 40 条外部观测(网页/纸媒/三维/新闻/瑞士),供选型 | 1 组 |
-| `video-motion`(索引) | Remotion 视频动效(mv-studio,只索引不承载) | 1 |
+数量以 `catalog.json` 为准(不在文档里写死,防漂移):
+
+| 类目 | 内容 |
+|---|---|
+| `themes` | 主题:配色 + 字体 + 配对规则 + 变体(含外部索引项) |
+| `fonts` | 中文排版配方(细体语言 / 字号档 / 免费字体清单) |
+| `web-fx` | 背景动效(共享引擎)、过场、粒子、三维 |
+| `web-ui` | 调参底座、深浅切换、deck 母版、WebGPU 玻璃、导航、瑞士风格包 |
+| `fx-engines` | 动效引擎 / 调参板底座(被上面几类引用) |
+| `references` | 外部站点观测(选型依据,只写结论不带原图原码) |
+| `video-motion` | Remotion 视频动效,仅索引;内容在其本家 |
 
 ## 进度
 
-- **M0 建档拍板** ✅ 生产根 + 门规 + ADR-0001 + PACK 契约 v1 + 白名单
-- **M1 单包打通** ⏳ 生成器 / 清洗闸 / catalog / 墙 / 公开仓 / skill 取用协议 / 一次真消费
-- M2 存量迁移 ⏸ · M3 自动化 ⏸ · M4 私有侧收口 ⏸
+- **M0 建档拍板** ✅ 生产根 + 门规 + ADR-0001 + PACK 契约 v1 + 公开收录判据 `docs/SCOPE.md`
+- **M1 单包打通** ✅ 生成器 + 清洗闸 + catalog + 墙 + 公开仓 + Pages + skill 取用协议 + 一次真消费(`design-lock.assets[]` 已记版本)
+- **M2 存量迁移** ⏳ web-fx / web-ui / fonts / video-motion 索引
+- M3 自动化 ⏳ CI 已绿(gate + pages);tag/release 已可用;harvest → PR 回收链已备
+- M4 私有侧收口 ⏸ 旧库降级已完成;旧私仓归档与最终 closeout 待做
 
 ## 链接
 
