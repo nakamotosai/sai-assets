@@ -48,7 +48,7 @@
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/paper-editorial/scripts/assert_tokens.py",
-    "evidence": "(待回填:assert 尚未运行,build_pack 会在通过后写入实测输出)"
+    "evidence": "PASS assert_tokens paper-editorial | variants=1 keys=19 hex=18 rgba=0 effects=1 contrast=ink/bg=16.13 onAccent/accent=5.71 | not_in_palette=[]"
   },
   "canonical_home": null
 }

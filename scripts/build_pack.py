@@ -875,7 +875,6 @@ NOT_IN_PALETTE = @@NOT_IN_PALETTE@@
 VAR_MAP = @@VAR_MAP@@          # 语义键 → CSS 变量后缀
 CONTRAST_PAIRS = @@CONTRAST_PAIRS@@
 PRODUCT_FILES = @@PRODUCT_FILES@@
-PREVIEW = @@PREVIEW@@
 USAGE_CUES = ("配对", "反模式", "--ink", "--accent", "--surface")
 SKILL_CUES = (
     "## When to use", "## When not to use", "## Default", "## Sub-themes",
@@ -1009,9 +1008,10 @@ def main() -> int:
     for rel in PRODUCT_FILES:
         if not (ROOT / rel).is_file():
             fail(f"缺产物 {rel}")
-    if PREVIEW:
-        if not (ROOT / PREVIEW).is_file():
-            fail(f"缺产物 {PREVIEW}")
+    declared_preview = (load("pack.json").get("files") or {}).get("preview")
+    if declared_preview:
+        if not (ROOT / declared_preview).is_file():
+            fail(f"缺产物 {declared_preview}")
     elif (ROOT / "preview" / "index.html").is_file():
         fail("pack.json 未声明预览,但 preview/index.html 存在")
 
@@ -1083,7 +1083,7 @@ if __name__ == "__main__":
 '''
 
 
-def assert_source(theme: dict, variant: dict, preview_rel) -> str:
+def assert_source(theme: dict, variant: dict) -> str:
     colors = variant["colors"]
     anchors = []
     for key in ("bg", "ink", "accent", "onAccent"):
@@ -1117,7 +1117,6 @@ def assert_source(theme: dict, variant: dict, preview_rel) -> str:
         "VAR_MAP": json.dumps(var_map, ensure_ascii=False, indent=4),
         "CONTRAST_PAIRS": json.dumps([["ink", "bg"], ["onAccent", "accent"]], ensure_ascii=False),
         "PRODUCT_FILES": json.dumps(product_files, ensure_ascii=False, indent=4),
-        "PREVIEW": repr(preview_rel),
     })
     return header + ASSERT_BODY
 
@@ -1210,7 +1209,7 @@ def build_pack(pack_id: str, src: Path, alias: dict, cfg: dict, do_sanitize: boo
     write_text(pack_dir / "docs" / "usage.md", usage_md(theme, variant))
     write_text(pack_dir / "SKILL.md", skill_md(theme, variant, preview_rel))
     write_text(pack_dir / "README.md", readme_md(theme, variant, title, preview_rel))
-    write_text(pack_dir / "scripts" / "assert_tokens.py", assert_source(theme, variant, preview_rel))
+    write_text(pack_dir / "scripts" / "assert_tokens.py", assert_source(theme, variant))
 
     # pack.json 先落盘(verified.evidence 是"待回填"字样,assert 通过后换成实测输出);
     # 清洗对已落盘文件就地替换,之后只回填 evidence,避免把清洗结果覆盖回去。

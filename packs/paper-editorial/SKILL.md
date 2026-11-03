@@ -57,7 +57,7 @@ description: "Paper Editorial(light 纸感编辑：米白画布、墨色正文�
 | `css/all.css` | 全部变体 + 基础 chrome,含 `:root` |
 | `css/themes.css` | 共存版:同 all.css 但**无 `:root`**,只 `[data-theme]` / `.theme-<id>` 作用域 |
 | `docs/usage.md` | 配对规则 / 字体配方 / 反模式(中文) |
-| `preview/index.html` | `null`(本包无活预览) |
+| `preview/index.html` | 活预览(独立单文件) |
 
 ## Agent apply steps
 
@@ -118,5 +118,5 @@ description: "Paper Editorial(light 纸感编辑：米白画布、墨色正文�
 
 ## Notes
 
-- 预览:本包**无活预览**(`pack.json.files.preview = null`):源库无对应 demo 目录,按 `css/default.css` 与 `docs/usage.md` 落地即可
+- 预览:`preview/index.html`,单文件可直接打开
 - 来源与语义层修正:`docs/usage.md` 末节。

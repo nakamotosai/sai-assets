@@ -93,7 +93,6 @@ PRODUCT_FILES = [
     "README.md",
     "pack.json"
 ]
-PREVIEW = 'preview/index.html'
 USAGE_CUES = ("配对", "反模式", "--ink", "--accent", "--surface")
 SKILL_CUES = (
     "## When to use", "## When not to use", "## Default", "## Sub-themes",
