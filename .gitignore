@@ -8,3 +8,7 @@ __pycache__/
 *.pyc
 .DS_Store
 
+
+
+# 站点构建产物(CI 生成,不入库)
+dist/

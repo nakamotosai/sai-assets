@@ -1,0 +1,44 @@
+name: site
+
+# 展示站自动导入管线:main 上有任何改动(packs/ 新增、包修改、docs)→ 重建站点 → 部署 Cloudflare Pages。
+# 唯一入口是 packs/*/pack.json:新增一个包目录即自动上站,没有第二个注册表。
+# 自检在 scripts/build_site.py 的 verify():详情页/预览/zip/子 demo/sitemap 任一对不上即非零退出,不会部署坏产物。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-main
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 公开内容闸 + 包内断言
+        run: python scripts/gate.py
+
+      - name: 重建 catalog(并校验提交里那份不过期)
+        run: |
+          python scripts/build_catalog.py
+          git diff --exit-code -- catalog.json \
+            || (echo "::error::catalog.json 与 packs/ 不一致,请本地重建后提交" && exit 1)
+
+      - name: 构建站点(含 verify:29 包详情页 / 预览 / zip / 子 demo / sitemap)
+        run: python scripts/build_site.py --out dist
+
+      - name: 部署 Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@3 pages deploy dist --project-name=sai-assets --branch=main --commit-dirty=true
