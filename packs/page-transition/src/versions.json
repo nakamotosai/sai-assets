@@ -45,7 +45,7 @@
     {
       "file": "src/text-three.js",
       "version": "1.0.0",
-      "sha256": "91064cbbc4ccbc31792ef57b68288bc62045ffe35b9b6d09ecc35d9499956bac",
+      "sha256": "daa36a41e9d306418922cae3ec039b2eef7230ae05cb35c18e62b1c636f19625",
       "source": "本机 demo 存档 demos/section-text-fx-three/main.js(文案中性化 + density/glow 真正接进采样与材质 + 减少动态)",
       "license": "MIT"
     },

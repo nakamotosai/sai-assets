@@ -1,4 +1,4 @@
-import * as THREE from './three.module.js';
+import * as THREE from '../upstream/three.module.js';
 
     /**
      * Three.js 切屏文字选稿
