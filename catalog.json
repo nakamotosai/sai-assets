@@ -23,6 +23,12 @@
      "path": "packs/fm-void/"
     },
     {
+     "id": "gruvbox-dark",
+     "version": "2.0.0",
+     "one_liner": "工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字…",
+     "path": "packs/gruvbox-dark/"
+    },
+    {
      "id": "minimalist-essential",
      "version": "1.0.1",
      "one_liner": "删到不能再删：中性底 + 单强调色 + 8pt 网格…",
@@ -87,13 +93,6 @@
      "version": "1.0.0",
      "one_liner": "暖黑底 #16130e 配暖色顺序带：深色底上把 Co…",
      "path": "packs/tokyo-crime-dark/"
-    },
-    {
-     "id": "gruvbox-dark",
-     "version": "1.0.0",
-     "one_liner": "工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字…",
-     "path": "packs/gruvbox-dark/",
-     "home": "https://github.com/nakamotosai/gruvbox-theme"
     }
    ]
   },

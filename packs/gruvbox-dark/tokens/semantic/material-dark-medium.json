@@ -1,0 +1,39 @@
+{
+  "id": "material-dark-medium",
+  "name": "Gruvbox Material Dark Medium",
+  "family": "material",
+  "mode": "dark",
+  "contrast": "medium",
+  "source": "sainnhe/gruvbox-material palette=material",
+  "colors": {
+    "bg": "#282828",
+    "bgDeep": "#1b1b1b",
+    "surface": "#32302f",
+    "surface2": "#45403d",
+    "border": "#5a524c",
+    "ink": "#d4be98",
+    "inkMuted": "#a89984",
+    "inkDim": "#928374",
+    "accent": "#e78a4e",
+    "accent2": "#d8a657",
+    "onAccent": "#1b1b1b",
+    "red": "#ea6962",
+    "green": "#a9b665",
+    "aqua": "#89b482",
+    "blue": "#7daea3",
+    "purple": "#d3869b",
+    "link": "#89b482",
+    "codeBg": "#1b1b1b",
+    "shadow": "0 8px 24px rgba(0,0,0,.45)"
+  },
+  "fonts": {
+    "display": "system-ui, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "body": "system-ui, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "mono": "\"JetBrains Mono\", \"Cascadia Code\", Consolas, monospace"
+  },
+  "radius": {
+    "sm": "6px",
+    "md": "10px",
+    "lg": "14px"
+  }
+}

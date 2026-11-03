@@ -1,6 +1,6 @@
 # PACK-CONTRACT v1 · 资产包契约
 
-> 一个包 = 一个**可克隆、可抄走、可被 agent 直接读懂**的自洽单元。参考实现:`nakamotosai/gruvbox-theme`(54KB,单包成品的既有范例,本契约是它的泛化)。
+> 一个包 = 一个**可克隆、可抄走、可被 agent 直接读懂**的自洽单元。参考实现:`packs/gruvbox-dark/`(2026-11-04 从 `gruvbox-theme` 整体并入,54KB 单包成品;本契约是它的泛化)。
 
 ## 1 目录形状
 

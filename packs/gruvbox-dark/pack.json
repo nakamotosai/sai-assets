@@ -1,29 +1,81 @@
 {
   "schema": 1,
   "id": "gruvbox-dark",
-  "title": "Gruvbox(外部包 · 只索引)",
+  "title": "Gruvbox · 暖灰底 + 米黄字(经典 / Material / Baby 十变体)",
   "kind": "theme",
   "category": "themes",
-  "version": "1.0.0",
-  "license": "MIT(本仓仅索引,内容许可见其本家)",
+  "version": "2.0.0",
+  "license": "MIT",
   "attribution": [
-    { "name": "morhetz/gruvbox", "url": "https://github.com/morhetz/gruvbox", "license": "MIT/X11", "what": "经典原色板" },
-    { "name": "sainnhe/gruvbox-material", "url": "https://github.com/sainnhe/gruvbox-material", "license": "MIT", "what": "material 强调色" },
-    { "name": "luisiacc/gruvbox-baby", "url": "https://github.com/luisiacc/gruvbox-baby", "license": "MIT", "what": "baby 参考" }
+    {
+      "name": "morhetz/gruvbox",
+      "url": "https://github.com/morhetz/gruvbox",
+      "license": "MIT/X11",
+      "what": "经典原色板"
+    },
+    {
+      "name": "sainnhe/gruvbox-material",
+      "url": "https://github.com/sainnhe/gruvbox-material",
+      "license": "MIT",
+      "what": "material 强调色"
+    },
+    {
+      "name": "luisiacc/gruvbox-baby",
+      "url": "https://github.com/luisiacc/gruvbox-baby",
+      "license": "MIT",
+      "what": "baby 参考"
+    }
   ],
-  "origin": { "project": "gruvbox-theme", "path": "README.md", "derived_from": null },
+  "origin": {
+    "project": "sai-assets",
+    "path": "packs/gruvbox-dark/",
+    "derived_from": "github.com/nakamotosai/gruvbox-theme"
+  },
   "entry": "SKILL.md",
-  "files": { "tokens": [], "css": [], "src": [], "upstream": [], "usage": null, "assert": null, "preview": null },
-  "tags": ["gruvbox", "retro", "warm-dark", "terminal", "multi-variant"],
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/baby-dark-medium.json",
+      "tokens/semantic/classic-dark-hard.json",
+      "tokens/semantic/classic-dark-medium.json",
+      "tokens/semantic/classic-dark-soft.json",
+      "tokens/semantic/classic-light-hard.json",
+      "tokens/semantic/classic-light-medium.json",
+      "tokens/semantic/classic-light-soft.json",
+      "tokens/semantic/material-dark-hard.json",
+      "tokens/semantic/material-dark-medium.json",
+      "tokens/semantic/material-dark-soft.json"
+    ],
+    "css": [
+      "css/absolute.css",
+      "css/all.css",
+      "css/apply.css",
+      "css/default.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "gruvbox",
+    "retro",
+    "warm-dark",
+    "terminal",
+    "multi-variant",
+    "dashboard"
+  ],
   "when": "工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字 + 橙强调,或需要 hard/medium/soft 与 material/baby 变体",
   "not_for": "纸媒社论风、明亮内容站(改用 ouuut-editorial)",
   "default_variant": "classic-dark-medium",
   "verified": {
-    "date": "2026-11-03",
-    "how": "本仓只做索引,未复制内容;可达性检查:git ls-remote https://github.com/nakamotosai/gruvbox-theme",
-    "evidence": "索引项;内容断言在外部仓自跑(python scripts/assert_tokens.py)"
+    "date": "2026-11-04",
+    "how": "python packs/gruvbox-dark/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens · themes=10 absolute=36 default=classic-dark-medium"
   },
-  "canonical_home": "https://github.com/nakamotosai/gruvbox-theme",
-  "external": true,
-  "changelog": ["1.0.0 · 作为外部包登记索引:内容不在本仓,取用请去 canonical_home(不复制 = 不留第二份真相源)"]
+  "changelog": [
+    "2.0.0 · 内容整体入库(原 gruvbox-theme 外部仓退役):css/tokens/preview/docs/SKILL/assert 全套进本仓,外部索引项取消",
+    "1.0.0 · 作为外部包登记索引:内容不在本仓,取用请去 canonical_home"
+  ]
 }

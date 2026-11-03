@@ -1,0 +1,315 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1164" height="792" viewBox="0 0 1164 792">
+<rect width="1164" height="792" fill="#1d2021"/>
+<text x="16" y="28" fill="#ebdbb2" font-family="ui-monospace,Consolas,monospace" font-size="16" font-weight="700">gruvbox-theme · all sub-themes</text>
+<text x="16" y="46" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="11">classic · light · material · baby · ★ default = classic-dark-medium</text>
+<rect x="16" y="68" width="560" height="132" rx="10" fill="#1d2021" stroke="#665c54" stroke-width="1.5"/>
+<rect x="26" y="78" width="36" height="36" rx="6" fill="#141617" stroke="#665c54"/>
+<rect x="68" y="78" width="36" height="36" rx="6" fill="#3c3836" stroke="#665c54"/>
+<text x="116" y="94" fill="#ebdbb2" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">classic-dark-hard</text>
+<text x="116" y="110" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="10">classic · dark · hard</text>
+<rect x="26" y="124" width="44" height="26" rx="5" fill="#1d2021" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="48" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="74" y="124" width="44" height="26" rx="5" fill="#141617" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="96" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="122" y="124" width="44" height="26" rx="5" fill="#3c3836" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="144" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="170" y="124" width="44" height="26" rx="5" fill="#ebdbb2" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="192" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="218" y="124" width="44" height="26" rx="5" fill="#fe8019" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="240" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="266" y="124" width="44" height="26" rx="5" fill="#fabd2f" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="288" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="314" y="124" width="44" height="26" rx="5" fill="#8ec07c" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="336" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="362" y="124" width="44" height="26" rx="5" fill="#b8bb26" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="384" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="410" y="124" width="44" height="26" rx="5" fill="#fb4934" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="432" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="458" y="124" width="44" height="26" rx="5" fill="#83a598" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="480" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="506" y="124" width="44" height="26" rx="5" fill="#d3869b" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="528" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="26" y="186" fill="#ebdbb2" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="136" y="174" width="72" height="16" rx="4" fill="#fe8019"/>
+<text x="172" y="186" fill="#1d2021" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="226" y="186" fill="#8ec07c" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+<rect x="588" y="68" width="560" height="132" rx="10" fill="#282828" stroke="#665c54" stroke-width="1.5"/>
+<rect x="598" y="78" width="36" height="36" rx="6" fill="#1d2021" stroke="#665c54"/>
+<rect x="640" y="78" width="36" height="36" rx="6" fill="#3c3836" stroke="#665c54"/>
+<text x="688" y="94" fill="#ebdbb2" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">classic-dark-medium ★</text>
+<text x="688" y="110" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="10">classic · dark · medium</text>
+<rect x="598" y="124" width="44" height="26" rx="5" fill="#282828" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="620" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="646" y="124" width="44" height="26" rx="5" fill="#1d2021" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="668" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="694" y="124" width="44" height="26" rx="5" fill="#3c3836" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="716" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="742" y="124" width="44" height="26" rx="5" fill="#ebdbb2" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="764" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="790" y="124" width="44" height="26" rx="5" fill="#fe8019" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="812" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="838" y="124" width="44" height="26" rx="5" fill="#fabd2f" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="860" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="886" y="124" width="44" height="26" rx="5" fill="#8ec07c" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="908" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="934" y="124" width="44" height="26" rx="5" fill="#b8bb26" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="956" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="982" y="124" width="44" height="26" rx="5" fill="#fb4934" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="1004" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="1030" y="124" width="44" height="26" rx="5" fill="#83a598" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="1052" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="1078" y="124" width="44" height="26" rx="5" fill="#d3869b" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="1100" y="164" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="598" y="186" fill="#ebdbb2" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="708" y="174" width="72" height="16" rx="4" fill="#fe8019"/>
+<text x="744" y="186" fill="#1d2021" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="798" y="186" fill="#8ec07c" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+<rect x="16" y="212" width="560" height="132" rx="10" fill="#32302f" stroke="#665c54" stroke-width="1.5"/>
+<rect x="26" y="222" width="36" height="36" rx="6" fill="#282828" stroke="#665c54"/>
+<rect x="68" y="222" width="36" height="36" rx="6" fill="#3c3836" stroke="#665c54"/>
+<text x="116" y="238" fill="#ebdbb2" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">classic-dark-soft</text>
+<text x="116" y="254" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="10">classic · dark · soft</text>
+<rect x="26" y="268" width="44" height="26" rx="5" fill="#32302f" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="48" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="74" y="268" width="44" height="26" rx="5" fill="#282828" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="96" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="122" y="268" width="44" height="26" rx="5" fill="#3c3836" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="144" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="170" y="268" width="44" height="26" rx="5" fill="#ebdbb2" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="192" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="218" y="268" width="44" height="26" rx="5" fill="#fe8019" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="240" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="266" y="268" width="44" height="26" rx="5" fill="#fabd2f" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="288" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="314" y="268" width="44" height="26" rx="5" fill="#8ec07c" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="336" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="362" y="268" width="44" height="26" rx="5" fill="#b8bb26" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="384" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="410" y="268" width="44" height="26" rx="5" fill="#fb4934" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="432" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="458" y="268" width="44" height="26" rx="5" fill="#83a598" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="480" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="506" y="268" width="44" height="26" rx="5" fill="#d3869b" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="528" y="308" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="26" y="330" fill="#ebdbb2" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="136" y="318" width="72" height="16" rx="4" fill="#fe8019"/>
+<text x="172" y="330" fill="#1d2021" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="226" y="330" fill="#8ec07c" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+<rect x="588" y="212" width="560" height="132" rx="10" fill="#f9f5d7" stroke="#bdae93" stroke-width="1.5"/>
+<rect x="598" y="222" width="36" height="36" rx="6" fill="#fbf1c7" stroke="#bdae93"/>
+<rect x="640" y="222" width="36" height="36" rx="6" fill="#ebdbb2" stroke="#bdae93"/>
+<text x="688" y="238" fill="#3c3836" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">classic-light-hard</text>
+<text x="688" y="254" fill="#665c54" font-family="ui-monospace,Consolas,monospace" font-size="10">classic · light · hard</text>
+<rect x="598" y="268" width="44" height="26" rx="5" fill="#f9f5d7" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="620" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="646" y="268" width="44" height="26" rx="5" fill="#fbf1c7" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="668" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="694" y="268" width="44" height="26" rx="5" fill="#ebdbb2" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="716" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="742" y="268" width="44" height="26" rx="5" fill="#3c3836" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="764" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="790" y="268" width="44" height="26" rx="5" fill="#af3a03" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="812" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="838" y="268" width="44" height="26" rx="5" fill="#b57614" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="860" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="886" y="268" width="44" height="26" rx="5" fill="#427b58" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="908" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="934" y="268" width="44" height="26" rx="5" fill="#79740e" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="956" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="982" y="268" width="44" height="26" rx="5" fill="#9d0006" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="1004" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="1030" y="268" width="44" height="26" rx="5" fill="#076678" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="1052" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="1078" y="268" width="44" height="26" rx="5" fill="#8f3f71" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="1100" y="308" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="598" y="330" fill="#3c3836" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="708" y="318" width="72" height="16" rx="4" fill="#af3a03"/>
+<text x="744" y="330" fill="#f9f5d7" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="798" y="330" fill="#427b58" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+<rect x="16" y="356" width="560" height="132" rx="10" fill="#fbf1c7" stroke="#bdae93" stroke-width="1.5"/>
+<rect x="26" y="366" width="36" height="36" rx="6" fill="#f9f5d7" stroke="#bdae93"/>
+<rect x="68" y="366" width="36" height="36" rx="6" fill="#ebdbb2" stroke="#bdae93"/>
+<text x="116" y="382" fill="#3c3836" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">classic-light-medium</text>
+<text x="116" y="398" fill="#665c54" font-family="ui-monospace,Consolas,monospace" font-size="10">classic · light · medium</text>
+<rect x="26" y="412" width="44" height="26" rx="5" fill="#fbf1c7" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="48" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="74" y="412" width="44" height="26" rx="5" fill="#f9f5d7" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="96" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="122" y="412" width="44" height="26" rx="5" fill="#ebdbb2" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="144" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="170" y="412" width="44" height="26" rx="5" fill="#3c3836" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="192" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="218" y="412" width="44" height="26" rx="5" fill="#af3a03" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="240" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="266" y="412" width="44" height="26" rx="5" fill="#b57614" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="288" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="314" y="412" width="44" height="26" rx="5" fill="#427b58" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="336" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="362" y="412" width="44" height="26" rx="5" fill="#79740e" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="384" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="410" y="412" width="44" height="26" rx="5" fill="#9d0006" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="432" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="458" y="412" width="44" height="26" rx="5" fill="#076678" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="480" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="506" y="412" width="44" height="26" rx="5" fill="#8f3f71" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="528" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="26" y="474" fill="#3c3836" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="136" y="462" width="72" height="16" rx="4" fill="#af3a03"/>
+<text x="172" y="474" fill="#f9f5d7" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="226" y="474" fill="#427b58" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+<rect x="588" y="356" width="560" height="132" rx="10" fill="#f2e5bc" stroke="#bdae93" stroke-width="1.5"/>
+<rect x="598" y="366" width="36" height="36" rx="6" fill="#ebdbb2" stroke="#bdae93"/>
+<rect x="640" y="366" width="36" height="36" rx="6" fill="#ebdbb2" stroke="#bdae93"/>
+<text x="688" y="382" fill="#3c3836" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">classic-light-soft</text>
+<text x="688" y="398" fill="#665c54" font-family="ui-monospace,Consolas,monospace" font-size="10">classic · light · soft</text>
+<rect x="598" y="412" width="44" height="26" rx="5" fill="#f2e5bc" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="620" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="646" y="412" width="44" height="26" rx="5" fill="#ebdbb2" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="668" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="694" y="412" width="44" height="26" rx="5" fill="#ebdbb2" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="716" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="742" y="412" width="44" height="26" rx="5" fill="#3c3836" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="764" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="790" y="412" width="44" height="26" rx="5" fill="#af3a03" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="812" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="838" y="412" width="44" height="26" rx="5" fill="#b57614" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="860" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="886" y="412" width="44" height="26" rx="5" fill="#427b58" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="908" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="934" y="412" width="44" height="26" rx="5" fill="#79740e" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="956" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="982" y="412" width="44" height="26" rx="5" fill="#9d0006" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="1004" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="1030" y="412" width="44" height="26" rx="5" fill="#076678" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="1052" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="1078" y="412" width="44" height="26" rx="5" fill="#8f3f71" stroke="#bdae93" stroke-opacity="0.5"/>
+<text x="1100" y="452" fill="#7c6f64" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="598" y="474" fill="#3c3836" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="708" y="462" width="72" height="16" rx="4" fill="#af3a03"/>
+<text x="744" y="474" fill="#f9f5d7" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="798" y="474" fill="#427b58" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+<rect x="16" y="500" width="560" height="132" rx="10" fill="#1d2021" stroke="#504945" stroke-width="1.5"/>
+<rect x="26" y="510" width="36" height="36" rx="6" fill="#141617" stroke="#504945"/>
+<rect x="68" y="510" width="36" height="36" rx="6" fill="#282828" stroke="#504945"/>
+<text x="116" y="526" fill="#d4be98" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">material-dark-hard</text>
+<text x="116" y="542" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="10">material · dark · hard</text>
+<rect x="26" y="556" width="44" height="26" rx="5" fill="#1d2021" stroke="#504945" stroke-opacity="0.5"/>
+<text x="48" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="74" y="556" width="44" height="26" rx="5" fill="#141617" stroke="#504945" stroke-opacity="0.5"/>
+<text x="96" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="122" y="556" width="44" height="26" rx="5" fill="#282828" stroke="#504945" stroke-opacity="0.5"/>
+<text x="144" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="170" y="556" width="44" height="26" rx="5" fill="#d4be98" stroke="#504945" stroke-opacity="0.5"/>
+<text x="192" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="218" y="556" width="44" height="26" rx="5" fill="#e78a4e" stroke="#504945" stroke-opacity="0.5"/>
+<text x="240" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="266" y="556" width="44" height="26" rx="5" fill="#d8a657" stroke="#504945" stroke-opacity="0.5"/>
+<text x="288" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="314" y="556" width="44" height="26" rx="5" fill="#89b482" stroke="#504945" stroke-opacity="0.5"/>
+<text x="336" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="362" y="556" width="44" height="26" rx="5" fill="#a9b665" stroke="#504945" stroke-opacity="0.5"/>
+<text x="384" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="410" y="556" width="44" height="26" rx="5" fill="#ea6962" stroke="#504945" stroke-opacity="0.5"/>
+<text x="432" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="458" y="556" width="44" height="26" rx="5" fill="#7daea3" stroke="#504945" stroke-opacity="0.5"/>
+<text x="480" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="506" y="556" width="44" height="26" rx="5" fill="#d3869b" stroke="#504945" stroke-opacity="0.5"/>
+<text x="528" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="26" y="618" fill="#d4be98" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="136" y="606" width="72" height="16" rx="4" fill="#e78a4e"/>
+<text x="172" y="618" fill="#141617" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="226" y="618" fill="#89b482" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+<rect x="588" y="500" width="560" height="132" rx="10" fill="#282828" stroke="#5a524c" stroke-width="1.5"/>
+<rect x="598" y="510" width="36" height="36" rx="6" fill="#1b1b1b" stroke="#5a524c"/>
+<rect x="640" y="510" width="36" height="36" rx="6" fill="#32302f" stroke="#5a524c"/>
+<text x="688" y="526" fill="#d4be98" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">material-dark-medium</text>
+<text x="688" y="542" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="10">material · dark · medium</text>
+<rect x="598" y="556" width="44" height="26" rx="5" fill="#282828" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="620" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="646" y="556" width="44" height="26" rx="5" fill="#1b1b1b" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="668" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="694" y="556" width="44" height="26" rx="5" fill="#32302f" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="716" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="742" y="556" width="44" height="26" rx="5" fill="#d4be98" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="764" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="790" y="556" width="44" height="26" rx="5" fill="#e78a4e" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="812" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="838" y="556" width="44" height="26" rx="5" fill="#d8a657" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="860" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="886" y="556" width="44" height="26" rx="5" fill="#89b482" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="908" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="934" y="556" width="44" height="26" rx="5" fill="#a9b665" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="956" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="982" y="556" width="44" height="26" rx="5" fill="#ea6962" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="1004" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="1030" y="556" width="44" height="26" rx="5" fill="#7daea3" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="1052" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="1078" y="556" width="44" height="26" rx="5" fill="#d3869b" stroke="#5a524c" stroke-opacity="0.5"/>
+<text x="1100" y="596" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="598" y="618" fill="#d4be98" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="708" y="606" width="72" height="16" rx="4" fill="#e78a4e"/>
+<text x="744" y="618" fill="#1b1b1b" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="798" y="618" fill="#89b482" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+<rect x="16" y="644" width="560" height="132" rx="10" fill="#32302f" stroke="#665c54" stroke-width="1.5"/>
+<rect x="26" y="654" width="36" height="36" rx="6" fill="#252423" stroke="#665c54"/>
+<rect x="68" y="654" width="36" height="36" rx="6" fill="#3c3836" stroke="#665c54"/>
+<text x="116" y="670" fill="#d4be98" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">material-dark-soft</text>
+<text x="116" y="686" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="10">material · dark · soft</text>
+<rect x="26" y="700" width="44" height="26" rx="5" fill="#32302f" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="48" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="74" y="700" width="44" height="26" rx="5" fill="#252423" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="96" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="122" y="700" width="44" height="26" rx="5" fill="#3c3836" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="144" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="170" y="700" width="44" height="26" rx="5" fill="#d4be98" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="192" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="218" y="700" width="44" height="26" rx="5" fill="#e78a4e" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="240" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="266" y="700" width="44" height="26" rx="5" fill="#d8a657" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="288" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="314" y="700" width="44" height="26" rx="5" fill="#89b482" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="336" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="362" y="700" width="44" height="26" rx="5" fill="#a9b665" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="384" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="410" y="700" width="44" height="26" rx="5" fill="#ea6962" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="432" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="458" y="700" width="44" height="26" rx="5" fill="#7daea3" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="480" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="506" y="700" width="44" height="26" rx="5" fill="#d3869b" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="528" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="26" y="762" fill="#d4be98" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="136" y="750" width="72" height="16" rx="4" fill="#e78a4e"/>
+<text x="172" y="762" fill="#252423" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="226" y="762" fill="#89b482" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+<rect x="588" y="644" width="560" height="132" rx="10" fill="#282828" stroke="#665c54" stroke-width="1.5"/>
+<rect x="598" y="654" width="36" height="36" rx="6" fill="#242424" stroke="#665c54"/>
+<rect x="640" y="654" width="36" height="36" rx="6" fill="#32302f" stroke="#665c54"/>
+<text x="688" y="670" fill="#ebdbb2" font-family="ui-monospace,Consolas,monospace" font-size="13" font-weight="700">baby-dark-medium</text>
+<text x="688" y="686" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="10">baby · dark · medium</text>
+<rect x="598" y="700" width="44" height="26" rx="5" fill="#282828" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="620" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">bg</text>
+<rect x="646" y="700" width="44" height="26" rx="5" fill="#242424" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="668" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">deep</text>
+<rect x="694" y="700" width="44" height="26" rx="5" fill="#32302f" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="716" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">surf</text>
+<rect x="742" y="700" width="44" height="26" rx="5" fill="#ebdbb2" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="764" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">ink</text>
+<rect x="790" y="700" width="44" height="26" rx="5" fill="#d65d0e" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="812" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc</text>
+<rect x="838" y="700" width="44" height="26" rx="5" fill="#fabd2f" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="860" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">acc2</text>
+<rect x="886" y="700" width="44" height="26" rx="5" fill="#8ec07c" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="908" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">aqua</text>
+<rect x="934" y="700" width="44" height="26" rx="5" fill="#8ec07c" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="956" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">grn</text>
+<rect x="982" y="700" width="44" height="26" rx="5" fill="#fb4934" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="1004" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">red</text>
+<rect x="1030" y="700" width="44" height="26" rx="5" fill="#83a598" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="1052" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">blu</text>
+<rect x="1078" y="700" width="44" height="26" rx="5" fill="#d4879c" stroke="#665c54" stroke-opacity="0.5"/>
+<text x="1100" y="740" fill="#928374" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">pur</text>
+<text x="598" y="762" fill="#ebdbb2" font-family="system-ui,Segoe UI,sans-serif" font-size="11">Aa · panel ink</text>
+<rect x="708" y="750" width="72" height="16" rx="4" fill="#d65d0e"/>
+<text x="744" y="762" fill="#1d2021" font-family="ui-monospace,Consolas,monospace" font-size="9" text-anchor="middle">accent</text>
+<text x="798" y="762" fill="#8ec07c" font-family="ui-monospace,Consolas,monospace" font-size="10">link</text>
+</svg>

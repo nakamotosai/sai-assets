@@ -55,7 +55,7 @@ CAT_CHIP = {
     "video-motion": "视频",
 }
 # 这类包内容在本家,仓里只有索引 → 不出 zip 的“下载代码”语义改为外链
-INDEX_ONLY = {"gruvbox-dark", "video-motion"}
+INDEX_ONLY = {"video-motion"}
 
 HEAVY_RE = re.compile(r"webgl|WebGLRenderer|THREE\.|getContext\(\s*['\"]webgl", re.I)
 CODE_CAP = 64 * 1024

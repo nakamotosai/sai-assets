@@ -1,0 +1,100 @@
+{
+  "default": "classic-dark-medium",
+  "themes": [
+    {
+      "id": "classic-dark-hard",
+      "name": "Gruvbox Classic Dark Hard",
+      "family": "classic",
+      "mode": "dark",
+      "contrast": "hard",
+      "path": "tokens/semantic/classic-dark-hard.json",
+      "default": false
+    },
+    {
+      "id": "classic-dark-medium",
+      "name": "Gruvbox Classic Dark Medium",
+      "family": "classic",
+      "mode": "dark",
+      "contrast": "medium",
+      "path": "tokens/semantic/classic-dark-medium.json",
+      "default": true
+    },
+    {
+      "id": "classic-dark-soft",
+      "name": "Gruvbox Classic Dark Soft",
+      "family": "classic",
+      "mode": "dark",
+      "contrast": "soft",
+      "path": "tokens/semantic/classic-dark-soft.json",
+      "default": false
+    },
+    {
+      "id": "classic-light-hard",
+      "name": "Gruvbox Classic Light Hard",
+      "family": "classic",
+      "mode": "light",
+      "contrast": "hard",
+      "path": "tokens/semantic/classic-light-hard.json",
+      "default": false
+    },
+    {
+      "id": "classic-light-medium",
+      "name": "Gruvbox Classic Light Medium",
+      "family": "classic",
+      "mode": "light",
+      "contrast": "medium",
+      "path": "tokens/semantic/classic-light-medium.json",
+      "default": false
+    },
+    {
+      "id": "classic-light-soft",
+      "name": "Gruvbox Classic Light Soft",
+      "family": "classic",
+      "mode": "light",
+      "contrast": "soft",
+      "path": "tokens/semantic/classic-light-soft.json",
+      "default": false
+    },
+    {
+      "id": "material-dark-hard",
+      "name": "Gruvbox Material Dark Hard",
+      "family": "material",
+      "mode": "dark",
+      "contrast": "hard",
+      "path": "tokens/semantic/material-dark-hard.json",
+      "default": false
+    },
+    {
+      "id": "material-dark-medium",
+      "name": "Gruvbox Material Dark Medium",
+      "family": "material",
+      "mode": "dark",
+      "contrast": "medium",
+      "path": "tokens/semantic/material-dark-medium.json",
+      "default": false
+    },
+    {
+      "id": "material-dark-soft",
+      "name": "Gruvbox Material Dark Soft",
+      "family": "material",
+      "mode": "dark",
+      "contrast": "soft",
+      "path": "tokens/semantic/material-dark-soft.json",
+      "default": false
+    },
+    {
+      "id": "baby-dark-medium",
+      "name": "Gruvbox Baby Dark Medium",
+      "family": "baby",
+      "mode": "dark",
+      "contrast": "medium",
+      "path": "tokens/semantic/baby-dark-medium.json",
+      "default": false
+    }
+  ],
+  "families": {
+    "classic": "Official morhetz palette; dark uses bright_* accents; light uses faded_*.",
+    "material": "sainnhe gruvbox-material palette=material (softer accents).",
+    "baby": "luisiacc gruvbox-baby medium — deeper chrome, slightly different orange."
+  }
+}

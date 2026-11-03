@@ -1,0 +1,39 @@
+{
+  "id": "classic-dark-hard",
+  "name": "Gruvbox Classic Dark Hard",
+  "family": "classic",
+  "mode": "dark",
+  "contrast": "hard",
+  "source": "morhetz/gruvbox absolute palette",
+  "colors": {
+    "bg": "#1d2021",
+    "bgDeep": "#141617",
+    "surface": "#3c3836",
+    "surface2": "#504945",
+    "border": "#665c54",
+    "ink": "#ebdbb2",
+    "inkMuted": "#a89984",
+    "inkDim": "#928374",
+    "accent": "#fe8019",
+    "accent2": "#fabd2f",
+    "onAccent": "#1d2021",
+    "red": "#fb4934",
+    "green": "#b8bb26",
+    "aqua": "#8ec07c",
+    "blue": "#83a598",
+    "purple": "#d3869b",
+    "link": "#8ec07c",
+    "codeBg": "#1d2021",
+    "shadow": "0 8px 24px rgba(0,0,0,.45)"
+  },
+  "fonts": {
+    "display": "system-ui, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "body": "system-ui, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "mono": "\"JetBrains Mono\", \"Cascadia Code\", Consolas, monospace"
+  },
+  "radius": {
+    "sm": "6px",
+    "md": "10px",
+    "lg": "14px"
+  }
+}

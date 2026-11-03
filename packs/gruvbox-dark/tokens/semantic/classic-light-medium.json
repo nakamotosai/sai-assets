@@ -1,0 +1,39 @@
+{
+  "id": "classic-light-medium",
+  "name": "Gruvbox Classic Light Medium",
+  "family": "classic",
+  "mode": "light",
+  "contrast": "medium",
+  "source": "morhetz/gruvbox absolute palette",
+  "colors": {
+    "bg": "#fbf1c7",
+    "bgDeep": "#f9f5d7",
+    "surface": "#ebdbb2",
+    "surface2": "#d5c4a1",
+    "border": "#bdae93",
+    "ink": "#3c3836",
+    "inkMuted": "#665c54",
+    "inkDim": "#7c6f64",
+    "accent": "#af3a03",
+    "accent2": "#b57614",
+    "onAccent": "#f9f5d7",
+    "red": "#9d0006",
+    "green": "#79740e",
+    "aqua": "#427b58",
+    "blue": "#076678",
+    "purple": "#8f3f71",
+    "link": "#427b58",
+    "codeBg": "#d5c4a1",
+    "shadow": "0 8px 24px rgba(60,56,54,.12)"
+  },
+  "fonts": {
+    "display": "system-ui, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "body": "system-ui, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "mono": "\"JetBrains Mono\", \"Cascadia Code\", Consolas, monospace"
+  },
+  "radius": {
+    "sm": "6px",
+    "md": "10px",
+    "lg": "14px"
+  }
+}

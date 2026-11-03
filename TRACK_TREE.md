@@ -38,7 +38,7 @@ M0 建档拍板 ──► M1 单包打通 ──► M2 存量迁移 ──► M3
 | 甲 14 + 字体 2 落仓 | catalog 计数与 WHITELIST 一致 |
 | 乙 4(web-fx)+ 丙 6 + 底座 1 落仓 | 每包 `pack.json.verified` 有当日断言输出 |
 | references 40 条清路径上墙 | 墙上有 references 入口,浏览器可开 |
-| 外部索引 2(gruvbox-theme / mv-studio) | catalog `canonical_home` 非空且可达 |
+| 外部索引 1(video-motion → mv-studio) | catalog `canonical_home` 非空且可达;gruvbox 已于 2026-11-04 内容整体入库(不再是索引) |
 | 旧库对应条目改索引 | 旧库 `themes/*.json` 与 `demos/<id>` 同轮留索引指针,复扫 0 重复内容 |
 
 ## M3 · 自动化(1-2d)✅ 2026-11-04

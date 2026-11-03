@@ -1,0 +1,471 @@
+/* ---- semantic themes ---- */
+/* Gruvbox Classic Dark Hard — morhetz/gruvbox absolute palette */
+[data-theme="classic-dark-hard"],
+.theme-classic-dark-hard,
+:root.theme-classic-dark-hard {
+  color-scheme: dark;
+  --bg: #1d2021;
+  --gb-bg: #1d2021;
+  --bg-deep: #141617;
+  --gb-bg-deep: #141617;
+  --surface: #3c3836;
+  --gb-surface: #3c3836;
+  --surface-2: #504945;
+  --gb-surface-2: #504945;
+  --border: #665c54;
+  --gb-border: #665c54;
+  --ink: #ebdbb2;
+  --gb-ink: #ebdbb2;
+  --ink-muted: #a89984;
+  --gb-ink-muted: #a89984;
+  --ink-dim: #928374;
+  --gb-ink-dim: #928374;
+  --accent: #fe8019;
+  --gb-accent: #fe8019;
+  --accent-2: #fabd2f;
+  --gb-accent-2: #fabd2f;
+  --on-accent: #1d2021;
+  --gb-on-accent: #1d2021;
+  --red: #fb4934;
+  --gb-red: #fb4934;
+  --green: #b8bb26;
+  --gb-green: #b8bb26;
+  --aqua: #8ec07c;
+  --gb-aqua: #8ec07c;
+  --blue: #83a598;
+  --gb-blue: #83a598;
+  --purple: #d3869b;
+  --gb-purple: #d3869b;
+  --link: #8ec07c;
+  --gb-link: #8ec07c;
+  --code-bg: #1d2021;
+  --gb-code-bg: #1d2021;
+  --shadow: 0 8px 24px rgba(0,0,0,.45);
+  --gb-shadow: 0 8px 24px rgba(0,0,0,.45);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+/* Gruvbox Classic Dark Medium — morhetz/gruvbox absolute palette */
+[data-theme="classic-dark-medium"],
+.theme-classic-dark-medium,
+:root.theme-classic-dark-medium {
+  color-scheme: dark;
+  --bg: #282828;
+  --gb-bg: #282828;
+  --bg-deep: #1d2021;
+  --gb-bg-deep: #1d2021;
+  --surface: #3c3836;
+  --gb-surface: #3c3836;
+  --surface-2: #504945;
+  --gb-surface-2: #504945;
+  --border: #665c54;
+  --gb-border: #665c54;
+  --ink: #ebdbb2;
+  --gb-ink: #ebdbb2;
+  --ink-muted: #a89984;
+  --gb-ink-muted: #a89984;
+  --ink-dim: #928374;
+  --gb-ink-dim: #928374;
+  --accent: #fe8019;
+  --gb-accent: #fe8019;
+  --accent-2: #fabd2f;
+  --gb-accent-2: #fabd2f;
+  --on-accent: #1d2021;
+  --gb-on-accent: #1d2021;
+  --red: #fb4934;
+  --gb-red: #fb4934;
+  --green: #b8bb26;
+  --gb-green: #b8bb26;
+  --aqua: #8ec07c;
+  --gb-aqua: #8ec07c;
+  --blue: #83a598;
+  --gb-blue: #83a598;
+  --purple: #d3869b;
+  --gb-purple: #d3869b;
+  --link: #8ec07c;
+  --gb-link: #8ec07c;
+  --code-bg: #1d2021;
+  --gb-code-bg: #1d2021;
+  --shadow: 0 8px 24px rgba(0,0,0,.45);
+  --gb-shadow: 0 8px 24px rgba(0,0,0,.45);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+/* Gruvbox Classic Dark Soft — morhetz/gruvbox absolute palette */
+[data-theme="classic-dark-soft"],
+.theme-classic-dark-soft,
+:root.theme-classic-dark-soft {
+  color-scheme: dark;
+  --bg: #32302f;
+  --gb-bg: #32302f;
+  --bg-deep: #282828;
+  --gb-bg-deep: #282828;
+  --surface: #3c3836;
+  --gb-surface: #3c3836;
+  --surface-2: #504945;
+  --gb-surface-2: #504945;
+  --border: #665c54;
+  --gb-border: #665c54;
+  --ink: #ebdbb2;
+  --gb-ink: #ebdbb2;
+  --ink-muted: #a89984;
+  --gb-ink-muted: #a89984;
+  --ink-dim: #928374;
+  --gb-ink-dim: #928374;
+  --accent: #fe8019;
+  --gb-accent: #fe8019;
+  --accent-2: #fabd2f;
+  --gb-accent-2: #fabd2f;
+  --on-accent: #1d2021;
+  --gb-on-accent: #1d2021;
+  --red: #fb4934;
+  --gb-red: #fb4934;
+  --green: #b8bb26;
+  --gb-green: #b8bb26;
+  --aqua: #8ec07c;
+  --gb-aqua: #8ec07c;
+  --blue: #83a598;
+  --gb-blue: #83a598;
+  --purple: #d3869b;
+  --gb-purple: #d3869b;
+  --link: #8ec07c;
+  --gb-link: #8ec07c;
+  --code-bg: #1d2021;
+  --gb-code-bg: #1d2021;
+  --shadow: 0 8px 24px rgba(0,0,0,.45);
+  --gb-shadow: 0 8px 24px rgba(0,0,0,.45);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+/* Gruvbox Classic Light Hard — morhetz/gruvbox absolute palette */
+[data-theme="classic-light-hard"],
+.theme-classic-light-hard,
+:root.theme-classic-light-hard {
+  color-scheme: light;
+  --bg: #f9f5d7;
+  --gb-bg: #f9f5d7;
+  --bg-deep: #fbf1c7;
+  --gb-bg-deep: #fbf1c7;
+  --surface: #ebdbb2;
+  --gb-surface: #ebdbb2;
+  --surface-2: #d5c4a1;
+  --gb-surface-2: #d5c4a1;
+  --border: #bdae93;
+  --gb-border: #bdae93;
+  --ink: #3c3836;
+  --gb-ink: #3c3836;
+  --ink-muted: #665c54;
+  --gb-ink-muted: #665c54;
+  --ink-dim: #7c6f64;
+  --gb-ink-dim: #7c6f64;
+  --accent: #af3a03;
+  --gb-accent: #af3a03;
+  --accent-2: #b57614;
+  --gb-accent-2: #b57614;
+  --on-accent: #f9f5d7;
+  --gb-on-accent: #f9f5d7;
+  --red: #9d0006;
+  --gb-red: #9d0006;
+  --green: #79740e;
+  --gb-green: #79740e;
+  --aqua: #427b58;
+  --gb-aqua: #427b58;
+  --blue: #076678;
+  --gb-blue: #076678;
+  --purple: #8f3f71;
+  --gb-purple: #8f3f71;
+  --link: #427b58;
+  --gb-link: #427b58;
+  --code-bg: #d5c4a1;
+  --gb-code-bg: #d5c4a1;
+  --shadow: 0 8px 24px rgba(60,56,54,.12);
+  --gb-shadow: 0 8px 24px rgba(60,56,54,.12);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+/* Gruvbox Classic Light Medium — morhetz/gruvbox absolute palette */
+[data-theme="classic-light-medium"],
+.theme-classic-light-medium,
+:root.theme-classic-light-medium {
+  color-scheme: light;
+  --bg: #fbf1c7;
+  --gb-bg: #fbf1c7;
+  --bg-deep: #f9f5d7;
+  --gb-bg-deep: #f9f5d7;
+  --surface: #ebdbb2;
+  --gb-surface: #ebdbb2;
+  --surface-2: #d5c4a1;
+  --gb-surface-2: #d5c4a1;
+  --border: #bdae93;
+  --gb-border: #bdae93;
+  --ink: #3c3836;
+  --gb-ink: #3c3836;
+  --ink-muted: #665c54;
+  --gb-ink-muted: #665c54;
+  --ink-dim: #7c6f64;
+  --gb-ink-dim: #7c6f64;
+  --accent: #af3a03;
+  --gb-accent: #af3a03;
+  --accent-2: #b57614;
+  --gb-accent-2: #b57614;
+  --on-accent: #f9f5d7;
+  --gb-on-accent: #f9f5d7;
+  --red: #9d0006;
+  --gb-red: #9d0006;
+  --green: #79740e;
+  --gb-green: #79740e;
+  --aqua: #427b58;
+  --gb-aqua: #427b58;
+  --blue: #076678;
+  --gb-blue: #076678;
+  --purple: #8f3f71;
+  --gb-purple: #8f3f71;
+  --link: #427b58;
+  --gb-link: #427b58;
+  --code-bg: #d5c4a1;
+  --gb-code-bg: #d5c4a1;
+  --shadow: 0 8px 24px rgba(60,56,54,.12);
+  --gb-shadow: 0 8px 24px rgba(60,56,54,.12);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+/* Gruvbox Classic Light Soft — morhetz/gruvbox absolute palette */
+[data-theme="classic-light-soft"],
+.theme-classic-light-soft,
+:root.theme-classic-light-soft {
+  color-scheme: light;
+  --bg: #f2e5bc;
+  --gb-bg: #f2e5bc;
+  --bg-deep: #ebdbb2;
+  --gb-bg-deep: #ebdbb2;
+  --surface: #ebdbb2;
+  --gb-surface: #ebdbb2;
+  --surface-2: #d5c4a1;
+  --gb-surface-2: #d5c4a1;
+  --border: #bdae93;
+  --gb-border: #bdae93;
+  --ink: #3c3836;
+  --gb-ink: #3c3836;
+  --ink-muted: #665c54;
+  --gb-ink-muted: #665c54;
+  --ink-dim: #7c6f64;
+  --gb-ink-dim: #7c6f64;
+  --accent: #af3a03;
+  --gb-accent: #af3a03;
+  --accent-2: #b57614;
+  --gb-accent-2: #b57614;
+  --on-accent: #f9f5d7;
+  --gb-on-accent: #f9f5d7;
+  --red: #9d0006;
+  --gb-red: #9d0006;
+  --green: #79740e;
+  --gb-green: #79740e;
+  --aqua: #427b58;
+  --gb-aqua: #427b58;
+  --blue: #076678;
+  --gb-blue: #076678;
+  --purple: #8f3f71;
+  --gb-purple: #8f3f71;
+  --link: #427b58;
+  --gb-link: #427b58;
+  --code-bg: #d5c4a1;
+  --gb-code-bg: #d5c4a1;
+  --shadow: 0 8px 24px rgba(60,56,54,.12);
+  --gb-shadow: 0 8px 24px rgba(60,56,54,.12);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+/* Gruvbox Material Dark Hard — sainnhe/gruvbox-material palette=material */
+[data-theme="material-dark-hard"],
+.theme-material-dark-hard,
+:root.theme-material-dark-hard {
+  color-scheme: dark;
+  --bg: #1d2021;
+  --gb-bg: #1d2021;
+  --bg-deep: #141617;
+  --gb-bg-deep: #141617;
+  --surface: #282828;
+  --gb-surface: #282828;
+  --surface-2: #3c3836;
+  --gb-surface-2: #3c3836;
+  --border: #504945;
+  --gb-border: #504945;
+  --ink: #d4be98;
+  --gb-ink: #d4be98;
+  --ink-muted: #a89984;
+  --gb-ink-muted: #a89984;
+  --ink-dim: #928374;
+  --gb-ink-dim: #928374;
+  --accent: #e78a4e;
+  --gb-accent: #e78a4e;
+  --accent-2: #d8a657;
+  --gb-accent-2: #d8a657;
+  --on-accent: #141617;
+  --gb-on-accent: #141617;
+  --red: #ea6962;
+  --gb-red: #ea6962;
+  --green: #a9b665;
+  --gb-green: #a9b665;
+  --aqua: #89b482;
+  --gb-aqua: #89b482;
+  --blue: #7daea3;
+  --gb-blue: #7daea3;
+  --purple: #d3869b;
+  --gb-purple: #d3869b;
+  --link: #89b482;
+  --gb-link: #89b482;
+  --code-bg: #141617;
+  --gb-code-bg: #141617;
+  --shadow: 0 8px 24px rgba(0,0,0,.45);
+  --gb-shadow: 0 8px 24px rgba(0,0,0,.45);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+/* Gruvbox Material Dark Medium — sainnhe/gruvbox-material palette=material */
+[data-theme="material-dark-medium"],
+.theme-material-dark-medium,
+:root.theme-material-dark-medium {
+  color-scheme: dark;
+  --bg: #282828;
+  --gb-bg: #282828;
+  --bg-deep: #1b1b1b;
+  --gb-bg-deep: #1b1b1b;
+  --surface: #32302f;
+  --gb-surface: #32302f;
+  --surface-2: #45403d;
+  --gb-surface-2: #45403d;
+  --border: #5a524c;
+  --gb-border: #5a524c;
+  --ink: #d4be98;
+  --gb-ink: #d4be98;
+  --ink-muted: #a89984;
+  --gb-ink-muted: #a89984;
+  --ink-dim: #928374;
+  --gb-ink-dim: #928374;
+  --accent: #e78a4e;
+  --gb-accent: #e78a4e;
+  --accent-2: #d8a657;
+  --gb-accent-2: #d8a657;
+  --on-accent: #1b1b1b;
+  --gb-on-accent: #1b1b1b;
+  --red: #ea6962;
+  --gb-red: #ea6962;
+  --green: #a9b665;
+  --gb-green: #a9b665;
+  --aqua: #89b482;
+  --gb-aqua: #89b482;
+  --blue: #7daea3;
+  --gb-blue: #7daea3;
+  --purple: #d3869b;
+  --gb-purple: #d3869b;
+  --link: #89b482;
+  --gb-link: #89b482;
+  --code-bg: #1b1b1b;
+  --gb-code-bg: #1b1b1b;
+  --shadow: 0 8px 24px rgba(0,0,0,.45);
+  --gb-shadow: 0 8px 24px rgba(0,0,0,.45);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+/* Gruvbox Material Dark Soft — sainnhe/gruvbox-material palette=material */
+[data-theme="material-dark-soft"],
+.theme-material-dark-soft,
+:root.theme-material-dark-soft {
+  color-scheme: dark;
+  --bg: #32302f;
+  --gb-bg: #32302f;
+  --bg-deep: #252423;
+  --gb-bg-deep: #252423;
+  --surface: #3c3836;
+  --gb-surface: #3c3836;
+  --surface-2: #504945;
+  --gb-surface-2: #504945;
+  --border: #665c54;
+  --gb-border: #665c54;
+  --ink: #d4be98;
+  --gb-ink: #d4be98;
+  --ink-muted: #a89984;
+  --gb-ink-muted: #a89984;
+  --ink-dim: #928374;
+  --gb-ink-dim: #928374;
+  --accent: #e78a4e;
+  --gb-accent: #e78a4e;
+  --accent-2: #d8a657;
+  --gb-accent-2: #d8a657;
+  --on-accent: #252423;
+  --gb-on-accent: #252423;
+  --red: #ea6962;
+  --gb-red: #ea6962;
+  --green: #a9b665;
+  --gb-green: #a9b665;
+  --aqua: #89b482;
+  --gb-aqua: #89b482;
+  --blue: #7daea3;
+  --gb-blue: #7daea3;
+  --purple: #d3869b;
+  --gb-purple: #d3869b;
+  --link: #89b482;
+  --gb-link: #89b482;
+  --code-bg: #252423;
+  --gb-code-bg: #252423;
+  --shadow: 0 8px 24px rgba(0,0,0,.45);
+  --gb-shadow: 0 8px 24px rgba(0,0,0,.45);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}
+/* Gruvbox Baby Dark Medium — luisiacc/gruvbox-baby (simplified semantic) */
+[data-theme="baby-dark-medium"],
+.theme-baby-dark-medium,
+:root.theme-baby-dark-medium {
+  color-scheme: dark;
+  --bg: #282828;
+  --gb-bg: #282828;
+  --bg-deep: #242424;
+  --gb-bg-deep: #242424;
+  --surface: #32302f;
+  --gb-surface: #32302f;
+  --surface-2: #504945;
+  --gb-surface-2: #504945;
+  --border: #665c54;
+  --gb-border: #665c54;
+  --ink: #ebdbb2;
+  --gb-ink: #ebdbb2;
+  --ink-muted: #a89984;
+  --gb-ink-muted: #a89984;
+  --ink-dim: #928374;
+  --gb-ink-dim: #928374;
+  --accent: #d65d0e;
+  --gb-accent: #d65d0e;
+  --accent-2: #fabd2f;
+  --gb-accent-2: #fabd2f;
+  --on-accent: #1d2021;
+  --gb-on-accent: #1d2021;
+  --red: #fb4934;
+  --gb-red: #fb4934;
+  --green: #8ec07c;
+  --gb-green: #8ec07c;
+  --aqua: #8ec07c;
+  --gb-aqua: #8ec07c;
+  --blue: #83a598;
+  --gb-blue: #83a598;
+  --purple: #d4879c;
+  --gb-purple: #d4879c;
+  --link: #8ec07c;
+  --gb-link: #8ec07c;
+  --code-bg: #202020;
+  --gb-code-bg: #202020;
+  --shadow: 0 8px 24px rgba(0,0,0,.45);
+  --gb-shadow: 0 8px 24px rgba(0,0,0,.45);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+}

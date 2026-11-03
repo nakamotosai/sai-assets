@@ -16,10 +16,35 @@
   apply(current(), false);
   if (btn) btn.addEventListener('click', () => apply(current() === 'charcoal' ? 'paper' : 'charcoal', true));
 
-  /* ------------------------------------------------ iframe 池(懒挂 + 并发上限) */
-  const CARD_W = 1280, CARD_H = 960, MAX_LIVE = 8;
+  /* ------------------------------------------------ iframe 池(滚动对账式,不依赖 IntersectionObserver 的边沿事件) */
+  const CARD_W = 1280, CARD_H = 800, MAX_LIVE = 14;
   const live = new Map();               // thumb 元素 → iframe
+  window.__pool = { mount: 0, unmount: 0, evict: 0 };   // 诊断计数(探针读;不影响行为)
 
+  const makePoster = (heavy) => {
+    const p = document.createElement('div');
+    p.className = 'poster';
+    const label = document.createElement('span');
+    label.className = 'poster-label';
+    label.textContent = heavy ? 'WebGL 实时预览' : '载入预览…';
+    p.appendChild(label);
+    if (heavy) {
+      const b = document.createElement('button');
+      b.className = 'run';
+      b.type = 'button';
+      b.textContent = '运行预览';
+      p.appendChild(b);
+    }
+    return p;
+  };
+  const sizeThumb = (thumb, fr) => {
+    const w = thumb.clientWidth || 320;
+    const s = w / CARD_W;
+    fr.style.width = CARD_W + 'px';
+    fr.style.height = CARD_H + 'px';
+    fr.style.transform = 'scale(' + s.toFixed(4) + ')';
+    fr.style.transformOrigin = '0 0';
+  };
   const mount = (thumb) => {
     if (live.has(thumb)) return;
     const src = thumb.dataset.src;
@@ -30,62 +55,56 @@
     fr.title = thumb.closest('article')?.querySelector('h3')?.textContent?.trim() || '预览';
     fr.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups');
     fr.setAttribute('referrerpolicy', 'no-referrer');
+    fr.addEventListener('load', () => sizeThumb(thumb, fr));
     thumb.querySelector('.poster')?.remove();
     thumb.appendChild(fr);
     live.set(thumb, fr);
+    window.__pool.mount++;
     sizeThumb(thumb, fr);
-    evict();
   };
   const unmount = (thumb) => {
     const fr = live.get(thumb);
     if (!fr) return;
     fr.remove();
     live.delete(thumb);
-  };
-  const evict = () => {
-    if (live.size <= MAX_LIVE) return;
-    for (const [thumb] of live) {
-      const r = thumb.getBoundingClientRect();
-      const far = r.bottom < -400 || r.top > window.innerHeight + 800;
-      if (far) { unmount(thumb); if (live.size <= MAX_LIVE) return; }
-    }
-  };
-  const sizeThumb = (thumb, fr) => {
-    const w = thumb.clientWidth || 320;
-    const s = w / CARD_W;
-    fr.style.width = CARD_W + 'px';
-    fr.style.height = CARD_H + 'px';
-    fr.style.transform = 'scale(' + s.toFixed(4) + ')';
-    fr.style.transformOrigin = '0 0';
+    window.__pool.unmount++;
+    if (!thumb.querySelector('.poster')) thumb.appendChild(makePoster(thumb.dataset.heavy === '1'));
   };
 
   const cards = [...document.querySelectorAll('.thumb[data-src]')];
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      for (const e of entries) {
-        if (e.isIntersecting) {
-          /* WebGL 类不自动挂载:点“运行预览”才建立渲染上下文 */
-          if (e.target.dataset.heavy) continue;
-          if (live.size >= MAX_LIVE && !live.has(e.target)) continue;
-          mount(e.target);
-        } else if (live.has(e.target)) {
-          const r = e.boundingClientRect;
-          if (r.bottom < -300 || r.top > window.innerHeight + 600) unmount(e.target);
-        }
-      }
-    }, { rootMargin: '600px 0px', threshold: 0.01 });
-    cards.forEach((t) => io.observe(t));
-  } else {
-    cards.slice(0, 4).forEach(mount);
+  const near = (el, pad) => {
+    const r = el.getBoundingClientRect();
+    return r.bottom > -pad && r.top < window.innerHeight + pad;
+  };
+  let queued = false;
+  function reconcile() {
+    queued = false;
+    if (!cards.length) return;
+    /* 1 先回收已经跑远的(留 2 屏缓冲,避免来回滚动时反复挂卸) */
+    for (const [thumb] of live) {
+      if (!near(thumb, 1400)) unmount(thumb);
+    }
+    /* 2 把视口附近还没挂的挂上,受并发上限保护 */
+    for (const thumb of cards) {
+      if (live.size >= MAX_LIVE) break;
+      if (live.has(thumb)) continue;
+      if (!near(thumb, thumb.dataset.heavy === '1' ? 150 : 400)) continue;  // WebGL 类等它真正进视口再起上下文
+      mount(thumb);
+    }
   }
+  const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(reconcile); } };
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', () => { live.forEach((fr, thumb) => sizeThumb(thumb, fr)); schedule(); }, { passive: true });
   /* WebGL 类:点按才建立渲染上下文(避免上下文数量上限把后面的预览顶掉) */
   document.querySelectorAll('.thumb .run').forEach((b) => {
-    b.addEventListener('click', (ev) => { ev.preventDefault(); mount(b.closest('.thumb')); });
+    b.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const thumb = b.closest('.thumb');
+      thumb.dataset.armed = '1';
+      mount(thumb);
+    });
   });
-  window.addEventListener('resize', () => {
-    live.forEach((fr, thumb) => sizeThumb(thumb, fr));
-    sizeStage();
-  }, { passive: true });
+  schedule();
 
   /* ------------------------------------------------ 详情页舞台(视口切换) */
   const VP = { 1280: [1280, 800], 834: [834, 1112], 390: [390, 844] };

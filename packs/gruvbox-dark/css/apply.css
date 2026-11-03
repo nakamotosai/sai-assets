@@ -1,0 +1,60 @@
+/* Drop-in body chrome for panels / tools — opt-in via .gruvbox-apply */
+.gruvbox-apply,
+[data-gruvbox-apply] {
+  background: var(--bg, var(--gb-bg, #282828));
+  color: var(--ink, var(--gb-ink, #ebdbb2));
+  font-family: system-ui, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.gruvbox-apply a,
+[data-gruvbox-apply] a {
+  color: var(--link, var(--gb-link, #8ec07c));
+}
+
+.gruvbox-apply code,
+.gruvbox-apply pre,
+[data-gruvbox-apply] code,
+[data-gruvbox-apply] pre {
+  background: var(--code-bg, var(--gb-code-bg, #1d2021));
+  color: var(--ink, var(--gb-ink, #ebdbb2));
+  border-radius: var(--radius-sm, 6px);
+}
+
+.gruvbox-apply .panel,
+[data-gruvbox-apply] .panel {
+  background: var(--surface, var(--gb-surface, #3c3836));
+  border: 1px solid var(--border, var(--gb-border, #665c54));
+  border-radius: var(--radius-md, 10px);
+  box-shadow: var(--shadow, none);
+}
+
+.gruvbox-apply .btn-primary,
+[data-gruvbox-apply] .btn-primary {
+  background: var(--accent, var(--gb-accent, #fe8019));
+  color: var(--on-accent, var(--gb-on-accent, #1d2021));
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+}
+
+/* Scrollbar (optional chrome) */
+.gruvbox-scrollbar,
+.gruvbox-apply {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--ink, #ebdbb2) 28%, transparent) transparent;
+}
+.gruvbox-scrollbar::-webkit-scrollbar,
+.gruvbox-apply::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.gruvbox-scrollbar::-webkit-scrollbar-track,
+.gruvbox-apply::-webkit-scrollbar-track {
+  background: transparent;
+}
+.gruvbox-scrollbar::-webkit-scrollbar-thumb,
+.gruvbox-apply::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--ink, #ebdbb2) 22%, transparent);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}

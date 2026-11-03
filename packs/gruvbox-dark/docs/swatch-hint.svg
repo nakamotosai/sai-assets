@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="664" height="88" viewBox="0 0 664 88">
+<rect width="664" height="88" fill="#1d2021"/>
+<rect x="12" y="10" width="100" height="52" rx="8" fill="#1d2021" stroke="#665c54"/>
+<rect x="20" y="18" width="20" height="20" rx="4" fill="#fe8019"/>
+<rect x="44" y="18" width="20" height="20" rx="4" fill="#8ec07c"/>
+<rect x="68" y="18" width="20" height="20" rx="4" fill="#ebdbb2"/>
+<text x="62.0" y="56" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">c-dark-hard</text>
+<rect x="120" y="10" width="100" height="52" rx="8" fill="#282828" stroke="#665c54"/>
+<rect x="128" y="18" width="20" height="20" rx="4" fill="#fe8019"/>
+<rect x="152" y="18" width="20" height="20" rx="4" fill="#8ec07c"/>
+<rect x="176" y="18" width="20" height="20" rx="4" fill="#ebdbb2"/>
+<text x="170.0" y="56" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">c-dark-medium</text>
+<rect x="228" y="10" width="100" height="52" rx="8" fill="#32302f" stroke="#665c54"/>
+<rect x="236" y="18" width="20" height="20" rx="4" fill="#fe8019"/>
+<rect x="260" y="18" width="20" height="20" rx="4" fill="#8ec07c"/>
+<rect x="284" y="18" width="20" height="20" rx="4" fill="#ebdbb2"/>
+<text x="278.0" y="56" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">c-dark-soft</text>
+<rect x="336" y="10" width="100" height="52" rx="8" fill="#fbf1c7" stroke="#bdae93"/>
+<rect x="344" y="18" width="20" height="20" rx="4" fill="#af3a03"/>
+<rect x="368" y="18" width="20" height="20" rx="4" fill="#427b58"/>
+<rect x="392" y="18" width="20" height="20" rx="4" fill="#3c3836"/>
+<text x="386.0" y="56" fill="#665c54" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">c-light-medium</text>
+<rect x="444" y="10" width="100" height="52" rx="8" fill="#282828" stroke="#5a524c"/>
+<rect x="452" y="18" width="20" height="20" rx="4" fill="#e78a4e"/>
+<rect x="476" y="18" width="20" height="20" rx="4" fill="#89b482"/>
+<rect x="500" y="18" width="20" height="20" rx="4" fill="#d4be98"/>
+<text x="494.0" y="56" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">m-dark-medium</text>
+<rect x="552" y="10" width="100" height="52" rx="8" fill="#282828" stroke="#665c54"/>
+<rect x="560" y="18" width="20" height="20" rx="4" fill="#d65d0e"/>
+<rect x="584" y="18" width="20" height="20" rx="4" fill="#8ec07c"/>
+<rect x="608" y="18" width="20" height="20" rx="4" fill="#ebdbb2"/>
+<text x="602.0" y="56" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="8" text-anchor="middle">b-dark-medium</text>
+<text x="12" y="80" fill="#a89984" font-family="ui-monospace,Consolas,monospace" font-size="10">all 10 themes → docs/compare.svg · preview/index.html</text>
+</svg>

@@ -2,7 +2,7 @@
 
 > 一个包 = 一个能直接抄进项目的自洽单元:配色与字体、配对规则、断言、活预览。
 > 公开仓:`github.com/nakamotosai/sai-assets` · 展示站:**https://assets.ouuut.com**(Cloudflare Pages,29 包带活预览与下载)
-> 事实源:nakotosai/gruvbox-theme(单包成品范例)、sai-assets `docs/PACK-CONTRACT.md`
+> 事实源:sai-assets `docs/PACK-CONTRACT.md`(契约的原始范例 gruvbox-theme 已于 2026-11-04 整体并入本仓 `packs/gruvbox-dark/`,旧仓归档)
 
 ## 状态
 
