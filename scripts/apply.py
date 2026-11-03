@@ -44,18 +44,21 @@ def git_sha() -> str | None:
 
 
 def list_packs() -> None:
-    cat = ROOT / "catalog.json"
-    if cat.is_file():
-        data = json.loads(cat.read_text(encoding="utf-8"))
-        for c in data["categories"]:
-            print(f'## {c["id"]} ({c["count"]})')
-            for it in c["items"]:
-                mark = "外部" if it.get("external") else "    "
-                print(f'  {mark} {it["id"]:24s} v{it["version"]:7s} {it["one_liner"]}')
-        return
+    """人读清单:直接读 pack.json(标题/tags/外部标记都在那儿),不依赖 catalog 的瘦身字段。"""
+    rows = []
     for path in sorted(PACKS.glob("*/pack.json")):
-        pack = json.loads(path.read_text(encoding="utf-8"))
-        print(f'{pack["category"]:12s} {pack["id"]:24s} v{pack["version"]}')
+        p = json.loads(path.read_text(encoding="utf-8"))
+        rows.append(p)
+    by_cat: dict[str, list[dict]] = {}
+    for p in rows:
+        by_cat.setdefault(p["category"], []).append(p)
+    for cat in sorted(by_cat):
+        items = by_cat[cat]
+        print(f'## {cat} ({len(items)})')
+        for p in sorted(items, key=lambda x: x["id"]):
+            mark = "外部" if p.get("external") else "    "
+            title = " ".join(str(p.get("title", "")).split())[:34]
+            print(f'  {mark} {p["id"]:24s} v{p["version"]:7s} {title}')
 
 
 def apply(pack_id: str, target: str, dry: bool, minimal: bool = False) -> None:

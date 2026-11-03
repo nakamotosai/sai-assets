@@ -76,7 +76,7 @@ packs/<id>/
 
 | 通道 | 命令 | 适用 |
 |---|---|---|
-| agent / 人 | `git clone --depth 1 https://github.com/nakamotosai/sai-assets.git` → 读 `catalog.json` → 进 `packs/<id>/SKILL.md` | 首次、通用 |
+| agent / 人 | `git clone --depth 1 https://github.com/nakamotosai/sai-assets.git` → 读 `catalog.json`(**发现索引**,≤8KB:只有 id/version/一句话/path)→ 进 `packs/<id>/pack.json` 与 `SKILL.md` | 首次、通用 |
 | 项目(拷贝式) | `python scripts/apply.py <id> --to <target-dir>` **默认整包拷贝**(含 `pack.json` 与 `preview/`,包内断言才能在项目里自证);`--minimal` 只拷产物子集 | 把资产抄进项目,**无运行时依赖** |
 | 零安装单文件 | `https://cdn.jsdelivr.net/gh/nakamotosai/sai-assets@<tag>/packs/<id>/css/default.css` | 需要固定版本的单文件 |
 

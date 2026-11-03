@@ -60,24 +60,25 @@ def collect() -> dict:
             continue
         entries = []
         for p in sorted(bucket, key=lambda x: (x.get("external", False), x["id"])):
-            entries.append({
+            # 发现索引:只留"选包"必需字段;完整元数据(license/attribution/tags/not_for/files)
+            # 在 packs/<id>/pack.json —— 这样 catalog 的体量不随包数爆炸,8KB 承诺守得住。
+            # title 不进 catalog(纯装饰,占 UTF-8 字节最狠);人读清单走 `apply.py --list`(读 pack.json)
+            entry = {
                 "id": p["id"],
-                "title": p["title"],
                 "version": p["version"],
-                "one_liner": clip(p.get("when", ""), 48),
-                "tags": p["tags"][:5],
+                "one_liner": clip(p.get("when", ""), 28),
                 "path": f"packs/{p['id']}/",
-                **({} if p["license"].strip().lower().startswith("mit") else {"license": clip(p["license"], 24)}),
-                "external": bool(p.get("external")),
-                "home": p.get("canonical_home") or None,
-            })
+            }
+            if p.get("canonical_home"):
+                entry["home"] = p["canonical_home"]
+            entries.append(entry)
         cats.append({"id": cid, "title": title, "count": len(entries), "items": entries})
     return {
         "schema": 1,
         "repo": "nakamotosai/sai-assets",
         "updated": stamp(),
         "base": BASE,
-        "how_to_use": "读本文件选包 → 取 base+path+<pack>/SKILL.md → 按其中 apply 步骤落地;项目侧用 python scripts/apply.py <id> --to <dir>",
+        "how_to_use": "读本文件选包(只有发现字段)→ 取 base+path+pack.json 看完整元数据 → 读 SKILL.md 按 apply 步骤落地;项目侧用 python scripts/apply.py <id> --to <dir>",
         "categories": cats,
     }
 

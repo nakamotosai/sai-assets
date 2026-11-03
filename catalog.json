@@ -3,7 +3,7 @@
  "repo": "nakamotosai/sai-assets",
  "updated": "2026-11-03",
  "base": "https://raw.githubusercontent.com/nakamotosai/sai-assets/main/",
- "how_to_use": "读本文件选包 → 取 base+path+<pack>/SKILL.md → 按其中 apply 步骤落地;项目侧用 python scripts/apply.py <id> --to <dir>",
+ "how_to_use": "读本文件选包(只有发现字段)→ 取 base+path+pack.json 看完整元数据 → 读 SKILL.md 按 apply 步骤落地;项目侧用 python scripts/apply.py <id> --to <dir>",
  "categories": [
   {
    "id": "themes",
@@ -12,222 +12,194 @@
    "items": [
     {
      "id": "abyss-lab-record",
-     "title": "Abyss Lab Record 暗黑实验记录",
      "version": "1.0.0",
-     "one_liner": "近黑底 + 工程网格 + 等宽 HUD + 单关键词橙，深色主叙事、纸面只做独立反转章节；面板…",
-     "tags": [
-      "dark",
-      "theme",
-      "paper",
-      "mono",
-      "grid"
-     ],
-     "path": "packs/abyss-lab-record/",
-     "external": false,
-     "home": null
+     "one_liner": "近黑底 + 工程网格 + 等宽 HUD + 单关键词橙…",
+     "path": "packs/abyss-lab-record/"
     },
     {
      "id": "fm-void",
-     "title": "FM Void · 全黑 void + 半透明等宽字",
      "version": "1.0.0",
-     "one_liner": "全黑 void + 半透明等宽字；戏在 canvas 背景;适用:UI 字小、letter-s…",
-     "tags": [
-      "dark",
-      "theme",
-      "mono",
-      "void"
-     ],
-     "path": "packs/fm-void/",
-     "external": false,
-     "home": null
+     "one_liner": "全黑 void + 半透明等宽字；戏在 canvas…",
+     "path": "packs/fm-void/"
     },
     {
      "id": "minimalist-essential",
-     "title": "Minimalist Essential 极简 essentials",
      "version": "1.0.0",
-     "one_liner": "删到不能再删：中性底 + 单强调色 + 8pt 网格 + 单列信息流；一屏一任务;适用:中性色…",
-     "tags": [
-      "light",
-      "theme",
-      "grid",
-      "minimal"
-     ],
-     "path": "packs/minimalist-essential/",
-     "external": false,
-     "home": null
+     "one_liner": "删到不能再删：中性底 + 单强调色 + 8pt 网格…",
+     "path": "packs/minimalist-essential/"
     },
     {
      "id": "mohe-mono-blue",
-     "title": "墨河 · 深色单色蓝（群青）",
      "version": "1.0.0",
-     "one_liner": "近黑冷蓝底 + 单一色相 218–223° 明度梯；唯一有彩光是强调色 #6891d9；卡片半…",
-     "tags": [
-      "dark",
-      "theme",
-      "ink",
-      "blue",
-      "serif"
-     ],
-     "path": "packs/mohe-mono-blue/",
-     "external": false,
-     "home": null
+     "one_liner": "近黑冷蓝底 + 单一色相 218–223° 明度梯；唯…",
+     "path": "packs/mohe-mono-blue/"
     },
     {
      "id": "ouuut-editorial",
-     "title": "ouuut Editorial · 和色六景(纸白 / 炭黑)",
      "version": "1.0.0",
-     "one_liner": "内容型 / 杂志型站点:纸白与炭黑双模、六色章节体系、零结构线(层级靠留白与字号)、需要 AA…",
-     "tags": [
-      "editorial",
-      "japanese-colors",
-      "light",
-      "dark",
-      "dual-theme"
-     ],
-     "path": "packs/ouuut-editorial/",
-     "external": false,
-     "home": null
+     "one_liner": "内容型 / 杂志型站点:纸白与炭黑双模、六色章节体系、…",
+     "path": "packs/ouuut-editorial/"
     },
     {
      "id": "paper-editorial",
-     "title": "Paper Editorial · 纸感编辑：米白画布",
      "version": "1.0.0",
-     "one_liner": "纸感编辑：米白画布、墨色正文、刊头朱红;适用:浅色 only;大标题衬线加粗;红只作强调不铺大底",
-     "tags": [
-      "light",
-      "theme",
-      "paper",
-      "ink",
-      "red"
-     ],
-     "path": "packs/paper-editorial/",
-     "external": false,
-     "home": null
+     "one_liner": "纸感编辑：米白画布、墨色正文、刊头朱红;适用:浅色 o…",
+     "path": "packs/paper-editorial/"
     },
     {
      "id": "popart-neubrutal",
-     "title": "Pop Art · Neo Brutal · 奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色",
      "version": "1.0.0",
-     "one_liner": "奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色;适用:4px 黑边;硬阴影无模糊;按下阴影…",
-     "tags": [
-      "light",
-      "theme",
-      "paper",
-      "shadow",
-      "cream"
-     ],
-     "path": "packs/popart-neubrutal/",
-     "external": false,
-     "home": null
+     "one_liner": "奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色;适…",
+     "path": "packs/popart-neubrutal/"
     },
     {
      "id": "saaaai-mono",
-     "title": "saaaai Mono · 近黑 void + 银灰 ink",
      "version": "1.0.0",
-     "one_liner": "近黑 void + 银灰 ink + 等高线轮廓当 accent;适用:单色强调;留大负空间;…",
-     "tags": [
-      "dark",
-      "theme",
-      "void"
-     ],
-     "path": "packs/saaaai-mono/",
-     "external": false,
-     "home": null
+     "one_liner": "近黑 void + 银灰 ink + 等高线轮廓当 a…",
+     "path": "packs/saaaai-mono/"
     },
     {
      "id": "saaaai-paper",
-     "title": "saaaai Paper · 暖纸浅底 + 陶土 accent",
      "version": "1.0.0",
-     "one_liner": "暖纸浅底 + 陶土 accent，主页 t6;适用:陶土作唯一 accent;浅底卡片白抬升",
-     "tags": [
-      "light",
-      "theme",
-      "paper",
-      "warm"
-     ],
-     "path": "packs/saaaai-paper/",
-     "external": false,
-     "home": null
+     "one_liner": "暖纸浅底 + 陶土 accent，主页 t6;适用:陶…",
+     "path": "packs/saaaai-paper/"
     },
     {
      "id": "slow-ride-cream",
-     "title": "Slow Ride Cream 慢骑奶油",
      "version": "1.0.0",
-     "one_liner": "暖奶油纸面 + 鼠尾草绿 + 番茄围巾，慢日子编辑风；拱形画框 + 双语微标签 + 一句文案;…",
-     "tags": [
-      "light",
-      "theme",
-      "paper",
-      "green",
-      "warm"
-     ],
-     "path": "packs/slow-ride-cream/",
-     "external": false,
-     "home": null
+     "one_liner": "暖奶油纸面 + 鼠尾草绿 + 番茄围巾，慢日子编辑风；…",
+     "path": "packs/slow-ride-cream/"
     },
     {
      "id": "swiss-classic",
-     "title": "Swiss Classic（瑞士国际主义）",
      "version": "1.0.0",
-     "one_liner": "暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次;适用:暖色纸白（#E…",
-     "tags": [
-      "light",
-      "theme",
-      "paper",
-      "red",
-      "warm"
-     ],
-     "path": "packs/swiss-classic/",
-     "external": false,
-     "home": null
+     "one_liner": "暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明…",
+     "path": "packs/swiss-classic/"
     },
     {
      "id": "swiss-inverted",
-     "title": "Swiss Inverted（瑞士反色 / 暗色）",
      "version": "1.0.0",
-     "one_liner": "暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红保持不变 —— 同字体两种墨极性;适用:…",
-     "tags": [
-      "dark",
-      "theme",
-      "paper",
-      "ink",
-      "red"
-     ],
-     "path": "packs/swiss-inverted/",
-     "external": false,
-     "home": null
+     "one_liner": "暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红…",
+     "path": "packs/swiss-inverted/"
     },
     {
      "id": "tokyo-crime-dark",
-     "title": "Tokyo Crime Dark 暖黑数据图",
      "version": "1.0.0",
-     "one_liner": "暖黑底 #16130e 配暖色顺序带：深色底上把 ColorBrewer YlOrRd 整体提…",
-     "tags": [
-      "dark",
-      "theme",
-      "warm",
-      "map",
-      "dataviz"
-     ],
-     "path": "packs/tokyo-crime-dark/",
-     "external": false,
-     "home": null
+     "one_liner": "暖黑底 #16130e 配暖色顺序带：深色底上把 Co…",
+     "path": "packs/tokyo-crime-dark/"
     },
     {
      "id": "gruvbox-dark",
-     "title": "Gruvbox(外部包 · 只索引)",
      "version": "1.0.0",
-     "one_liner": "工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字 + 橙强调,或需要 hard/mediu…",
-     "tags": [
-      "gruvbox",
-      "retro",
-      "warm-dark",
-      "terminal",
-      "multi-variant"
-     ],
+     "one_liner": "工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字…",
      "path": "packs/gruvbox-dark/",
-     "external": true,
      "home": "https://github.com/nakamotosai/gruvbox-theme"
+    }
+   ]
+  },
+  {
+   "id": "fonts",
+   "title": "排版配方",
+   "count": 2,
+   "items": [
+    {
+     "id": "cjk-thin-type-system",
+     "version": "1.0.0",
+     "one_liner": "中文 / 日文暗色单页站、作品集、个人站要求「细、干净…",
+     "path": "packs/cjk-thin-type-system/"
+    },
+    {
+     "id": "cjk-typography",
+     "version": "1.0.0",
+     "one_liner": "新中文项目定字族与字号时:先对三场景字号总表,再定回退…",
+     "path": "packs/cjk-typography/"
+    }
+   ]
+  },
+  {
+   "id": "web-fx",
+   "title": "网页动效",
+   "count": 4,
+   "items": [
+    {
+     "id": "bg-fx",
+     "version": "1.0.0",
+     "one_liner": "需要一块有机制、经得起近看的动态背景:首屏 hero、…",
+     "path": "packs/bg-fx/"
+    },
+    {
+     "id": "page-transition",
+     "version": "1.0.0",
+     "one_liner": "静态站/长页需要过场:多页站翻页过渡与页内进出场(原生…",
+     "path": "packs/page-transition/"
+    },
+    {
+     "id": "particle-fx",
+     "version": "1.0.0",
+     "one_liner": "页面需要一层轻量粒子:字标粒子组字、星野背景、银河盘视…",
+     "path": "packs/particle-fx/"
+    },
+    {
+     "id": "three-fx",
+     "version": "1.0.0",
+     "one_liner": "需要一块**三维**、有物理感的空间效果:体波测地线盘…",
+     "path": "packs/three-fx/"
+    }
+   ]
+  },
+  {
+   "id": "web-ui",
+   "title": "UI 组件",
+   "count": 6,
+   "items": [
+    {
+     "id": "dual-theme-toggle",
+     "version": "1.0.0",
+     "one_liner": "任何需要深浅两态的站点:内容型 / 工具型 / 文档站…",
+     "path": "packs/dual-theme-toggle/"
+    },
+    {
+     "id": "libraries-dev-fx",
+     "version": "1.0.0",
+     "one_liner": "想在一页里横向对比 border-beam / thi…",
+     "path": "packs/libraries-dev-fx/"
+    },
+    {
+     "id": "nav-rail-marquee",
+     "version": "1.0.0",
+     "one_liner": "单页作品集 / 工作室首页 / 长页叙事需要一层压在画…",
+     "path": "packs/nav-rail-marquee/"
+    },
+    {
+     "id": "slide-master-senior",
+     "version": "1.0.0",
+     "one_liner": "做 1920×1080 演示母版 / 讲义 / 可打印…",
+     "path": "packs/slide-master-senior/"
+    },
+    {
+     "id": "spectral-glass-prism",
+     "version": "1.0.0",
+     "one_liner": "落地页 / 作品集要一块能拖能转、有真火彩的实时玻璃舞…",
+     "path": "packs/spectral-glass-prism/"
+    },
+    {
+     "id": "swiss-style",
+     "version": "1.0.0",
+     "one_liner": "瑞士 / 国际主义风格的版式与构件:可推导的模块网格(…",
+     "path": "packs/swiss-style/"
+    }
+   ]
+  },
+  {
+   "id": "fx-engines",
+   "title": "动效引擎 / 底座",
+   "count": 1,
+   "items": [
+    {
+     "id": "fx-engines",
+     "version": "1.0.0",
+     "one_liner": "需要持续仿真的粒子效果(径向波前/吸引子/Curl 流…",
+     "path": "packs/fx-engines/"
     }
    ]
   },
@@ -238,20 +210,22 @@
    "items": [
     {
      "id": "references",
-     "title": "References · 外部站点观测(40 条)",
      "version": "1.0.0",
-     "one_liner": "选版式 / 定字号 / 定网格前先读的 40 条外部站点观测:网页 6 · 纸媒 7 · 三维…",
-     "tags": [
-      "references",
-      "observation",
-      "web",
-      "print",
-      "three"
-     ],
-     "path": "packs/references/",
-     "license": "CC0-1.0",
-     "external": false,
-     "home": null
+     "one_liner": "选版式 / 定字号 / 定网格前先读的 40 条外部站…",
+     "path": "packs/references/"
+    }
+   ]
+  },
+  {
+   "id": "video-motion",
+   "title": "视频动效(索引)",
+   "count": 1,
+   "items": [
+    {
+     "id": "video-motion",
+     "version": "1.0.0",
+     "one_liner": "要把一首歌排成一支「印刷质感」的 MV / 歌词影像时…",
+     "path": "packs/video-motion/"
     }
    ]
   }

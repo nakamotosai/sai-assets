@@ -21,7 +21,7 @@
 ## 接口冻结(禁中途改)
 
 - `pack.json` 字段集:**以 `schema/pack.schema.json` 为准**,加字段须先改 schema + PACK-CONTRACT。
-- `catalog.json` 顶层:`{ "schema":1, "updated":"<ISO>", "categories":[{ "id","title","items":[{ "id","title","kind","version","one_liner","when","tags","url","license","canonical_home" }] }] }`。
+- `catalog.json` 顶层:`{ "schema":1, "repo", "updated":"<YYYY-MM-DD>", "base":"<raw 前缀>", "how_to_use", "categories":[{ "id","title","count","items":[{ "id","version","one_liner","path","home"? }] }] }` —— **发现索引**(≤8KB 承诺;title/tags/license/attribution/not_for 与完整元数据在 `packs/<id>/pack.json`,人读清单走 `apply.py --list`)
 - 取用入口固定为 `scripts/apply.py <id> --to <dir>`;`--list` 打印 catalog 摘要。
 
 ## 依赖与风险
