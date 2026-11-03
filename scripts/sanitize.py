@@ -211,7 +211,8 @@ def target_packs(args) -> list[tuple[str, Path]]:
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(description="入包文本清洗(规则表:schema/sanitize.json)")
-    parser.add_argument("--all", action="store_true", help="处理 packs/** 下全部包")
+    parser.add_argument("--all", action="store_true",
+                        help="处理 packs/** 下全部包(就地改写,含他人负责的包;只看不改请加 --dry-run)")
     parser.add_argument("--pack", action="append", metavar="ID", help="只处理指定包(可重复)")
     parser.add_argument("--root", metavar="DIR", help="处理任意目录/文件(配合 --pack-id)")
     parser.add_argument("--pack-id", metavar="ID", help="--root 时使用的包 id(tagline 映射用)")

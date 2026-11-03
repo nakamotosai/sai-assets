@@ -7,6 +7,7 @@
 docs/usage.md、scripts/assert_tokens.py、SKILL.md、README.md、pack.json、preview/。
 
 流程(逐包):
+  0) 整体重写 packs/<id>/(生成物,不要手改;保证重建无残留);
   1) 渲染产物(语义层由源色板按 candidate 表映射,不发明新色);
   2) 调 scripts/sanitize.py 做公开前替换(按包打印计数;--no-sanitize 关闭);
   3) 跑该包自己的 assert_tokens.py;
@@ -29,6 +30,7 @@ import datetime
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -1136,6 +1138,7 @@ def copy_preview(src_demos: Path, demo_dir: str, dest_dir: Path) -> tuple:
         return None, [], [f"demo 目录 {src_dir} 无 preview.html"]
     dest_dir.mkdir(parents=True, exist_ok=True)
     copied = []
+    seen = set()
     html = src_html.read_text(encoding="utf-8")
     for a, b in REF_RE.findall(html):
         ref = (a or b).split("#")[0].split("?")[0].strip()
@@ -1144,7 +1147,7 @@ def copy_preview(src_demos: Path, demo_dir: str, dest_dir: Path) -> tuple:
         rel = Path(ref)
         if rel.is_absolute() or rel.name == "MANIFEST.json":
             continue
-        if rel.suffix.lower() not in COPY_EXTS:
+        if rel.suffix.lower() not in COPY_EXTS or rel.as_posix() in seen:
             continue
         source = (src_dir / rel).resolve()
         try:
@@ -1153,6 +1156,7 @@ def copy_preview(src_demos: Path, demo_dir: str, dest_dir: Path) -> tuple:
             continue
         if not source.is_file():
             continue
+        seen.add(rel.as_posix())
         target = dest_dir / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(source.read_bytes())
@@ -1177,6 +1181,10 @@ def build_pack(pack_id: str, src: Path, alias: dict, cfg: dict, do_sanitize: boo
     theme = json.loads(theme_path.read_text(encoding="utf-8"))
     variant = resolve_variant(theme, pack_id)
     pack_dir = PACKS_DIR / pack_id
+    if pack_dir.exists():
+        shutil.rmtree(pack_dir)  # 生成物整体重写:避免上一轮的 preview/ 等残留
+        log(f"   重置 {pack_dir.as_posix()}(生成物全量重写,不要手改)")
+    pack_dir.mkdir(parents=True, exist_ok=True)
     title = pack_title(theme)
 
     demo_dir = preview_dir_for(pack_id, alias)

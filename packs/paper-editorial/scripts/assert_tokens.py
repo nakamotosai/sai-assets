@@ -82,7 +82,7 @@ PRODUCT_FILES = [
     "README.md",
     "pack.json"
 ]
-PREVIEW = 'preview/index.html'
+PREVIEW = None
 USAGE_CUES = ("配对", "反模式", "--ink", "--accent", "--surface")
 SKILL_CUES = (
     "## When to use", "## When not to use", "## Default", "## Sub-themes",
@@ -214,9 +214,10 @@ def main() -> int:
     for rel in PRODUCT_FILES:
         if not (ROOT / rel).is_file():
             fail(f"缺产物 {rel}")
-    if PREVIEW:
-        if not (ROOT / PREVIEW).is_file():
-            fail(f"缺产物 {PREVIEW}")
+    declared_preview = (load("pack.json").get("files") or {}).get("preview")
+    if declared_preview:
+        if not (ROOT / declared_preview).is_file():
+            fail(f"缺产物 {declared_preview}")
     elif (ROOT / "preview" / "index.html").is_file():
         fail("pack.json 未声明预览,但 preview/index.html 存在")
 

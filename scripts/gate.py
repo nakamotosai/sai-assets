@@ -132,10 +132,15 @@ def _json_pointer(where: str) -> str:
     return "#" if not rel else "#/" + rel
 
 
-def check_packs(packs_dir: Path, pack_schema: dict) -> tuple[list, int]:
-    """返回 (schema findings, 包数);0 个包本身就是 findings(禁止扫 0 个包报绿)。"""
+def check_packs(packs_dir: Path, pack_schema: dict, tracked: set[str] | None = None) -> tuple[list, int]:
+    """返回 (schema findings, 包数);0 个包本身就是 findings(禁止扫 0 个包报绿)。
+
+    tracked 非空时只认 git 跟踪的 pack.json(与清扫面同口径:未 add 的新包不计入,
+    这样"先 add 再跑闸"这一条对 schema 与 assert 都成立,CI 与本地结论一致)。"""
     findings: list = []
     pack_files = sorted(packs_dir.glob("*/pack.json")) if packs_dir.is_dir() else []
+    if tracked is not None:
+        pack_files = [p for p in pack_files if p.relative_to(packs_dir.parent).as_posix() in tracked]
     if not pack_files:
         findings.append(
             "[schema] packs/*/pack.json: 找到 0 个(至少须 1 个;扫 0 个包不许报绿)"
@@ -323,10 +328,14 @@ def scan_banned(root: Path, rule_set: list, scan_upstream: bool, exempt_files: l
 # 3. 断言闸
 # --------------------------------------------------------------------------- #
 
-def run_assertions(packs_dir: Path) -> tuple[list, int]:
-    """逐个包跑 scripts/assert_tokens.py;返回 (逐包结果(含失败尾部), 执行数)。"""
+def run_assertions(packs_dir: Path, tracked: set[str] | None = None) -> tuple[list, int]:
+    """逐个包跑 scripts/assert_tokens.py;返回 (逐包结果(含失败尾部), 执行数)。
+
+    与 schema/清扫同口径:tracked 非空时只跑 git 跟踪的断言脚本(在建中、未 add 的包不参与)。"""
     results: list = []
     scripts = sorted(packs_dir.glob("*/scripts/assert_tokens.py")) if packs_dir.is_dir() else []
+    if tracked is not None:
+        scripts = [s for s in scripts if s.relative_to(packs_dir.parent).as_posix() in tracked]
     for script in scripts:
         pack_dir = script.parents[1]
         pack_id = pack_dir.name
@@ -432,11 +441,14 @@ def main(argv=None) -> int:
         print(f"gate: 规则表不可用({LOCAL_RULES_REL} 或 schema/banned.json):{exc}", file=sys.stderr)
         return 2
 
-    schema_findings, pack_count = check_packs(packs_dir, pack_schema)
+    tracked_files, _mode = _scan_mode(root)
+    tracked_set = set(tracked_files) if tracked_files is not None else None
+
+    schema_findings, pack_count = check_packs(packs_dir, pack_schema, tracked_set)
     banned_findings, allow_hits, exempt_hits, scan_stats = scan_banned(
         root, rule_set, args.scan_upstream, exempt_files
     )
-    assert_results, assert_count = run_assertions(packs_dir)
+    assert_results, assert_count = run_assertions(packs_dir, tracked_set)
     assert_findings = [r for r in assert_results if not r["ok"]]
 
     total = len(schema_findings) + len(banned_findings) + len(assert_findings)
