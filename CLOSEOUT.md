@@ -18,7 +18,7 @@
 | 取用 | `apply.py`(整包拷贝 + lock 片段)/ raw URL / jsDelivr 固定版本 / clone;`harvest.py` 收新包(必填 when/not-for/license + 已有用法文档,不写散文) |
 | 真消费 | `panout-japan`:CSS 计算值 1760 cell 0 差异、`app.css` 段字节不变、截图差 9/1,296,000 px;`design-lock.assets[]` 记 `ouuut-editorial@1.0.0`(未 push,等其自身收口节奏) |
 | 真 PR | PR #1(squash 合并):`minimalist-essential` 补活预览 + 1.0.1;CI 绿 → merge → tag,回收链跑通 |
-| 旧库 | `F:\模板库` 降级为素材源(README/DESIGN 断链修正);`sai-frontend` §1/§1.5 + 9 份 references 口径改为 pack 路径,旧"内网 :18466 / registry.json / 手抄 token"口径清零 |
+| 旧库 | 本地旧素材库降级为素材源(README/DESIGN 断链修正);`sai-frontend` §1/§1.5 + 9 份 references 口径改为 pack 路径,旧"内网 :18466 / registry.json / 手抄 token"口径清零 |
 | 顺手补 | `mv-studio`(Remotion,16 archetype,原零备份)已推私有远端 |
 
 ## 迁移中发现并修掉的真问题(都留了痕)
@@ -32,7 +32,7 @@
 
 ## 未完成(明确留给下一步)
 
-- 旧私仓 `sai-themelab` 归档(远端开着;本地已降级)。
+- 旧私仓 `sai-themelab` 归档(**已完成**:远端已置 archived=true;Gitea 侧内网不可达,未动)。
 - `mv-studio` 的 `canonical_home` 回填(私有仓不宜当公开入口,现为 `null`)。
 - 主检出 ref 落后 origin/main 一个 commit(内容逐字节相同;工作区策略禁止在此切换/重置,下次干净时 `git pull` 即快进)。
 - 9 个"只有卡片、没有实现产物"的动效(`blur-focus` / `clip-sweep` / `flip-in` / `hard-press` / `ambient-void` / `io-triggered-float-in` / `spotlight-hover` / `fx-mutex-system`;`theme-crossfade` 已并入 `dual-theme-toggle`):要真入库得先补产物,禁空壳。

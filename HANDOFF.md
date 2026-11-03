@@ -34,8 +34,8 @@ python scripts/harvest.py <id> --from <src> --kind fx --category web-fx \
 
 ## 4 已知缺口 / 未做完
 
-1. **旧私仓 `nakamotosai/sai-themelab`(private)未归档**:本地 `F:\模板库` 已降级为素材源,远端还开着;归档属 M4 收尾。
-2. **`F:\projects\mv-studio`(Remotion 视频动效)**:已补私有远端 `nakamotosai/mv-studio`,但**尚未在 catalog 里回填 `canonical_home`**(private 仓不宜当公开入口,现为 `null` + 说明)。
+1. **旧私仓 `nakamotosai/sai-themelab`(private)未归档**:本地旧素材库已降级为素材源,远端还开着(现已归档);
+2. **本地的 Remotion 视频工程(mv-studio)**:已补私有远端 `nakamotosai/mv-studio`,但**尚未在 catalog 里回填 `canonical_home`**(private 仓不宜当公开入口,现为 `null` + 说明)。
 3. **WebGL 预览的环境依赖**:本机 ego 窗口 `getContext('webgl2')` 为 null;`bg-fx` / `three-fx` / `page-transition(text-three)` / `particle-fx(void-audio)` 已做**显式环境闸**(可见说明、不假渲染)。真画面需有 GPU 的浏览器(bg-fx 的截图已证)。
 4. **主检出(shared checkout)落后 origin/main 一个 commit**:工作树内容与 `origin/main` 逐字节相同,只是 ref 停在 `20f57e5`(工作区策略禁止在此切换/重置/暂存)。下次干净状态下 `git pull` 即快进。
 5. `demos/` 里被排除的 10 项(第三方品牌/媒体内容)与 9 个"卡片-only 无产物"的动效:留在旧库,不进公开仓。
@@ -45,7 +45,7 @@ python scripts/harvest.py <id> --from <src> --kind fx --category web-fx \
 | 面 | 位置 |
 |---|---|
 | 公开资产(唯一对外) | 本仓(GitHub) |
-| 素材 / 草稿(私有) | `F:\模板库`(旧库,已降级;含未公开原子与待清理件) |
+| 素材 / 草稿(私有,本地) | 旧素材库(已降级;含未公开原子与待清理件,路径不入仓) |
 | 私有规则补充表 | `.private/banned.local.json`(gitignore) |
 | 设计规则(harness 级) | `skill://sai-frontend` §1(取用协议)、`skill://design-system`、`sai-frontend/references/` |
 | 消费记录 | 各项目 `design-lock.json.assets[]` |
