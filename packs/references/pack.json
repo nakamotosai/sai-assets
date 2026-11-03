@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "id": "references",
+  "title": "References · 外部站点观测(40 条)",
+  "kind": "meta",
+  "category": "references",
+  "version": "1.0.0",
+  "license": "CC0-1.0",
+  "attribution": [
+    {
+      "name": "各条 source_url 指向的公开站点 / 规范页 / 上游仓库",
+      "license": "各自站点与规范自身的许可",
+      "what": "观测出处:本包只记录观测与结论,未复制原图、原文与源码"
+    }
+  ],
+  "origin": {
+    "project": "sai-assets",
+    "path": "references/",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "data/index.json",
+      "data/ref-w1-typo-serif.json",
+      "data/ref-w2-typo-mono.json",
+      "data/ref-w3-bento-whitespace.json",
+      "data/ref-w4-dark-cinematic.json",
+      "data/ref-w5-light-warm.json",
+      "data/ref-w6-restrained-motion.json",
+      "data/ref-p1-title-floor.json",
+      "data/ref-p2-body-floor.json",
+      "data/ref-p3-paper-texture.json",
+      "data/ref-p4-one-focal.json",
+      "data/ref-p5-masthead.json",
+      "data/ref-p6-no-table-timeline.json",
+      "data/ref-p7-height-print.json",
+      "data/ref-t1-wgpu-roughness.json",
+      "data/ref-t2-render-pipeline.json",
+      "data/ref-t3-compute-galaxy.json",
+      "data/ref-t4-fluid-xray.json",
+      "data/ref-t5-proc-geometry.json",
+      "data/ref-t6-fluid-presets.json",
+      "data/ref-t7-text-shatter.json",
+      "data/ref-n1-sspai.json",
+      "data/ref-n2-papermod.json",
+      "data/ref-n3-ghost.json",
+      "data/ref-n4-tailnews.json",
+      "data/ref-n5-propublica.json",
+      "data/ref-n6-quanta.json",
+      "data/ref-n7-massively.json",
+      "data/ref-n8-miniflux.json",
+      "data/ref-n9-cleanblog.json",
+      "data/ref-n10-verge.json",
+      "data/ref-n11-newsblur.json",
+      "data/ref-n12-selfoss.json",
+      "data/ref-n13-clreq.json",
+      "data/ref-n14-cntypeset.json",
+      "data/ref-n15-notosanssc.json",
+      "data/ref-s1-grid-formula.json",
+      "data/ref-s2-margins-canons.json",
+      "data/ref-s3-gerstner-compound.json",
+      "data/ref-s4-isotype.json",
+      "data/ref-s5-free-font-stack.json"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py"
+  },
+  "tags": ["references", "observation", "web", "print", "three", "news", "swiss"],
+  "when": "选版式 / 定字号 / 定网格前先读的 40 条外部站点观测:网页 6 · 纸媒 7 · 三维 7 · 新闻 15 · 瑞士 5,给结构骨架、字阶与出处许可状态定依据",
+  "not_for": "当色板用(要 hex 去 themes 包)、当代码或素材用、或据此复刻某个原站",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/references/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens references — 40 条 · index 40 条一致 · 必备字段齐 · 形态规则 8 条 0 命中 · index.json 13407B"
+  },
+  "canonical_home": null
+}

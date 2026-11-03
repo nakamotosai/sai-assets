@@ -1,0 +1,11 @@
+{
+  "id": "ref-t4-fluid-xray",
+  "name": "双场景流体X光",
+  "tag": "three",
+  "source_url": "https://tympanus.net/codrops/2026/03/23/building-a-dual-scene-fluid-x-ray-reveal-effect-in-three-js",
+  "observed": "codrops 2026-03 教程，免费可读，留。一屏一效观测放行。",
+  "layout": "双场景流体 X 光揭示",
+  "colorsDNA": null,
+  "matchTheme": "fm-void",
+  "when": "做流体揭示转场时学思路；demo 源码不入库，用时按站内许可执行。许可：观测放行（源码禁入库）。"
+}

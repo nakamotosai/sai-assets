@@ -1,0 +1,11 @@
+{
+  "id": "ref-w6-restrained-motion",
+  "name": "动效克制·滚动叙事",
+  "tag": "web",
+  "source_url": "https://www.hontran.dev/",
+  "observed": "hontran 实读200：directed motion + prefers-reduced-motion 判据；motionkit / trivia 同源交叉，留。观测级放行。",
+  "layout": "动效克制；滚动叙事；prefers-reduced-motion 兜底",
+  "colorsDNA": null,
+  "matchTheme": "all",
+  "when": "任何主题做滚动叙事前先立克制基线并加 reduced-motion 兜底。注：motionkit/trivia 精确 URL 未在输入中给出，未另行钉死。许可：观测放行。"
+}

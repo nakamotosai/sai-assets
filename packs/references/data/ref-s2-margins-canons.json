@@ -1,0 +1,11 @@
+{
+  "id": "ref-s2-margins-canons",
+  "name": "边距经典比（Van de Graaf / MB / 黄金）",
+  "tag": "swiss",
+  "source_url": "https://en.wikipedia.org/wiki/Canons_of_page_construction",
+  "observed": "正文区⊂页面，边距按经典比（内:上:外:下）：Van de Graaf 2:3:4:6（页宽高各 9 等分取 1/9、2/9，正文区高=页宽）；MB 偏好 1:1.5:2:3；黄金 3:5:5:8；中世纪 1:1:2:3。",
+  "layout": "边距比决定正文区位置与视觉重心；不对称边距是刻意的",
+  "colorsDNA": null,
+  "matchTheme": "swiss-classic",
+  "when": "印刷/海报/deck 定时先选一套 canon，别用均匀边距"
+}

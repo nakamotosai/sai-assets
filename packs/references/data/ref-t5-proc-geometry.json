@@ -1,0 +1,11 @@
+{
+  "id": "ref-t5-proc-geometry",
+  "name": "程序化几何WebGPU",
+  "tag": "three",
+  "source_url": "https://tympanus.net/codrops/2026/08/11/exploring-procedural-geometry-with-three-js-and-webgpu/",
+  "observed": "codrops 2026-08 教程，留。一屏一效观测放行。",
+  "layout": "程序化几何；WebGPU",
+  "colorsDNA": null,
+  "matchTheme": "fm-void",
+  "when": "做程序化几何时学思路；源码不入库。许可：观测放行。"
+}

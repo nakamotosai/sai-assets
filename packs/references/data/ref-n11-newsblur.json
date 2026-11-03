@@ -1,0 +1,11 @@
+{
+  "id": "ref-n11-newsblur",
+  "name": "NewsBlur·聚合多视图参考",
+  "tag": "news",
+  "source_url": "https://github.com/samuelclay/NewsBlur",
+  "observed": "GitHub 实读200：MIT License - see LICENSE file。聚合多视图；英文为主中文0分无夸大；自托管重。得分7/12（2/1/2/1/0/1）。",
+  "layout": "聚合多视图；自托管",
+  "colorsDNA": null,
+  "matchTheme": "saaaai-mono",
+  "when": "做聚合多视图时参考本条；中文需另做。许可：MIT。"
+}

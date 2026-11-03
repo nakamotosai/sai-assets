@@ -1,0 +1,11 @@
+{
+  "id": "ref-s1-grid-formula",
+  "name": "瑞士网格构造公式（Müller-Brockmann）",
+  "tag": "swiss",
+  "source_url": "https://archive.org/stream/GridSystemsInGraphicDesignJosefMullerBrockmann/",
+  "observed": "MB 原著全文实读：网格是可推导的算术程序，不是美学。列深(行)=k·m+(k−1)·g=N，解 m=floor((N−(k−1)·g)/k)。worked example N=57,k=4,g=1→m=13→55行=24.7cm。字段(Field)≠栏(Column)；书用可变 8–32 字段；「12 栏」是网页惯例。",
+  "layout": "构造法：字号行距定模块→量 N→定 k/g→解 m→回代；跨字号行高同模块；图上边压 cap-height、下边压 descender",
+  "colorsDNA": null,
+  "matchTheme": "swiss-classic",
+  "when": "做任何瑞士/编辑/海报网格时先按公式推导，别套死 12 栏（详见本地实现文件）"
+}

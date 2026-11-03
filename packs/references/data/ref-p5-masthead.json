@@ -1,0 +1,11 @@
+{
+  "id": "ref-p5-masthead",
+  "name": "刊头范式",
+  "tag": "print",
+  "source_url": "https://freefrontend.com/css-magazine-layouts",
+  "observed": "同源（freefrontend）实读200：asymmetric grid + 留白层级，主张一致。规范观测放行。",
+  "layout": "asymmetric grid；留白层级；刊头范式",
+  "colorsDNA": null,
+  "matchTheme": "paper-editorial",
+  "when": "做刊头区时用非对称网格+留白定层级。许可：观测放行（代码只当思路）。"
+}

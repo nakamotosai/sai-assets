@@ -1,0 +1,11 @@
+{
+  "id": "ref-s5-free-font-stack",
+  "name": "可合法打包的瑞士字体栈",
+  "tag": "swiss",
+  "source_url": "https://rsms.me/inter/",
+  "observed": "可 @font-face 随包分发：Inter（OFL-1.1）、Noto Sans SC/思源黑体（OFL-1.1）、Geist/Public Sans/Archivo/Space Grotesk。付费不可分发：Neue Haas Grotesk/Helvetica Now/Univers（Monotype/Lineto）。系统 Helvetica Neue 只可本地列名，禁 @font-face。",
+  "layout": "字体栈：'Helvetica Neue','Neue Haas Grotesk',Inter,'Noto Sans SC','Source Han Sans SC',sans-serif",
+  "colorsDNA": null,
+  "matchTheme": "swiss-classic",
+  "when": "要交付可分发的瑞士风格作品时，用 Inter+思源黑体，别捆 Helvetica"
+}

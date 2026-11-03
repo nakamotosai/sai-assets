@@ -1,0 +1,11 @@
+{
+  "id": "ref-n10-verge",
+  "name": "The Verge·快讯流+拼贴观测",
+  "tag": "news",
+  "source_url": "https://www.theverge.com/",
+  "observed": "theverge.com 首页实读200：导航+订阅结构；快讯流+黑底拼贴。黑底拼贴打印0分，仅参考。观测归纳不搬码不抄文。得分8/12（2/1/2/2/1/0）。",
+  "layout": "快讯流；黑底拼贴（打印0分，仅参考）",
+  "colorsDNA": null,
+  "matchTheme": "fm-void",
+  "when": "做快讯流时参考本条拼贴节奏；黑底块不进打印样式。许可：观测归纳（不搬运原文/图/码）。"
+}

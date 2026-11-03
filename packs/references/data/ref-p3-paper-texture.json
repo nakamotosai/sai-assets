@@ -1,0 +1,11 @@
+{
+  "id": "ref-p3-paper-texture",
+  "name": "纸面质感",
+  "tag": "print",
+  "source_url": "https://www.uisdc.com/web-paper-texture",
+  "observed": "uisdc 同源交叉：色板为归纳非取色搬运，留。规范观测放行。",
+  "layout": "纸张纹理质感叠加；归纳非搬运",
+  "colorsDNA": null,
+  "matchTheme": "paper-editorial",
+  "when": "做纸媒质感时用纹理叠加思路，色板自归纳。许可：观测放行。"
+}

@@ -64,10 +64,10 @@ def collect() -> dict:
                 "id": p["id"],
                 "title": p["title"],
                 "version": p["version"],
-                "one_liner": clip(p.get("when", ""), 72),
+                "one_liner": clip(p.get("when", ""), 48),
                 "tags": p["tags"][:5],
                 "path": f"packs/{p['id']}/",
-                "license": clip(p["license"], 24),
+                **({} if p["license"].strip().lower().startswith("mit") else {"license": clip(p["license"], 24)}),
                 "external": bool(p.get("external")),
                 "home": p.get("canonical_home") or None,
             })

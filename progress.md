@@ -21,3 +21,20 @@
 ### 下一步
 
 等 PackGen/Gate 结果 → 跑 `gate.py` 全绿 → 建公开仓 + 首推 → 把 `sai-frontend` §1 改成取用协议 → 在一个真实项目里消费一次(落 `design-lock.json.assets[]`)。
+
+## 2026-11-03 · M1 收尾(公开仓已上线)
+
+- 公开仓:`nakamotosai/sai-assets`(public),两个 workflow(gate / pages)全绿;Pages 已部署:
+  - 墙 `https://nakamotosai.github.io/sai-assets/`
+  - 目录 `https://raw.githubusercontent.com/nakamotosai/sai-assets/main/catalog.json`
+  - 包预览 `.../packs/ouuut-editorial/preview/`
+- 首个 release tag:`pack/ouuut-editorial@1.0.0`(release.py 打 tag 前强制 gate 绿)。
+- 15 个包:13 主题(12 生成 + ouuut-editorial 手写)+ gruvbox-dark(外部索引)+ references(40 条观测,`index.json` 13407B)。
+- 闸:`python scripts/gate.py` → `PASS gate: 0 findings, 15 packs, 14 assertions`;规则分两层(公开层 11 条通用 + `.private/banned.local.json` 内部标识 13 条)。
+- 视觉验收(ego lite 1440px):墙 + ouuut-editorial 预览真开;纸白/A → 炭黑/D 切换后 `--bg #F5F3ED→#0E0E0C`、`--accent #CD5545→#688527`、`aria-label` 翻转、月亮图标显示;色卡 hex 随配色组实时更新。
+- skill 侧:`sai-frontend` §1/§1.5 已重写为**取用协议**(三通道 + 硬规则 + 选型顺序),旧的"内网库 + 手抄 token"口径与 `registry.json` 索引写法退场(仅留一行"不再是取用方向")。
+- CI 确定性:目录/墙的时间戳改取 HEAD 提交日期,消除"CI 重建必红"。
+
+## 2026-11-03 · M2 进行中
+
+四个分身并行:bg-fx/three-fx(WebGL 家族)、page-transition/particle-fx/fx-engines、web-ui 六包、fonts 两包 + video-motion 索引项。

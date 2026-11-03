@@ -14,7 +14,7 @@
      "id": "abyss-lab-record",
      "title": "Abyss Lab Record 暗黑实验记录",
      "version": "1.0.0",
-     "one_liner": "近黑底 + 工程网格 + 等宽 HUD + 单关键词橙，深色主叙事、纸面只做独立反转章节；面板全透明虚线检测框;适用:近黑非纯黑底 + 单层工…",
+     "one_liner": "近黑底 + 工程网格 + 等宽 HUD + 单关键词橙，深色主叙事、纸面只做独立反转章节；面板…",
      "tags": [
       "dark",
       "theme",
@@ -23,7 +23,6 @@
       "grid"
      ],
      "path": "packs/abyss-lab-record/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -31,7 +30,7 @@
      "id": "fm-void",
      "title": "FM Void · 全黑 void + 半透明等宽字",
      "version": "1.0.0",
-     "one_liner": "全黑 void + 半透明等宽字；戏在 canvas 背景;适用:UI 字小、letter-spacing 宽;背景用 canvas 表演;静…",
+     "one_liner": "全黑 void + 半透明等宽字；戏在 canvas 背景;适用:UI 字小、letter-s…",
      "tags": [
       "dark",
       "theme",
@@ -39,7 +38,6 @@
       "void"
      ],
      "path": "packs/fm-void/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -47,7 +45,7 @@
      "id": "minimalist-essential",
      "title": "Minimalist Essential 极简 essentials",
      "version": "1.0.0",
-     "one_liner": "删到不能再删：中性底 + 单强调色 + 8pt 网格 + 单列信息流；一屏一任务;适用:中性色做 90% 面积 + 1 个强调色只占 ≤10%…",
+     "one_liner": "删到不能再删：中性底 + 单强调色 + 8pt 网格 + 单列信息流；一屏一任务;适用:中性色…",
      "tags": [
       "light",
       "theme",
@@ -55,7 +53,6 @@
       "minimal"
      ],
      "path": "packs/minimalist-essential/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -63,7 +60,7 @@
      "id": "mohe-mono-blue",
      "title": "墨河 · 深色单色蓝（群青）",
      "version": "1.0.0",
-     "one_liner": "近黑冷蓝底 + 单一色相 218–223° 明度梯；唯一有彩光是强调色 #6891d9；卡片半透明浮在 WebGL 墨河背景上；竖排书脊刊头（…",
+     "one_liner": "近黑冷蓝底 + 单一色相 218–223° 明度梯；唯一有彩光是强调色 #6891d9；卡片半…",
      "tags": [
       "dark",
       "theme",
@@ -72,7 +69,6 @@
       "serif"
      ],
      "path": "packs/mohe-mono-blue/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -80,7 +76,7 @@
      "id": "ouuut-editorial",
      "title": "ouuut Editorial · 和色六景(纸白 / 炭黑)",
      "version": "1.0.0",
-     "one_liner": "内容型 / 杂志型站点:纸白与炭黑双模、六色章节体系、零结构线(层级靠留白与字号)、需要 AA 安全的小字强调色",
+     "one_liner": "内容型 / 杂志型站点:纸白与炭黑双模、六色章节体系、零结构线(层级靠留白与字号)、需要 AA…",
      "tags": [
       "editorial",
       "japanese-colors",
@@ -89,7 +85,6 @@
       "dual-theme"
      ],
      "path": "packs/ouuut-editorial/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -106,7 +101,6 @@
       "red"
      ],
      "path": "packs/paper-editorial/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -114,7 +108,7 @@
      "id": "popart-neubrutal",
      "title": "Pop Art · Neo Brutal · 奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色",
      "version": "1.0.0",
-     "one_liner": "奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色;适用:4px 黑边;硬阴影无模糊;按下阴影收 2px",
+     "one_liner": "奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色;适用:4px 黑边;硬阴影无模糊;按下阴影…",
      "tags": [
       "light",
       "theme",
@@ -123,7 +117,6 @@
       "cream"
      ],
      "path": "packs/popart-neubrutal/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -131,14 +124,13 @@
      "id": "saaaai-mono",
      "title": "saaaai Mono · 近黑 void + 银灰 ink",
      "version": "1.0.0",
-     "one_liner": "近黑 void + 银灰 ink + 等高线轮廓当 accent;适用:单色强调;留大负空间;contour 与 accent 可分离",
+     "one_liner": "近黑 void + 银灰 ink + 等高线轮廓当 accent;适用:单色强调;留大负空间;…",
      "tags": [
       "dark",
       "theme",
       "void"
      ],
      "path": "packs/saaaai-mono/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -154,7 +146,6 @@
       "warm"
      ],
      "path": "packs/saaaai-paper/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -162,7 +153,7 @@
      "id": "slow-ride-cream",
      "title": "Slow Ride Cream 慢骑奶油",
      "version": "1.0.0",
-     "one_liner": "暖奶油纸面 + 鼠尾草绿 + 番茄围巾，慢日子编辑风；拱形画框 + 双语微标签 + 一句文案;适用:纸面底色 + 深棕墨字，英文微标签全大写宽…",
+     "one_liner": "暖奶油纸面 + 鼠尾草绿 + 番茄围巾，慢日子编辑风；拱形画框 + 双语微标签 + 一句文案;…",
      "tags": [
       "light",
       "theme",
@@ -171,7 +162,6 @@
       "warm"
      ],
      "path": "packs/slow-ride-cream/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -179,7 +169,7 @@
      "id": "swiss-classic",
      "title": "Swiss Classic（瑞士国际主义）",
      "version": "1.0.0",
-     "one_liner": "暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次;适用:暖色纸白（#EDEBE6）与暖黑（#111111），绝不用纯…",
+     "one_liner": "暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明度差与发丝线造层次;适用:暖色纸白（#E…",
      "tags": [
       "light",
       "theme",
@@ -188,7 +178,6 @@
       "warm"
      ],
      "path": "packs/swiss-classic/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -196,7 +185,7 @@
      "id": "swiss-inverted",
      "title": "Swiss Inverted（瑞士反色 / 暗色）",
      "version": "1.0.0",
-     "one_liner": "暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红保持不变 —— 同字体两种墨极性;适用:深色底用暖黑 #121212，绝不用纯 #000…",
+     "one_liner": "暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红保持不变 —— 同字体两种墨极性;适用:…",
      "tags": [
       "dark",
       "theme",
@@ -205,7 +194,6 @@
       "red"
      ],
      "path": "packs/swiss-inverted/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -213,7 +201,7 @@
      "id": "tokyo-crime-dark",
      "title": "Tokyo Crime Dark 暖黑数据图",
      "version": "1.0.0",
-     "one_liner": "暖黑底 #16130e 配暖色顺序带：深色底上把 ColorBrewer YlOrRd 整体提亮 15% 修对比（断点不动），深棕分隔线代替白…",
+     "one_liner": "暖黑底 #16130e 配暖色顺序带：深色底上把 ColorBrewer YlOrRd 整体提…",
      "tags": [
       "dark",
       "theme",
@@ -222,7 +210,6 @@
       "dataviz"
      ],
      "path": "packs/tokyo-crime-dark/",
-     "license": "MIT",
      "external": false,
      "home": null
     },
@@ -230,7 +217,7 @@
      "id": "gruvbox-dark",
      "title": "Gruvbox(外部包 · 只索引)",
      "version": "1.0.0",
-     "one_liner": "工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字 + 橙强调,或需要 hard/medium/soft 与 material/baby 变体",
+     "one_liner": "工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字 + 橙强调,或需要 hard/mediu…",
      "tags": [
       "gruvbox",
       "retro",
@@ -239,9 +226,32 @@
       "multi-variant"
      ],
      "path": "packs/gruvbox-dark/",
-     "license": "MIT(本仓仅索引,内容许可见其本家)",
      "external": true,
      "home": "https://github.com/nakamotosai/gruvbox-theme"
+    }
+   ]
+  },
+  {
+   "id": "references",
+   "title": "外部参考观测",
+   "count": 1,
+   "items": [
+    {
+     "id": "references",
+     "title": "References · 外部站点观测(40 条)",
+     "version": "1.0.0",
+     "one_liner": "选版式 / 定字号 / 定网格前先读的 40 条外部站点观测:网页 6 · 纸媒 7 · 三维…",
+     "tags": [
+      "references",
+      "observation",
+      "web",
+      "print",
+      "three"
+     ],
+     "path": "packs/references/",
+     "license": "CC0-1.0",
+     "external": false,
+     "home": null
     }
    ]
   }

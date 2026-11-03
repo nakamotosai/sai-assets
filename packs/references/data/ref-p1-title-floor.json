@@ -1,0 +1,11 @@
+{
+  "id": "ref-p1-title-floor",
+  "name": "大字号地板-标题",
+  "tag": "print",
+  "source_url": "https://www.woshipm.com/pd/5105282.html",
+  "observed": "woshipm 实读200：百度大字版移动端 60-81px 字号体系 + 眼动验证，主张一致。规范观测放行。",
+  "layout": "标题字号地板 60-81px（移动端推导）；眼动验证",
+  "colorsDNA": null,
+  "matchTheme": "slow-ride-cream",
+  "when": "做中老年/大字场景标题时先对地板值再定层级。许可：观测放行（规范归纳）。"
+}
