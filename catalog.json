@@ -206,19 +206,13 @@
   {
    "id": "references",
    "title": "外部参考观测",
-   "count": 2,
+   "count": 1,
    "items": [
     {
      "id": "references",
      "version": "1.0.0",
      "one_liner": "选版式 / 定字号 / 定网格前先读的 40 条外部站…",
      "path": "packs/references/"
-    },
-    {
-     "id": "zz-smoke-test",
-     "version": "0.0.1",
-     "one_liner": "验证「加一个包目录 → 自动上站」这条管线时可临时入库…",
-     "path": "packs/zz-smoke-test/"
     }
    ]
   },

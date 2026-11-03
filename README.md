@@ -35,6 +35,19 @@ curl -O https://cdn.jsdelivr.net/gh/nakamotosai/sai-assets@pack/paper-editorial@
 
 消费后须在项目 `design-lock.json` 记 `assets[]`(见 `docs/USAGE-INTEGRATION.md`)。
 
+## 加一个包(自动上站)
+
+```bash
+# 1) 收包(从项目 harvest:自动 sanitize + 闸)
+python scripts/harvest.py <id> --from <项目目录> --kind fx --category web-fx \
+    --when "何时用" --not-for "何时不用" --license MIT --entry index.html --usage <用法文档>
+# 2) 重建目录与站点,跑闸
+python scripts/build_catalog.py && python scripts/build_site.py && git add -A && python scripts/gate.py
+# 3) 推 main → CI 自动部署;开 PR 会额外给一个 pr-<n> 预览环境
+```
+
+站点唯一入口是 `packs/*/pack.json`:没有第二个注册表。构建自检(详情页/预览/zip/子 demo/sitemap/零外链)任一不成立就不部署。
+
 ## 类目
 
 数量以 `catalog.json` 为准(不在文档里写死,防漂移):
