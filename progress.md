@@ -38,3 +38,23 @@
 ## 2026-11-03 · M2 进行中
 
 四个分身并行:bg-fx/three-fx(WebGL 家族)、page-transition/particle-fx/fx-engines、web-ui 六包、fonts 两包 + video-motion 索引项。
+
+## 2026-11-04 · M2 完成(29 包全绿)
+
+四个分身并行交付,收口后一次全仓验证:
+
+| 类目 | 包 |
+|---|---|
+| themes | 14(13 实体 + gruvbox-dark 外部索引) |
+| fonts | 2(cjk-thin-type-system / cjk-typography) |
+| web-fx | 4(bg-fx 10 效果共享引擎 / page-transition 3 / particle-fx 6 / three-fx 2) |
+| web-ui | 6(dual-theme-toggle / slide-master-senior / spectral-glass-prism / libraries-dev-fx / nav-rail-marquee / swiss-style) |
+| fx-engines | 1(粒子引擎 + 悬浮调参板底座) |
+| references | 1(40 条观测) |
+| video-motion | 1(索引项,不承载内容) |
+
+- 闸:`PASS gate: 0 findings, 29 packs, 27 assertions`;catalog 6698B ≤ 8KB(发现索引);墙 29 卡。
+- CI 从两个 workflow 变成"三个真问题都抓到"的现场:①惰性时间戳(改取 HEAD 提交日期)②`apply.py` 漏拷 pack.json/preview(包内断言必失败)③**CRLF 工作区 vs LF 检出导致 `versions.json` 的 sha256 两值**(三包同因,改 LF 归一后再哈希)。
+- 共享引擎去重:bg-fx 的 10 份 `engine.js` 合成 1 份;param-panel 以"带版本号的拷贝"分发(断言查版本 + LF 归一 sha256),堵住旧库"被拷 12 份后漂移"的坑。
+- 视觉:32 张 1440px 截图,除三个包的 WebGL 降级路径外 0 控制台报错;本机 ego 窗口 `getContext('webgl2')` 为 null,包内已做**显式环境闸**(可见说明、不假渲染),有 GPU 的环境为真画面(bg-fx 截图已证).
+- 待办口径:三方 vendored three.js 各包自带的决定记在 `docs/PACK-CONTRACT.md §7`。

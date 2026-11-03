@@ -6,7 +6,7 @@
 
 ## 状态
 
-- 阶段:**M0 完成 → M1 进行中**
+- 阶段:**M2 完成(29 包全绿)→ M3/M4 收尾**
 - 里程碑树:`TRACK_TREE.md` · 范围白名单:`docs/WHITELIST.md` · 包契约:`docs/PACK-CONTRACT.md`
 - 决策记录:`docs/adr/adr-0001-single-repo-multi-pack-fresh-history.md`
 
@@ -49,9 +49,9 @@ curl -O https://cdn.jsdelivr.net/gh/nakamotosai/sai-assets@pack/paper-editorial@
 
 - **M0 建档拍板** ✅ 生产根 + 门规 + ADR-0001 + PACK 契约 v1 + 公开收录判据 `docs/SCOPE.md`
 - **M1 单包打通** ✅ 生成器 + 清洗闸 + catalog + 墙 + 公开仓 + Pages + skill 取用协议 + 一次真消费(`design-lock.assets[]` 已记版本)
-- **M2 存量迁移** ⏳ web-fx / web-ui / fonts / video-motion 索引
-- M3 自动化 ⏳ CI 已绿(gate + pages);tag/release 已可用;harvest → PR 回收链已备
-- M4 私有侧收口 ⏸ 旧库降级已完成;旧私仓归档与最终 closeout 待做
+- **M2 存量迁移** ✅ 29 包:themes 14 · fonts 2 · web-fx 4 · web-ui 6 · fx-engines 1 · references 1 · video-motion 1(索引)
+- **M3 自动化** ⏳ CI 已绿(gate + pages);tag/release 可用;harvest → PR 回收链已备待跑一次真 PR
+- M4 私有侧收口 ⏳ 旧库已降级;待:旧私仓归档、最终 closeout
 
 ## 链接
 
