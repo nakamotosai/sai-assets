@@ -26,6 +26,7 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+ASSET_VER = ""        # build() 里按外壳文件内容算,写进 URL 的 ?v=,避免部署后用户拿旧 JS
 PACKS = ROOT / "packs"
 SHELL = ROOT / "site"
 REPO = "nakamotosai/sai-assets"
@@ -238,6 +239,7 @@ THEME_ICON = ('<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true
 def head(title: str, desc: str, canonical: str, *, depth: int, jsonld: str = "",
          og_type: str = "website") -> str:
     up = "../" * depth
+    v = f"?v={ASSET_VER}" if ASSET_VER else ""
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -258,11 +260,11 @@ def head(title: str, desc: str, canonical: str, *, depth: int, jsonld: str = "",
 <meta name="theme-color" content="#F5F3ED" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0E0E0C" media="(prefers-color-scheme: dark)">
 <link rel="alternate" type="application/json" href="{up}catalog.json" title="catalog.json">
-<link rel="stylesheet" href="{up}assets/all.css">
-<link rel="stylesheet" href="{up}assets/type.css">
-<link rel="stylesheet" href="{up}assets/site.css">
+<link rel="stylesheet" href="{up}assets/all.css{v}">
+<link rel="stylesheet" href="{up}assets/type.css{v}">
+<link rel="stylesheet" href="{up}assets/site.css{v}">
 <script>try{{var t=localStorage.getItem('sai-assets-theme');if(t)document.documentElement.dataset.theme=t;}}catch(e){{}}</script>
-{jsonld}<script src="{up}assets/site.js" defer></script>
+{jsonld}<script src="{up}assets/site.js{v}" defer></script>
 </head>
 <body>
 <a class="skip" href="#main">跳到主内容</a>
@@ -689,6 +691,7 @@ def verify(out: Path, rows: list[dict]) -> None:
 
 
 def build(out: Path) -> None:
+    global ASSET_VER
     updated = stamp()
     rows = load_packs()
     if not rows:
@@ -709,6 +712,10 @@ def build(out: Path) -> None:
     ed = PACKS / "ouuut-editorial" / "css"
     shutil.copy2(ed / "all.css", out / "assets" / "all.css")
     shutil.copy2(ed / "type.css", out / "assets" / "type.css")
+    h = hashlib.sha256()
+    for name in ("site.css", "site.js", "all.css", "type.css"):
+        h.update((out / "assets" / name).read_bytes())
+    ASSET_VER = h.hexdigest()[:8]
     shutil.copy2(ROOT / "catalog.json", out / "catalog.json")
 
     (out / "index.html").write_text(render_home(rows, updated), encoding="utf-8")
