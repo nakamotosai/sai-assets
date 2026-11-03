@@ -82,6 +82,14 @@
 - **卡片空白**:旧池用 IntersectionObserver 的边沿事件,卸载时只删 iframe 不放回占位,快速滚动后可见卡片会变成空白渐变。改为滚动对账式池(scroll/resize + rAF,回收 ±1.4 屏外、上限 14),卸载一律放回带文案的占位;实测 19 个滚动位置空白块 = 0。缩略区同时改 16:10(同屏多看一档)。
 - **gruvbox 去外部化**:内容整体入库 `packs/gruvbox-dark@2.0.0`(css 5 / tokens 12 / preview / docs / SKILL / assert / references),包内断言自跑 PASS(themes=10 absolute=36);旧仓 `nakamotosai/gruvbox-theme` 已归档。仓内只剩 `video-motion` 一个外部索引(Remotion 工程,运行模型不同)。
 
+## 视觉重做(2026-11-04 第二轮,用户令:站本身要高级、极简)
+
+- **方案**:卡片墙退役,改「印刷索引」—— 行是条目(编号/名称+id/一句话/类目/版本),预览改为**悬停右侧浮层**(一次只跑一个 iframe,首屏零 iframe);详情页舞台前置(标题正下方)、控制条上移、舞台宽高双向 fit。
+- **参考**:minimal.gallery(大标题 + 零界面)、recent.design / godly.website(作品优先)、reactbits / 21st.dev(详情页代码页签)、Linear/Vercel(近黑底 + 发丝线 + 等宽元数据)。
+- **取舍**:不做瀑布流截图墙(丢"跑真预览"卖点)、不做 3D 滚动长镜头(与极简冲突、LCP 不可控)。
+- **探针**:1440 / 390 / 500 三档 `ovx = 0`,对比度违例 0,字号 5 档(14/15/17/22/hero),首页 iframe 初始 0 / 悬停 1,`class=card` 残留 0,`html.js` 兜底 + `@media print` 可见。
+- **修掉**:舞台 iframe 相对路径在 detail 两层深度下 404(现在按 `up` 前缀生成);`.reveal` 无 JS 时整页不可见。
+
 ## 未完成(明确留档)
 
 - `MASTER-CHECKLIST.md` 未勾 5 项:C3(社交卡平台实测)、D3(Search Console/Bing 验证)、E8(Lighthouse 移动端基线)、G3(Uptime Kuma 监控项)、J6(发布后 24h/首周巡检)。都不阻断首发。
