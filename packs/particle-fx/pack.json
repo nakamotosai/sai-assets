@@ -82,8 +82,8 @@
   "default_variant": null,
   "verified": {
     "date": "2026-11-03",
-    "how": "python packs/particle-fx/scripts/assert_tokens.py(六档对齐 + 版本 + sha256 + 参数一致性)+ preview/galaxy.html、preview/index.html、preview/void-audio.html 在 Chrome 打开",
-    "evidence": "PASS assert_tokens particle-fx"
+    "how": "python packs/particle-fx/scripts/assert_tokens.py(六档对齐+版本+sha256+参数一致性)+ preview/ 全部 7 页经本地 http 服务在 Chrome 打开(1440×900,控制台 0 报错)+ void-audio 降级路径实测",
+    "evidence": "PASS assert_tokens particle-fx · 6 档 · particle-motions 1.0.0/void-fx 1.0.0/param-panel 2.0.0(=fx-engines)· sha256 13 文件 · 61 字段/61 默认值 · 61 个包内引用全命中 · 7 页控制台 0 报错 · 音频档:无 ?stream= 时流按钮禁用、默认假频谱、模拟 NotAllowedError → HUD『麦克风被拒 → 假频谱』且 0 报错;截图 .private/shots/particle-fx-{starfield,galaxy,curl,text-push,scroll-morph,void-audio,void-audio-denied}.png"
   },
   "canonical_home": null,
   "changelog": [

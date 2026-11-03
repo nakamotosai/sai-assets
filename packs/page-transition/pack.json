@@ -81,8 +81,8 @@
   "default_variant": null,
   "verified": {
     "date": "2026-11-03",
-    "how": "python packs/page-transition/scripts/assert_tokens.py(三档对齐 + 版本 + sha256 + three 头)+ preview/index.html、vt-a.html、section-travel.html 经本地 http 服务在 Chrome 打开",
-    "evidence": "PASS assert_tokens page-transition"
+    "how": "python packs/page-transition/scripts/assert_tokens.py(三档对齐+版本+sha256+three 头)+ preview/ 全部 5 页经本地 http 服务在 Chrome 打开(1440×900,控制台 0 报错)+ A→B 跨文档翻页实测",
+    "evidence": "PASS assert_tokens page-transition · 3 档 · param-panel 2.0.0(=fx-engines)/three r170 · sha256 12 文件 · 8 字段/8 默认值 · 45 个包内引用全命中 · 5 页控制台 0 报错 · 跨页:startViewTransition=function、翻到 B 后背景层仍在动(__bgFrames=108)、0 报错 · 本机 ego 窗口无 WebGL2,text-three 走环境闸只出可见说明(不报错、不静默半死);截图 .private/shots/page-transition-{vt-a,vt-b,section-travel,text-three}.png"
   },
   "canonical_home": null,
   "changelog": [

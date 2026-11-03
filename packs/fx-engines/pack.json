@@ -62,8 +62,8 @@
   "default_variant": null,
   "verified": {
     "date": "2026-11-03",
-    "how": "python packs/fx-engines/scripts/assert_tokens.py(版本+sha256+params schema+预览引用)+ preview/index.html、preview/param-panel.html 在 Chrome 打开",
-    "evidence": "PASS assert_tokens fx-engines"
+    "how": "python packs/fx-engines/scripts/assert_tokens.py(版本+sha256+params schema+预览引用)+ preview/index.html、preview/param-panel.html 经本地 http 服务在 Chrome 打开(1440×900,控制台 0 报错)",
+    "evidence": "PASS assert_tokens fx-engines · fx.js 1.0.0/param-panel.js 2.0.0 · sha256 6 文件 · 6 fx(0..5)· FX_PARAM_DEFAULTS 18 键 · 4 个包内引用全命中 · 预览控制台 0 报错;截图 .private/shots/fx-engines-engine.png、fx-engines-panel.png"
   },
   "canonical_home": null,
   "changelog": [

@@ -94,7 +94,7 @@
     {
       "file": "src/stage.css",
       "version": "1.0.0",
-      "sha256": "ad7ea787f29fd75f334f3525e811b4b298b9fc0fad24aef8f1f069da4c060e0a",
+      "sha256": "8d21cf5c87452a605a810f0931e5285463ac54e21508ea2a104ad0d902729a5c",
       "source": "本包自产:预览页共用舞台样式(含音频档频谱条与按钮组)",
       "license": "MIT"
     }
