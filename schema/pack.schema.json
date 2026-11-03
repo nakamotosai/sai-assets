@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/nakamotosai/sai-assets/schema/pack.schema.json",
+  "title": "sai-assets pack.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "id", "title", "kind", "category", "version", "license", "attribution", "origin", "entry", "files", "tags", "when", "not_for", "verified"],
+  "properties": {
+    "schema": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "title": { "type": "string", "minLength": 2 },
+    "kind": { "enum": ["theme", "fonts", "fx", "ui", "meta"] },
+    "category": { "enum": ["themes", "fonts", "web-fx", "web-ui", "fx-engines", "references", "video-motion"] },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "license": { "type": "string", "minLength": 2 },
+    "attribution": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "license"],
+        "properties": {
+          "name": { "type": "string" },
+          "url": { "type": "string" },
+          "license": { "type": "string" },
+          "what": { "type": "string" }
+        }
+      }
+    },
+    "origin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["project", "path"],
+      "properties": {
+        "project": { "type": "string" },
+        "path": { "type": "string", "not": { "pattern": "^([A-Za-z]:|/|\\\\)" } },
+        "derived_from": { "type": ["string", "null"] }
+      }
+    },
+    "entry": { "type": "string" },
+    "files": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tokens": { "type": "array", "items": { "type": "string" } },
+        "css": { "type": "array", "items": { "type": "string" } },
+        "src": { "type": "array", "items": { "type": "string" } },
+        "upstream": { "type": "array", "items": { "type": "string" } },
+        "usage": { "type": ["string", "null"] },
+        "assert": { "type": ["string", "null"] },
+        "preview": { "type": ["string", "null"] }
+      }
+    },
+    "tags": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "when": { "type": "string", "minLength": 4 },
+    "not_for": { "type": "string", "minLength": 4 },
+    "default_variant": { "type": ["string", "null"] },
+    "verified": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "how", "evidence"],
+      "properties": {
+        "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "how": { "type": "string", "minLength": 4 },
+        "evidence": { "type": "string", "minLength": 4 }
+      }
+    },
+    "canonical_home": { "type": ["string", "null"] },
+    "external": { "type": "boolean" },
+    "changelog": { "type": "array", "items": { "type": "string" } }
+  }
+}

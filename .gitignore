@@ -1,0 +1,9 @@
+# 私有工作区:不进公开仓、也不进公开内容闸的扫描范围
+.private/
+_scratch/
+_deposit_tmp/
+
+# 生成物缓存
+__pycache__/
+*.pyc
+.DS_Store

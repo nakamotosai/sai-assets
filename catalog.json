@@ -1,0 +1,50 @@
+{
+ "schema": 1,
+ "repo": "nakamotosai/sai-assets",
+ "updated": "2026-11-03T13:48:36+00:00",
+ "base": "https://raw.githubusercontent.com/nakamotosai/sai-assets/main/",
+ "how_to_use": "读本文件选包 → 取 base+path+<pack>/SKILL.md → 按其中 apply 步骤落地;项目侧用 python scripts/apply.py <id> --to <dir>",
+ "categories": [
+  {
+   "id": "themes",
+   "title": "主题 · 配色与字体",
+   "count": 2,
+   "items": [
+    {
+     "id": "ouuut-editorial",
+     "title": "ouuut Editorial · 和色六景(纸白 / 炭黑)",
+     "version": "1.0.0",
+     "one_liner": "内容型 / 杂志型站点:纸白与炭黑双模、六色章节体系、零结构线(层级靠留白与字号)、需要 AA 安全的小字强调色",
+     "tags": [
+      "editorial",
+      "japanese-colors",
+      "light",
+      "dark",
+      "dual-theme"
+     ],
+     "path": "packs/ouuut-editorial/",
+     "license": "MIT",
+     "external": false,
+     "home": null
+    },
+    {
+     "id": "gruvbox-dark",
+     "title": "Gruvbox(外部包 · 只索引)",
+     "version": "1.0.0",
+     "one_liner": "工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字 + 橙强调,或需要 hard/medium/soft 与 material/baby 变体",
+     "tags": [
+      "gruvbox",
+      "retro",
+      "warm-dark",
+      "terminal",
+      "multi-variant"
+     ],
+     "path": "packs/gruvbox-dark/",
+     "license": "MIT(本仓仅索引,内容许可见其本家)",
+     "external": true,
+     "home": "https://github.com/nakamotosai/gruvbox-theme"
+    }
+   ]
+  }
+ ]
+}

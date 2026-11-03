@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sai-assets · 可复用网页资产库</title>
+<meta name="description" content="主题配色与字体、网页动效、UI 组件的可复用包目录;每个包自带入口、产物、配对规则与断言。">
+<style>
+ :root{--bg:#fbfaf7;--ink:#1b1b18;--muted:#6b6a63;--line:#e6e3db;--card:#fff;--accent:#b4451f}
+ @media (prefers-color-scheme: dark){:root{--bg:#111110;--ink:#ecebe5;--muted:#9c9a92;--line:#2a2a27;--card:#181817;--accent:#e08a6a}}
+ *{box-sizing:border-box}
+ body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 system-ui,-apple-system,"Segoe UI","Noto Sans SC",sans-serif}
+ .wrap{max-width:1180px;margin:0 auto;padding:40px 22px 80px}
+ h1{font-size:30px;margin:0 0 6px;letter-spacing:-.01em}
+ .lede{color:var(--muted);margin:0 0 8px;max-width:70ch}
+ .meta{color:var(--muted);font-size:13px;margin:0 0 28px}
+ .meta code{font-family:ui-monospace,monospace}
+ h2{font-size:17px;margin:38px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+ h2 em{color:var(--muted);font-style:normal;font-weight:400;font-size:13px;margin-left:8px}
+ .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+ .card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:14px 15px}
+ .card h3{margin:0 0 4px;font-size:15px}
+ .card h3 span{color:var(--muted);font-weight:400;font-size:12px;margin-left:6px}
+ .card p{margin:0 0 10px;color:var(--muted);font-size:13px}
+ .tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+ .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:1px 8px}
+ .sw{display:flex;height:16px;border-radius:4px;overflow:hidden;margin:0 0 10px;border:1px solid var(--line)}
+ .sw i{flex:1}
+ .links{display:flex;gap:12px;font-size:13px}
+ a{color:var(--accent);text-decoration:none}
+ a:hover{text-decoration:underline}
+ .ext{font-size:11px;border:1px dashed var(--line);border-radius:99px;padding:1px 8px;color:var(--muted)}
+ .foot{margin-top:44px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+</style></head><body><div class="wrap">
+<h1>sai-assets · 可复用网页资产库</h1>
+<p class="lede">主题配色与字体、网页动效、UI 组件、排版配方。一个包 = 入口 + 产物 + 配对规则 + 断言,能直接抄进项目。</p>
+<p class="meta">共 2 个包 · 更新 2026-11-03 · 目录 <code>catalog.json</code> · 取用 <code>python scripts/apply.py &lt;id&gt; --to &lt;dir&gt;</code></p>
+<h2>主题 · 配色与字体<em>2 个</em></h2><div class="grid"><article class="card"><h3>Gruvbox(外部包 · 只索引)<span>gruvbox-dark · v1.0.0</span></h3><p>工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字 + 橙强调,或需要 hard/medium/soft 与 material/baby 变体</p><div class="tags"><span class="tag">gruvbox</span><span class="tag">retro</span><span class="tag">warm-dark</span><span class="tag">terminal</span><span class="tag">multi-variant</span><span class="ext">外部索引</span></div><div class="links"><a href="packs/gruvbox-dark/SKILL.md">SKILL.md</a><a href="https://github.com/nakamotosai/gruvbox-theme">本家仓库</a></div></article><article class="card"><h3>ouuut Editorial · 和色六景(纸白 / 炭黑)<span>ouuut-editorial · v1.0.0</span></h3><p>内容型 / 杂志型站点:纸白与炭黑双模、六色章节体系、零结构线(层级靠留白与字号)、需要 AA 安全的小字强调色</p><div class="sw"><i style="background:#F5F3ED"></i><i style="background:#1A1A16"></i><i style="background:#5B5A53"></i><i style="background:#0E0E0C"></i><i style="background:#EDEBE4"></i><i style="background:#A3A199"></i><i style="background:#0C8B7A"></i><i style="background:#A77109"></i><i style="background:#CD5545"></i><i style="background:#3F7DCA"></i></div><div class="tags"><span class="tag">editorial</span><span class="tag">japanese-colors</span><span class="tag">light</span><span class="tag">dark</span><span class="tag">dual-theme</span></div><div class="links"><a href="packs/ouuut-editorial/preview/">活预览</a><a href="packs/ouuut-editorial/SKILL.md">SKILL.md</a><a href="packs/ouuut-editorial/docs/usage.md">配对规则</a></div></article></div>
+<p class="foot">每个包的 <code>SKILL.md</code> 是 agent 入口;<code>docs/usage.md</code> 是配对规则;<code>scripts/assert_tokens.py</code> 是断言。<br>
+内容许可见各包 <code>pack.json</code> 的 <code>license</code> 与 <code>attribution</code>;外部包只做索引,内容在其本家。</p>
+</div></body></html>

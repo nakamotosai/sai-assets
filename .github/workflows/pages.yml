@@ -1,0 +1,48 @@
+name: pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Gate(公开内容闸 + 断言)
+        run: python scripts/gate.py
+      - name: Rebuild catalog(并校验不超 8KB)
+        run: python scripts/build_catalog.py
+      - name: Rebuild wall
+        run: python scripts/build_wall.py
+      - name: Fail if generated files are stale
+        run: |
+          git diff --exit-code -- catalog.json index.html \
+            || (echo "::error::catalog.json / index.html 与 packs/ 不一致,请本地重建后提交" && exit 1)
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

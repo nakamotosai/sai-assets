@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "note": "原子卡 id ↔ 旧库 demo 目录名映射(只保留白名单包需要的条目;跨仓公开,故不含任何被排除项)。灌入时以本表为准,禁按 id 猜目录。",
+  "map": {
+    "section-text-three": "section-text-fx-three",
+    "section-text-travel": "section-text-fx",
+    "theme-crossfade": "dual-theme-toggle",
+    "swiss-classic": "swiss-style",
+    "swiss-inverted": "swiss-style",
+    "swiss-dataviz": "swiss-style",
+    "swiss-grid-system": "swiss-style",
+    "swiss-layouts": "swiss-style",
+    "swiss-ui": "swiss-style",
+    "swiss-field-layout": "swiss-field"
+  },
+  "card_only": ["blur-focus", "clip-sweep", "flip-in", "hard-press", "io-triggered-float-in", "spotlight-hover", "fx-mutex-system"],
+  "card_only_note": "只有索引卡、无实现产物:进 catalog 但不生成包、不上墙(禁空壳)。theme-crossfade 已并入 dual-theme-toggle。",
+  "bundles": {
+    "bg-fx": ["aurora-veil", "chrome-ripple", "ember-field", "gilded-topography", "lumen-river", "magnetic-filings", "prism-beam", "silk-interference", "solar-drift", "tidal-caustics"],
+    "page-transition": ["view-transition-layer", "section-text-travel", "section-text-three"],
+    "particle-fx": ["particle-text-push", "starfield-drift", "galaxy-disk", "curl-fluid", "particle-scroll-morph", "fm-void-audio"],
+    "three-fx": ["blackhole-void-three", "blackhole-particles"],
+    "fx-engines": ["shared-fx-engine", "param-panel"],
+    "cjk-typography": ["cjk-body-sans", "size-scale", "sys-console", "free-thin-cjk-sans"]
+  }
+}
