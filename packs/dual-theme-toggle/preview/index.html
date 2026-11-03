@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 接入第 1 行:防闪。应用存过的主题必须在 <head> 里先贴一次;
+     放到 </body> 前,选过浅色的用户每次刷新都会先闪一帧深色。data-resolved 顺手补上,图标也不会错一帧 -->
+<script>document.documentElement.dataset.js='';try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;document.documentElement.dataset.resolved=t||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');}catch(e){}</script>
+<title>dual-theme-toggle · 两态主题切换器</title>
+<!-- 接入第 2 行:token + 按钮样式 -->
+<link rel="stylesheet" href="../src/theme-toggle.css">
+<style>
+  /* 本页只是样品页的 chrome,不属于包;真实项目里这部分是你的页面样式,只消费 --bg/--ink/--muted/--surface/--accent-ink */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink); line-height: 1.75;
+    font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color .3s cubic-bezier(.22,.61,.36,1), color .3s cubic-bezier(.22,.61,.36,1);
+  }
+  a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+
+  .bar { position: sticky; top: 0; z-index: 7; background: var(--bg); border-bottom: 1px solid var(--line); }
+  .bar-in { max-width: 1080px; margin: 0 auto; padding: 0 24px; min-height: 56px; display: flex; align-items: center; gap: 18px; }
+  .sticker { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; letter-spacing: .14em; color: var(--muted); white-space: nowrap; }
+  .bar-sp { flex: 1; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 48px 24px 96px; }
+  h1 { font-size: 30px; line-height: 1.3; font-weight: 800; letter-spacing: -.01em; }
+  h2 { font-size: 20px; font-weight: 800; margin-top: 56px; padding-left: 12px; border-left: 3px solid var(--accent); }
+  p.lead { color: var(--muted); margin-top: 12px; font-size: 15px; max-width: 62ch; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; background: var(--surface); padding: 1px 5px; }
+
+  .status { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+  .cell { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
+  .cell dt { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; letter-spacing: .1em; color: var(--muted); }
+  .cell dd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 15px; margin-top: 4px; word-break: break-all; }
+  .swatch { display: inline-block; width: 12px; height: 12px; border: 1px solid var(--line-strong); vertical-align: -1px; margin-right: 6px; }
+
+  .picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; margin-top: 20px; }
+  .pick { cursor: pointer; text-align: left; background: transparent; border: 1px solid var(--line); border-radius: 6px; padding: 20px; color: var(--ink); font: inherit; transition: border-color .26s cubic-bezier(.22,.61,.36,1), transform .26s cubic-bezier(.22,.61,.36,1); }
+  .pick:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .pick b { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 28px; color: var(--accent-ink); display: block; }
+  .pick span { display: block; margin-top: 6px; font-size: 14px; color: var(--muted); }
+
+  .spacer { height: 58vh; display: grid; place-items: center; color: var(--muted); font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: .18em; border: 1px dashed var(--line-strong); border-radius: 6px; margin-top: 24px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; margin-top: 20px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px; }
+  .card h3 { font-size: 16px; font-weight: 700; line-height: 1.4; }
+  .card p { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .card.accent h3 { color: var(--accent-ink); }
+
+  .check { margin-top: 20px; padding: 18px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); font-size: 14px; color: var(--muted); }
+  .check li { margin-left: 18px; }
+
+  footer { margin-top: 72px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; font-family: ui-monospace, monospace; }
+
+  @media (prefers-reduced-motion: reduce) { .pick, body { transition: none; } .pick:hover { transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="sticker">ASSET · DUAL THEME TOGGLE</span>
+    <span class="bar-sp"></span>
+    <!-- 接入第 3 行的 DOM 部分:一个 44px 热区、无边框纯图标的按钮。
+         JS 会自动注入太阳/月亮两个图标并维护 aria-label;宿主不存在时 JS 会自己造一个 -->
+    <button class="tt" type="button" data-theme-toggle="theme" aria-label="切换深浅主题"></button>
+  </div>
+</div>
+
+<div class="wrap">
+  <h1>两态主题切换器 · 一个按钮</h1>
+  <p class="lead">
+    右上角切一次:整页颜色交叉淡化(视图过渡),选择写进 <code>localStorage</code>,刷新保持。
+    从没点过的用户不看这段脚本 —— 没有 <code>data-theme</code> 属性时,页面直接跟随系统的
+    <code>prefers-color-scheme</code>,并且把按钮藏起来:宁可不显示,也不给一个点不动的假开关。
+  </p>
+
+  <h2>当前状态(活读数)</h2>
+  <dl class="status">
+    <div class="cell"><dt>html[data-theme]</dt><dd id="s-attr">—</dd></div>
+    <div class="cell"><dt>html[data-resolved]</dt><dd id="s-resolved">—</dd></div>
+    <div class="cell"><dt>computed --bg</dt><dd id="s-bg">—</dd></div>
+    <div class="cell"><dt>localStorage.theme</dt><dd id="s-ls">—</dd></div>
+  </dl>
+
+  <h2>定长丝滑滚动(同一个文件里的第二件工具)</h2>
+  <p class="lead">
+    点下面任一张卡:2 秒缓入缓出滚到卡片区。中途滚轮 / 触摸 / 方向键一动作就交还控制权,
+    <code>prefers-reduced-motion</code> 下直接瞬移。原生 <code>scrollIntoView({behavior:'smooth'})</code>
+    的时长由浏览器定(约 300ms),要"能看清的过程"只能 rAF 自算。
+  </p>
+  <section class="picks">
+    <button class="pick" type="button" data-scroll-to="#wall"><b>01</b><span>令牌单一出处</span></button>
+    <button class="pick" type="button" data-scroll-to="#wall"><b>02</b><span>特异性地毯</span></button>
+    <button class="pick" type="button" data-scroll-to="#wall"><b>03</b><span>冷启动口径</span></button>
+    <button class="pick" type="button" data-scroll-to="#wall"><b>04</b><span>双视口验收</span></button>
+  </section>
+
+  <div class="spacer">↓ 占位区:让卡片落在首屏之外,才看得出滚动过程 ↓</div>
+
+  <section id="wall">
+    <h2>十条踩出来的硬结论</h2>
+    <div class="grid">
+      <article class="card"><h3>令牌单一出处</h3><p>主题 token 各页各写一份,第 N+1 个页面必然漏:真实事故是首页和详情页都换了皮肤,专题页还是硬编码的旧色。</p></article>
+      <article class="card accent"><h3>html[data-theme] 的元素名前缀</h3><p>属性贴 &lt;html&gt; 上,而各页自己的 <code>:root</code> 通常写在后面、特异性同为 (0,1,0) —— 选择器不带元素名前缀就会被压掉:属性切了、颜色纹丝不动。</p></article>
+      <article class="card"><h3>&lt;head&gt; 期贴标</h3><p>存过的主题必须在 <code>&lt;head&gt;</code> 里先贴一次,否则刷新先闪一帧默认主题。</p></article>
+      <article class="card"><h3>重映射表要盖满</h3><p>重映射要覆盖页面用到的全部 token,漏一个就是"切了一半"。</p></article>
+      <article class="card"><h3>无 JS 跟系统</h3><p>没有属性时用 <code>@media (prefers-color-scheme)</code> 跟随系统,并隐藏按钮 —— 点不动的开关比没有开关更糟。</p></article>
+      <article class="card"><h3>小字走 --accent-ink</h3><p>原色 <code>--accent</code> 只给图形和大字号;彩色小字必须用同色相提亮/压暗一档的 <code>--accent-ink</code>。</p></article>
+      <article class="card"><h3>图标一个按钮</h3><p>44px 热区、15px 图标、无边框无胶囊无文字;禁两个圆点并排。</p></article>
+      <article class="card"><h3>动效随主题停</h3><p>隐藏画布 ≠ 停渲染:给常驻动效挂主题判断,浅色下别继续烧 GPU。</p></article>
+      <article class="card"><h3>删交互清五层</h3><p>DOM / CSS 提示与动画 / JS 绑定 / 过期闸 / 别处仍在用的附带物,一层不落。</p></article>
+      <article class="card"><h3>冷启动口径</h3><p>备选主题冷启动时背景帧数应为一帧都没跑 —— 拿计数说话,不靠"看起来停了"。</p></article>
+    </div>
+
+    <div class="check">
+      <strong>验收清单(可照抄)</strong>
+      <ul>
+        <li>点按钮:<code>html[data-theme]</code> 翻转,上面 <code>computed --bg</code> 跟着变。</li>
+        <li>刷新:<code>localStorage.theme</code> 还在,首屏直接是选过的颜色(全程无闪)。</li>
+        <li>清掉存储再刷新:属性消失,跟随系统;按钮仍在,点一下就写回选择。</li>
+        <li>键盘 Tab 到按钮:可见焦点环 2px;Enter/Space 生效。</li>
+        <li>1440 / 390 两个视口:顶栏不出现横向滚动条。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    dual-theme-toggle · 源实现 <span>demos/dual-theme-toggle</span> · MIT · 见 <a href="../docs/usage.md">docs/usage.md</a>
+  </footer>
+</div>
+
+<!-- 接入第 3 行:行为(按钮不存在时它会自己造一个) -->
+<script src="../src/theme-toggle.js"></script>
+<script>
+  // 样品页的活读数:只在预览里用,不属于包
+  (function () {
+    var R = document.documentElement;
+    function paint() {
+      var bg = getComputedStyle(document.body).getPropertyValue('--bg').trim();
+      var ls = null;
+      try { ls = localStorage.getItem('theme'); } catch (e) {}
+      document.getElementById('s-attr').textContent = R.getAttribute('data-theme') || '(无 → 跟随系统)';
+      document.getElementById('s-resolved').textContent = R.getAttribute('data-resolved') || '—';
+      document.getElementById('s-bg').innerHTML = '<span class="swatch" style="background:' + bg + '"></span>' + bg;
+      document.getElementById('s-ls').textContent = ls === null ? '(空)' : ls;
+    }
+    R.addEventListener('themechange', paint);
+    document.addEventListener('DOMContentLoaded', paint);
+    paint();
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "id": "scale",
+  "unit": "px",
+  "floor_px": 12,
+  "note": "字号 4 档。地板 12px 是任何中文文字的最小值(微标签),细体档的更高地板见 weights.json。clamp 中段用 vw 做响应式、上限一律绝对单位。",
+  "tiers": [
+    {
+      "id": "giant",
+      "role": "字标 —— 全站唯一允许挂显示字族的元素",
+      "css": "clamp(44px, 8.2vw, 122px)",
+      "min_px": 44,
+      "max_px": 122,
+      "weight": "mark",
+      "leading": "display",
+      "shadow": "display",
+      "note": "源卡未给字标字距档:保持 0,不额外加"
+    },
+    {
+      "id": "display",
+      "role": "标语 / 邮箱 —— 全站最大正文",
+      "css": "clamp(28px, 3.2vw, 44px)",
+      "min_px": 28,
+      "max_px": 44,
+      "weight": "text",
+      "leading": "display",
+      "shadow": "display",
+      "note": "≥28px 才允许第二层扩散影"
+    },
+    {
+      "id": "title",
+      "role": "区块标题 / 卡片标题",
+      "css": "clamp(20px, 2vw, 22px)",
+      "min_px": 20,
+      "max_px": 22,
+      "weight": "text",
+      "tracking": "title",
+      "leading": "title",
+      "shadow": "text"
+    },
+    {
+      "id": "body",
+      "role": "正文 / 界面 / 微标签",
+      "css": "17px",
+      "min_px": 17,
+      "max_px": 17,
+      "weight": "text",
+      "tracking": "body",
+      "leading": "body",
+      "shadow": "text",
+      "note": "细体正文的地板就是 17px,不许更小;微标签要再小必须把字重抬到 400(见 weights.json)"
+    }
+  ]
+}

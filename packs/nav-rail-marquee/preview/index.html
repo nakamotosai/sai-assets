@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nav-rail-marquee · 预览舞台</title>
+<link rel="stylesheet" href="../src/nav-rail.css">
+<style>
+  /* ── 舞台外壳(预览专用,不属于组件本体) ── */
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+
+  /* ── 段落排版(占位文案,只用来撑出可滚动的整屏布景) ── */
+  .nr-sec { gap: 0; }
+  .nr-sec__kicker {
+    margin: 0 0 26px;
+    font-size: 11px;
+    letter-spacing: .3em;
+    color: rgba(255, 255, 255, .45);
+  }
+  .nr-sec__title {
+    margin: 0 0 26px;
+    font-size: 40px;
+    line-height: 1.16;
+    font-weight: 600;
+    letter-spacing: -.01em;
+  }
+  .nr-sec__lede {
+    margin: 0 0 40px;
+    max-width: 46em;
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, .62);
+  }
+  .nr-sec__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-width: 900px;
+  }
+  .nr-sec__list li {
+    padding: 18px 20px;
+    font-size: 12px;
+    letter-spacing: .04em;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, .72);
+    background: rgba(255, 255, 255, .05);
+  }
+  @media (min-width: 1024px) {
+    .nr-sec__title { font-size: 64px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nr" data-nav-rail>
+
+  <!-- 左竖排跑马灯:两份等长内容 + vertical-rl,位移 -50% 即无缝 -->
+  <div class="nr-marquee" aria-hidden="true">
+    <div class="nr-marquee__track">
+      <span>WHO · WORKS · DEMOS · ABOUT · example.com · </span>
+      <span>WHO · WORKS · DEMOS · ABOUT · example.com · </span>
+    </div>
+  </div>
+
+  <!-- 顶部居中小写导航:三个入口映射到 works / demos / about 三段 -->
+  <nav class="nr-top" data-nr-top aria-label="主导航">
+    <button type="button" class="nr-btn" data-nr-target="works" aria-label="跳到 works 段">works</button>
+    <button type="button" class="nr-btn" data-nr-target="demos" aria-label="跳到 demos 段">demos</button>
+    <button type="button" class="nr-btn" data-nr-target="about" aria-label="跳到 contact 段">contact</button>
+  </nav>
+
+  <!-- 右侧段轨:标签 + 条形,当前段条形加长发光 -->
+  <nav class="nr-rail" data-nr-rail aria-label="段落导航">
+    <button type="button" class="nr-btn" data-nr-target="who" aria-current="page" aria-label="跳到 WHO 段">
+      <span class="nr-lbl">WHO</span><span class="nr-bar" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="nr-btn" data-nr-target="works" aria-label="跳到 WORKS 段">
+      <span class="nr-lbl">WORKS</span><span class="nr-bar" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="nr-btn" data-nr-target="demos" aria-label="跳到 DEMOS 段">
+      <span class="nr-lbl">DEMOS</span><span class="nr-bar" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="nr-btn" data-nr-target="about" aria-label="跳到 ABOUT 段">
+      <span class="nr-lbl">ABOUT</span><span class="nr-bar" aria-hidden="true"></span>
+    </button>
+  </nav>
+
+  <!-- 底部进度线:宽度由脚本按当前段写入 -->
+  <div class="nr-progress" data-nr-progress role="progressbar" aria-label="段落进度"
+       aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">
+    <span class="nr-progress__bar" data-nr-bar></span>
+  </div>
+
+  <main class="nr-stage" data-nr-stage>
+
+    <section class="nr-sec" data-nr-section="who" id="sec-who">
+      <p class="nr-sec__kicker">01 — WHO</p>
+      <h1 class="nr-sec__title">左竖排跑马灯 · 顶导航 · 右段轨</h1>
+      <p class="nr-sec__lede">
+        占位文案。这一屏用来验证「当前段」是否随滚动与点击切换:整页只有一套 chrome,
+        左侧是竖排跑马灯,顶部是居中小写导航,右侧是段轨,底部是进度线。
+      </p>
+      <ul class="nr-sec__list">
+        <li>视口 1440px 下满屏布景,舞台内部滚动并预留滚动条槽位,不抖。</li>
+        <li>段轨当前条加长并发光,顶导航同段落同步高亮。</li>
+        <li>进度线宽度 = (当前段序号 + 1) / 段数,由脚本写入。</li>
+      </ul>
+    </section>
+
+    <section class="nr-sec" data-nr-section="works" id="sec-works">
+      <p class="nr-sec__kicker">02 — WORKS</p>
+      <h2 class="nr-sec__title">占位条目</h2>
+      <p class="nr-sec__lede">
+        占位文案。点击顶部 works 或右侧 WORKS,两处当前态应当同时切换,
+        底部进度线走到第二格。
+      </p>
+      <ul class="nr-sec__list">
+        <li>条目一 · 占位</li>
+        <li>条目二 · 占位</li>
+        <li>条目三 · 占位</li>
+      </ul>
+    </section>
+
+    <section class="nr-sec" data-nr-section="demos" id="sec-demos">
+      <p class="nr-sec__kicker">03 — DEMOS</p>
+      <h2 class="nr-sec__title">占位条目</h2>
+      <p class="nr-sec__lede">
+        占位文案。滚动到这里时,段轨的 DEMOS 条自动变亮,顶导航的 demos 同步高亮,
+        进度线走到第三格,不需要点任何东西。
+      </p>
+      <ul class="nr-sec__list">
+        <li>示例 A · 占位</li>
+        <li>示例 B · 占位</li>
+        <li>示例 C · 占位</li>
+      </ul>
+    </section>
+
+    <section class="nr-sec" data-nr-section="about" id="sec-about">
+      <p class="nr-sec__kicker">04 — ABOUT</p>
+      <h2 class="nr-sec__title">无障碍与键盘</h2>
+      <p class="nr-sec__lede">
+        占位文案。每个可点项都有 44px 命中区与 aria-label,当前项写 aria-current="page";
+        Tab 可达并显示焦点环,段轨用上下键、顶导航用左右键移动焦点;
+        系统开启「减少动效」时跑马灯停跑、过渡归零。
+      </p>
+      <ul class="nr-sec__list">
+        <li>Tab / Shift+Tab 在两组导航之间移动</li>
+        <li>Enter / Space 跳到该段</li>
+        <li>Home / End 到首尾项</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<script src="../src/nav-rail.js"></script>
+</body>
+</html>

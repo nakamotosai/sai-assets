@@ -1,0 +1,128 @@
+:root {
+      --bg: #000;
+      --fg: #f2f0ea;
+      --muted: rgba(255,255,255,.42);
+      --gold: #c4a574;
+      --line: rgba(255,255,255,.12);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%; overflow: hidden;
+      background: var(--bg); color: var(--fg);
+      font-family: "Noto Sans SC", "PingFang SC", "Segoe UI", system-ui, sans-serif;
+    }
+    #c {
+      position: fixed; inset: 0; z-index: 0;
+      display: block; width: 100%; height: 100%;
+    }
+    .picker {
+      position: fixed; z-index: 20;
+      top: 0; bottom: 0; left: 0;
+      width: min(310px, 40vw);
+      padding: 18px 12px 24px max(14px, env(safe-area-inset-left));
+      overflow-y: auto;
+      background: linear-gradient(90deg, rgba(0,0,0,.94) 74%, transparent);
+      scrollbar-width: thin;
+    }
+    .picker h1 {
+      font-size: 13px; font-weight: 500; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--gold);
+      margin: 4px 8px 6px;
+    }
+    .picker .lead {
+      font-size: 12px; color: var(--muted); line-height: 1.55;
+      margin: 0 8px 14px; max-width: 32ch;
+    }
+    .picker .lead b { color: rgba(255,255,255,.8); font-weight: 500; }
+    .speed-box {
+      margin: 0 8px 14px; padding: 10px;
+      border: 1px solid var(--line); border-radius: 10px;
+      background: rgba(255,255,255,.03);
+    }
+    .speed-box .lbl {
+      font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 8px;
+    }
+    .speed-box .row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .speed-box button {
+      flex: 1; min-width: 4em;
+      font-family: inherit; font-size: 11px;
+      color: rgba(255,255,255,.65);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 999px; padding: 6px 8px; cursor: pointer;
+    }
+    .speed-box button.on {
+      color: #0a0806; background: var(--gold); border-color: var(--gold); font-weight: 600;
+    }
+    .pick {
+      display: block; width: 100%; text-align: left;
+      background: transparent; border: 1px solid transparent;
+      border-radius: 10px; padding: 10px 12px; margin-bottom: 6px;
+      color: inherit; cursor: pointer;
+    }
+    .pick:hover { border-color: rgba(255,255,255,.16); background: rgba(255,255,255,.03); }
+    .pick.on {
+      border-color: rgba(196,165,116,.55);
+      background: rgba(196,165,116,.08);
+    }
+    .pick .n {
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 10px; letter-spacing: .16em; color: var(--gold); margin-bottom: 4px;
+    }
+    .pick .t { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+    .pick .d { font-size: 11px; color: var(--muted); line-height: 1.45; }
+    .tools {
+      position: fixed; z-index: 22;
+      top: max(14px, env(safe-area-inset-top));
+      right: max(16px, env(safe-area-inset-right));
+      display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end;
+    }
+    .tools button, .tools a {
+      font-family: inherit; font-size: 11px; letter-spacing: .1em;
+      color: rgba(255,255,255,.7);
+      background: rgba(0,0,0,.55);
+      border: 1px solid var(--line);
+      border-radius: 999px; padding: 7px 14px;
+      cursor: pointer; text-decoration: none;
+    }
+    .tools button.primary {
+      color: #0a0806; background: var(--gold); border-color: var(--gold); font-weight: 600;
+    }
+    .rail {
+      position: fixed; z-index: 18;
+      right: max(14px, env(safe-area-inset-right));
+      top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 14px; align-items: flex-end;
+    }
+    .rail button {
+      background: none; border: 0; padding: 4px 0; cursor: pointer;
+      color: rgba(255,255,255,.3);
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .rail button .bar {
+      width: 2px; height: 16px; background: rgba(255,255,255,.18);
+      order: 2; transition: height .35s, background .25s;
+    }
+    .rail button .lbl { order: 1; opacity: 0; }
+    .rail button.on { color: #fff; }
+    .rail button.on .bar { height: 36px; background: #fff; }
+    .rail button:hover .lbl, .rail button.on .lbl { opacity: 1; }
+    .prog {
+      position: fixed; bottom: 0; left: 0; height: 1.5px; z-index: 18;
+      background: linear-gradient(90deg, rgba(255,255,255,.12), #fff);
+      width: 33.33%; transition: width .55s;
+    }
+    .hint {
+      position: fixed; z-index: 16; left: 50%; bottom: 18px;
+      transform: translateX(-50%);
+      font-size: 11px; letter-spacing: .1em;
+      color: rgba(255,255,255,.28); white-space: nowrap;
+      pointer-events: none;
+    }
+    @media (max-width: 720px) {
+      .picker { width: 100%; height: auto; max-height: 34vh; bottom: auto; }
+      .rail { display: none; }
+    }

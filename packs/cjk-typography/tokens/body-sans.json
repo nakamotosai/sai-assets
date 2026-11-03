@@ -1,0 +1,23 @@
+{
+  "id": "body-sans",
+  "title": "CJK Body Sans · 正文无衬线回退栈",
+  "roles": {
+    "body": "\"Noto Sans SC\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", sans-serif",
+    "display": "\"Noto Sans SC\", \"PingFang SC\", \"Hiragino Sans GB\", \"Microsoft YaHei\", sans-serif",
+    "article": "\"Noto Serif SC\", \"Source Han Serif SC\", \"Songti SC\", serif",
+    "mono": "\"JetBrains Mono\", \"Maple Mono NF CN\", ui-monospace, monospace"
+  },
+  "css": "body{font-family:\"Noto Sans SC\",\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",sans-serif;font-display:swap;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}\narticle{font-family:\"Noto Serif SC\",\"Source Han Serif SC\",\"Songti SC\",serif}\np{line-height:1.75;letter-spacing:.02em;font-size:16px}\n@media(min-width:1024px){p{font-size:17px}}",
+  "weights": "正文 400–500 · 强调 700 · 禁 11–15px 中文用 300(笔画溶解「300 陷阱」)· 禁加粗宋体冒充黑体",
+  "sizes": "正文 16px(移动 15px)· 次级 / 卡片 14px · 角标 12px · 整页可读最小 14px · 卡片禁 9 / 10 / 11 / 13px · 标题 20px 起、层级差 ≥4px",
+  "line_height": "中文正文 1.7–1.8 · 长文衬线 ≥1.6",
+  "features": [
+    "SimSun / 宋体 / serif 禁入 body 回退栈(静默回退 = 硬错误)",
+    "中文字库大:必须子集化 + font-display:swap 防 FOIT",
+    "零 Web 字体场景直接用系统栈(苹方 / 微软雅黑),不拉外部字体",
+    "大容器字号 ≥ 同屏小容器"
+  ],
+  "when": "一切中文正文与 UI;长文阅读切 article 衬线栈;纸媒标题衬线走主题包的 display 档",
+  "note": "`css` 里的 p{letter-spacing:.02em} 是源卡的拉丁 / 标题用法;中文正文按 cjk-thin-type-system 的口径加字距为 0,正文落地时以那边为准。",
+  "sample": "正文十六字 · 卡片十四字 · 标题二十起"
+}

@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "id": "bg-fx",
+  "title": "bg-fx · 十款 WebGL2 动态背景(共享引擎)",
+  "kind": "fx",
+  "category": "web-fx",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "sai-assets 内部模板库 · demos 下 10 个背景 demo 包(自产,已脱敏)",
+      "license": "MIT",
+      "what": "origin:共享引擎 engine.js 与 10 个 concept 的机制代码、参数默认值;本包只做去重(10 份 engine.js → 1 份)与拆分(单个 concepts.js → concepts/<id>.js)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "demos/{aurora-veil,chrome-ripple,ember-field,gilded-topography,lumen-river,magnetic-filings,prism-beam,silk-interference,solar-drift,tidal-caustics}",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/engine.js",
+      "src/stage.css",
+      "src/concepts/common.js",
+      "src/concepts/lumen-river.js",
+      "src/concepts/solar-drift.js",
+      "src/concepts/aurora-veil.js",
+      "src/concepts/gilded-topography.js",
+      "src/concepts/silk-interference.js",
+      "src/concepts/tidal-caustics.js",
+      "src/concepts/ember-field.js",
+      "src/concepts/chrome-ripple.js",
+      "src/concepts/prism-beam.js",
+      "src/concepts/magnetic-filings.js",
+      "effects/lumen-river/params.json",
+      "effects/solar-drift/params.json",
+      "effects/aurora-veil/params.json",
+      "effects/gilded-topography/params.json",
+      "effects/silk-interference/params.json",
+      "effects/tidal-caustics/params.json",
+      "effects/ember-field/params.json",
+      "effects/chrome-ripple/params.json",
+      "effects/prism-beam/params.json",
+      "effects/magnetic-filings/params.json"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "webgl2",
+    "postfx",
+    "glsl",
+    "shader",
+    "background",
+    "bloom",
+    "hero",
+    "dark",
+    "light"
+  ],
+  "when": "需要一块有机制、经得起近看的动态背景:首屏 hero、section 底、deck 封面、展厅墙。取用面 = 一份 engine.js(bloom → 径向色差 → 亮度门控颗粒 → smoothstep 暗角 → ACES → 三角抖动)+ 一个 concept(该效果的机制);参数只有 6 个通用旋钮(speed/bloom/exposure/grain/ca/vig)。性能口径:DPR 封顶(弱设备 1.25、桌面 1.75),场景按半分辨率、泛光按 1/4 分辨率,页隐藏(document.hidden)与离屏(IntersectionObserver)整帧跳过,回到前台按 delta clamp 续播。无障碍口径:prefers-reduced-motion 只渲染一帧静态画面(t=6.0),不做自动播放的循环动画。",
+  "not_for": "禁用:① 前景内容密集的页面(背景有景深与高光,会跟正文抢注意力,长文页只用 textZone 压暗后的低配 speed);② 需要首帧 LCP 极致的落地页(首帧要建 4 张离屏 target,移动端明显更重——改用 CSS 渐变);③ 无 WebGL2 的老设备(createEngine 会返回 {ok:false},必须自己给静态兜底,别让画布全黑);④ 把 10 个效果同屏铺开(10 个 WebGL 上下文会被浏览器回收,一页只开一个);⑤ 当图标/装饰贴纸用(这是环境光,不是插画)。",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/bg-fx/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens bg-fx"
+  },
+  "canonical_home": null
+}

@@ -1,0 +1,65 @@
+{
+  "schema": 1,
+  "id": "libraries-dev-fx",
+  "title": "Libraries.dev 全家桶试吃台 · 五个 CDN 特效组件",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "Libraries.dev(Jakubantalik)",
+      "url": "https://github.com/Jakubantalik/Libraries.dev",
+      "license": "MIT",
+      "what": "border-beam / thinking-orbs / liquid-gooey / metal-fx / img-fx 五个组件源码与试吃台外壳设计(本包只保留外壳,组件运行时外链)"
+    },
+    {
+      "name": "esm.sh",
+      "url": "https://esm.sh/",
+      "license": "CDN 服务,按各包自身许可分发",
+      "what": "运行时按需转译并加载上述五个包"
+    },
+    {
+      "name": "Lorem Picsum",
+      "url": "https://picsum.photos/",
+      "license": "占位图服务(图片来自 Unsplash)",
+      "what": "img-fx 试吃项的示例图片(仅外链,未随包分发)"
+    }
+  ],
+  "origin": {
+    "project": "sai-theme-lab",
+    "path": "demos/libraries-dev-fx",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/bench.css",
+      "src/bench.js"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "reveal",
+    "effects",
+    "react",
+    "cdn",
+    "esm-sh",
+    "tasting-bench",
+    "border-beam",
+    "thinking-orbs",
+    "liquid-gooey",
+    "metal-fx",
+    "img-fx"
+  ],
+  "when": "想在一页里横向对比 border-beam / thinking-orbs / liquid-gooey / metal-fx / img-fx 五个特效真身(React 原包,非仿写),或需要一个『每格独立加载 + 局部失败红字』的展示骨架,且不许装 npm、要求 file:// 直开",
+  "not_for": "生产运行时依赖、离线或内网演示、需要固定版本可复现的工程、SSR 或打包进 bundle 的场景",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/libraries-dev-fx/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens libraries-dev-fx / (待断言实测)"
+  },
+  "canonical_home": null
+}

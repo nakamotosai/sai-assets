@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "id": "cjk-typography",
+  "title": "CJK Typography · 中文排版四件套(回退栈 / 字号总表 / 系统栈 / 免费细体)",
+  "kind": "fonts",
+  "category": "fonts",
+  "version": "1.0.0",
+  "license": "MIT(本包 JSON / 文档 / 断言为自产;所列字体各自沿用自己的许可,见 tokens/free-thin-cjk.json)",
+  "attribution": [
+    {
+      "name": "本地素材库 · 中文正文字体栈原子卡",
+      "license": "自产观测(2026-09-30 全网扫描)",
+      "what": "回退栈、字号地板、300 陷阱与子集化口径"
+    },
+    {
+      "name": "本地素材库 · 字号偏好总表原子卡",
+      "license": "自产观测",
+      "what": "工具台 / 纸媒电视 1920 / 营销落地 三场景字号数字"
+    },
+    {
+      "name": "本地素材库 · 系统控制台栈原子卡",
+      "license": "自产观测",
+      "what": "system-ui 系统栈与 tabular-nums 口径"
+    },
+    {
+      "name": "本地素材库 · 免费细体中文三选原子卡",
+      "license": "自产观测(2026-10-06 npm / CDN 实查)",
+      "what": "三份候选的许可、可变轴与 unicode-range 分片实测"
+    },
+    { "name": "Noto Sans SC / Noto Serif SC", "url": "https://cdn.jsdelivr.net/npm/@fontsource-variable/noto-sans-sc@5.3.0/index.css", "license": "OFL-1.1", "what": "字族名与 CDN 分发入口(npm 包路径)" },
+    { "name": "MiSans VF", "url": "https://cdn.jsdelivr.net/npm/misans@5.0.0/lib/Normal/MiSansVF.min.css", "license": "Apache-2.0", "what": "字族名与 CDN 分发入口(npm 包路径)" },
+    { "name": "HarmonyOS Sans SC", "url": "https://cdn.jsdelivr.net/npm/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/Light.css", "license": "Unlicense", "what": "字族名与 CDN 分发入口(npm 包路径)" },
+    { "name": "JetBrains Mono / Inter / Space Mono / Maple Mono NF CN / Cascadia Code(字族名引用)", "license": "各上游许可(OFL-1.1 等待核)", "what": "等宽与拉丁字族名,包内不含字体文件" }
+  ],
+  "origin": {
+    "project": "asset-source",
+    "path": "fonts/",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/index.json",
+      "tokens/body-sans.json",
+      "tokens/size-scale.json",
+      "tokens/console.json",
+      "tokens/free-thin-cjk.json"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": ["cjk", "font-stack", "type-scale", "monospace", "free-fonts", "license", "subsetting"],
+  "when": "新中文项目定字族与字号时:先对三场景字号总表,再定回退栈,还要选一款免费细体中文(含许可与下载来源)时",
+  "not_for": "档位 / 行高 / 字距 / 文字影的收敛(走 cjk-thin-type-system)、配色(走 themes 包)、需要 700 粗体力量感的品牌页",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/cjk-typography/scripts/assert_tokens.py",
+    "evidence": "PENDING"
+  },
+  "canonical_home": null
+}

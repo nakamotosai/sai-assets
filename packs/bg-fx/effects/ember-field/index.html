@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ember Field · 余烬之野 · bg-fx</title>
+<meta name="description" content="三层深度带的泪滴余烬上升,远糊近锐;视差来自构造而非缩放。" />
+<link rel="stylesheet" href="../../src/stage.css" />
+</head>
+<body>
+<canvas id="stage" aria-label="Ember Field · 余烬之野 实时背景"></canvas>
+<div class="hud"><a href="../">← bg-fx</a> · Ember Field · 余烬之野</div>
+<p class="hint" id="hint">三层深度带的泪滴余烬上升,远糊近锐;视差来自构造而非缩放。 ｜ 指针扰动场 · 滚动推进 · 页隐藏即暂停 · 调参见 <code>params.json</code>(URL 可临时覆盖:<code>?speed=40&amp;bloom=0.6</code>)</p>
+<script type="module">
+// ember-field 页 —— 只做三件事:取共享引擎、取本效果 concept、喂默认参数。
+// 共享引擎:../../src/engine.js(场景 → 亮部提取 → 可分离模糊 → bloom/色差/颗粒/暗角/ACES/抖动)
+// 本效果机制:../../src/concepts/ember-field.js
+import { createEngine } from "../../src/engine.js";
+import { CONCEPT } from "../../src/concepts/ember-field.js";
+
+const canvas = document.getElementById("stage");
+const hint = document.getElementById("hint");
+
+// params.json 是本效果的调参默认值(缺省值与 inline 兜底一致,不经 http 服务直接打开也能跑)。
+const inline = { speed: 100, bloom: 0.30, grain: 0.030, exposure: 1.0, ca: 0.0026, vig: 0.5 };
+let defaults = inline;
+try {
+  const res = await fetch("./params.json");
+  defaults = { ...inline, ...(await res.json()).defaults };
+} catch (_) { /* 不经 http 服务直接打开时读不到 json,用上面同值兜底 */ }
+
+const q = new URLSearchParams(location.search);
+const num = (k, d) => (q.has(k) && Number.isFinite(+q.get(k)) ? +q.get(k) : d);
+
+try {
+  const eng = createEngine(canvas, CONCEPT.frag, {
+    bloomAmt: num("bloom", defaults.bloom),
+    grain: num("grain", defaults.grain),
+    exposure: num("exposure", defaults.exposure),
+    ca: num("ca", defaults.ca),
+    vig: num("vig", defaults.vig),
+    speed: num("speed", defaults.speed) / 100,
+  });
+  if (!eng.ok) hint.textContent = "本设备没有可用的 WebGL2(" + eng.reason + "),已停在静态底。";
+} catch (err) {
+  hint.textContent = "着色器编译失败:" + err.message;
+}
+</script>
+</body>
+</html>

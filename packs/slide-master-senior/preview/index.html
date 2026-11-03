@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Deck Master · 母版演示(封面 + 时间线)</title>
+  <link rel="stylesheet" href="../src/deck.css" />
+</head>
+<body>
+  <!-- P01 封面:右侧通高图位 + 左双轨 -->
+  <section class="page" data-page="01">
+    <div class="inner">
+      <div class="topbar"><span class="brand">Deck Master · 母版演示</span><span class="pageno" data-deck-pageno>01 / 02</span></div>
+      <div class="cover-grid">
+        <div class="cover-left">
+          <p class="eyebrow">母版演示 · 1920 × 1080</p>
+          <h1 class="cover-title">中老年大字号<br />Slide 母版</h1>
+          <p class="cover-sub">正文 18.5–21px · 标题 44–48px · 行高 1.65–1.75<br />封面 / 时间线两页,高度预算 1000 法则</p>
+          <p class="cover-cta"><span class="btn">← → 翻页</span><span class="btn ghost">滚轮亦可</span></p>
+        </div>
+        <div class="cover-right" role="img" aria-label="封面占位图,请替换为自有图片">
+          <span class="ph-mark">占位图 3:4</span>
+        </div>
+      </div>
+      <div class="ribbon">封面页 · 右侧通高图 + 左双轨 · 强调色面积 &lt;10%</div>
+    </div>
+  </section>
+
+  <!-- P02 时间线:禁表格,行程走时间轴(示例文案为中性占位,换成自己的行程) -->
+  <section class="page" data-page="02">
+    <div class="inner">
+      <div class="topbar"><span class="brand">行程总览 · 时间轴</span><span class="pageno" data-deck-pageno>02 / 02</span></div>
+      <h2 class="sec-title">三日行程 · 一页一观点</h2>
+      <ol class="timeline">
+        <li><span class="t-day">第一日</span><span class="t-what">抵达安顿 · 熟悉环境不赶路</span><span class="t-note">15:00 后入住</span></li>
+        <li><span class="t-day">第二日</span><span class="t-what">核心行程 · 只排一个重点</span><span class="t-note">午休 2 小时</span></li>
+        <li><span class="t-day">第三日</span><span class="t-what">从容返程 · 留白不加塞</span><span class="t-note">11:00 前退房</span></li>
+      </ol>
+      <div class="ribbon">时间轴页 · 每栏 ≤40 字 · 全页 ≤7 行 · 灰只许 #334155 级</div>
+    </div>
+  </section>
+
+  <script src="../src/deck.js" defer></script>
+</body>
+</html>

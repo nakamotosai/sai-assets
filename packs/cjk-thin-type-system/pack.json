@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "id": "cjk-thin-type-system",
+  "title": "CJK Thin Type System · 中文细体排版语言",
+  "kind": "fonts",
+  "category": "fonts",
+  "version": "1.0.0",
+  "license": "MIT(本包 JSON / 文档 / 断言为自产)",
+  "attribution": [
+    {
+      "name": "本地素材库 · 字号阶梯与字重配对原子卡",
+      "license": "自产观测(2026-10-31 全站排版普查)",
+      "what": "21 种样式组合 → 6 组规则的收敛样本与字重/字号/行高/影档位"
+    },
+    {
+      "name": "sai-frontend §4 中文排版硬闸",
+      "license": "internal",
+      "what": "阴影至多一层、移动优先、中文回退链三条硬口径"
+    },
+    {
+      "name": "Noto Sans SC / Fraunces(字族名引用)",
+      "license": "OFL-1.1(Fraunces 待核)",
+      "what": "只引用字族名,包内不含字体文件;字族与回退栈见 cjk-typography 包"
+    }
+  ],
+  "origin": {
+    "project": "asset-source",
+    "path": "fonts/cjk-thin-type-system.json",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/index.json",
+      "tokens/scale.json",
+      "tokens/weights.json",
+      "tokens/tracking.json",
+      "tokens/leading.json",
+      "tokens/shadow.json"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": ["cjk", "typography", "thin", "type-scale", "dark", "letter-spacing", "line-height", "text-shadow"],
+  "when": "中文 / 日文暗色单页站、作品集、个人站要求「细、干净、一套语言」时;或已有站点出现「字体乱」(同一字号挂多字重、各组件一套行高 / 字距 / 阴影)需要先普查再收敛时",
+  "not_for": "明亮纸媒长文(走 cjk-typography 的正文档 + 衬线 article 栈)、数据密集工具面板(走系统栈)、需要粗体力量感的营销落地页",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/cjk-thin-type-system/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens cjk-thin-type-system / scale 4 · weights 2 · tracking 3 · leading 3 · shadow 2 / probe: preview 2 文件 · 5 条 font-size 最小 12px · 最小行高 1.35 · vw 外推 0 · 斜体 0;负例 6/6 判失败(11px / 裸 4vw / clamp 上限 4vw / lh 1.2 / italic / min_px 15)"
+  },
+  "canonical_home": null
+}

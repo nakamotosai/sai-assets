@@ -1,0 +1,14 @@
+{
+  "id": "console",
+  "title": "System Console · 系统栈(零 Web 字体)",
+  "roles": {
+    "display": "system-ui, -apple-system, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "body": "system-ui, -apple-system, \"Segoe UI\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+    "mono": "\"JetBrains Mono\", \"Cascadia Code\", Consolas, monospace"
+  },
+  "weights": "400 / 600 / 700",
+  "features": ["tabular-nums 数字", "不引外部字体请求"],
+  "when": "控制台、地图 HUD、内网工具",
+  "note": "系统栈的取值随操作系统,视觉不可完全控制;要「一套语言」的暗色单页站走 cjk-thin-type-system,不要拿系统栈硬凑。",
+  "sample": "系统控制台 · 震度 5 強 · 14px 正文"
+}

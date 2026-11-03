@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Libraries.dev 全家桶试吃 · 远程试吃台</title>
+<link rel="stylesheet" href="../src/bench.css" />
+
+<!-- 五个组件原包都按裸说明符引 react/three/htm;importmap 负责把它们钉到同一份 CDN 副本上 -->
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "three": "https://esm.sh/three@0.169.0",
+    "htm": "https://esm.sh/htm@3.1.1"
+  }
+}
+</script>
+
+<!-- 普通脚本 + 动态 import:file:// 直开也能跑,不必起本地服务器 -->
+<script src="../src/bench.js" defer></script>
+</head>
+<body>
+<header>
+  <h1>Libraries.dev 全家桶试吃 <span class="badge">MIT 开源 · 免费可商用</span></h1>
+  <p class="sub">5 个组件真身直接从 CDN 加载(React 版原包,非仿写)。哪个加载失败会红字告诉你。</p>
+</header>
+
+<div class="grid" id="grid">
+  <div class="cell">
+    <h2>Border Beam <span class="pkg">border-beam</span></h2>
+    <p class="desc">卡片边缘跑的彩虹光带(“追光”效果)。下面两条:左=整圈流光,右=只闪底部一条线。</p>
+    <div class="stage" id="stage-beam"><status>加载中...</status></div>
+  </div>
+  <div class="cell">
+    <h2>Thinking Orbs <span class="pkg">thinking-orbs</span></h2>
+    <p class="desc">AI 在思考时转圈的小光球。</p>
+    <div class="stage" id="stage-orbs"><status>加载中...</status></div>
+  </div>
+  <div class="cell">
+    <h2>Gooey <span class="pkg">liquid-gooey</span></h2>
+    <p class="desc">
+两滴黏液靠近时会像真的液体一样“吸”在一起。</p>
+    <div class="stage" id="stage-gooey"><status>加载中...</status></div>
+  </div>
+  <div class="cell">
+    <h2>Metal <span class="pkg">metal-fx</span></h2>
+    <p class="desc">金属拉丝高光,像不锈钢表面的反光流动。</p>
+    <div class="stage" id="stage-metal"><status>加载中...</status></div>
+  </div>
+  <div class="cell">
+    <h2>Image FX <span class="pkg">img-fx</span></h2>
+    <p class="desc">给图片加特效滤镜。</p>
+    <div class="stage" id="stage-image"><status>加载中...</status></div>
+  </div>
+</div>
+
+<footer>
+  五个组件源码:<a href="https://github.com/Jakubantalik/Libraries.dev">Libraries.dev</a>(MIT 许可证,随便拿)。
+  示例图:<a href="https://picsum.photos/">Lorem Picsum</a> 占位图(仅外链,未随包分发)。CDN:<a href="https://esm.sh/">esm.sh</a>。
+  本页只是试吃装,不是生产依赖。
+  <noscript><br />本页需要 JavaScript 与可访问上述 CDN 的网络;两者缺一时五个 stage 会保持“加载中...”或红字提示。</noscript>
+</footer>
+</body>
+</html>

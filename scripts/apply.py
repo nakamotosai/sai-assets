@@ -6,7 +6,7 @@
   python scripts/apply.py ouuut-editorial --to src/styles [--dry-run]
 
 行为:
-  - 只读 pack.json 声明的文件,拷到 <to>/<id>/ 下(保持相对结构);
+  - 默认**整包拷贝**(含 pack.json 与 preview,包内断言才能在项目里自证);`--minimal` 只拷产物子集;
   - 不写 node_modules、不改目标项目其它文件;
   - 打印可直接粘进 design-lock.json 的 assets[] 片段;
   - 外部包(canonical_home 非空)拒绝拷贝,给出去本家取的指引。
@@ -58,21 +58,30 @@ def list_packs() -> None:
         print(f'{pack["category"]:12s} {pack["id"]:24s} v{pack["version"]}')
 
 
-def apply(pack_id: str, target: str, dry: bool) -> None:
+def apply(pack_id: str, target: str, dry: bool, minimal: bool = False) -> None:
     pack, src_dir = load(pack_id)
     if pack.get("canonical_home"):
         print(f'外部包:{pack["id"]} 内容不在本仓。请从本家取用 → {pack["canonical_home"]}', file=sys.stderr)
         sys.exit(2)
 
     dest_root = Path(target).resolve() / pack_id
-    wanted: list[str] = []
     files = pack.get("files") or {}
-    for key in ("css", "src", "tokens", "upstream"):
-        wanted += [f for f in (files.get(key) or [])]
-    for rel in (files.get("usage"), files.get("assert"), pack.get("entry"), "README.md"):
-        if rel:
-            wanted.append(rel)
-    wanted = [w for w in dict.fromkeys(wanted) if (src_dir / w).is_file()]
+    if minimal:
+        wanted: list[str] = []
+        for key in ("css", "src", "tokens", "upstream"):
+            wanted += [f for f in (files.get(key) or [])]
+        for rel in (files.get("usage"), files.get("assert"), pack.get("entry"), "README.md"):
+            if rel:
+                wanted.append(rel)
+        wanted = [w for w in dict.fromkeys(wanted) if (src_dir / w).is_file()]
+    else:
+        # 默认整包拷贝:包自带 `scripts/assert_tokens.py` 要读 pack.json 与 preview,
+        # 少了它们包内断言必失败(真实消费时踩到过)。整包拷 = 项目里也自证得起来。
+        wanted = sorted(
+            str(f.relative_to(src_dir)).replace("\\", "/")
+            for f in src_dir.rglob("*")
+            if f.is_file()
+        )
 
     if not wanted:
         print(f"FAIL pack {pack_id} declares no copyable files", file=sys.stderr)
@@ -112,6 +121,8 @@ def main() -> None:
     ap.add_argument("pack", nargs="?", help="包 id")
     ap.add_argument("--to", help="目标目录(会创建 <to>/<id>/)")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--minimal", action="store_true",
+                    help="只拷 css/src/tokens/usage/entry/README(默认整包拷贝,含 pack.json 与 preview)")
     ap.add_argument("--list", action="store_true")
     args = ap.parse_args()
 
@@ -121,7 +132,7 @@ def main() -> None:
     if not args.to:
         print("FAIL 需要 --to <dir>", file=sys.stderr)
         sys.exit(1)
-    apply(args.pack, args.to, args.dry_run)
+    apply(args.pack, args.to, args.dry_run, args.minimal)
 
 
 if __name__ == "__main__":

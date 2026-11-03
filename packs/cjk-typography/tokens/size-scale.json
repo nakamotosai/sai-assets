@@ -1,0 +1,37 @@
+{
+  "id": "size-scale",
+  "title": "字号偏好总表 · 三场景",
+  "unit_note": "新项目先对这张表:场景先定,数字后取;同屏只有一套场景。",
+  "scenes": [
+    {
+      "id": "console",
+      "scene": "工具台",
+      "h1": "15–22px",
+      "body": "14px(HUD 12)",
+      "meta": "11–12px",
+      "code": "11–13px",
+      "note": "零 Web 字体优先;数字 tabular"
+    },
+    {
+      "id": "print-1920",
+      "scene": "纸媒 / 电视 1920",
+      "h1": "64–110px(封面可 100+)",
+      "body": "≥40px",
+      "meta": "UI / 脚注 ≥26px",
+      "code": "—",
+      "note": "Serif 标题 + Sans 正文;真字重"
+    },
+    {
+      "id": "landing",
+      "scene": "营销落地",
+      "h1": "clamp(2rem–7rem) 负字距",
+      "body": "16–17px · lh 1.55–1.65",
+      "meta": "mono eyebrow ~0.72rem · ls .14–.2em",
+      "code": "mono 元信息",
+      "note": "手写体 / 衬线只上拉丁标题;正文用中文安全栈"
+    }
+  ],
+  "mono_default": "一律 JetBrains Mono(印刷 / 波普风可换 Space Mono)",
+  "cjk_rule": "有 @font-face 必须挂 SC 安全回落;禁把日文字重当中文品牌",
+  "cjk_floor_note": "工具台场景的 meta 11–12px / code 11–13px 是拉丁与数字标签的档;中文标签取上限 12px,与 cjk-thin-type-system 的 12px 地板一致(两包同一口径,不是两套标准)。"
+}

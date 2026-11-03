@@ -1,0 +1,83 @@
+/* libraries-dev-fx · 试吃台外壳样式(纯外壳,组件外观由 CDN 包自带)
+ * 来源:Libraries.dev — https://github.com/Jakubantalik/Libraries.dev(MIT 许可证)
+ * 拆自 demos/libraries-dev-fx/index.html 的内联 <style>:token 集中在顶部 :root,
+ * 后面依次是基础 chrome → 页面骨架(header/grid/cell/stage)→ 试吃道具(.demo-*)。 */
+
+:root {
+  --bg: #121212;
+  --panel: #1d1d1d;
+  --stage: #161616;
+  --fg: #eeeeef;
+  --dim: rgba(238, 238, 239, 0.55);
+  --faint: rgba(238, 238, 239, 0.08);
+  --hairline: rgba(238, 238, 239, 0.06);
+  --acc: #b8bb26;
+  --err: #fb4934;
+  --radius: 16px;
+  --radius-sm: 12px;
+  --cell-gap: 24px;
+  --measure: 1100px;
+}
+
+/* ---------- 基础 chrome ---------- */
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--fg); }
+body {
+  font-family: "Noto Sans SC", "Inter", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 16px; line-height: 1.6;
+  min-height: 100vh;
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(238,238,239,.22); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(238,238,239,.35); }
+
+/* ---------- 页面骨架 ---------- */
+header { padding: 48px 24px 8px; max-width: var(--measure); margin: 0 auto; }
+h1 { font-size: 32px; margin: 0 0 8px; font-weight: 600; }
+.sub { color: var(--dim); margin: 0; font-size: 16px; }
+.badge {
+  display: inline-block; margin-left: 10px; padding: 2px 10px;
+  border-radius: 999px; font-size: 13px; font-weight: 600;
+  background: rgba(184,187,38,.15); color: var(--acc);
+  border: 1px solid rgba(184,187,38,.35); vertical-align: middle;
+}
+
+.grid {
+  max-width: var(--measure); margin: 32px auto 64px; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--cell-gap);
+}
+.cell {
+  background: var(--panel); border-radius: var(--radius);
+  padding: 24px; display: flex; flex-direction: column; gap: 16px;
+  border: 1px solid var(--hairline);
+}
+.cell h2 { font-size: 18px; margin: 0; font-weight: 600; display:flex; align-items:center; gap:8px; }
+.cell .desc { color: var(--dim); font-size: 14px; margin: 0; }
+.stage {
+  min-height: 180px; display: flex; align-items: center; justify-content: center;
+  background: var(--stage); border-radius: var(--radius-sm); padding: 24px; overflow: visible;
+}
+.pkg { font-family: "Roboto Mono", "Maple Mono NF CN", monospace; font-size: 13px; color: var(--dim); }
+status { font-size: 14px; color: var(--dim); }
+.ok { color: var(--acc); }
+.err { color: var(--err); font-size: 13px; white-space: pre-wrap; word-break: break-all; }
+
+/* ---------- 试吃道具 ---------- */
+/* 目标卡片(被 beam 包裹的容器) */
+.demo-card {
+  width: 240px; padding: 24px; border-radius: 16px; background: var(--panel);
+  display: flex; flex-direction: column; gap: 10px;
+  border: 1px solid rgba(238,238,239,.08);
+}
+.line { height: 8px; border-radius: 4px; background: rgba(238,238,239,.10); }
+.line.title { height: 10px; width: 55%; background: rgba(238,238,239,.16); }
+.line.short { width: 78%; }
+
+.demo-input {
+  width: 260px; padding: 12px 16px; border-radius: 999px; background: var(--panel);
+  border: 1px solid rgba(238,238,239,.12); color: var(--fg); font-size: 15px; outline: none;
+}
+
+footer { max-width: var(--measure); margin: 0 auto; padding: 24px; color: var(--dim); font-size: 14px; }
+footer a { color: var(--acc); }

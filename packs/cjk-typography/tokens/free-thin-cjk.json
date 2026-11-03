@@ -1,0 +1,71 @@
+{
+  "id": "free-thin",
+  "title": "免费细体中文无衬线(三选)",
+  "claim": "「无衬线 + 很细 + 高级 + 免费商用」的中文正文配方。三份候选都免费可商用、都有真细体、都按 unicode-range 分片(浏览器只拉页面实际用到的字形)。中文想细,必须用可变字体 —— 静态档位只有 100 的整数倍,取不到 150 这种中间值。",
+  "candidates": [
+    {
+      "id": "noto-sans-sc",
+      "name": "Noto Sans SC(可变)",
+      "license": "OFL-1.1",
+      "license_full": "SIL Open Font License 1.1",
+      "weight_axis": "可变 100–900",
+      "family_css": "\"Noto Sans SC Variable\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+      "source": {
+        "kind": "npm 包 · CDN 文件",
+        "package": "@fontsource-variable/noto-sans-sc@5.3.0",
+        "css": "https://cdn.jsdelivr.net/npm/@fontsource-variable/noto-sans-sc@5.3.0/index.css",
+        "checked": "2026-10-06 实查 npm 与 CDN:unicode-range 101 片",
+        "upstream_home": "待核(未联网核对上游项目主页)"
+      },
+      "pick": "中性稳妥;首屏 150 / 其余 300"
+    },
+    {
+      "id": "misans",
+      "name": "MiSans VF",
+      "license": "Apache-2.0",
+      "license_full": "Apache License 2.0,三份里最宽松",
+      "weight_axis": "可变 150–700",
+      "family_css": "\"MiSans VF\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+      "source": {
+        "kind": "npm 包 · CDN 文件",
+        "package": "misans@5.0.0",
+        "css": "https://cdn.jsdelivr.net/npm/misans@5.0.0/lib/Normal/MiSansVF.min.css",
+        "checked": "2026-10-06 实查 npm 与 CDN:80KB CSS,unicode-range 分片",
+        "upstream_home": "待核(未联网核对上游项目主页)"
+      },
+      "pick": "许可最宽松时选它"
+    },
+    {
+      "id": "harmonyos-sans-sc",
+      "name": "HarmonyOS Sans SC",
+      "license": "Unlicense",
+      "license_full": "Unlicense,等同公有领域",
+      "weight_axis": "Thin / Light(分片包按档给:Light 300)",
+      "family_css": "\"HarmonyOS Sans SC\", \"PingFang SC\", \"Microsoft YaHei\", sans-serif",
+      "source": {
+        "kind": "npm 包 · CDN 文件",
+        "package": "harmonyos-sans-sc-webfont-splitted@1.1.0",
+        "css": "https://cdn.jsdelivr.net/npm/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/Light.css",
+        "checked": "2026-10-06 实查 npm 与 CDN:82 片,unicode-range 分片",
+        "upstream_home": "待核(未联网核对上游项目主页)"
+      },
+      "pick": "要几何方正时选它"
+    }
+  ],
+  "latin": "\"Inter\", var(--f-sans) —— 拉丁走 Inter,中文自然落到中文栈",
+  "weights": "分档而不是全局统一:首屏那两行(15px / 25px)才压得住 150;其余一律 300。中文 11–15px 用 300 以下会「笔画溶解」(300 陷阱),所以小字别再往下拉。",
+  "size": "CDN 直连实测 1.5–2.4MB(整页滚完);页面唯一字符往往只有两三百个 → 本地子集化可压到 20–40KB,差 50 倍。子集化是纯收益,条件允许就做。",
+  "features": [
+    "unicode-range 分片:浏览器只拉用到的字形,不是整包",
+    "可变字体是「取中间字重」的唯一途径(静态档位只有 100 的整数倍)",
+    "拉丁与中文分家:UI 字族用 Inter 打头,中文自然落到中文栈",
+    "标题可以另用衬线(标题走衬线 + 合成倾斜时,倾斜只给拉丁,中文不倾斜)"
+  ],
+  "when": "任何「中文要细、要高级、要免费商用」的正文场景;三选按许可与气质:许可最宽松选 MiSans,要几何方正选 HarmonyOS Sans SC,要中性稳妥选 Noto Sans SC",
+  "refused": [
+    "需盗版 / 破解的商业字体文件(本清单一条都不收)",
+    "许可缺失(MISSING)或来源不明的字体",
+    "不子集化、整包下载中文字库当 Web 字体",
+    "把日文字重当成中文品牌字重(有 @font-face 必须挂 SC 安全回落)"
+  ]
+}

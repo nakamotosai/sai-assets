@@ -1,0 +1,212 @@
+@charset "UTF-8";
+/* ============================================================================
+   swiss-style · src/swiss-grid.css
+   12 栏模块网格 · 经典边距比 · 8pt 子网格 + 24px 主基线 · 复合网格 ·
+   响应式断点 · 教学网格线开关(.grid-lines)
+   ----------------------------------------------------------------------------
+   本包只给版式与构件,不给配色。
+   配色 token 的权威在主题包 packs/swiss-classic(css/default.css)与
+   packs/swiss-inverted;下面 :root 里的只是「兜底值 = swiss-classic」,
+   正式接入请引主题包,别把这里的 hex 当调色处。
+   本包自有结构变量:--swiss-cols / --swiss-gutter / --swiss-margin /
+   --swiss-baseline(+ --swiss-subgrid 8pt 子网格、--swiss-font 字体栈透传)。
+   ============================================================================ */
+:root {
+  /* --- 兜底值 = swiss-classic(正式接入请引主题包,勿在此改色) --- */
+  --bg: #EDEBE6;
+  --bg-deep: #DCDAD1;
+  --surface: #F7F5F0;
+  --surface-2: #E4E1D9;
+  --border: #111111;
+  --ink: #111111;
+  --ink-muted: #6B6862;
+  --ink-dim: #4A4A4A;
+  --accent: #D8232A;
+  --on-accent: #FFFFFF;
+  --red: #D8232A;
+  --link: #D8232A;
+  --hairline: #9A9995;
+  --grid-red: #DB9382;
+
+  /* --- 本包自有结构变量 --- */
+  --swiss-cols: 12;        /* 栏数:网页惯例 12;移动降到 6 / 4 */
+  --swiss-gutter: 24px;    /* 沟槽 = 1 主基线 */
+  --swiss-margin: 120px;   /* 屏基准外边距(≥1280px 档) */
+  --swiss-baseline: 24px;  /* 主基线 = 8pt×3 */
+  --swiss-subgrid: 8px;    /* 8pt 子网格:间距档位基数 */
+  --swiss-font: "Helvetica Neue", "Neue Haas Grotesk Display Pro", Inter,
+    "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei",
+    Arial, sans-serif;
+}
+
+/* ---------------------------------------------------------------- 基础壳 */
+.sw {
+  box-sizing: border-box;
+  font-family: var(--swiss-font);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+.sw *,
+.sw *::before,
+.sw *::after {
+  box-sizing: border-box;
+}
+.sw h1,
+.sw h2,
+.sw h3,
+.sw h4,
+.sw p,
+.sw figure,
+.sw ul {
+  margin: 0;
+}
+
+/* 页面壳:居中最大宽 + 外边距 */
+.sw-page {
+  max-width: 1920px;
+  margin-inline: auto;
+  padding-inline: var(--swiss-margin);
+}
+
+/* -------------------------------------------------- 12 栏模块网格(核心) */
+/* 元素先设计对齐格线,成品再把线藏起来 —— 这就是瑞士方法。 */
+.swiss-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--swiss-cols), minmax(0, 1fr));
+  gap: var(--swiss-gutter);
+}
+
+/* 跨栏工具(默认 12 栏语境) */
+.sw-c1 { grid-column: span 1; }
+.sw-c2 { grid-column: span 2; }
+.sw-c3 { grid-column: span 3; }
+.sw-c4 { grid-column: span 4; }
+.sw-c5 { grid-column: span 5; }
+.sw-c6 { grid-column: span 6; }
+.sw-c7 { grid-column: span 7; }
+.sw-c8 { grid-column: span 8; }
+.sw-c9 { grid-column: span 9; }
+.sw-c10 { grid-column: span 10; }
+.sw-c11 { grid-column: span 11; }
+.sw-c12 { grid-column: span 12; }
+.sw-full { grid-column: 1 / -1; }
+
+/* 常用角色栏位(对齐源参考式样:标题 1/9 · 正文 1/7 · 页注 9/13) */
+.sw-col-title { grid-column: 1 / 9; }
+.sw-col-body { grid-column: 1 / 7; }
+.sw-col-meta { grid-column: 9 / 13; }
+.sw-col-half-l { grid-column: 1 / 7; }
+.sw-col-half-r { grid-column: 7 / 13; }
+.sw-col-third { grid-column: span 4; }
+
+/* ------------------------------------------- 经典边距比(内:上:外:下) */
+/* 屏幕近似:按比值归一化后取总边距 50%(--swiss-area-scale),印刷开本
+   请按 notes 里的 Van de Graaf / MB 原法另算。 */
+.sw-sheet {
+  --swiss-area-scale: 0.5; /* 边距合计占比:越小正文区越大 */
+  --sw-m-inner: 1;         /* 内侧(左) */
+  --sw-m-top: 1.5;         /* 上 */
+  --sw-m-outer: 2;         /* 外侧(右) */
+  --sw-m-bottom: 3;        /* 下(Müller-Brockmann 默认比 1:1.5:2:3) */
+  position: relative;
+  background: var(--bg);
+  padding-block-start: calc(var(--swiss-area-scale) * 100% * var(--sw-m-top) / (var(--sw-m-top) + var(--sw-m-bottom)));
+  padding-block-end: calc(var(--swiss-area-scale) * 100% * var(--sw-m-bottom) / (var(--sw-m-top) + var(--sw-m-bottom)));
+  padding-inline-start: calc(var(--swiss-area-scale) * 100% * var(--sw-m-inner) / (var(--sw-m-inner) + var(--sw-m-outer)));
+  padding-inline-end: calc(var(--swiss-area-scale) * 100% * var(--sw-m-outer) / (var(--sw-m-inner) + var(--sw-m-outer)));
+}
+.sw-sheet--vandegraaf { --sw-m-inner: 2; --sw-m-top: 3; --sw-m-outer: 4; --sw-m-bottom: 6; }
+.sw-sheet--mb { --sw-m-inner: 1; --sw-m-top: 1.5; --sw-m-outer: 2; --sw-m-bottom: 3; }
+.sw-sheet--golden { --sw-m-inner: 3; --sw-m-top: 5; --sw-m-outer: 5; --sw-m-bottom: 8; }
+.sw-sheet--medieval { --sw-m-inner: 1; --sw-m-top: 1; --sw-m-outer: 2; --sw-m-bottom: 3; }
+
+/* ---------------------------------------------------- 8pt 子网格 / 基线 */
+/* 所有字号的行高取同一模块 M(--swiss-baseline)的整数倍;间距落 8pt 档。 */
+.sw-rhythm { line-height: var(--swiss-baseline); }
+.sw-stack > * + * { margin-top: var(--swiss-baseline); }
+/* 4pt 间距阶梯(4/8/12/16/24/32/48/64/96),用于 margin-top 节奏 */
+.sw-mt-4 { margin-top: 4px; }
+.sw-mt-8 { margin-top: 8px; }
+.sw-mt-12 { margin-top: 12px; }
+.sw-mt-16 { margin-top: 16px; }
+.sw-mt-24 { margin-top: 24px; }
+.sw-mt-32 { margin-top: 32px; }
+.sw-mt-48 { margin-top: 48px; }
+.sw-mt-64 { margin-top: 64px; }
+.sw-mt-96 { margin-top: 96px; }
+/* 元素高度吸附到基线整数倍(避免半行) */
+.sw-snap { height: calc(round(down, var(--sw-h, var(--swiss-baseline)), var(--swiss-baseline))); }
+/* 规则线不要把下方内容顶离基线 */
+.sw-rule { border-top: 1px solid var(--border); }
+.sw-rule--thick { border-top: 3px solid var(--ink); }
+.sw-rule + * { padding-top: calc(var(--swiss-baseline) - 1px); }
+
+/* -------------------------------------------------- 复合网格(Gerstner) */
+/* 两套规则网格叠加 → 不等宽节奏列。 */
+.sw-compound-2x3 { display: grid; grid-template-columns: 2fr 1fr 1fr 2fr; gap: var(--swiss-gutter); }
+.sw-compound-3x4 { display: grid; grid-template-columns: 3fr 1fr 2fr 2fr 1fr 3fr; gap: var(--swiss-gutter); }
+.sw-compound-4x5 { display: grid; grid-template-columns: 4fr 1fr 3fr 2fr 2fr 3fr 1fr 4fr; gap: var(--swiss-gutter); }
+
+/* 3 / 4 字段小倍数图与图文分区用的均分格 */
+.sw-split-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--swiss-gutter); }
+.sw-split-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--swiss-gutter); }
+.sw-split-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--swiss-gutter); }
+
+/* ------------------------------------------------ 教学网格线开关 */
+/* .swiss-grid-demo 是 .grid-lines 的定位宿主(动效显影也认它) */
+.swiss-grid-demo { position: relative; }
+/* 成品藏线,教学才画出来 —— 瑞士设计教学的招牌手法。
+   用法:把 .grid-lines 放进一个 position:relative 的容器,
+   body.show-grid 时显形。 */
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 3;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      var(--grid-red) 0 1px,
+      transparent 1px
+        calc((100% - (var(--swiss-cols) - 1) * var(--swiss-gutter)) / var(--swiss-cols) + var(--swiss-gutter))
+    ),
+    repeating-linear-gradient(0deg, var(--grid-red) 0 1px, transparent 1px var(--swiss-subgrid));
+}
+body.show-grid .grid-lines,
+.grid-lines.is-on { opacity: 0.5; }
+
+/* ----------------------------------------- 入场动效挂钩(配合 swiss-motion.js) */
+/* 动效只动 transform / opacity,不动 layout。 */
+[data-swiss-count] { font-variant-numeric: tabular-nums; }
+[data-swiss-settle] {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+[data-swiss-settle].is-settled { opacity: 1; transform: none; }
+
+/* ------------------------------------------------------------ 响应式断点 */
+/* ≥1280 桌max  |  768–1279 中  |  480–767 小(6 栏)  |  <480(4 栏) */
+@media (max-width: 1279px) {
+  :root { --swiss-gutter: 20px; --swiss-margin: 64px; }
+}
+@media (max-width: 767px) {
+  :root { --swiss-cols: 6; --swiss-gutter: 16px; --swiss-margin: 32px; }
+  .sw-c1, .sw-c2, .sw-c3, .sw-c4, .sw-c5, .sw-c6,
+  .sw-c7, .sw-c8, .sw-c9, .sw-c10, .sw-c11, .sw-c12,
+  .sw-col-title, .sw-col-body, .sw-col-meta,
+  .sw-col-half-l, .sw-col-half-r, .sw-col-third { grid-column: 1 / -1; }
+  .sw-split-2, .sw-split-3, .sw-split-4,
+  .sw-compound-2x3, .sw-compound-3x4, .sw-compound-4x5 { grid-template-columns: 1fr; }
+}
+@media (max-width: 479px) {
+  :root { --swiss-cols: 4; --swiss-gutter: 16px; --swiss-margin: 16px; }
+}
+
+/* 200% 缩放 / 无横滚的兜底 */
+.sw img,
+.sw svg { max-width: 100%; height: auto; }

@@ -1,0 +1,300 @@
+@charset "UTF-8";
+/* ============================================================================
+   swiss-style · src/swiss-layouts.css
+   五套版式骨架:海报 / deck / 跨页 / 报告封面 / 落地 hero。
+   全部显式对齐 12 栏网格与单一左轴(依赖 swiss-grid.css 的 --swiss-* 变量)。
+   ----------------------------------------------------------------------------
+   规则:不对称构图(一侧文字一侧几何)、留白成块(≥35–45%)、
+        标题靠上、禁居中大标题、禁 box-shadow / 渐变。
+   ============================================================================ */
+
+/* ------------------------------------------------------------ 刊头四点轴 */
+.sw-masthead {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--swiss-gutter);
+  align-items: baseline;
+  border-top: 3px solid var(--ink);
+  padding-top: 12px;
+  font-size: 15px;
+  color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+}
+.sw-masthead b { font-weight: 600; color: var(--ink); }
+
+/* ------------------------------------------------------- 分区标题(共用) */
+.sw-section-head {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--swiss-gutter);
+  align-items: baseline;
+  border-top: 3px solid var(--ink);
+  padding-top: 12px;
+}
+.sw-section-head .sw-idx {
+  grid-column: 1 / 2;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.sw-section-head h2 {
+  grid-column: 2 / 8;
+  font-size: clamp(22px, 2.6vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.sw-section-head .sw-cap {
+  grid-column: 9 / 13;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+/* ------------------------------------------------------------ 1 海报 Poster */
+/* A 系列 1:√2,四边距按经典比;大标题跨 1/9,几何形跨 9/13,信息块左下。 */
+.sw-poster {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 1 / 1.414;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto 1fr auto;
+  gap: 0 var(--swiss-gutter);
+  padding: 8% 7% 7% 9%; /* 近似 1 : 1.5 : 2 : 3 */
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+}
+.sw-poster .sw-poster-top {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 3px solid var(--ink);
+  padding-top: 8px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.sw-poster .sw-poster-title {
+  grid-column: 1 / 9;
+  align-self: center;
+  font-size: clamp(28px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+}
+.sw-poster .sw-poster-shape {
+  grid-column: 9 / 13;
+  align-self: center;
+  justify-self: end;
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--accent);
+}
+.sw-poster .sw-poster-info {
+  grid-column: 1 / 6;
+  align-self: end;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+}
+
+/* -------------------------------------------------------------- 2 Deck 16:9 */
+.sw-deck {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto 1fr auto;
+  gap: 0 var(--swiss-gutter);
+  padding: 4.5% 6.25%; /* 1920×1080 上 ≈ 48px / 120px */
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+}
+.sw-deck .sw-deck-title {
+  grid-column: 1 / 10;
+  align-self: start;
+  margin-top: 8%;
+  font-size: clamp(24px, 4.2vw, 56px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+.sw-deck .sw-deck-body {
+  grid-column: 1 / 7;
+  align-self: end;
+  font-size: clamp(13px, 1.15vw, 18px);
+  line-height: 1.6;
+  color: var(--ink-dim);
+  max-width: 36ch;
+}
+.sw-deck .sw-deck-foot {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--swiss-gutter);
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------- 3 跨页 Spread */
+/* 双页:左页主图跨 2 字段 + 图注贴下伸线;右页正文单栏 measure 30–36 汉字。 */
+.sw-spread {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--swiss-gutter);
+  background: var(--bg);
+  border: 1px solid var(--hairline);
+  padding: calc(var(--swiss-baseline) * 2);
+}
+.sw-spread .sw-page-l {
+  grid-column: 1 / 7;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(var(--swiss-gutter) / 2);
+  align-content: start;
+}
+.sw-spread .sw-page-r {
+  grid-column: 7 / 13;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(var(--swiss-gutter) / 2);
+  align-content: start;
+}
+.sw-spread .sw-figure {
+  grid-column: span 2;
+  aspect-ratio: 4 / 3;
+  background: var(--surface-2);
+  border: 1px solid var(--hairline);
+}
+.sw-spread .sw-figcap {
+  grid-column: span 2;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--hairline);
+  padding-top: 8px;
+}
+.sw-spread .sw-measure {
+  grid-column: span 3;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+.sw-spread .sw-measure p + p { margin-top: var(--swiss-baseline); }
+
+/* ---------------------------------------------------- 4 报告封面 Cover */
+.sw-cover {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: auto 1fr auto;
+  gap: 0 var(--swiss-gutter);
+  align-content: space-between;
+  min-height: 100vh;
+  padding: var(--swiss-margin);
+  background: var(--bg);
+}
+.sw-cover .sw-cover-eyebrow {
+  grid-column: 1 / 6;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.sw-cover .sw-cover-title {
+  grid-column: 1 / 10;
+  align-self: center;
+  font-size: clamp(40px, 7vw, 120px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+.sw-cover .sw-cover-meta {
+  grid-column: 9 / 13;
+  justify-self: end;
+  align-self: end;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--accent);
+  padding-top: 8px;
+}
+
+/* ------------------------------------------------------ 5 落地页 Hero */
+.sw-hero {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--swiss-gutter);
+  align-items: end;
+  min-height: 76vh;
+  padding-block: calc(var(--swiss-baseline) * 4);
+}
+.sw-hero .sw-hero-copy { grid-column: 1 / 8; align-self: center; }
+.sw-hero .sw-hero-title {
+  font-size: clamp(40px, 6.5vw, 112px);
+  font-weight: 800;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+}
+.sw-hero .sw-hero-sub {
+  margin-top: var(--swiss-baseline);
+  font-size: clamp(16px, 1.4vw, 22px);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: 34ch;
+}
+.sw-hero .sw-hero-cta { margin-top: calc(var(--swiss-baseline) * 1.5); }
+.sw-hero .sw-hero-figure {
+  grid-column: 9 / 13;
+  align-self: center;
+  justify-self: end;
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--ink);
+}
+.sw-hero .sw-hero-values {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--swiss-gutter);
+  margin-top: calc(var(--swiss-baseline) * 3);
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+/* -------------------------------------------------------------- 响应式 */
+@media (max-width: 767px) {
+  .sw-masthead { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 8px; }
+  .sw-section-head .sw-idx,
+  .sw-section-head h2,
+  .sw-section-head .sw-cap { grid-column: 1 / -1; }
+  .sw-poster .sw-poster-title,
+  .sw-poster .sw-poster-shape,
+  .sw-poster .sw-poster-info,
+  .sw-deck .sw-deck-title,
+  .sw-deck .sw-deck-body,
+  .sw-spread .sw-page-l,
+  .sw-spread .sw-page-r,
+  .sw-cover .sw-cover-eyebrow,
+  .sw-cover .sw-cover-title,
+  .sw-cover .sw-cover-meta,
+  .sw-hero .sw-hero-copy,
+  .sw-hero .sw-hero-figure { grid-column: 1 / -1; }
+  .sw-deck .sw-deck-foot { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 6px; }
+  .sw-hero .sw-hero-values { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sw-cover { min-height: 70vh; padding: var(--swiss-margin); }
+  .sw-hero .sw-hero-figure { justify-self: start; max-width: 220px; }
+}

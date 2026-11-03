@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CJK Thin Type System · 中文细体排版语言(预览)</title>
+<link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<main class="wrap">
+  <header>
+    <p class="eyebrow">font pack · cjk-thin-type-system v1.0.0</p>
+    <h1 class="giant">THIN</h1>
+    <p class="lede">一套中文细体排版语言:字号 4 档 · 字重 2 档 · 字距 3 档 · 行高 3 档 · 文字影 2 档。组件只继承,不再各写一套。</p>
+  </header>
+
+  <section>
+    <h2 class="title">档位阶梯</h2>
+    <div class="tiers">
+      <div class="tier">
+        <p class="label">giant · clamp(44px, 8.2vw, 122px) · w600 · lh 1.4 · 双层影</p>
+        <p class="s-giant">THIN</p>
+      </div>
+      <div class="tier">
+        <p class="label">display · clamp(28px, 3.2vw, 44px) · w200 · lh 1.4 · 双层影</p>
+        <p class="s-display">细体在大字号上才不溶解</p>
+      </div>
+      <div class="tier">
+        <p class="label">title · clamp(20px, 2vw, 22px) · w200 · ls .02em · lh 1.35</p>
+        <p class="s-title">区块标题 / 卡片标题</p>
+      </div>
+      <div class="tier">
+        <p class="label">body · 17px · w200 · ls 0 · lh 1.6 · 单层影</p>
+        <p class="s-body">正文十七字,中文正文不加字距,行高一点六。</p>
+      </div>
+      <div class="tier">
+        <p class="label">label · 12px · w400 · ls .12em · 单层影(地板档)</p>
+        <p class="s-label">eyebrow · 12px floor</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="title">字号 4 档 · 字重阶梯</h2>
+    <table>
+      <caption class="spec">越大越细:字重越细,允许的字号越大;小字必须抬字重。</caption>
+      <thead>
+        <tr><th scope="col">字号档</th><th scope="col">值</th><th scope="col">字重</th><th scope="col">字距</th><th scope="col">行高</th><th scope="col">文字影</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="head">giant</td><td class="spec">clamp(44px, 8.2vw, 122px)</td><td class="spec">600</td><td class="spec">0</td><td class="spec">1.4</td><td class="spec">双层(≥28px)</td></tr>
+        <tr><td class="head">display</td><td class="spec">clamp(28px, 3.2vw, 44px)</td><td class="spec">200</td><td class="spec">0</td><td class="spec">1.4</td><td class="spec">双层</td></tr>
+        <tr><td class="head">title</td><td class="spec">clamp(20px, 2vw, 22px)</td><td class="spec">200</td><td class="spec">.02em</td><td class="spec">1.35</td><td class="spec">单层</td></tr>
+        <tr><td class="head">body</td><td class="spec">17px(细体地板)</td><td class="spec">200</td><td class="spec">0</td><td class="spec">1.6</td><td class="spec">单层</td></tr>
+        <tr><td class="head">label</td><td class="spec">12px(全站地板)</td><td class="spec">400</td><td class="spec">.12em</td><td class="spec">≥1.35</td><td class="spec">单层</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2 class="title">字距 3 档 · 行高 3 档 · 影 2 档</h2>
+    <div class="grid2">
+      <div class="panel"><p class="label">字距 0 / .02em / .12em</p>
+        <p class="s-body track-a">正文不加字距 zero</p>
+        <p class="s-body track-b">标题轻微开一点 .02em</p>
+        <p class="s-label track-c">label letter spacing</p>
+      </div>
+      <div class="panel"><p class="label">行高 1.4 / 1.35 / 1.6</p>
+        <p class="s-body lh-a">大字行高一点四,标语与字标用。</p>
+        <p class="s-body lh-b">标题行高一点三五,全站最小行高,不许再压。</p>
+        <p class="s-body lh-c">正文行高一点六,中文正文的舒适区,四行以内读起来最稳。</p>
+      </div>
+      <div class="panel"><p class="label">文字影 单层 / 双层</p>
+        <p class="s-display sh-a">单层影</p>
+        <p class="s-display sh-b">双层扩散影</p>
+        <p class="spec">细体只配单层影;第二层扩散影只给 ≥28px —— 发丝笔画加双层影会糊成一团。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="title">地板与硬规则</h2>
+    <ul class="rules">
+      <li>中文最小字号 <span class="mk">12px</span>;12px 起必须 400 字重,不许用细体。</li>
+      <li>越大越细:<code>200 ≥17px</code> / <code>300 ≥14px</code> / <code>400 ≤12px</code>;同一字号只挂一种字重。</li>
+      <li>最小行高 <code>1.35</code>,行高绑字号档、不绑组件。</li>
+      <li>禁用 <code>vw</code> 外推上限:响应式写进 <code>clamp()</code> 中段,上限一律绝对单位。</li>
+      <li>CJK 禁斜体、禁 <code>border-bottom</code> 当前下划线;中文正文禁两端对齐。</li>
+      <li>按钮不吃继承:<code>button,input,select,textarea{font:inherit}</code>。</li>
+      <li>拉丁显示字族只给纯拉丁字标 —— 给中文元素会静默回落宋体。</li>
+    </ul>
+  </section>
+
+  <footer class="spec">字族由 cjk-typography 包下发(本包只管档位) · 断言:<code>python scripts/assert_tokens.py</code> · MIT</footer>
+</main>
+</body>
+</html>

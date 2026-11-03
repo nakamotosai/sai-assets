@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>swiss-style 标本页 · 瑞士国际主义版式与构件</title>
+<!-- 本包只给版式与构件;配色 token 的权威在主题包 swiss-classic / swiss-inverted。
+     下面是 swiss-grid.css 的兜底值(= swiss-classic),正式接入请引主题包。 -->
+<link rel="stylesheet" href="../src/swiss-grid.css">
+<link rel="stylesheet" href="../src/swiss-ui.css">
+<link rel="stylesheet" href="../src/swiss-layouts.css">
+<style>
+/* 仅本标本页使用的排版壳,不属于 src */
+body { background: var(--bg); color: var(--ink); }
+.pv-sec { margin-top: 96px; }
+.pv-kicker {
+  grid-column: 1 / 7;
+  margin-top: 24px;
+  font-size: clamp(16px, 1.5vw, 24px);
+  line-height: 1.55;
+  color: var(--ink-muted);
+}
+.pv-flag {
+  grid-column: 10 / 13;
+  align-self: start;
+  justify-self: end;
+  width: clamp(120px, 14vw, 220px);
+  aspect-ratio: 1;
+  background: var(--accent);
+  position: relative;
+}
+.pv-flag::before,
+.pv-flag::after { content: ""; position: absolute; background: var(--on-accent); }
+.pv-flag::before { left: 38%; top: 18%; width: 24%; height: 64%; }
+.pv-flag::after { top: 38%; left: 18%; width: 64%; height: 24%; }
+.pv-hero h1 {
+  grid-column: 1 / 9;
+  font-size: clamp(48px, 8vw, 132px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+}
+.pv-hero .pv-cn {
+  grid-column: 1 / 9;
+  margin-top: 8px;
+  font-size: clamp(22px, 3vw, 56px);
+  font-weight: 900;
+  line-height: 1.08;
+}
+.pv-cards .sw-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 24px;
+  min-height: 176px;
+  display: flex;
+  flex-direction: column;
+}
+.pv-cards .sw-card--inv { background: var(--ink); color: var(--bg); }
+.pv-cards .pv-big {
+  font-size: clamp(32px, 4vw, 64px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.pv-cards .pv-tag { margin-top: auto; font-size: 12px; color: var(--ink-muted); }
+.pv-cards .sw-card--inv .pv-tag { color: var(--hairline); }
+.pv-count-blk { grid-column: 1 / 5; }
+.pv-count-blk .pv-num {
+  font-size: clamp(44px, 6vw, 96px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.pv-rows { border-top: 1px solid var(--border); margin-top: 24px; }
+.pv-row {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--swiss-gutter);
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--bg-deep);
+}
+.pv-row .pv-no { grid-column: 1 / 2; color: var(--accent); font-size: 13px; font-weight: 600; }
+.pv-row .pv-t { grid-column: 2 / 8; font-size: 17px; font-weight: 600; }
+.pv-row .pv-m { grid-column: 9 / 13; font-size: 13px; color: var(--ink-muted); }
+.pv-controls { margin-top: 24px; }
+.pv-btn-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.pv-tags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.pv-thumbs { margin-top: 24px; }
+.pv-thumb-cap { margin-top: 8px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-muted); }
+.pv-thumbs .sw-cover { min-height: 420px; padding: 32px; }
+.pv-thumbs .sw-cover .sw-cover-title { font-size: clamp(24px, 2.4vw, 40px); }
+.pv-thumbs .sw-hero { min-height: 320px; }
+.pv-thumbs .sw-hero .sw-hero-title { font-size: clamp(22px, 2.2vw, 40px); }
+.pv-thumbs .sw-hero .sw-hero-figure { max-width: 160px; }
+.pv-bars i { height: var(--h, 40%); }
+</style>
+</head>
+<body class="sw">
+<div class="sw-page">
+
+  <!-- 刊头四点轴 -->
+  <header class="sw-masthead sw-mt-64">
+    <span><b>No 01</b></span>
+    <span>Swiss Style Primer</span>
+    <span>国际主义平面设计风格</span>
+    <span>网格 · 构件 · 版式</span>
+  </header>
+
+  <!-- Hero:不对称,一侧文字一侧几何 -->
+  <section class="swiss-grid pv-hero sw-mt-64">
+    <h1>Swiss<br>Style.</h1>
+    <div class="pv-cn">看不见的网格,让信息自己说话</div>
+    <div class="pv-flag" role="img" aria-label="十字几何形,结构红唯一大面积"> </div>
+    <p class="pv-kicker">
+      这不是一种「款式」,而是一套可搬运的排版系统:一条先推导、再藏起来的模块网格,
+      一款中性无衬线体,一律左对齐右缘参差,让信息自己承担层级。
+      本包只给版式与构件;配色 token 来自主题包。
+    </p>
+  </section>
+
+  <!-- 01 网格:教学网格线开关 + 卡片归格 -->
+  <section class="sw-section sw-mt-96">
+    <div class="sw-section-head">
+      <span class="sw-idx">01</span>
+      <h2>十二栏模块网格</h2>
+      <span class="sw-cap">右侧开关把网格线画回来 —— 干净只是内容服从同一套格子的结果。</span>
+      <button class="sw-btn sw-btn--quiet sw-mt-16" style="grid-column:1/3;justify-self:start"
+        data-swiss-grid-toggle data-label-on="隐藏网格 Hide grid" data-label-off="显示网格 Show grid">显示网格 Show grid</button>
+    </div>
+
+    <div class="swiss-grid-demo sw-mt-32">
+      <div class="grid-lines" aria-hidden="true"></div>
+      <div class="swiss-grid pv-cards">
+        <article class="sw-card sw-c4" data-swiss-settle data-swiss-index="0">
+          <div class="pv-big">B12</div>
+          <div class="pv-tag"><span class="sw-dot"></span>&nbsp;登机口 · 占位示例</div>
+        </article>
+        <article class="sw-card sw-card--inv sw-c4" data-swiss-settle data-swiss-index="1">
+          <div class="pv-big">Gleis 7</div>
+          <div class="pv-tag">站台 · 占位示例</div>
+        </article>
+        <article class="sw-card sw-c4" data-swiss-settle data-swiss-index="2">
+          <div class="pv-big">1957</div>
+          <div class="pv-tag">字号、字距、基线三件套</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 细线分隔的列表 + 计数入位 -->
+  <section class="sw-section sw-mt-96">
+    <div class="sw-section-head">
+      <span class="sw-idx">02</span>
+      <h2>细线分隔,不用盒子</h2>
+      <span class="sw-cap">能用间距分组就不画线;线只给密集列表。下方数字进入视口时从 0 滚到目标值。</span>
+    </div>
+
+    <div class="swiss-grid sw-mt-32">
+      <div class="pv-count-blk">
+        <div class="sw-label">累计示例单位</div>
+        <div class="pv-num" data-swiss-count="1240">0</div>
+        <div class="sw-hint">计数入位:单帧 rAF 驱动,tabular 数字不抖位。</div>
+      </div>
+      <div class="sw-col-body" style="grid-column:6/13">
+        <div class="pv-rows">
+          <div class="pv-row"><span class="pv-no">01</span><span class="pv-t">网格先推导,再隐藏</span><span class="pv-m">12 栏 · 24px 沟槽 · 24px 主基线</span></div>
+          <div class="pv-row"><span class="pv-no">02</span><span class="pv-t">一款中性怪诞体拉满层级</span><span class="pv-m">靠字号,不靠字体堆砌</span></div>
+          <div class="pv-row"><span class="pv-no">03</span><span class="pv-t">一律左对齐,右缘参差</span><span class="pv-m">禁居中、禁两端对齐</span></div>
+          <div class="pv-row"><span class="pv-no">04</span><span class="pv-t">客观:不对称 + 大留白</span><span class="pv-m">一款强调色,几何形而非插画</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 控件集 -->
+  <section class="sw-section sw-mt-96">
+    <div class="sw-section-head">
+      <span class="sw-idx">03</span>
+      <h2>控件:直角平涂、发丝线</h2>
+      <span class="sw-cap">红只做焦点态 / 选中态 / 主按钮 hover,不做大面积填充。所有尺寸落 8pt 网格。</span>
+    </div>
+
+    <div class="swiss-grid pv-controls sw-mt-32">
+      <div class="sw-c6">
+        <div class="sw-label">按钮</div>
+        <div class="pv-btn-row">
+          <button class="sw-btn" type="button">默认</button>
+          <button class="sw-btn sw-btn--primary" type="button">主按钮</button>
+          <button class="sw-btn sw-btn--quiet" type="button">次按钮</button>
+          <button class="sw-btn" type="button" disabled>禁用</button>
+        </div>
+
+        <div class="sw-label sw-mt-32">标签</div>
+        <div class="pv-tags">
+          <span class="sw-tag"><span class="sw-dot"></span>进行中</span>
+          <span class="sw-tag sw-tag--solid">已归档</span>
+          <span class="sw-tag sw-tag--accent">重点</span>
+          <span class="sw-tag sw-tag--quiet">草稿</span>
+        </div>
+
+        <div class="sw-label sw-mt-32">分页</div>
+        <nav class="sw-pagination" aria-label="分页示例">
+          <span aria-current="page">1</span>
+          <a href="#c-demo">2</a>
+          <a href="#c-demo">3</a>
+          <span class="sw-pg-sep">…</span>
+          <a href="#c-demo">12</a>
+        </nav>
+      </div>
+
+      <div class="sw-c6">
+        <form class="sw-field" onsubmit="return false">
+          <div class="sw-label">输入</div>
+          <label class="sw-field">
+            <span class="sw-label">标题</span>
+            <input class="sw-input" type="text" placeholder="占位文本">
+          </label>
+          <p class="sw-hint">输入框只留底发丝线,聚焦时底线上红。</p>
+          <label class="sw-field sw-mt-24">
+            <span class="sw-label">分类</span>
+            <select class="sw-select">
+              <option>示例分类一</option>
+              <option>示例分类二</option>
+            </select>
+          </label>
+          <label class="sw-check sw-mt-24"><input type="checkbox" checked> 勾选项示例</label>
+        </form>
+      </div>
+
+      <div class="sw-col-half-l sw-mt-32">
+        <table class="sw-table">
+          <caption>表格:只用发丝横线</caption>
+          <thead>
+            <tr><th scope="col">编号</th><th scope="col">条目</th><th scope="col" class="sw-num">计数</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>01</td><td>网格</td><td class="sw-num">12</td></tr>
+            <tr><td>02</td><td>沟槽</td><td class="sw-num">24</td></tr>
+            <tr><td>03</td><td>主基线</td><td class="sw-num">24</td></tr>
+            <tr><td>04</td><td>子网格</td><td class="sw-num">8</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="sw-col-half-r sw-mt-32">
+        <p class="sw-note">提示条:左侧 2px 结构红,不铺底。焦点环用 accent,对比 ≥3:1。</p>
+        <hr class="sw-hair sw-mt-24">
+        <div class="sw-label sw-mt-24">导航</div>
+        <nav class="sw-nav">
+          <a href="#c-demo" aria-current="page">概览</a>
+          <a href="#c-demo">文档</a>
+          <a href="#c-demo">规范</a>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 数据图元 -->
+  <section class="sw-section sw-mt-96">
+    <div class="sw-section-head">
+      <span class="sw-idx">04</span>
+      <h2>数据图元:等大计数 + 小倍数图</h2>
+      <span class="sw-cap">Isotype 用重复等大图元表数量,永不放大单个图元;Small multiples 同一坐标系重复小图便于比较。</span>
+    </div>
+
+    <div class="swiss-grid sw-mt-32">
+      <div class="sw-col-half-l">
+        <div class="sw-label">Isotype · 等大图元</div>
+        <div class="sw-iso-row" role="img" aria-label="八个单位方块,其中一个为强调红">
+          <i class="sw-iso-unit"></i><i class="sw-iso-unit"></i><i class="sw-iso-unit"></i>
+          <i class="sw-iso-unit"></i><i class="sw-iso-unit"></i><i class="sw-iso-unit"></i>
+          <i class="sw-iso-unit"></i><i class="sw-iso-unit sw-iso-unit--accent"></i>
+        </div>
+        <p class="sw-iso-legend">1 图元 = 250 件 · 8 图元 = 2000 件</p>
+      </div>
+
+      <div class="sw-col-half-r">
+        <div class="sw-label">Small multiples · 细灰柱,红只标一个高亮点</div>
+        <div class="sw-multiples">
+          <figure class="sw-multiple">
+            <figcaption class="sw-k">A 区</figcaption>
+            <div class="sw-v">42</div>
+            <div class="sw-bars"><i style="--h:40%"></i><i style="--h:70%"></i><i style="--h:55%"></i><i class="is-hi" style="--h:90%"></i><i style="--h:60%"></i></div>
+          </figure>
+          <figure class="sw-multiple">
+            <figcaption class="sw-k">B 区</figcaption>
+            <div class="sw-v">37</div>
+            <div class="sw-bars"><i style="--h:55%"></i><i style="--h:45%"></i><i style="--h:80%"></i><i style="--h:65%"></i><i class="is-hi" style="--h:85%"></i></div>
+          </figure>
+          <figure class="sw-multiple">
+            <figcaption class="sw-k">C 区</figcaption>
+            <div class="sw-v">28</div>
+            <div class="sw-bars"><i style="--h:30%"></i><i style="--h:60%"></i><i style="--h:50%"></i><i style="--h:75%"></i><i style="--h:45%"></i></div>
+          </figure>
+          <figure class="sw-multiple">
+            <figcaption class="sw-k">D 区</figcaption>
+            <div class="sw-v">51</div>
+            <div class="sw-bars"><i style="--h:70%"></i><i style="--h:85%"></i><i style="--h:60%"></i><i style="--h:50%"></i><i class="is-hi" style="--h:95%"></i></div>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 网格显影 + 版式骨架缩略 -->
+  <section class="sw-section sw-mt-96" id="c-demo">
+    <div class="sw-section-head">
+      <span class="sw-idx">05</span>
+      <h2>五套版式骨架</h2>
+      <span class="sw-cap">海报 / deck / 跨页 / 报告封面 / 落地 hero,全部对齐 12 栏与单一左轴。本区首次进入视口时会触发一次网格显影。</span>
+    </div>
+
+    <div class="swiss-grid-demo sw-mt-32">
+      <div class="grid-lines" aria-hidden="true"></div>
+      <div data-swiss-grid-reveal>
+        <div class="swiss-grid pv-thumbs">
+          <div class="sw-c6">
+            <div class="sw-poster">
+              <div class="sw-poster-top"><span>Poster</span><span>No 01</span></div>
+              <div class="sw-poster-title">海报<br>骨架</div>
+              <div class="sw-poster-shape" role="img" aria-label="结构红几何形"></div>
+              <div class="sw-poster-info">日期 · 地点 · 编号<br>占位信息块</div>
+            </div>
+            <div class="pv-thumb-cap">1 海报 · A 系列 1:√2</div>
+          </div>
+
+          <div class="sw-c6">
+            <div class="sw-deck">
+              <div class="sw-masthead" style="grid-column:1/-1">
+                <span><b>No 02</b></span><span>Deck</span><span>幻灯片</span><span>16:9</span>
+              </div>
+              <div class="sw-deck-title">幻灯片<br>骨架</div>
+              <div class="sw-deck-body">页眉四点轴 · 大标题靠上三分之一 · 正文单栏 measure · 页脚四栏。</div>
+              <div class="sw-deck-foot"><span>网格</span><span>字体</span><span>颜色</span><span>对齐</span></div>
+            </div>
+            <div class="pv-thumb-cap">2 Deck · 16:9</div>
+          </div>
+        </div>
+
+        <div class="swiss-grid sw-mt-32">
+          <div class="sw-c6">
+            <div class="sw-spread">
+              <div class="sw-page-l">
+                <div class="sw-figure" role="img" aria-label="主图占位"></div>
+                <div class="sw-figcap">图注贴下伸线 · 主图跨 2 字段。</div>
+              </div>
+              <div class="sw-page-r">
+                <p class="sw-measure">右页正文单栏,measure 控制在 30–36 个汉字;行高取主基线整数倍,跨字号注册到同一模块。</p>
+              </div>
+            </div>
+            <div class="pv-thumb-cap">3 跨页 · 4 字段</div>
+          </div>
+
+          <div class="sw-c6">
+            <div class="pv-thumbs">
+              <div class="sw-cover">
+                <div class="sw-cover-eyebrow">分类 · 编号</div>
+                <div class="sw-cover-title">报告封面骨架</div>
+                <div class="sw-cover-meta">期次<br>日期<br>占位</div>
+              </div>
+            </div>
+            <div class="pv-thumb-cap">4 报告封面 · 大留白</div>
+          </div>
+        </div>
+
+        <div class="sw-mt-32">
+          <div class="sw-hero">
+            <div class="sw-hero-copy">
+              <div class="sw-hero-title">落地 hero 骨架</div>
+              <p class="sw-hero-sub">左标题右几何的不对称构图;下方规则线 + 四栏价值点。</p>
+              <div class="sw-hero-cta"><button class="sw-btn sw-btn--primary" type="button">主行动</button></div>
+            </div>
+            <div class="sw-hero-figure" role="img" aria-label="几何形占位"></div>
+            <div class="sw-hero-values">
+              <div><div class="sw-label">网格</div><div>12 栏</div></div>
+              <div><div class="sw-label">沟槽</div><div>24px</div></div>
+              <div><div class="sw-label">基线</div><div>24px</div></div>
+              <div><div class="sw-label">对齐</div><div>单一左轴</div></div>
+            </div>
+          </div>
+          <div class="pv-thumb-cap">5 落地 hero · 12 栏响应式</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="sw-masthead sw-mt-96" style="margin-bottom:96px;border-top-width:1px">
+    <span><b>网格</b>12 栏 · 24px 沟槽 · 24px 主基线</span>
+    <span><b>字体</b>中性怪诞体 + 中文黑体</span>
+    <span><b>配色</b>由主题包提供(本页为兜底值)</span>
+    <span><b>对齐</b>单一左轴 · 右缘参差</span>
+  </footer>
+
+</div>
+<script src="../src/swiss-motion.js"></script>
+</body>
+</html>

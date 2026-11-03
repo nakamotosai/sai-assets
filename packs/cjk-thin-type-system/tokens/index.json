@@ -1,0 +1,38 @@
+{
+  "id": "cjk-thin-type-system",
+  "kind": "fonts",
+  "title": "CJK Thin Type System · 中文细体排版语言",
+  "version": "1.0.0",
+  "summary": "暗色单页站的中文极细排版语言:字号 4 档 · 字重 2 档(另附「越大越细」阶梯)· 字距 3 档 · 行高 3 档 · 文字影 2 档。约法 = 组件只继承,不再自己写 font-size / font-weight / letter-spacing / line-height / text-shadow。",
+  "split": "与 cjk-typography 分工:那条管「用哪些字」(字族与回退栈),本条管「用几档、多细、多宽、多高、几层影」。本包不下发字族。",
+  "axes": [
+    { "id": "scale", "count": 4, "file": "tokens/scale.json", "what": "字号档(giant / display / title / body)" },
+    { "id": "weights", "count": 2, "file": "tokens/weights.json", "what": "字重档(text 200 / mark 600)+ 越大越细配对" },
+    { "id": "tracking", "count": 3, "file": "tokens/tracking.json", "what": "字距档(0 / .02em / .12em)" },
+    { "id": "leading", "count": 3, "file": "tokens/leading.json", "what": "行高档(1.4 / 1.35 / 1.6)" },
+    { "id": "shadow", "count": 2, "file": "tokens/shadow.json", "what": "文字影档(单层 / 双层扩散)" }
+  ],
+  "defaults": {
+    "scale": "body",
+    "weight": "text",
+    "tracking": "body",
+    "leading": "body",
+    "shadow": "text"
+  },
+  "floors": {
+    "cjk_px": 12,
+    "thin_weight_px": 17,
+    "leading": 1.35,
+    "display_shadow_px": 28
+  },
+  "family_pack": "cjk-typography",
+  "rules": [
+    "组件只继承,不再各自写 font-size / font-weight / letter-spacing / line-height / text-shadow —— 同一字号挂多字重、各组件一套行高,正是「字体乱」的根因",
+    "行高与文字影绑字号档,不绑组件",
+    "响应式写进 clamp 的中段,上限用绝对单位;禁用 vw 外推上限",
+    "同一字号只挂一种字重",
+    "中文禁斜体;禁 border-bottom 当前下划线",
+    "正文中文不加字距;.02em / .12em 只给标题与微标签"
+  ],
+  "trap": "按钮不吃继承:button / input 用 UA 默认字(回落无文字影的正文字形),必须 button,input,select,textarea{font:inherit;letter-spacing:inherit;text-shadow:inherit}"
+}

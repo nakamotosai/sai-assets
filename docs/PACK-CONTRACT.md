@@ -77,7 +77,7 @@ packs/<id>/
 | 通道 | 命令 | 适用 |
 |---|---|---|
 | agent / 人 | `git clone --depth 1 https://github.com/nakamotosai/sai-assets.git` → 读 `catalog.json` → 进 `packs/<id>/SKILL.md` | 首次、通用 |
-| 项目(拷贝式) | `python scripts/apply.py <id> --to <target-dir>`(拷 CSS/tokens + 打印 apply 步骤) | 把资产抄进项目,**无运行时依赖** |
+| 项目(拷贝式) | `python scripts/apply.py <id> --to <target-dir>` **默认整包拷贝**(含 `pack.json` 与 `preview/`,包内断言才能在项目里自证);`--minimal` 只拷产物子集 | 把资产抄进项目,**无运行时依赖** |
 | 零安装单文件 | `https://cdn.jsdelivr.net/gh/nakamotosai/sai-assets@<tag>/packs/<id>/css/default.css` | 需要固定版本的单文件 |
 
 消费后**必须**在项目 `design-lock.json` 记一行(`assets[]`),见 `docs/USAGE-INTEGRATION.md`。
@@ -101,3 +101,13 @@ packs/<id>/
    - **文字档**:正文 `ink` on `bg` ≥ 4.5:1;`muted` on `bg` ≥ 4.5:1;`accent-ink`(同色相提亮/压暗一档)on `bg` ≥ 4.5:1 —— 小字必须用 `--accent-ink`,不许用 `--accent`。
    - **图形档**:每个强调色 on **深色底** ≥ 4.5:1、on **浅色底** ≥ 3:1;每个强调色相对亮度 Y 落在 [0.15, 0.25](保证两模都能用)。
    断言须把这两档都跑出来并打印实测值。
+
+## 6 闭环(harvest → gate → PR → tag → 消费)
+
+| 阶段 | 入口 | 硬要求 |
+|---|---|---|
+| 收 | `python scripts/harvest.py <id> --from <src-dir> --kind … --when … --not-for … --license … --entry … (--usage <已有文档> \| --gen-assert)` | `--when/--not-for/--license` 必填、`--usage` 必须指向已存在的文档 —— **harvest 不写散文、不写占位**;收完自动 sanitize + 仓级闸,本包有命中即非零退出 |
+| 闸 | `git add -A && python scripts/gate.py` | 只扫跟踪文件;`0 findings` 才算过 |
+| 发布 | `python scripts/release.py <id> [--push]` | 打 tag 前强制 gate 绿;tag 名 `pack/<id>@<version>`;外部包跳过 |
+| 消费 | `apply.py` / raw URL / clone | 消费后项目 `design-lock.json.assets[]` 记 `pack`/`version`/`sha` |
+| 回收 | 项目里改好的资产回 harvest → PR | 禁在公开仓之外留第二份副本 |

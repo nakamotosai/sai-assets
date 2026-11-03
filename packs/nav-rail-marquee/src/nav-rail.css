@@ -1,0 +1,203 @@
+/*!
+ * nav-rail-marquee — 左竖排跑马灯 + 顶部导航 + 右侧段轨 + 底部进度线
+ * MIT License · sai-assets pack nav-rail-marquee v1.0.0
+ * 全部规则作用域限定在 .nr(包裹根元素),不写 html / body,可直接叠进既有页面。
+ */
+
+/* ── 0 · 变量(所有可调项都在这里) ─────────────────────────── */
+.nr {
+  /* 中性色阶:黑底 + 白字三档(暗色场景默认值) */
+  --nr-bg: #000;
+  --nr-ink: rgba(255, 255, 255, .92);
+  --nr-dim: rgba(255, 255, 255, .55);
+  --nr-line: rgba(255, 255, 255, .18);
+  --nr-rule: rgba(255, 255, 255, .12);
+  --nr-accent: #fff;
+  --nr-glow: rgba(255, 255, 255, .55);
+  --nr-focus: #7fd7ff;
+  --nr-font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* 左竖排跑马灯:原 params.json 的 marqueeOpacity / marqueeSec 落成两个 CSS 变量 */
+  --mq-opacity: .72;   /* 取值范围 0.2 – 1,步进 0.02,默认 0.72 */
+  --mq-sec: 24s;       /* 取值范围 8s – 60s,步进 1s,默认 24s */
+
+  /* 尺寸 */
+  --nr-hit: 44px;         /* 每个可点项的最小命中区(无障碍硬项,别改小) */
+  --nr-gutter: 14px;      /* 右侧段轨距边 */
+  --nr-top-offset: 14px;  /* 顶部导航距上边 */
+  --nr-rail-gap: 16px;
+  --nr-bar-w: 2px;        /* 段轨条形宽 */
+  --nr-bar-h: 18px;       /* 段轨条形常态高 */
+  --nr-bar-h-on: 40px;    /* 当前段条形高 */
+  --nr-prog-h: 2px;       /* 底部进度线高 */
+  --nr-t: .4s;            /* 过渡时长(降级时归零) */
+
+  position: relative;
+  min-height: 100%;
+  background: var(--nr-bg);
+  color: var(--nr-ink);
+  font-family: var(--nr-font);
+}
+
+.nr *,
+.nr *::before,
+.nr *::after { box-sizing: border-box; }
+
+/* ── 1 · 左竖排跑马灯(vertical-rl + 双份内容实现无缝循环) ── */
+.nr-marquee {
+  position: fixed;
+  inset: 0 auto 0 8px;
+  z-index: 7;
+  writing-mode: vertical-rl;
+  overflow: hidden;
+  opacity: var(--mq-opacity);
+  pointer-events: none;
+}
+
+.nr-marquee__track {
+  display: inline-block;
+  white-space: nowrap;
+  font-size: 12px;
+  letter-spacing: .14em;
+  color: rgba(255, 255, 255, .62);
+  animation: nr-mq-scroll var(--mq-sec) linear infinite;
+  will-change: transform;
+}
+
+/* 轨道里放两份等长内容,位移 -50% 后与起点像素一致 → 无缝 */
+@keyframes nr-mq-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, -50%, 0); }
+}
+
+/* ── 2 · 按钮底座(顶导航与段轨共用同一套命中区 / 焦点 / 当前态) ── */
+.nr-btn {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  border: 0;
+  background: none;
+  color: var(--nr-dim);
+  font: inherit;
+  font-size: 11px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--nr-hit);
+  min-height: var(--nr-hit);
+  padding: 0 8px;
+  cursor: pointer;
+  transition: color var(--nr-t) ease;
+}
+
+.nr-btn:hover { color: var(--nr-ink); }
+
+.nr-btn:focus-visible {
+  outline: 2px solid var(--nr-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.nr-btn[aria-current="page"] { color: var(--nr-ink); }
+
+/* ── 3 · 顶部导航(居中、小写、等距) ── */
+.nr-top {
+  position: fixed;
+  top: var(--nr-top-offset);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nr-top .nr-btn {
+  letter-spacing: .18em;
+  text-transform: lowercase;
+}
+
+/* ── 4 · 右侧段轨(标签 + 条形,当前段高亮发光) ── */
+.nr-rail {
+  position: fixed;
+  right: var(--nr-gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 8;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--nr-rail-gap);
+}
+
+.nr-rail .nr-btn {
+  gap: 12px;
+  padding: 0 2px 0 10px;
+  font-size: 10px;
+  letter-spacing: .2em;
+}
+
+.nr-rail .nr-lbl { order: 1; }
+
+.nr-rail .nr-bar {
+  order: 2;
+  display: block;
+  width: var(--nr-bar-w);
+  height: var(--nr-bar-h);
+  background: var(--nr-line);
+  transition: height var(--nr-t) ease, background-color var(--nr-t) ease, box-shadow var(--nr-t) ease;
+}
+
+.nr-rail .nr-btn[aria-current="page"] .nr-bar {
+  height: var(--nr-bar-h-on);
+  background: var(--nr-accent);
+  box-shadow: 0 0 14px var(--nr-glow);
+}
+
+/* ── 5 · 底部进度线(宽度由 JS 按当前段写入 --nr-progress) ── */
+.nr-progress {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--nr-prog-h);
+  z-index: 8;
+  background: var(--nr-rule);
+}
+
+.nr-progress__bar {
+  display: block;
+  height: 100%;
+  /* 25% 只是 JS 接管前的一帧兜底(4 段时等于第 1 段),不是静态终值 */
+  width: var(--nr-progress, 25%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, .15), var(--nr-accent));
+  box-shadow: 0 0 10px var(--nr-glow);
+  transition: width var(--nr-t) ease;
+}
+
+/* ── 6 · 舞台(内部滚动 + 预留滚动条槽位 → 不出现滚动条抖动) ── */
+.nr-stage {
+  height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+}
+
+.nr-sec {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 96px 128px;
+}
+
+/* ── 7 · 降级:减少动效(停跑马灯、停过渡、停平滑滚动) ── */
+@media (prefers-reduced-motion: reduce) {
+  .nr-marquee__track { animation: none; transform: none; }
+  .nr-btn,
+  .nr-rail .nr-bar,
+  .nr-progress__bar { transition: none; }
+  .nr-stage { scroll-behavior: auto; }
+}

@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>bg-fx · 十款 WebGL2 动态背景</title>
+<meta name="description" content="bg-fx 索引墙:10 个获奖级 WebGL2 背景,共享一份 engine.js(bloom → 径向色差 → 胶片颗粒 → 暗角 → ACES → 抖动),每个效果一份 concept 机制代码。" />
+<style>
+  :root{
+    color-scheme: dark;
+    --bg:#08090c; --panel:#0e1015; --line:#1e2129; --ink:#e6e2d9; --dim:#8d8a83; --faint:#5d5b56;
+    --maxw:1140px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink); min-height:100vh;
+    font:400 15px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI","Noto Sans SC",sans-serif;
+    padding:56px 28px 72px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:34px}
+  .kicker{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--faint);margin-bottom:14px}
+  h1{font-size:clamp(26px,4.2vw,40px);font-weight:600;letter-spacing:-.015em;line-height:1.15}
+  h1 small{display:block;font-size:14px;font-weight:400;color:var(--dim);letter-spacing:0;margin-top:10px}
+  .pipe{
+    margin-top:18px;font:500 12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--dim);
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 14px;
+    overflow-x:auto;white-space:nowrap;
+  }
+  .pipe b{color:var(--ink);font-weight:600}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .card{
+    position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:18px 18px 16px 22px;display:flex;flex-direction:column;gap:10px;
+    transition:border-color .18s ease,transform .18s ease;
+  }
+  .card:hover{border-color:#333846;transform:translateY(-2px)}
+  .card::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0}
+  .card[data-theme="dark"]::before{background:linear-gradient(180deg,#5f7fd8,#2b3a63)}
+  .card[data-theme="light"]::before{background:linear-gradient(180deg,#e0b473,#a9762f)}
+  .card h2{font-size:16px;font-weight:600;letter-spacing:-.01em}
+  .card h2 span{display:block;font-size:12px;font-weight:400;color:var(--dim);margin-top:3px;letter-spacing:0}
+  .card p{font-size:13px;line-height:1.65;color:var(--dim)}
+  .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .tag{font:500 10.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.06em;
+    color:var(--faint);border:1px solid var(--line);border-radius:999px;padding:5px 8px}
+  .card a{margin-top:auto;font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.04em;
+    color:var(--ink);text-decoration:none;border-bottom:1px solid #3a4050;align-self:flex-start;padding-bottom:2px}
+  .card a:hover{border-bottom-color:var(--ink)}
+  footer{margin-top:38px;border-top:1px solid var(--line);padding-top:20px;color:var(--faint);
+    font:500 12px/1.8 ui-monospace,SFMono-Regular,Menlo,monospace}
+  footer a{color:var(--dim)}
+  @media (prefers-reduced-motion: reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">web-fx · bg-fx</div>
+    <h1>十款 WebGL2 动态背景
+      <small>共享一份引擎,每个效果只写自己的机制:极光 · 墨流 · 焦散 · 摩尔干涉 · 金属拉丝 ……</small>
+    </h1>
+    <div class="pipe"><b>scene</b> (HDR) → <b>bright</b> (阈值 1.0) → <b>blur</b> ×4 可分离 → <b>composite</b> (bloom + 径向色差 + 亮度门控颗粒 + smoothstep 暗角 + ACES + 三角抖动)</div>
+  </header>
+
+  <main class="grid">
+  <article class="card" data-theme="dark">
+    <h2>Lumen River<span>流光之河</span></h2>
+    <p>域扭曲的发光墨流,光标只搅动不重排构图;发光质量锁在右侧 2/3,标题区留暗。</p>
+    <div class="meta">
+      <span class="tag">dark</span>
+      <span class="tag">ice-blue</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/lumen-river/index.html">打开 effect 页 →</a>
+  </article>
+  <article class="card" data-theme="light">
+    <h2>Solar Drift<span>暖阳漂移</span></h2>
+    <p>纸底上缓慢绕行的太阳:过曝核心 + 平方反比日冕 + 定向体积光轴 + 层状云带。</p>
+    <div class="meta">
+      <span class="tag">light</span>
+      <span class="tag">amber</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/solar-drift/index.html">打开 effect 页 →</a>
+  </article>
+  <article class="card" data-theme="dark">
+    <h2>Aurora Veil<span>极光幕帘</span></h2>
+    <p>五条独立顶高的幕帘,striae 频率与振幅随空间变(读作垂挂织物,不是条形码)。</p>
+    <div class="meta">
+      <span class="tag">dark</span>
+      <span class="tag">lime</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/aurora-veil/index.html">打开 effect 页 →</a>
+  </article>
+  <article class="card" data-theme="dark">
+    <h2>Gilded Topography<span>鎏金地形</span></h2>
+    <p>等高线金属地图:线宽随坡度变,指数等高线 + 金属双色,只覆盖约四成画面。</p>
+    <div class="meta">
+      <span class="tag">dark</span>
+      <span class="tag">gold</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/gilded-topography/index.html">打开 effect 页 →</a>
+  </article>
+  <article class="card" data-theme="dark">
+    <h2>Silk Interference<span>丝缎干涉</span></h2>
+    <p>两块光栅平面的真实摩尔拍频 + 脊线镜面高光:是“丝”,不是“布”。</p>
+    <div class="meta">
+      <span class="tag">dark</span>
+      <span class="tag">violet-rose</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/silk-interference/index.html">打开 effect 页 →</a>
+  </article>
+  <article class="card" data-theme="light">
+    <h2>Tidal Caustics<span>潮汐焦散</span></h2>
+    <p>五次迭代的折射焦散:细亮脉络聚成簇,其余压成暗静水;亮点是唯一发射体。</p>
+    <div class="meta">
+      <span class="tag">light</span>
+      <span class="tag">aqua</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/tidal-caustics/index.html">打开 effect 页 →</a>
+  </article>
+  <article class="card" data-theme="dark">
+    <h2>Ember Field<span>余烬之野</span></h2>
+    <p>三层深度带的泪滴余烬上升,远糊近锐;视差来自构造而非缩放。</p>
+    <div class="meta">
+      <span class="tag">dark</span>
+      <span class="tag">ember-orange</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/ember-field/index.html">打开 effect 页 →</a>
+  </article>
+  <article class="card" data-theme="dark">
+    <h2>Chrome Ripple<span>铬面涟漪</span></h2>
+    <p>拉丝金属:波前被表面曲率扭曲(非同心靶环)+ 各向异性镜面条纹 + 大尺度 sheen。</p>
+    <div class="meta">
+      <span class="tag">dark</span>
+      <span class="tag">cold-white</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/chrome-ripple/index.html">打开 effect 页 →</a>
+  </article>
+  <article class="card" data-theme="dark">
+    <h2>Prism Beam<span>棱镜光束</span></h2>
+    <p>按角度索引波长的棱镜扇:紫→红色散,核心留白,尘点只存在于束内。</p>
+    <div class="meta">
+      <span class="tag">dark</span>
+      <span class="tag">spectral</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/prism-beam/index.html">打开 effect 页 →</a>
+  </article>
+  <article class="card" data-theme="dark">
+    <h2>Magnetic Filings<span>铁屑磁力线</span></h2>
+    <p>双极偶极场:|B| 决定每根铁屑的长短与亮度,零点只剩短桩,鞍线可见。</p>
+    <div class="meta">
+      <span class="tag">dark</span>
+      <span class="tag">signal-red</span>
+      <span class="tag">speed · bloom · exposure · grain · ca · vig</span>
+    </div>
+    <a href="../effects/magnetic-filings/index.html">打开 effect 页 →</a>
+  </article>
+  </main>
+
+  <footer>
+    每张卡链到独立效果页(无 iframe);参数默认值在各效果目录的 <code>params.json</code>。<br>
+    性能与无障碍口径:DPR 封顶(弱设备 1.25 / 桌面 1.75)、页隐藏与离屏暂停、<code>prefers-reduced-motion</code> 只出静态帧。详见 <code>docs/usage.md</code>。
+  </footer>
+</div>
+
+</body>
+</html>

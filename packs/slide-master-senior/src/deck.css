@@ -1,0 +1,262 @@
+/*! slide-master-senior · src/deck.css
+ *  1920×1080 分页母版(封面页 + 时间线页)。整理自母版演示的 styles.css,保留其排版配方。
+ *  换色只改 §1 颜色令牌;版式尺度也在 §1,组件里不写死数值。
+ *  翻页/页码/窄视口缩放由 src/deck.js 装配;打印成 PDF 的规则在 §5。
+ */
+
+/* ── §1 令牌:颜色集中在 :root(强调色面积保持 <10%) ───────────────── */
+:root {
+  --paper: #f6f1e7;    /* 页底:暖纸 */
+  --surface: #fffdf6;  /* 卡面 / 图位底 */
+  --ink: #071529;      /* 正文墨色 */
+  --ink-2: #334155;    /* 唯一的灰档(次要文字、标签、注脚) */
+  --accent: #b34a32;   /* 强调色:眉标、日期、主按钮(面积 <10%) */
+  --gold: #c9a45c;     /* 顶栏分隔线 */
+  --line: #e3d7bd;     /* 卡面描边 */
+  --stage: #2b2b2b;    /* 屏幕预览时的舞台底(打印时被清掉) */
+
+  --page-w: 1920px;
+  --page-h: 1080px;
+  --page-pad-x: 80px;  /* 1760 内容宽 = 1920 − 2×80 */
+  --page-pad-y: 40px;
+  --budget-h: 1000px;  /* 1000 法则:内容预算 1000px,上下各 40px 归 1080 */
+
+  --font-cjk: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-weight-strong: 800;
+
+  /* 字级(正文 18.5–21px / 内页标题 44–48px / 行高 1.65–1.75) */
+  --fs-label: 19px;   /* 顶栏 · 页码 · 眉标 · 注脚 · 按钮 · 页脚条 */
+  --fs-body: 21px;    /* 正文 */
+  --fs-day: 26px;     /* 时间线条目:日期(小标题档) */
+  --fs-item: 30px;    /* 时间线条目:事项(小标题档) */
+  --fs-h2: 48px;      /* 内页标题 */
+  --fs-h1: 96px;      /* 封面主标题(封面专属,不套 44–48 档) */
+  --lh-text: 1.7;
+  --lh-h2: 1.25;
+  --lh-h1: 1.2;
+
+  /* 形态 */
+  --bw: 3px;
+  --r-card: 24px;
+  --r-item: 16px;
+  --r-btn: 12px;
+  --gap-cover: 64px;
+  --gap-item: 32px;
+  --gap-row: 28px;
+}
+
+/* ── §2 舞台与页卡 ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  padding: 24px 0;
+  background: var(--stage);
+  color: var(--ink);
+  font-family: var(--font-cjk);
+  font-size: var(--fs-label);
+  line-height: var(--lh-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 页卡就是 1920×1080 的一页;窄视口由 deck.js 写 --deck-fit 等比缩小 */
+.page {
+  width: var(--page-w);
+  height: var(--page-h);
+  overflow: hidden;
+  margin: 24px auto;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 12px 48px rgb(0 0 0 / 45%);
+  zoom: var(--deck-fit, 1);
+}
+
+/* 1000 法则:内容区固定 1000px 高,上下各 40px 归 1080 */
+.inner {
+  width: calc(var(--page-w) - var(--page-pad-x) * 2);
+  height: var(--budget-h);
+  margin: var(--page-pad-y) auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ── §3 零件 ─────────────────────────────────────────────────────── */
+.topbar {
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--fs-label);
+  font-weight: var(--font-weight-strong);
+  letter-spacing: .24em;
+  color: var(--ink-2);
+  border-bottom: var(--bw) solid var(--gold);
+  padding-bottom: 12px;
+}
+
+.pageno { letter-spacing: .12em; }
+
+.eyebrow {
+  margin: 0 0 24px;
+  font-size: var(--fs-label);
+  font-weight: var(--font-weight-strong);
+  letter-spacing: .24em;
+  color: var(--accent);
+}
+
+.sec-title {
+  margin: 24px 0 40px;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  font-weight: var(--font-weight-strong);
+}
+
+.ribbon {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 2px solid var(--line);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--ink-2);
+}
+
+/* ── §4 封面页:右侧通高图位 + 左双轨 ─────────────────────────────── */
+.cover-grid {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  gap: var(--gap-cover);
+}
+
+.cover-left {
+  flex: 1.1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cover-title {
+  margin: 0 0 32px;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  font-weight: var(--font-weight-strong);
+  letter-spacing: 0;
+}
+
+.cover-sub {
+  margin: 0 0 48px;
+  font-size: var(--fs-body);
+  line-height: var(--lh-text);
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.cover-cta { display: flex; gap: 16px; }
+
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: var(--r-btn);
+  background: var(--ink);
+  color: #fff;
+  font-size: var(--fs-label);
+  font-weight: 700;
+}
+
+.btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border: var(--bw) solid var(--ink);
+}
+
+.cover-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 3 / 4;
+  max-height: 720px;
+  background: var(--surface);
+  border: var(--bw) solid var(--line);
+  border-radius: var(--r-card);
+}
+
+/* 占位图标记:换成真图时整块替换 .cover-right 的背景 */
+.ph-mark {
+  padding: 16px 28px;
+  border: 2px dashed var(--ink-2);
+  background: repeating-linear-gradient(45deg, #00000008, #00000008 12px, transparent 12px, transparent 24px);
+  color: var(--ink-2);
+  font-size: var(--fs-label);
+  font-weight: 700;
+}
+
+/* ── §5 时间线页:行程走时间轴,禁表格 ───────────────────────────── */
+.timeline {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-row);
+}
+
+.timeline li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gap-item);
+  padding: 28px 36px;
+  background: var(--surface);
+  border: var(--bw) solid var(--line);
+  border-radius: var(--r-item);
+}
+
+.t-day {
+  font-size: var(--fs-day);
+  font-weight: var(--font-weight-strong);
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.t-what {
+  flex: 1;
+  font-size: var(--fs-item);
+  font-weight: 700;
+}
+
+.t-note {
+  font-size: var(--fs-label);
+  font-weight: 500;
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* ── §6 打印成 PDF:1920×1080 一页一卡 ───────────────────────────── */
+@page {
+  size: 1920px 1080px;
+  margin: 0;
+}
+
+@media print {
+  body {
+    padding: 0;
+    background: #fff;
+  }
+
+  .page {
+    margin: 0 auto;
+    page-break-after: always;
+    break-inside: avoid;
+    zoom: 1 !important;
+    transform: none !important;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}

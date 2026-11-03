@@ -1,0 +1,15 @@
+{
+  "id": "tracking",
+  "unit": "em",
+  "tiers": [
+    { "id": "body", "value": "0", "what": "正文 / 界面:中文不加字距(--ls-0)" },
+    { "id": "title", "value": "0.02em", "what": "标题:轻微开一点,给中文标题透气" },
+    { "id": "label", "value": "0.12em", "what": "微标签 / eyebrow:拉丁小字与全大写标签" }
+  ],
+  "cjk_rules": [
+    "中文正文不加字距(加字距会把中文行切成碎块)",
+    ".02em / .12em 只用于标题与微标签,不下放到正文",
+    "中文禁两端对齐(text-align:justify 会用字距变化去填行,中文行宽因此抖动)"
+  ],
+  "anti_pattern": "给中文正文加 letter-spacing 冒充「高级感」;一页里出现第四档字距值。"
+}

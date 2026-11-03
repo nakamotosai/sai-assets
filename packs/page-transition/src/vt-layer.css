@@ -1,0 +1,55 @@
+/* ============================================================
+   view-transition-layer.css — 多页静态站的「翻页 + 页内」动效层
+   出处：2026-10-02 biz.saaaai.com 策展改版（用户：「都要带动画过度，全部都要」）
+   零依赖，直接 link 进每一页（新旧文档都要有）。
+   ============================================================ */
+
+/* --- 1. 跨页：同源导航自动接管视图过渡 --- */
+@view-transition { navigation: auto; }
+
+/* 常驻背景层（星空/粒子 canvas）单独成组：
+   不参与整页交叉淡化，否则"同一片背景"会糊成鬼影。
+   新旧两帧都不加动画 —— 旧帧保持可见，用来盖住新页 WebGL 初始化那几百毫秒空窗
+   （藏掉旧帧会让过渡期间背景整段消失，观感=背景重新加载）。
+   新画布若是 alpha:false 的不透明层，一画出来就整体盖住旧帧，零鬼影。 */
+#bg { view-transition-name: bg; }
+::view-transition-group(bg) { animation: none; }
+::view-transition-old(bg) { animation: none; }
+::view-transition-new(bg) { animation: none; }
+
+/* 整页：旧页淡出，新页淡入并轻微上浮 */
+::view-transition-old(root) { animation: 190ms ease both vt-out; }
+::view-transition-new(root) { animation: 330ms cubic-bezier(.22,.61,.36,1) both vt-in; }
+@keyframes vt-out { from { opacity: 1 } to { opacity: 0 } }
+@keyframes vt-in  { from { opacity: 0; transform: translateY(14px) } to { opacity: 1; transform: none } }
+
+/* --- 2. 页内卡片：进场 + 退场（display 也能过渡） --- */
+.card {
+  transition-property: transform, border-color, box-shadow, opacity, display;
+  transition-duration: .3s, .3s, .3s, .3s, .3s;
+  transition-timing-function: cubic-bezier(.22,.61,.36,1), cubic-bezier(.22,.61,.36,1), cubic-bezier(.22,.61,.36,1), cubic-bezier(.22,.61,.36,1), ease;
+  transition-behavior: normal, normal, normal, normal, allow-discrete;
+}
+/* 退场：JS 只写 inline display:none，靠属性选择器给 opacity 一个目标值；
+   display 本身由 allow-discrete 延迟翻转，元素多留 .3s 把淡出演完。 */
+.card[style*="display: none"] { opacity: 0; transform: translateY(8px) scale(.985) }
+/* 入场起点。注意 .vt-skip：Chrome 把 appendChild 重排也当"重新渲染"，
+   排序重排时会整墙重放入场（实测 opacity 0→73→100），所以重排路径要临时挂 .vt-skip 跳过。 */
+@starting-style { .card:not(.vt-skip) { opacity: 0; transform: translateY(12px) } }
+
+/* --- 3. 弹层：开合都走动画 --- */
+.overlay { display: none; opacity: 0; transition: opacity .26s ease, display .26s allow-discrete }
+.overlay.on { display: block; opacity: 1 }
+@starting-style { .overlay.on { opacity: 0 } }
+
+/* --- 4. 懒加载 iframe / 图片：载完淡入（失败开环，事件不来也不会白屏） --- */
+.lazy-media.loaded > iframe,
+.lazy-media.loaded > img { animation: vt-fade .5s ease both }
+@keyframes vt-fade { from { opacity: 0 } to { opacity: 1 } }
+
+/* --- 5. 无障碍 --- */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 1ms }
+  .card, .overlay { transition-duration: .01ms !important }
+  .lazy-media.loaded > iframe, .lazy-media.loaded > img { animation: none }
+}

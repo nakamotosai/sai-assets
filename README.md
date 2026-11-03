@@ -21,7 +21,11 @@ cat sai-assets/packs/paper-editorial/SKILL.md
 # 2) 项目:拷贝式应用(无运行时依赖)+ 记版本
 python sai-assets/scripts/apply.py paper-editorial --to src/styles
 
-# 3) 零安装单文件(固定版本)
+# 3) 收一个新包(从项目里 harvest,自动 sanitize + 闸)
+python sai-assets/scripts/harvest.py <id> --from <项目目录> --kind fx --category web-fx \
+    --when "何时用" --not-for "何时不用" --license MIT --entry index.html --usage <已有用法文档>
+
+# 4) 零安装单文件(固定版本)
 curl -O https://cdn.jsdelivr.net/gh/nakamotosai/sai-assets@pack/paper-editorial@1.0.0/packs/paper-editorial/css/default.css
 ```
 

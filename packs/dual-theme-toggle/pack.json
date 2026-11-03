@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "id": "dual-theme-toggle",
+  "title": "Dual Theme Toggle · 两态主题切换器(一个按钮)",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "内部 design-system 双模条款(纸白 / 炭黑)",
+      "license": "internal",
+      "what": "配色定稿:深浅只翻中性色、强调色两模共用、小字走 accent-ink;以及无边框纯图标按钮规格(44px 热区 / 15px 图标 / aria-label / localStorage / 无 JS 保持隐藏并跟随系统)"
+    },
+    {
+      "name": "内部 demo demos/dual-theme-toggle",
+      "license": "MIT",
+      "what": "切换逻辑、防闪贴标、视图过渡、定长丝滑滚动,以及「重映射选择器必须带元素名前缀」等实测结论的来源"
+    }
+  ],
+  "origin": {
+    "project": "asset-library",
+    "path": "demos/dual-theme-toggle",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/theme-toggle.css",
+      "src/theme-toggle.js"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "theme-toggle",
+    "dark-mode",
+    "light-dark",
+    "design-tokens",
+    "localstorage",
+    "view-transition",
+    "smooth-scroll",
+    "accessibility"
+  ],
+  "when": "任何需要深浅两态的站点:内容型 / 工具型 / 文档站都行;要求无 JS 跟随系统、刷新不闪、切换有可见回执",
+  "not_for": "需要三套以上主题、或主题要换的不只是颜色(字体/密度/语言一起切)的产品;那类该用主题目录 + 属性分发,不是一个按钮",
+  "verified": {
+    "date": "2026-11-03",
+    "how": "python packs/dual-theme-toggle/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens dual-theme-toggle(见本仓 gate 输出;实测对比度与 preview 引用数在 docs/usage.md)"
+  },
+  "canonical_home": null
+}

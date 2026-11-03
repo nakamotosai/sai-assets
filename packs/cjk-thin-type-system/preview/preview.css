@@ -1,0 +1,158 @@
+/* cjk-thin-type-system · 活预览样式(预览自用字族;正稿字族去 cjk-typography 取)
+   本文件同时是审计探针的靶子:字号地板 12px / 最小行高 1.35 / 禁 vw 外推 / 中文禁斜体。 */
+:root {
+  --f-sans: system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --f-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --f-mono: "JetBrains Mono", Consolas, monospace;
+
+  --bg: #0e0e0c;
+  --ink: #edebe4;
+  --muted: #a3a199;
+  --line: rgba(237, 235, 228, 0.12);
+  --surface: rgba(237, 235, 228, 0.045);
+  --mk: #cd5545;
+
+  --fw-text: 200;
+  --fw-mark: 600;
+  --fs-giant: clamp(44px, 8.2vw, 122px);
+  --fs-display: clamp(28px, 3.2vw, 44px);
+  --fs-title: clamp(20px, 2vw, 22px);
+  --fs-body: 17px;
+  --fs-label: 12px;
+  --ls-0: 0;
+  --ls-t: 0.02em;
+  --ls-l: 0.12em;
+  --lh-display: 1.4;
+  --lh-title: 1.35;
+  --lh-body: 1.6;
+  --sh-text: 0 1px 2px rgba(0, 0, 0, 0.9);
+  --sh-display: 0 3px 12px rgba(0, 0, 0, 0.55), 0 10px 44px rgba(0, 0, 0, 0.7);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-text);
+  letter-spacing: var(--ls-0);
+  line-height: var(--lh-body);
+  text-shadow: var(--sh-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 56px 24px 96px; }
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-size: var(--fs-label);
+  font-weight: 400;
+  letter-spacing: var(--ls-l);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 18px;
+}
+
+h1.giant {
+  font-family: var(--f-display);
+  font-weight: var(--fw-mark);
+  font-size: var(--fs-giant);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-0);
+  text-shadow: var(--sh-display);
+  margin: 0;
+}
+
+.lede {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-text);
+  line-height: var(--lh-display);
+  text-shadow: var(--sh-display);
+  max-width: 34ch;
+  margin: 20px 0 0;
+}
+
+h2.title {
+  font-size: var(--fs-title);
+  font-weight: var(--fw-text);
+  letter-spacing: var(--ls-t);
+  line-height: var(--lh-title);
+  margin: 0 0 14px;
+}
+
+section { margin-top: 56px; }
+
+.spec {
+  font-family: var(--f-mono);
+  font-size: var(--fs-label);
+  font-weight: 400;
+  letter-spacing: var(--ls-0);
+  color: var(--muted);
+}
+
+table { width: 100%; border-collapse: collapse; }
+
+caption { text-align: left; }
+
+th, td {
+  text-align: left;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+  vertical-align: top;
+}
+
+th {
+  font-family: var(--f-mono);
+  font-size: var(--fs-label);
+  font-weight: 400;
+  letter-spacing: var(--ls-l);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+td.head { font-weight: var(--fw-mark); }
+
+.tiers { display: grid; gap: 1px; background: var(--line); }
+
+.tier {
+  background: var(--bg);
+  padding: 18px 0;
+}
+
+.tier .label {
+  font-family: var(--f-mono);
+  font-size: var(--fs-label);
+  font-weight: 400;
+  letter-spacing: var(--ls-l);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+.s-giant { font-family: var(--f-display); font-weight: var(--fw-mark); font-size: var(--fs-giant); line-height: var(--lh-display); text-shadow: var(--sh-display); margin: 0; }
+.s-display { font-size: var(--fs-display); font-weight: var(--fw-text); line-height: var(--lh-display); text-shadow: var(--sh-display); margin: 0; }
+.s-title { font-size: var(--fs-title); font-weight: var(--fw-text); letter-spacing: var(--ls-t); line-height: var(--lh-title); margin: 0; }
+.s-body { font-size: var(--fs-body); font-weight: var(--fw-text); line-height: var(--lh-body); margin: 0; }
+.s-label { font-family: var(--f-mono); font-size: var(--fs-label); font-weight: 400; letter-spacing: var(--ls-l); text-transform: uppercase; color: var(--muted); margin: 0; }
+
+.grid2 { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.panel { background: var(--surface); padding: 22px; }
+
+.track-a { letter-spacing: var(--ls-0); }
+.track-b { letter-spacing: var(--ls-t); }
+.track-c { letter-spacing: var(--ls-l); }
+.lh-a { line-height: var(--lh-display); }
+.lh-b { line-height: var(--lh-title); }
+.lh-c { line-height: var(--lh-body); }
+.sh-a { text-shadow: var(--sh-text); }
+.sh-b { text-shadow: var(--sh-display); }
+
+.rules { padding-left: 20px; }
+.rules li { margin-bottom: 8px; }
+.rules code, .spec code { font-family: var(--f-mono); font-size: var(--fs-label); font-weight: 400; color: var(--ink); }
+.mk { color: var(--mk); font-weight: var(--fw-mark); }
+footer { margin-top: 64px; color: var(--muted); }
