@@ -48,7 +48,7 @@
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/dual-theme-toggle/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens dual-theme-toggle / ink·muted·accent-ink on bg: 浅 15.73·6.24·4.89 / 深 16.20·7.47·5.78;accent #CD5545 Y=0.199(深底 4.58:1 / 浅底 3.80:1);两处浅色映射逐字一致;preview 引用 3 个全部解析"
+    "evidence": "PASS assert_tokens dual-theme-toggle / 对比度 浅 15.73·6.24·4.89 / 深 16.20·7.47·5.78,accent Y=0.199 / 真机:点切换 --bg #0E0E0C→#F5F3ED、localStorage.theme=light、刷新保持、按钮 44×44、1440 与 390 均 hScroll 0、控制台 0 报错"
   },
   "canonical_home": null
 }

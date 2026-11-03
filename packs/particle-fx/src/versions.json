@@ -38,7 +38,7 @@
     {
       "file": "src/concepts/void-audio.js",
       "version": "1.0.0",
-      "sha256": "7895f6124c5189c3a65368b4cd95d543407524a50dc34dd05a7a8c6f6bd65302",
+      "sha256": "69d1a38cb71ea216bf377cf6ac1dfd7d5c70a0dd0c3273eec9f476203d2e7d29",
       "source": "本包自产:音频反应接线(音源三档 + 失败降级 + 面板视角同步)",
       "license": "MIT"
     },
@@ -94,7 +94,7 @@
     {
       "file": "src/stage.css",
       "version": "1.0.0",
-      "sha256": "1a6e6d99ed7e13d5050883219fd71cbe56a46bf13d65a1e57aafbcef95955b50",
+      "sha256": "ad7ea787f29fd75f334f3525e811b4b298b9fc0fad24aef8f1f069da4c060e0a",
       "source": "本包自产:预览页共用舞台样式(含音频档频谱条与按钮组)",
       "license": "MIT"
     }

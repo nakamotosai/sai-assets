@@ -233,21 +233,29 @@ export function mount(host, params) {
 
   function buildFx() {
     if (fx) fx.dispose();
-    fx = createVoidFx(stage, THREE, {
-      quality: Number(view.quality ?? 0.8),
-      steps: Math.round(Number(view.steps ?? 39)),
-      onViewChange: (v) => {
-        const rounded = {
-          yaw: Math.round(v.yaw * 1000) / 1000,
-          pitch: Math.round(v.pitch * 1000) / 1000,
-          dist: Math.round(v.dist * 100) / 100,
-          zoom: Math.round(v.zoom * 1000) / 1000,
-        };
-        Object.assign(view, rounded);
-        if (panelApi) panelApi.syncParams({ ...panelApi.getParams(), ...rounded });
-        if (prevPanel) Object.assign(prevPanel, rounded);
-      },
-    });
+    try {
+      fx = createVoidFx(stage, THREE, {
+        quality: Number(view.quality ?? 0.8),
+        steps: Math.round(Number(view.steps ?? 39)),
+        onViewChange: (v) => {
+          const rounded = {
+            yaw: Math.round(v.yaw * 1000) / 1000,
+            pitch: Math.round(v.pitch * 1000) / 1000,
+            dist: Math.round(v.dist * 100) / 100,
+            zoom: Math.round(v.zoom * 1000) / 1000,
+          };
+          Object.assign(view, rounded);
+          if (panelApi) panelApi.syncParams({ ...panelApi.getParams(), ...rounded });
+          if (prevPanel) Object.assign(prevPanel, rounded);
+        },
+      });
+    } catch (err) {
+      fx = null;
+      const notice = el("div", "gl-missing", "本机没有可用的 WebGL2:黑洞盘无法渲染(面板与频谱条仍可用)。");
+      stage.appendChild(notice);
+      meta.textContent = "WebGL2 不可用 → 只出假频谱";
+      return;
+    }
     applyToFx(view, true);
   }
 
@@ -298,7 +306,7 @@ export function mount(host, params) {
 
   // ── 主循环 ──
   function frame(now) {
-    if (!alive) return;
+    if (!alive || !fx) return;
     raf = requestAnimationFrame(frame);
     const dt = Math.min(0.05, (now - last) / 1000);
     last = now;
@@ -326,8 +334,8 @@ export function mount(host, params) {
   const reduced = reducedMotion();
   if (reduced) {
     // 减少动态:只渲染一帧静止黑洞,不跑 rAF
-    fx.render(1 / 60);
-    hud.textContent = "VOID · 已开启「减少动态」· 只渲染一帧";
+    if (fx) fx.render(1 / 60);
+    hud.textContent = fx ? "VOID · 已开启「减少动态」· 只渲染一帧" : hud.textContent;
   } else {
     requestAnimationFrame(frame);
   }

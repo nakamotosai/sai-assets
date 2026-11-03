@@ -69,7 +69,7 @@
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/swiss-style/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens swiss-style / 引用 4 个 · 声明路径 7 个 · src 文件 4 个 · 共 31592 字节 · kind=ui category=web-ui"
+    "evidence": "PASS assert_tokens swiss-style / 引用 4 · src 4 文件 31592 字节 / 真机 1440:标本页(网格/控件/图元/骨架)渲染正常、hScroll 0、控制台 0 报错"
   },
   "canonical_home": null
 }

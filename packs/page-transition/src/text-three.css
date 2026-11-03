@@ -122,7 +122,15 @@
       color: rgba(255,255,255,.28); white-space: nowrap;
       pointer-events: none;
     }
-    @media (max-width: 720px) {
+    /* 没有 WebGL2 时 text-three.js 会插入这块可见说明(不静默失败、不留控制台噪音) */
+.gl-missing {
+  position: fixed; z-index: 40; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  max-width: 46ch; text-align: center; padding: 14px 18px; border-radius: 10px;
+  background: rgba(0, 0, 0, .88); border: 1px solid rgba(196, 165, 116, .5);
+  color: var(--gold, #c4a574); font-size: 13px; line-height: 1.6;
+}
+
+@media (max-width: 720px) {
       .picker { width: 100%; height: auto; max-height: 34vh; bottom: auto; }
       .rail { display: none; }
     }

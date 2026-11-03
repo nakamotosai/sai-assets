@@ -59,7 +59,7 @@
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/libraries-dev-fx/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens libraries-dev-fx / 引用 5 个(https 3 / 包内相对 2)+ importmap 4 条 · src 2 个文件 11843 字节 · files 声明 5 条全部命中 · 5 个 stage / 5 个 CDN 包 · http/本机/内网命中 0"
+    "evidence": "PASS assert_tokens libraries-dev-fx / refs 5 · 5 个 stage 5 个 CDN 包 / 真机:五格中四格真身渲染(无 WebGL 时 img-fx 显示中性跳过说明,不再抛 three.js 未捕获错误)、控制台 0 报错"
   },
   "canonical_home": null
 }

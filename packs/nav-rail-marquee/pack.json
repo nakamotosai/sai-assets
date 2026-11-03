@@ -49,7 +49,7 @@
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/nav-rail-marquee/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens nav-rail-marquee / 引用 2 个(包内 2 · https 0)· 声明路径 5 个全部存在 · src 文件 2 个(14716 字节)· 段落 4 段 · 可点项 7 个覆盖 4 段 · docs 关键词 9/9;仓级 python scripts/gate.py(公开 11 + 本地 13 条规则)对本包 0 schema / 0 banned / 断言 PASS;另以最小 DOM 桩在 Node 上跑通:点顶导航 demos → 两处 active + 75%,点段轨 ABOUT → 顶导航同步 + 100%,滚动联动 → 50%,减少动效下 scrollIntoView 降级为 auto,destroy 解绑全部监听"
+    "evidence": "PASS assert_tokens nav-rail-marquee / refs 2 · src 14716 字节 / 真机:点顶导航与段轨 aria-current 同步切换、进度线 25→50→75→100%、跑马灯 24s、控制台 0 报错"
   },
   "canonical_home": null
 }

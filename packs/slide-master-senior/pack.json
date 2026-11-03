@@ -42,7 +42,7 @@
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/slide-master-senior/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens slide-master-senior / refs 2(全部包内相对引用,0 外链) · src 2 文件 12116 字节 · 声明产物 5 个 32054 字节 · 2 页 1920x1080 · license MIT · 禁用串命中 0"
+    "evidence": "PASS assert_tokens slide-master-senior / refs 2 · src 2 文件 12116 字节 · 禁用串 0 / 真机 1440:两页母版渲染正常、hScroll 0、控制台 0 报错"
   },
   "canonical_home": null
 }

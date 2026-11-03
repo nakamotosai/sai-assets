@@ -63,7 +63,7 @@
   "verified": {
     "date": "2026-11-03",
     "how": "python packs/spectral-glass-prism/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens spectral-glass-prism(见本仓 gate 输出;引擎 347813 字节 vendored,契约节点 5/5,宿主先探测后加载)"
+    "evidence": "PASS assert_tokens spectral-glass-prism / 引擎 347813 字节 vendored · 契约节点 5/5 · 宿主先探测后加载 / 真机:data-sg-state=live、Tweakpane 面板出现、Picsum 底图与色散画面正常、控制台 0 报错"
   },
   "canonical_home": null
 }

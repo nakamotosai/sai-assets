@@ -45,15 +45,15 @@
     {
       "file": "src/text-three.js",
       "version": "1.0.0",
-      "sha256": "6b1d97eb1271563d0f41261aec0d335e08034e57eb7dc2e3145052e6b43751e8",
-      "source": "本机 demo 存档 demos/section-text-fx-three/main.js(文案中性化 + density/glow 真正接进采样与材质 + 减少动态)",
+      "sha256": "b68ac8d807f9fbcee32caa92c2a9585ca20e31a508019a233084f043ab949b95",
+      "source": "本机 demo 存档 demos/section-text-fx-three/main.js(文案中性化 + density/glow 真正接进采样与材质 + 减少动态 + WebGL2 环境闸)",
       "license": "MIT"
     },
     {
       "file": "src/text-three.css",
       "version": "1.0.0",
-      "sha256": "56939c7d84e15d2f1ccd0647f451e4cc050cbfd8894d477eae20ae062348f7a6",
-      "source": "本机 demo 存档 demos/section-text-fx-three/styles.css",
+      "sha256": "b0b50d99beeabf34b228cef6ae988331695c9d99b5ff58c6e51bddc7233989b9",
+      "source": "本机 demo 存档 demos/section-text-fx-three/styles.css(+ WebGL2 缺失提示样式)",
       "license": "MIT"
     },
     {

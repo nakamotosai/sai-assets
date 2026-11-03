@@ -49,6 +49,20 @@ import * as THREE from '../upstream/three.module.js';
     export const textParams = { density: 0.8, glow: 0.6 };
     const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    /** 没有 WebGL2 时给一块可见说明:这一档需要 WebGL2,不做「假渲染」也不抛错。 */
+    function showNoWebGL() {
+      const n = document.createElement('div');
+      n.className = 'gl-missing';
+      n.textContent = '本机没有可用的 WebGL2:这一档需要 WebGL2 才能渲染(同包的 vt-layer / section-travel 不受影响)。';
+      document.body.appendChild(n);
+    }
+
+    /** WebGL2 不可用时的占位渲染器:接口照旧、什么都不画(避免半截初始化 + 控制台噪音)。 */
+    function noopRenderer(cvs) {
+      const noop = () => {};
+      return { setPixelRatio: noop, setClearColor: noop, setSize: noop, render: noop, domElement: cvs };
+    }
+
     try {
       const s = localStorage.getItem(STORE);
       if (s && FX_LIST.some((f) => f.id === s)) fx = s;
@@ -112,7 +126,13 @@ import * as THREE from '../upstream/three.module.js';
 
     // ── Three ──
     const canvas = document.getElementById('c');
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+
+    // 环境闸:先探测 WebGL2(在 three 之前探,不会占用上下文)
+    const GL_OK = !!document.createElement('canvas').getContext('webgl2');
+    if (!GL_OK) showNoWebGL();
+    const renderer = GL_OK
+      ? new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
+      : noopRenderer(canvas);
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 1);
 

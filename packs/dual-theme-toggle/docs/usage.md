@@ -92,6 +92,7 @@ document.documentElement.addEventListener('themechange', e => {
 - **两处浅色映射只改一处**:`@media (prefers-color-scheme: light) :root:not([data-theme])` 与 `html[data-theme="light"]` 是同一份映射的两个触发条件,漏改一处就是"选过的人和没选过的人看到两个浅色"。断言会逐行比对这两段。
 - **把贴标脚本挪到 `</body>` 前**:功能照样能用,但选过浅色的用户每次刷新先闪一帧深色。
 - **用 `localStorage` 的异常当致命错误**:隐私模式下 `localStorage` 会抛,直接 try/catch 当作"没选过"继续跟系统。
+- **在不可见/被遮挡的页面里起视图过渡**:拿不到帧时过渡会停在旧快照上(DOM 已经改了、屏幕还是老颜色)。本包的做法是 `document.visibilityState === 'visible'` 才起过渡,否则同步落笔。
 - **切换时给整页加 CSS transition 补动画**:颜色会"爬"过去,而且用户按得快就追不上;用视图过渡,或什么都不做。
 
 ## 自检
@@ -109,7 +110,7 @@ python packs/dual-theme-toggle/scripts/assert_tokens.py
 | `--accent-ink` on `--bg` | 4.89:1 | 5.78:1 |
 | `--accent` on `--bg` | 3.80:1(仅图形/大字) | 4.58:1 |
 
-行为口径:点一次按钮 → `html[data-theme]` 翻转且 `getComputedStyle(body).--bg` 变成目标色;`localStorage.theme` 写入;刷新后首屏即是目标色且不闪;清存储后属性消失、跟随系统。
+行为口径(2026-11-03 真机实测,Chromium 156 / 1440×900):点一次按钮 → `html[data-theme]` 翻转且 `getComputedStyle(body).--bg` 变成目标色;`localStorage.theme` 写入;刷新后首屏即是目标色且不闪;清存储后属性消失、跟随系统。
 
 ## 来源与许可
 
