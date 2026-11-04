@@ -20,6 +20,7 @@ LIMIT = 8192
 
 BASE = "https://raw.githubusercontent.com/nakamotosai/sai-assets/main/"
 CATEGORIES = [
+    ("sites", "线上作品"),
     ("themes", "主题 · 配色与字体"),
     ("fonts", "排版配方"),
     ("web-fx", "网页动效"),

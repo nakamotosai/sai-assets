@@ -179,7 +179,8 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad) 96px; }
 .ver { font-family: var(--mono); font-size: var(--fs-micro); color: var(--muted); display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
 .arrow { color: var(--muted); font-size: var(--fs-body); line-height: 1; transition: transform .3s var(--ease), color .2s var(--ease); }
 .row a:hover .arrow { transform: translateX(4px); color: var(--ink); }
-.row[data-external] .arrow::after { content: "↗"; }
+.row[data-external] .arrow { font-size: 0; }
+.row[data-external] .arrow::after { content: "↗"; font-size: var(--fs-body); }
 .row .dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: 1px; opacity: 0; transition: opacity .2s; }
 .row a:hover .dot { opacity: 1; }
 

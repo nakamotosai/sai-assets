@@ -51,7 +51,8 @@
     "preview_mount": "滚动对账式(scroll/resize + rAF):先回收跑远的(±1.4 屏),再挂视口附近的;卸载一律放回带文案的占位,任何时刻不留空白块",
     "layout": "索引式(无卡片/无阴影/无圆角):行高 84px 起,五列栅格 48 / 1.35fr / 1.05fr / 64 / 96",
     "preview_model": "首页悬停出右侧浮层(一次只跑一个 iframe,≥1100px 才出现);详情页单舞台,宽高双向 fit + 居中(窄视口成设备画框)",
-    "motion": "只做 opacity/transform;行入场 600ms;跨页 View Transitions 渐进增强;reduced-motion 全关"
+    "motion": "只做 opacity/transform;行入场 600ms;跨页 View Transitions 渐进增强;reduced-motion 全关",
+    "external_preview": "sites 类目条目(如 ouuut.com)悬停浮层/详情舞台直接嵌本家 https 地址(跨域 iframe);这是唯一允许的外部请求,且只在用户悬停/打开时发生,首屏仍零外部请求"
   },
   "assertions": [
     {
@@ -158,6 +159,13 @@
       "check": "详情页舞台 iframe 的 src 在 2 层深度解析后命中 packs/<id>/preview",
       "threshold": "iframe contentDocument.title 非 Error response",
       "how": "ego 探针读 iframe 文档标题"
+    },
+    {
+      "id": "external-iframe-on-demand",
+      "kind": "probe",
+      "check": "首页初始 iframe 数 = 0;悬停 sites 条目后才出现 1 个指向本家的跨域 iframe",
+      "threshold": "初始 0 / 悬停 1",
+      "how": ".private/ego/round-42.mjs"
     }
   ]
 }

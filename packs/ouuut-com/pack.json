@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "id": "ouuut-com",
+  "title": "ouuut.com — Independent AI Studio(Tokyo / Global)",
+  "kind": "meta",
+  "category": "sites",
+  "version": "1.0.0",
+  "license": "站点自有内容(仅作展示与索引,不随本仓分发)",
+  "attribution": [],
+  "origin": { "project": "ouuut-site", "path": "index.html", "derived_from": null },
+  "entry": "SKILL.md",
+  "files": { "tokens": [], "css": [], "src": [], "upstream": [], "usage": null, "assert": null, "preview": null },
+  "preview_url": "https://ouuut.com/",
+  "tags": ["showcase", "studio", "live-site", "editorial"],
+  "when": "想看库内资产拼成一个真实上线站是什么样:ouuut 主站就是「和色六景 · 纸白/炭黑」+ 自研动效的成品,作为本站的活体参照与效果样板。",
+  "not_for": "取用代码:本站不是可抄的资产包;要抄请取 ouuut-editorial / bg-fx / page-transition 等包。",
+  "verified": {
+    "date": "2026-11-04",
+    "how": "curl -sI https://ouuut.com/ (HTTP 200;响应无 X-Frame-Options、无 CSP frame-ancestors)",
+    "evidence": "200 · server: cloudflare · 可安全嵌入本站预览浮层与详情舞台(跨域 iframe)"
+  },
+  "canonical_home": "https://ouuut.com/",
+  "external": true,
+  "changelog": [
+    "1.0.0 · 作为线上作品条目入库:活预览直接嵌本家,内容不复制进本仓"
+  ]
+}

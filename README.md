@@ -54,6 +54,7 @@ python scripts/build_catalog.py && python scripts/build_site.py && git add -A &&
 
 | 类目 | 内容 |
 |---|---|
+| `sites` | 线上作品:用库内资产建成的真实站点(内容在本家,只做活预览索引) |
 | `themes` | 主题:配色 + 字体 + 配对规则 + 变体(含外部索引项) |
 | `fonts` | 中文排版配方(细体语言 / 字号档 / 免费字体清单) |
 | `web-fx` | 背景动效(共享引擎)、过场、粒子、三维 |

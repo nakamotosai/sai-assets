@@ -35,8 +35,9 @@ RAW = f"https://raw.githubusercontent.com/{REPO}/main/"
 CDN = f"https://cdn.jsdelivr.net/gh/{REPO}@pack"
 GH = f"https://github.com/{REPO}"
 
-CAT_ORDER = ["themes", "fonts", "web-fx", "web-ui", "fx-engines", "references", "video-motion"]
+CAT_ORDER = ["sites", "themes", "fonts", "web-fx", "web-ui", "fx-engines", "references", "video-motion"]
 CAT_TITLE = {
+    "sites": "线上作品(用库内资产建成)",
     "themes": "主题 · 配色与字体",
     "fonts": "排版配方",
     "web-fx": "网页动效",
@@ -47,6 +48,7 @@ CAT_TITLE = {
 }
 # 卡片/详情用的类目短标签(导航 chip)
 CAT_CHIP = {
+    "sites": "作品",
     "themes": "主题",
     "fonts": "排版",
     "web-fx": "动效",
@@ -207,6 +209,7 @@ def load_packs() -> list[dict]:
             "tags": pack.get("tags") or [],
             "one_liner": pack.get("one_liner", ""),
             "external": bool(pack.get("external")) or pack["id"] in INDEX_ONLY,
+            "preview_url": pack.get("preview_url"),
             "canonical_home": pack.get("canonical_home"),
             "attribution": pack.get("attribution") or [],
             "verified": pack.get("verified") or {},
@@ -287,10 +290,11 @@ def head(title: str, desc: str, canonical: str, *, depth: int, jsonld: str = "",
 
 def row_html(row: dict, index: int) -> str:
     """索引行:编号 / 名称+id / 一句话 / 类目 / 版本+箭头。悬停由 JS 唤起右侧预览。"""
-    src = f'packs/{row["id"]}/{row["preview"]}' if row["preview"] else ""
+    src = (f'packs/{row["id"]}/{row["preview"]}' if row["preview"]
+           else (row.get("preview_url") or ""))
     search = " ".join([row["id"], row["title"], row["category"], " ".join(row["tags"]),
                        row["when"], row["one_liner"]]).lower()
-    ext = " data-external" if row["id"] in INDEX_ONLY else ""
+    ext = " data-external" if row["external"] else ""
     return (
         f'<li class="row reveal" id="row-{esc(row["id"])}" data-cat="{esc(row["category"])}"'
         f' data-search="{esc(search)}" data-src="{esc(src)}" data-heavy="{"1" if row["heavy"] else "0"}"'
@@ -306,6 +310,9 @@ def row_html(row: dict, index: int) -> str:
 
 
 def stage_html(row: dict, preview: str | None, heavy: bool, up: str = "") -> str:
+    if not preview and row.get("preview_url"):
+        return (f'<div class="stage-inner" data-src="{esc(row["preview_url"])}" data-heavy="0">'
+                f'<div class="poster"><span>载入外部站点…</span></div></div>')
     if not preview:
         return ('<div class="poster"><span>'
                 + ("外部索引 · 内容在其本家仓库" if row["id"] in INDEX_ONLY else "本包没有预览页")
@@ -324,7 +331,7 @@ def install_html(row: dict, up: str) -> str:
         ("固定版本(CDN)", f'<link rel="stylesheet" href="{cdn}css/default.css">'),
         ("raw 直取(跟随 main)", f'curl -O {raw}SKILL.md'),
         ("仓库内落地", f'python scripts/apply.py {pid} --to <项目目录>'),
-        ("整包下载", f'{SITE}/downloads/{pid}.zip'),
+        ("整包下载", f'{SITE}/downloads/{pid}.zip' if not row["external"] else str(row.get("preview_url") or "")),
     ]
     blocks = []
     for label, code in snippets:
@@ -622,7 +629,8 @@ def write_app_json(dist: Path, rows: list[dict], updated: str) -> None:
             "preview": f'packs/{r["id"]}/{r["preview"]}' if r["preview"] else None,
             "heavy": r["heavy"],
             "demos": [{"slug": d["slug"], "label": d["label"], "page": f'p/{r["id"]}/demo/{d["slug"]}/'} for d in r["demos"]],
-            "page": f'p/{r["id"]}/', "zip": None if r["id"] in INDEX_ONLY else f'downloads/{r["id"]}.zip',
+            "page": f'p/{r["id"]}/', "zip": None if r["external"] else f'downloads/{r["id"]}.zip',
+            "preview_url": r.get("preview_url"),
             "files": r["files_n"], "kb": r["kb"], "swatches": r["swatches"],
         })
     cats = [{"id": c, "title": CAT_TITLE[c], "chip": CAT_CHIP[c],
@@ -646,7 +654,7 @@ def verify(out: Path, rows: list[dict]) -> None:
             bad.append(f"缺详情页 {r['id']}")
         if r["preview"] and not (out / "packs" / r["id"] / r["preview"]).is_file():
             bad.append(f"缺预览文件 {r['id']}/{r['preview']}")
-        if r["id"] not in INDEX_ONLY:
+        if not r["external"]:
             z = out / "downloads" / f'{r["id"]}.zip'
             if not z.is_file():
                 bad.append(f"缺 zip {r['id']}")
@@ -720,7 +728,7 @@ def build(out: Path) -> None:
             dd = d / "demo" / demo["slug"]
             dd.mkdir(parents=True, exist_ok=True)
             (dd / "index.html").write_text(render_demo(r, demo, updated), encoding="utf-8")
-        if r["id"] not in INDEX_ONLY:
+        if not r["external"]:
             write_zip(out / "downloads" / f'{r["id"]}.zip', r["dir"])
     write_app_json(out, rows, updated)
     write_meta(out, rows, updated)
