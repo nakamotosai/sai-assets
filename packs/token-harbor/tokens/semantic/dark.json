@@ -1,0 +1,201 @@
+{
+  "id": "dark",
+  "name": "近黑",
+  "mode": "dark",
+  "color_scheme": "dark",
+  "note": "语义映射 · 默认变体。value 必须逐字等于 tokens/absolute.json 的原子值(atom 字段给出该原子的键);CSS 两份文件里的同名 token 由 scripts/assert_tokens.py 逐条比对,防止三处漂移。",
+  "tokens": {
+    "bg": {
+      "value": "#141413",
+      "kind": "color",
+      "atom": "#141413",
+      "use": "整页底:<body>、吸顶 header 的背景、表单控件的输入底、移动端展开导航的面板底"
+    },
+    "surface": {
+      "value": "#1b1b19",
+      "kind": "color",
+      "atom": "#1b1b19",
+      "use": "卡面:作品卡、服务卡、定价卡、案例卡、why 卡、表单卡、hero 胶囊;比 bg 亮一档,不用阴影也能起层"
+    },
+    "surface-raised": {
+      "value": "#232320",
+      "kind": "color",
+      "atom": "#232320",
+      "use": "再高一档的面:作品卡的媒体框底(图未加载/占位时的底)"
+    },
+    "ink": {
+      "value": "#e8e6e1",
+      "kind": "color",
+      "atom": "#e8e6e1",
+      "use": "正文与标题:body 默认字色、.h-display / .h-section / .h-card、卡标题、按钮文字(次要按钮)、表单标签"
+    },
+    "muted": {
+      "value": "#9a9793",
+      "kind": "color",
+      "atom": "#9a9793",
+      "use": "次要文字:lede 之外的小字、卡片描述、导航默认色、图注、faq 答案、页脚以外的说明文字"
+    },
+    "muted-soft": {
+      "value": "#6f6c68",
+      "kind": "color",
+      "atom": "#6f6c68",
+      "use": "最弱一档:法务页脚注(.legal-meta)、大段背景说明;不用于正文"
+    },
+    "line": {
+      "value": "rgba(255, 255, 255, 0.0902)",
+      "kind": "color",
+      "atom": "rgba(255, 255, 255, 0.0902)",
+      "use": "chrome 分隔线:announce 条下边线、吸顶 header 下边线(比 hairline 略实)"
+    },
+    "line-hairline": {
+      "value": "rgba(255, 255, 255, 0.0510)",
+      "kind": "color",
+      "atom": "rgba(255, 255, 255, 0.0510)",
+      "use": "最细的线:卡片描边、卡内 / 页脚以外的相邻块分隔、faq 上下线、proof 与 process 的分隔线"
+    },
+    "line-field": {
+      "value": "rgba(255, 255, 255, 0.1608)",
+      "kind": "color",
+      "atom": "rgba(255, 255, 255, 0.1608)",
+      "use": "控件描边:输入框 / 下拉 / 文本域、次要按钮(.btn-outline)的边框;卡悬停时描边提到这一档"
+    },
+    "line-control": {
+      "value": "rgba(255, 255, 255, 0.3608)",
+      "kind": "color",
+      "atom": "rgba(255, 255, 255, 0.3608)",
+      "use": "交互描边:次要按钮悬停时的边框、下划线的默认色(.work-all a / .case-foot a 的 text-decoration-color)"
+    },
+    "surface-hover": {
+      "value": "rgba(255, 255, 255, 0.0392)",
+      "kind": "color",
+      "atom": "rgba(255, 255, 255, 0.0392)",
+      "use": "悬停洗色:导航项、语言按钮、主题按钮、菜单按钮、次要按钮的 hover 底"
+    },
+    "surface-pressed": {
+      "value": "rgba(255, 255, 255, 0.0784)",
+      "kind": "color",
+      "atom": "rgba(255, 255, 255, 0.0784)",
+      "use": "按下去 / 当前态:tag 底、icon-chip 底、语言按钮的 .is-active 底、输入框聚焦时的外环"
+    },
+    "accent": {
+      "value": "#e8e6e1",
+      "kind": "color",
+      "atom": "#e8e6e1",
+      "use": "唯一强调色 = 墨本身:主按钮底、焦点环、::selection 底、勾选态 accent-color;不做彩色强调"
+    },
+    "on-accent": {
+      "value": "#141413",
+      "kind": "color",
+      "atom": "#141413",
+      "use": "压在 accent 上的文字:主按钮文字、nav-cta 移动端按钮文字、跳转链接(skip-link)与选中文本的颜色"
+    },
+    "promo-bg": {
+      "value": "#e8e6e1",
+      "kind": "color",
+      "atom": "#e8e6e1",
+      "use": "大面积反色块:顶部 announce 条的底、定价主推卡(.is-featured)的底"
+    },
+    "promo-fg": {
+      "value": "#141413",
+      "kind": "color",
+      "atom": "#141413",
+      "use": "反色块上的文字:announce 文案与小圆点、主推卡的标题 / 价格 / 清单 / 按钮文字"
+    },
+    "promo-muted": {
+      "value": "rgba(20, 20, 19, 0.7)",
+      "kind": "color",
+      "atom": "rgba(20, 20, 19, 0.7)",
+      "use": "反色块里的次要文字:主推卡的档位名、单位、描述"
+    },
+    "promo-tag-bg": {
+      "value": "rgba(20, 20, 19, 0.12)",
+      "kind": "color",
+      "atom": "rgba(20, 20, 19, 0.12)",
+      "use": "反色块里的 tag 底:主推卡上的「推荐」类标签"
+    },
+    "footer-bg": {
+      "value": "#0c0d09",
+      "kind": "color",
+      "atom": "#0c0d09",
+      "use": "页脚底:两模共用同一块深色,比暗模 bg 再深一档,保证页脚在亮模下也沉得下去"
+    },
+    "footer-fg": {
+      "value": "#fafaf9",
+      "kind": "color",
+      "atom": "#fafaf9",
+      "use": "页脚主文字与链接悬停色;页脚里的品牌名也用它"
+    },
+    "footer-strong": {
+      "value": "rgba(250, 250, 249, 0.9)",
+      "kind": "color",
+      "atom": "rgba(250, 250, 249, 0.9)",
+      "use": "页脚列标题(.footer-col h2)"
+    },
+    "footer-link": {
+      "value": "rgba(250, 250, 249, 0.6)",
+      "kind": "color",
+      "atom": "rgba(250, 250, 249, 0.6)",
+      "use": "页脚链接默认色(.footer-col a、.footer-lang a)"
+    },
+    "footer-muted": {
+      "value": "rgba(250, 250, 249, 0.55)",
+      "kind": "color",
+      "atom": "rgba(250, 250, 249, 0.55)",
+      "use": "页脚正文:标语、公司信息、元信息、底栏文字"
+    },
+    "footer-faint": {
+      "value": "rgba(250, 250, 249, 0.45)",
+      "kind": "color",
+      "atom": "rgba(250, 250, 249, 0.45)",
+      "use": "页脚最弱一档:品牌副标(.brand-sub)"
+    },
+    "footer-line": {
+      "value": "rgba(250, 250, 249, 0.12)",
+      "kind": "color",
+      "atom": "rgba(250, 250, 249, 0.12)",
+      "use": "页脚底栏上边线"
+    },
+    "footer-line-strong": {
+      "value": "rgba(250, 250, 249, 0.18)",
+      "kind": "color",
+      "atom": "rgba(250, 250, 249, 0.18)",
+      "use": "页脚里品牌副标的左边线(与 footer-faint 成对)"
+    },
+    "overlay-bg": {
+      "value": "rgba(20, 20, 19, 0.72)",
+      "kind": "color",
+      "atom": "rgba(20, 20, 19, 0.72)",
+      "use": "压在媒体图上的徽标底(.work-type),配 backdrop-filter 模糊"
+    },
+    "overlay-fg": {
+      "value": "#f7f6f2",
+      "kind": "color",
+      "atom": "#f7f6f2",
+      "use": "压在媒体图上的徽标文字(与主题无关,两模同值)"
+    },
+    "overlay-line": {
+      "value": "rgba(255, 255, 255, 0.14)",
+      "kind": "color",
+      "atom": "rgba(255, 255, 255, 0.14)",
+      "use": "媒体图徽标的描边"
+    },
+    "shadow-btn": {
+      "value": "0 1px rgba(0, 0, 0, 0.1020), 0 2px 4px rgba(0, 0, 0, 0.2000), 0 8px 22px -4px rgba(0, 0, 0, 0.3490)",
+      "kind": "shadow",
+      "atom": "0 1px rgba(0, 0, 0, 0.1020), 0 2px 4px rgba(0, 0, 0, 0.2000), 0 8px 22px -4px rgba(0, 0, 0, 0.3490)",
+      "use": "主按钮的三层影;悬停时按钮上浮 1px 全靠它"
+    },
+    "shadow-card": {
+      "value": "0 1px 2px rgba(0, 0, 0, 0.1333), 0 8px 24px -12px rgba(0, 0, 0, 0.2667)",
+      "kind": "shadow",
+      "atom": "0 1px 2px rgba(0, 0, 0, 0.1333), 0 8px 24px -12px rgba(0, 0, 0, 0.2667)",
+      "use": "卡片悬停的浮起影 + 表单卡的常驻影 + 主推卡的影"
+    },
+    "shadow-pill": {
+      "value": "0 1px rgba(0, 0, 0, 0.1490), 0 2px 4px rgba(0, 0, 0, 0.2000), 0 12px 28px -8px rgba(0, 0, 0, 0.3333)",
+      "kind": "shadow",
+      "atom": "0 1px rgba(0, 0, 0, 0.1490), 0 2px 4px rgba(0, 0, 0, 0.2000), 0 12px 28px -8px rgba(0, 0, 0, 0.3333)",
+      "use": "hero 胶囊(.hero-pill)的影;胶囊是页面里唯一的悬浮元素"
+    }
+  }
+}

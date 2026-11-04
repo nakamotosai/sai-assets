@@ -1,0 +1,82 @@
+/* Token Harbor · 多主题并存版:只出 [data-theme="dark"] / [data-theme="light"] 两个作用域的 token 覆盖
+   ------------------------------------------------------------------
+   这份文件里没有任何构件规则,只有颜色与影。用法:
+     1) 项目已有自己的组件样式 —— 只引这一份,在 <html data-theme="dark|light"> 上切换;
+     2) 想连基础 chrome 一起拿 —— default.css(近黑 + 全部构件)+ 这一份(补暖白)。
+   两模共用同一套键名;footer-* 与 overlay-* 两模同值(页脚本来就是深色块、图上徽标本来就压在图里)。
+   圆角 / 字号 / 布局刻度的 token 在 css/default.css 的 :root,本文件不重复(见 docs/usage.md §刻度)。
+   真值源:tokens/semantic/dark.json 与 tokens/semantic/light.json;本文件的值由 scripts/assert_tokens.py 逐条比对。 */
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #141413;
+  --surface: #1b1b19;
+  --surface-raised: #232320;
+  --ink: #e8e6e1;
+  --muted: #9a9793;
+  --muted-soft: #6f6c68;
+  --line: rgba(255, 255, 255, 0.0902);
+  --line-hairline: rgba(255, 255, 255, 0.0510);
+  --line-field: rgba(255, 255, 255, 0.1608);
+  --line-control: rgba(255, 255, 255, 0.3608);
+  --surface-hover: rgba(255, 255, 255, 0.0392);
+  --surface-pressed: rgba(255, 255, 255, 0.0784);
+  --accent: #e8e6e1;
+  --on-accent: #141413;
+  --promo-bg: #e8e6e1;
+  --promo-fg: #141413;
+  --promo-muted: rgba(20, 20, 19, 0.7);
+  --promo-tag-bg: rgba(20, 20, 19, 0.12);
+  --footer-bg: #0c0d09;
+  --footer-fg: #fafaf9;
+  --footer-strong: rgba(250, 250, 249, 0.9);
+  --footer-link: rgba(250, 250, 249, 0.6);
+  --footer-muted: rgba(250, 250, 249, 0.55);
+  --footer-faint: rgba(250, 250, 249, 0.45);
+  --footer-line: rgba(250, 250, 249, 0.12);
+  --footer-line-strong: rgba(250, 250, 249, 0.18);
+  --overlay-bg: rgba(20, 20, 19, 0.72);
+  --overlay-fg: #f7f6f2;
+  --overlay-line: rgba(255, 255, 255, 0.14);
+  --shadow-btn: 0 1px rgba(0, 0, 0, 0.1020), 0 2px 4px rgba(0, 0, 0, 0.2000), 0 8px 22px -4px rgba(0, 0, 0, 0.3490);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.1333), 0 8px 24px -12px rgba(0, 0, 0, 0.2667);
+  --shadow-pill: 0 1px rgba(0, 0, 0, 0.1490), 0 2px 4px rgba(0, 0, 0, 0.2000), 0 12px 28px -8px rgba(0, 0, 0, 0.3333);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --surface-raised: #faf9f5;
+  --ink: #17170f;
+  --muted: #6b6a64;
+  --muted-soft: #96948d;
+  --line: rgba(23, 23, 15, 0.1020);
+  --line-hairline: rgba(23, 23, 15, 0.0588);
+  --line-field: rgba(23, 23, 15, 0.2392);
+  --line-control: rgba(23, 23, 15, 0.5020);
+  --surface-hover: rgba(23, 23, 15, 0.0353);
+  --surface-pressed: rgba(23, 23, 15, 0.0588);
+  --accent: #17170f;
+  --on-accent: #f7f6f2;
+  --promo-bg: #17170f;
+  --promo-fg: #f7f6f2;
+  --promo-muted: rgba(247, 246, 242, 0.7);
+  --promo-tag-bg: rgba(247, 246, 242, 0.16);
+  --footer-bg: #11120d;
+  --footer-fg: #fafaf9;
+  --footer-strong: rgba(250, 250, 249, 0.9);
+  --footer-link: rgba(250, 250, 249, 0.6);
+  --footer-muted: rgba(250, 250, 249, 0.55);
+  --footer-faint: rgba(250, 250, 249, 0.45);
+  --footer-line: rgba(250, 250, 249, 0.12);
+  --footer-line-strong: rgba(250, 250, 249, 0.18);
+  --overlay-bg: rgba(20, 20, 19, 0.72);
+  --overlay-fg: #f7f6f2;
+  --overlay-line: rgba(255, 255, 255, 0.14);
+  --shadow-btn: 0 1px rgba(0, 0, 0, 0.0588), 0 2px 4px rgba(26, 25, 24, 0.1412), 0 8px 22px -4px rgba(26, 25, 24, 0.2784);
+  --shadow-card: 0 1px 2px rgba(23, 23, 15, 0.0392), 0 8px 24px -12px rgba(23, 23, 15, 0.1020);
+  --shadow-pill: 0 1px rgba(26, 25, 24, 0.0510), 0 2px 4px rgba(26, 25, 24, 0.0588), 0 12px 28px -8px rgba(26, 25, 24, 0.1608);
+}

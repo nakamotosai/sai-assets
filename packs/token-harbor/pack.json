@@ -1,0 +1,68 @@
+{
+  "schema": 1,
+  "id": "token-harbor",
+  "title": "Token Harbor · 墨色双模设计语言",
+  "kind": "theme",
+  "category": "themes",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "站点样式表(自有营销 / 服务型站点)",
+      "license": "MIT",
+      "what": "原色板(近黑 / 暖白两套中性色 + 四级透明墨线 + 三档影)、全部构件规则与深浅双模逻辑的来源"
+    },
+    {
+      "name": "sai-assets PACK-CONTRACT v1",
+      "license": "MIT",
+      "what": "包形状、pack.json 字段、断言最低集与 theme 类必填产物的规则来源"
+    }
+  ],
+  "origin": {
+    "project": "make-site",
+    "path": "assets/css/site.css",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/absolute.json",
+      "tokens/index.json",
+      "tokens/semantic/dark.json",
+      "tokens/semantic/light.json"
+    ],
+    "css": [
+      "css/default.css",
+      "css/themes.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "monochrome",
+    "dual-theme",
+    "dark",
+    "light",
+    "marketing",
+    "landing-page",
+    "hairline",
+    "no-hue",
+    "announce-bar",
+    "forms",
+    "faq",
+    "pricing-cards"
+  ],
+  "when": "营销 / 服务型站点与产品落地页要一套「无色相」设计语言时:近黑与暖白双模、正文 14px、按钮 4px 圆角、卡片 14px、无渐变、标题不外挂衬线,唯一强调色就是墨色本身(靠墨/纸互换与一条细线制造层次)。含 announce 条、吸顶 header、语言切换与主题按钮、tag/chip、定价卡、案例卡、表单与 footer 全套构件,加一套按用途命名的语义 token(深浅各一份)。",
+  "not_for": "内容型/杂志型长文排版(走 ouuut-editorial 或 paper-editorial);需要三套以上主题或换肤;需要色相当信息编码(状态红绿、数据可视化配色)——这套语言里没有色相;要的是动效而不是配色(走 motion-kit)。",
+  "default_variant": "dark",
+  "verified": {
+    "date": "2026-11-04",
+    "how": "python packs/token-harbor/scripts/assert_tokens.py(退出 0)与 python scripts/gate.py(exit 0)",
+    "evidence": "assert_tokens 真实输出:『PASS assert_tokens token-harbor / 对比度实测 · 近黑(dark):ink/bg 14.78:1 · muted/bg 6.34:1(阈值 4.5:1,全部通过)/ 对比度实测 · 暖白(light):ink/bg 16.66:1 · muted/bg 5.02:1(阈值 4.5:1,全部通过)/ 反色块与页脚(次级实测):dark promo 14.78:1 · dark footer 18.67:1 · light promo 16.66:1 · light footer 18.01:1 / 原色表 38 色 + 6 影 · 语义 token 32 条 × 2 变体 · CSS 逐条比对通过 96 处(default :root 32 + themes 两作用域 64)/ 预览 preview/index.html:包内引用 2 个(外部 0、url() 0)· 页内锚点 9 个全部命中 id · 产物 12 文件 · 禁用内容形态交给 scripts/gate.py』(退出码 0)。gate 真实输出:『PASS gate: 0 findings, 33 packs, 31 assertions』,其中唯一提到本包的一行是 [assert] token-harbor: PASS,输出里没有任何 packs/token-harbor/ 前缀的命中行(本包已 git add 进索引,gate 因此对 pack.json 做 schema 校验、对包内文本做禁用形态扫描并跑了本包断言)。"
+  },
+  "canonical_home": null,
+  "changelog": [
+    "1.0.0 · 首次发布:近黑(默认)/ 暖白双模 + 全套营销 / 服务型站点构件 + 按用途命名的语义 token 各一份(32 条 × 2),含四级墨线、promo 四件套与三档影"
+  ]
+}

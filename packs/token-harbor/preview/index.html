@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>token-harbor · 墨色双模设计语言(构件画廊)</title>
+<meta name="theme-color" content="#141413" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="../css/default.css">
+<link rel="stylesheet" href="../css/themes.css">
+<style>
+  /* 仅本页骨架:分节、token 表、字阶行、媒体占位;所有构件都用本包 css/default.css 的类渲染。 */
+  .gallery { padding: 56px 0 0; }
+  .gallery-sec { padding: 56px 24px; border-bottom: 1px solid var(--line-hairline); }
+  .gallery-sec:last-child { border-bottom: 0; }
+  .gallery-note { margin: 0 0 24px; font-size: var(--fs-meta); line-height: 1.6; color: var(--muted); }
+  .gallery-note code, code { font-family: var(--font-mono); font-size: 11.5px; }
+  .gallery-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); gap: 12px; }
+  .gallery-sw { border: 1px solid var(--line-hairline); border-radius: var(--radius-card); overflow: hidden; }
+  .gallery-sw span { display: block; height: 54px; background: var(--sw); }
+  .gallery-sw b { display: block; padding: 8px 10px 2px; font-size: var(--fs-meta); font-weight: 600; }
+  .gallery-sw em { display: block; padding: 0 10px 10px; font-style: normal; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  table.gallery-tokens { width: 100%; border-collapse: collapse; font-size: var(--fs-small); }
+  table.gallery-tokens th { text-align: left; padding: 10px 12px; font-size: var(--fs-caption); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid var(--line); }
+  table.gallery-tokens td { padding: 9px 12px; border-bottom: 1px solid var(--line-hairline); vertical-align: middle; }
+  table.gallery-tokens td.use { color: var(--muted); }
+  .sw-cell { width: 74px; }
+  .sw-cell span { display: block; width: 52px; height: 22px; border: 1px solid var(--line-hairline); border-radius: 3px; background: var(--sw); }
+  .sw-cell .sw-shadow { background: var(--surface); box-shadow: var(--sw); }
+  .gallery-type > div { display: flex; align-items: baseline; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--line-hairline); flex-wrap: wrap; }
+  .gallery-type code { flex: 0 0 168px; color: var(--muted); }
+  .gallery-type p { margin: 0; }
+  .gallery-media { display: grid; place-items: center; }
+  .gallery-media em { font-style: normal; font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--muted); letter-spacing: 0.06em; }
+  .gallery-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .gallery-stack { display: flex; flex-direction: column; gap: 20px; }
+  .gallery-kv { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 6px 16px; font-size: var(--fs-small); }
+  .gallery-kv dt { color: var(--muted); }
+  .gallery-kv dd { margin: 0; }
+  .gallery-anchor { scroll-margin-top: 96px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#tokens">跳到内容</a>
+
+<div class="announce">
+  <div class="wrap announce-inner">
+    <span class="announce-dot" aria-hidden="true"></span>
+    <span>构件画廊:一套 token,两个模式 —— 近黑与暖白互换,强调色永远是墨本身</span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="回到顶部">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">Token Harbor</span>
+      <span class="brand-sub">墨色双模</span>
+    </a>
+    <nav class="nav" aria-label="页面分区">
+      <a href="#tokens">token</a>
+      <a href="#type">字阶</a>
+      <a href="#parts">构件</a>
+      <a href="#work">作品卡</a>
+      <a href="#cases">案例卡</a>
+      <a href="#pricing">定价</a>
+      <a href="#faq">常见问题</a>
+      <a class="nav-cta" href="#contact">联系</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" aria-label="语言切换示例">
+        <a href="#top" class="is-active">ZH</a>
+        <a href="#top">EN</a>
+      </div>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="切到暖白模式">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M20.4 14.6A8.6 8.6 0 0 1 9.4 3.6a8.6 8.6 0 1 0 11 11Z"/></svg>
+      </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-label="展开导航"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <span class="hero-pill"><span class="dot" aria-hidden="true"></span>当前模式:<b data-mode-label>近黑(dark)</b></span>
+    <h1 class="hero-title">一套 token,两个墨色模式</h1>
+    <p class="hero-sub">近黑与暖白互换,正文 14px,按钮 4px 圆角,卡片 14px,无渐变。唯一的强调色就是墨色本身 —— 层次靠墨纸互换与一条细线。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary btn-lg" href="#parts">看构件</a>
+      <a class="btn btn-outline btn-lg" href="#tokens">读 token 表</a>
+    </div>
+    <p class="hero-note">本页自包含:零外部子资源,加载时不跳转,不写 localStorage 也能看。</p>
+    <div class="hero-proof">
+      <div class="proof-item"><span class="proof-value">14px</span><span class="proof-label">正文</span></div>
+      <div class="proof-item"><span class="proof-value">4px</span><span class="proof-label">按钮圆角</span></div>
+      <div class="proof-item"><span class="proof-value">14px</span><span class="proof-label">卡片圆角</span></div>
+      <div class="proof-item"><span class="proof-value">0</span><span class="proof-label">渐变 / 色相</span></div>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="tokens">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Token</span>
+        <h2 class="h-section">语义 token 表</h2>
+        <p class="lede">色板格与「当前值」都直接读页面上的 CSS 变量,切换模式时整表跟着变;右侧一列是这个 token 归属的构件。</p>
+      </div>
+      <p class="gallery-note">对比度实测(脚本打印):近黑 ink/bg 14.78:1 · muted/bg 6.34:1;暖白 ink/bg 16.66:1 · muted/bg 5.02:1。四档全部 ≥ 4.5:1。muted-soft 只有 3.53:1(近黑)/ 2.81:1(暖白),只给法务页脚注这类可放弃的文字。</p>
+      <div class="gallery-row" style="margin-bottom:24px">
+        <span class="tag">--accent = 墨本身</span>
+        <span class="tag">四级透明墨线</span>
+        <span class="tag">影三档</span>
+        <span class="tag">footer-* 两模同值</span>
+      </div>
+      <table class="gallery-tokens">
+        <caption class="sr-only">token-harbor 语义 token 表</caption>
+        <thead>
+          <tr><th scope="col">token</th><th scope="col">色板</th><th scope="col">当前值</th><th scope="col">用在哪</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>--bg</code></td><td class="sw-cell"><span style="--sw: var(--bg)"></span></td><td><code data-token="--bg"></code></td><td class="use">整页底、header 背景、输入底</td></tr>
+          <tr><td><code>--surface</code></td><td class="sw-cell"><span style="--sw: var(--surface)"></span></td><td><code data-token="--surface"></code></td><td class="use">卡面:作品 / 服务 / 定价 / 案例 / 表单卡、hero 胶囊</td></tr>
+          <tr><td><code>--surface-raised</code></td><td class="sw-cell"><span style="--sw: var(--surface-raised)"></span></td><td><code data-token="--surface-raised"></code></td><td class="use">作品卡媒体框底</td></tr>
+          <tr><td><code>--ink</code></td><td class="sw-cell"><span style="--sw: var(--ink)"></span></td><td><code data-token="--ink"></code></td><td class="use">正文与标题</td></tr>
+          <tr><td><code>--muted</code></td><td class="sw-cell"><span style="--sw: var(--muted)"></span></td><td><code data-token="--muted"></code></td><td class="use">次要文字、描述、导航默认色、图注</td></tr>
+          <tr><td><code>--muted-soft</code></td><td class="sw-cell"><span style="--sw: var(--muted-soft)"></span></td><td><code data-token="--muted-soft"></code></td><td class="use">最弱一档:法务页脚注</td></tr>
+          <tr><td><code>--line</code></td><td class="sw-cell"><span style="--sw: var(--line)"></span></td><td><code data-token="--line"></code></td><td class="use">chrome 分隔线:announce 条、吸顶 header</td></tr>
+          <tr><td><code>--line-hairline</code></td><td class="sw-cell"><span style="--sw: var(--line-hairline)"></span></td><td><code data-token="--line-hairline"></code></td><td class="use">卡片描边、卡内分隔、faq 上下线</td></tr>
+          <tr><td><code>--line-field</code></td><td class="sw-cell"><span style="--sw: var(--line-field)"></span></td><td><code data-token="--line-field"></code></td><td class="use">输入框与次要按钮描边</td></tr>
+          <tr><td><code>--line-control</code></td><td class="sw-cell"><span style="--sw: var(--line-control)"></span></td><td><code data-token="--line-control"></code></td><td class="use">交互描边、下划线默认色</td></tr>
+          <tr><td><code>--surface-hover</code></td><td class="sw-cell"><span style="--sw: var(--surface-hover)"></span></td><td><code data-token="--surface-hover"></code></td><td class="use">悬停洗色(导航、按钮、开关)</td></tr>
+          <tr><td><code>--surface-pressed</code></td><td class="sw-cell"><span style="--sw: var(--surface-pressed)"></span></td><td><code data-token="--surface-pressed"></code></td><td class="use">当前态:tag 底、chip 底、聚焦外环</td></tr>
+          <tr><td><code>--accent</code></td><td class="sw-cell"><span style="--sw: var(--accent)"></span></td><td><code data-token="--accent"></code></td><td class="use">主按钮底、焦点环、选中文本底</td></tr>
+          <tr><td><code>--on-accent</code></td><td class="sw-cell"><span style="--sw: var(--on-accent)"></span></td><td><code data-token="--on-accent"></code></td><td class="use">压在 accent 上的文字</td></tr>
+          <tr><td><code>--promo-bg</code></td><td class="sw-cell"><span style="--sw: var(--promo-bg)"></span></td><td><code data-token="--promo-bg"></code></td><td class="use">反色块:announce 条、定价主推卡</td></tr>
+          <tr><td><code>--promo-fg</code></td><td class="sw-cell"><span style="--sw: var(--promo-fg)"></span></td><td><code data-token="--promo-fg"></code></td><td class="use">反色块上的文字</td></tr>
+          <tr><td><code>--promo-muted</code></td><td class="sw-cell"><span style="--sw: var(--promo-muted)"></span></td><td><code data-token="--promo-muted"></code></td><td class="use">反色块里的次要文字</td></tr>
+          <tr><td><code>--promo-tag-bg</code></td><td class="sw-cell"><span style="--sw: var(--promo-tag-bg)"></span></td><td><code data-token="--promo-tag-bg"></code></td><td class="use">反色块里的 tag 底</td></tr>
+          <tr><td><code>--footer-bg</code></td><td class="sw-cell"><span style="--sw: var(--footer-bg)"></span></td><td><code data-token="--footer-bg"></code></td><td class="use">页脚底(两模同值)</td></tr>
+          <tr><td><code>--footer-fg</code></td><td class="sw-cell"><span style="--sw: var(--footer-fg)"></span></td><td><code data-token="--footer-fg"></code></td><td class="use">页脚主文字</td></tr>
+          <tr><td><code>--footer-strong</code></td><td class="sw-cell"><span style="--sw: var(--footer-strong)"></span></td><td><code data-token="--footer-strong"></code></td><td class="use">页脚列标题</td></tr>
+          <tr><td><code>--footer-link</code></td><td class="sw-cell"><span style="--sw: var(--footer-link)"></span></td><td><code data-token="--footer-link"></code></td><td class="use">页脚链接</td></tr>
+          <tr><td><code>--footer-muted</code></td><td class="sw-cell"><span style="--sw: var(--footer-muted)"></span></td><td><code data-token="--footer-muted"></code></td><td class="use">页脚正文与底栏</td></tr>
+          <tr><td><code>--footer-faint</code></td><td class="sw-cell"><span style="--sw: var(--footer-faint)"></span></td><td><code data-token="--footer-faint"></code></td><td class="use">页脚品牌副标</td></tr>
+          <tr><td><code>--footer-line</code></td><td class="sw-cell"><span style="--sw: var(--footer-line)"></span></td><td><code data-token="--footer-line"></code></td><td class="use">页脚底栏上边线</td></tr>
+          <tr><td><code>--footer-line-strong</code></td><td class="sw-cell"><span style="--sw: var(--footer-line-strong)"></span></td><td><code data-token="--footer-line-strong"></code></td><td class="use">页脚品牌副标左边线</td></tr>
+          <tr><td><code>--overlay-bg</code></td><td class="sw-cell"><span style="--sw: var(--overlay-bg)"></span></td><td><code data-token="--overlay-bg"></code></td><td class="use">媒体图上的徽标底</td></tr>
+          <tr><td><code>--overlay-fg</code></td><td class="sw-cell"><span style="--sw: var(--overlay-fg)"></span></td><td><code data-token="--overlay-fg"></code></td><td class="use">媒体图徽标文字</td></tr>
+          <tr><td><code>--overlay-line</code></td><td class="sw-cell"><span style="--sw: var(--overlay-line)"></span></td><td><code data-token="--overlay-line"></code></td><td class="use">媒体图徽标描边</td></tr>
+          <tr><td><code>--shadow-btn</code></td><td class="sw-cell"><span class="sw-shadow" style="--sw: var(--shadow-btn)"></span></td><td><code data-token="--shadow-btn"></code></td><td class="use">主按钮三层影</td></tr>
+          <tr><td><code>--shadow-card</code></td><td class="sw-cell"><span class="sw-shadow" style="--sw: var(--shadow-card)"></span></td><td><code data-token="--shadow-card"></code></td><td class="use">卡片悬停浮起影、表单卡常驻影</td></tr>
+          <tr><td><code>--shadow-pill</code></td><td class="sw-cell"><span class="sw-shadow" style="--sw: var(--shadow-pill)"></span></td><td><code data-token="--shadow-pill"></code></td><td class="use">hero 胶囊影</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="type">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Type</span>
+        <h2 class="h-section">字阶</h2>
+        <p class="lede">十一档,全部走变量;标题不外挂衬线,中英同栈。</p>
+      </div>
+      <div class="gallery-type">
+        <div><code>--fs-display 64px</code><p class="h-display" style="font-size: var(--fs-display)">墨色双模</p></div>
+        <div><code>--fs-section 40px</code><p class="h-section" style="font-size: var(--fs-section)">分区标题</p></div>
+        <div><code>--fs-case 20px</code><p style="margin:0;font-size:var(--fs-case);font-weight:700;letter-spacing:-0.015em">案例卡标题</p></div>
+        <div><code>--fs-sub 18px</code><p style="margin:0;font-size:var(--fs-sub);font-weight:700">表单标题</p></div>
+        <div><code>--fs-card 17px</code><p class="h-card">卡标题</p></div>
+        <div><code>--fs-lede 16px</code><p class="lede" style="margin:0">导语一档,字重 500。</p></div>
+        <div><code>--fs-body 14px</code><p style="margin:0;font-size:var(--fs-body)">正文一档,页面的默认字号。</p></div>
+        <div><code>--fs-small 13px</code><p style="margin:0;font-size:var(--fs-small)">卡片描述、按钮文字。</p></div>
+        <div><code>--fs-meta 12px</code><p style="margin:0;font-size:var(--fs-meta)">元信息、脚注上一条。</p></div>
+        <div><code>--fs-caption 11px</code><p style="margin:0;font-size:var(--fs-caption)">最小一档,只给标签与提示。</p></div>
+        <div><code>--fs-eyebrow 10.5px</code><p class="eyebrow" style="margin:0">eyebrow 小标</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="parts">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Parts</span>
+        <h2 class="h-section">按钮 / tag / chip</h2>
+        <p class="lede">按钮高度三档(32 / 36 / 44),圆角一律 4px;tag 是胶囊,chip 是 44px 命中区。</p>
+      </div>
+      <div class="gallery-row" style="margin-bottom:20px">
+        <button class="btn btn-primary" type="button">主按钮</button>
+        <button class="btn btn-outline" type="button">次要按钮</button>
+        <button class="btn btn-primary btn-lg" type="button">大按钮</button>
+        <button class="btn btn-outline btn-sm" type="button">小按钮</button>
+        <button class="btn btn-primary" type="button" disabled style="opacity:.5;cursor:not-allowed">禁用</button>
+      </div>
+      <div class="gallery-row" style="margin-bottom:20px">
+        <span class="tag">tag · 胶囊</span>
+        <span class="tag">10.5px</span>
+        <span class="tag">无彩强调</span>
+        <span class="icon-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" aria-hidden="true"><path d="M5 12h13M13 6.5 19 12l-6 5.5"/></svg>
+          <span class="sr-only">icon chip</span>
+        </span>
+      </div>
+      <div class="gallery-swatches">
+        <div class="gallery-sw"><span style="--sw: var(--bg)"></span><b>bg</b><em>页面底</em></div>
+        <div class="gallery-sw"><span style="--sw: var(--surface)"></span><b>surface</b><em>卡面</em></div>
+        <div class="gallery-sw"><span style="--sw: var(--surface-raised)"></span><b>surface-raised</b><em>媒体框底</em></div>
+        <div class="gallery-sw"><span style="--sw: var(--ink)"></span><b>ink</b><em>正文</em></div>
+        <div class="gallery-sw"><span style="--sw: var(--muted)"></span><b>muted</b><em>次要文字</em></div>
+        <div class="gallery-sw"><span style="--sw: var(--accent)"></span><b>accent</b><em>墨本身</em></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Work</span>
+        <h2 class="h-section">作品卡</h2>
+        <p class="lede">卡面无阴影,悬停才浮起;类型徽标压在媒体图上,用固定的叠加 token(不随主题翻)。</p>
+      </div>
+      <div class="work-grid">
+        <article class="work-card">
+          <div class="work-media gallery-media"><em>媒体位 16 / 10</em><span class="tag work-type">类型 · 甲</span></div>
+          <div class="work-body">
+            <div class="work-top"><h3 class="work-title">条目标题一</h3><span class="work-arrow">→</span></div>
+            <p class="work-desc">两行以内的中性描述文字,用来占位说明这一条是什么。</p>
+            <div class="work-tags"><span class="tag">标签</span><span class="tag">标签</span></div>
+          </div>
+        </article>
+        <article class="work-card">
+          <div class="work-media gallery-media"><em>媒体位 16 / 10</em><span class="tag work-type">类型 · 乙</span></div>
+          <div class="work-body">
+            <div class="work-top"><h3 class="work-title">条目标题二</h3><span class="work-arrow">→</span></div>
+            <p class="work-desc">换行与字号在这一档固定,长描述也不会撑破卡面圆角。</p>
+            <div class="work-tags"><span class="tag">标签</span><span class="tag">标签</span></div>
+          </div>
+        </article>
+      </div>
+      <p class="work-all"><a href="#work">查看全部条目</a></p>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Services</span>
+        <h2 class="h-section">服务卡</h2>
+        <p class="lede">三列等分;tag 顶在左上,底部一排标签用 margin-top:auto 压到底。</p>
+      </div>
+      <div class="services-grid">
+        <article class="service-card">
+          <span class="tag">服务 · 甲</span>
+          <h3 class="h-card">服务标题一</h3>
+          <p>一行到两行说明,用来验证同一行高下的对齐。</p>
+          <div class="service-tags"><span class="tag">标签</span><span class="tag">标签</span></div>
+        </article>
+        <article class="service-card">
+          <span class="tag">服务 · 乙</span>
+          <h3 class="h-card">服务标题二</h3>
+          <p>说明长度不同也不会把卡片撑得参差 —— 卡高由网格拉伸决定。</p>
+          <div class="service-tags"><span class="tag">标签</span><span class="tag">标签</span></div>
+        </article>
+        <article class="service-card">
+          <span class="tag">服务 · 丙</span>
+          <h3 class="h-card">服务标题三</h3>
+          <p>第三张卡的说明。</p>
+          <div class="service-tags"><span class="tag">标签</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="cases">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Cases</span>
+        <h2 class="h-section">案例卡</h2>
+        <p class="lede">三段式:问题 / 做法 / 结果;每段之间一条细线,不整卡描边加重。</p>
+      </div>
+      <div class="case-grid">
+        <article class="case-card">
+          <span class="case-label">案例 01</span>
+          <h3 class="case-title">案例标题一</h3>
+          <dl class="case-list">
+            <div><dt>问题</dt><dd>旧版分区靠颜色区分,深色下对比不足。</dd></div>
+            <div><dt>做法</dt><dd>换成墨/纸互换与四级细线,强调色收成一个。</dd></div>
+            <div><dt>结果</dt><dd>正文与次要文字都过 AA,维护面从两套色表降到一套 token。</dd></div>
+          </dl>
+          <div class="case-foot">
+            <div class="case-tags"><span class="tag">标签</span><span class="tag">标签</span></div>
+            <a href="#cases">看细节</a>
+          </div>
+        </article>
+        <article class="case-card">
+          <span class="case-label">案例 02</span>
+          <h3 class="case-title">案例标题二</h3>
+          <dl class="case-list">
+            <div><dt>问题</dt><dd>表格与表单控件在两种模式下各写了一遍样式。</dd></div>
+            <div><dt>做法</dt><dd>控件全部改走 line-field 与 surface-pressed 两个语义位。</dd></div>
+            <div><dt>结果</dt><dd>模式分支从样式表里消失,校验态也不用颜色表达。</dd></div>
+          </dl>
+          <div class="case-foot">
+            <div class="case-tags"><span class="tag">标签</span><span class="tag">标签</span></div>
+            <a href="#cases">看细节</a>
+          </div>
+        </article>
+        <article class="case-card">
+          <span class="case-label">案例 03</span>
+          <h3 class="case-title">案例标题三</h3>
+          <dl class="case-list">
+            <div><dt>问题</dt><dd>定价主推卡在暖白下反色失真。</dd></div>
+            <div><dt>做法</dt><dd>抽出 promo 四件套,主推卡与按钮各翻一次。</dd></div>
+            <div><dt>结果</dt><dd>两模共用同一组规则,反色块的对比度实测 14.78:1 / 16.66:1。</dd></div>
+          </dl>
+          <div class="case-foot">
+            <div class="case-tags"><span class="tag">标签</span></div>
+            <a href="#cases">看细节</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Pricing</span>
+        <h2 class="h-section">定价卡</h2>
+        <p class="lede">主推卡整块翻成反色(promo-*),按钮在反色块里再翻一次 —— 两模同一套规则。</p>
+      </div>
+      <div class="pricing-grid">
+        <article class="sku-card">
+          <div class="sku-name"><span>档位 · 基本</span><span class="tag">按次</span></div>
+          <div class="sku-price"><span class="sku-price-num">¥1 200</span><span class="sku-price-unit">/ 起</span></div>
+          <p class="sku-desc">适合一次性的小页面:静态排版与一套 token。</p>
+          <ul class="sku-features"><li>单页结构</li><li>一套配色</li><li>交付说明</li></ul>
+          <button class="btn btn-outline" type="button">选这一档</button>
+        </article>
+        <article class="sku-card is-featured">
+          <div class="sku-name"><span>档位 · 推荐</span><span class="tag">推荐</span></div>
+          <div class="sku-price"><span class="sku-price-num">¥3 600</span><span class="sku-price-unit">/ 起</span></div>
+          <p class="sku-desc">多分区站点:全套构件 + 深浅双模 + 表单。</p>
+          <ul class="sku-features"><li>全套构件</li><li>双模 token</li><li>表单与校验态</li></ul>
+          <button class="btn btn-primary" type="button">选这一档</button>
+        </article>
+        <article class="sku-card">
+          <div class="sku-name"><span>档位 · 长期</span><span class="tag">按月</span></div>
+          <div class="sku-price"><span class="sku-price-num">¥800</span><span class="sku-price-unit">/ 月</span></div>
+          <p class="sku-desc">持续维护:新增分区、刻度微调、可访问性复查。</p>
+          <ul class="sku-features"><li>按需增补</li><li>对比度复查</li><li>交付留痕</li></ul>
+          <button class="btn btn-outline" type="button">选这一档</button>
+        </article>
+      </div>
+      <p class="pricing-note">价格是中性占位数字,只用来验证排版;不构成任何报价。</p>
+
+      <div class="extras-wrap">
+        <div class="extras-head"><h3>附加项</h3><span>按件计</span></div>
+        <div class="extras-grid">
+          <div class="extra-row"><div><div class="extra-name">附加项一</div><p class="extra-desc">一行说明,用来验证 1px 网格线与圆角裁切。</p></div><div class="extra-price">¥200</div></div>
+          <div class="extra-row"><div><div class="extra-name">附加项二</div><p class="extra-desc">同样一行说明,右侧价格不接受换行。</p></div><div class="extra-price">¥300</div></div>
+        </div>
+      </div>
+
+      <div class="care-wrap">
+        <div class="extras-head"><h3>维护包</h3><span>三档</span></div>
+        <div class="care-grid">
+          <div class="care-card">
+            <div class="care-top"><span class="care-name">基础</span><span class="care-price">¥200<span> / 次</span></span></div>
+            <ul class="care-list"><li>文案与刻度微调</li><li>交付差异说明</li></ul>
+          </div>
+          <div class="care-card">
+            <div class="care-top"><span class="care-name">标准</span><span class="care-price">¥500<span> / 次</span></span></div>
+            <ul class="care-list"><li>新增一个分区</li><li>对比度复查</li></ul>
+          </div>
+          <div class="care-card">
+            <div class="care-top"><span class="care-name">深度</span><span class="care-price">¥900<span> / 次</span></span></div>
+            <ul class="care-list"><li>结构级调整</li><li>构件补做</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Process</span>
+        <h2 class="h-section">流程</h2>
+        <p class="lede">五步一格,靠上下两条细线分块,不用卡片。</p>
+      </div>
+      <div class="process-grid">
+        <div class="process-step"><span class="process-num">01</span><h3 class="process-title">读 token</h3><p class="process-desc">先看语义表,不自己编颜色。</p></div>
+        <div class="process-step"><span class="process-num">02</span><h3 class="process-title">选模式</h3><p class="process-desc">默认近黑,需要暖白再加一份。</p></div>
+        <div class="process-step"><span class="process-num">03</span><h3 class="process-title">落构件</h3><p class="process-desc">按钮 / 卡 / announce / 表单按类名落位。</p></div>
+        <div class="process-step"><span class="process-num">04</span><h3 class="process-title">实测对比度</h3><p class="process-desc">正文与次要文字各跑一次断言。</p></div>
+        <div class="process-step"><span class="process-num">05</span><h3 class="process-title">登记</h3><p class="process-desc">在项目 design-lock 记包名与版本。</p></div>
+      </div>
+      <div class="why-grid" style="margin-top:32px">
+        <div class="why-card"><h3>为什么只有一个强调色</h3><p>色相一旦承担信息,就得成体系;这套语言把信息交给字号、留白与墨纸互换,强调色只留墨本身。</p></div>
+        <div class="why-card"><h3>为什么细线不统一成一个值</h3><p>卡片描边、控件描边、交互描边要三种存在感,所以留四级:line / hairline / field / control。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="h-section">常见问题</h2>
+        <p class="lede">原生 details:展开状态不用 JavaScript。</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary>深浅两模要引几份 CSS?</summary>
+          <div class="faq-answer">单主题(近黑)只引 default.css;要在同页切换模式,再加一份 themes.css 并在 html 上写 data-theme。</div>
+        </details>
+        <details class="faq-item">
+          <summary>强调色能不能换成别的颜色?</summary>
+          <div class="faq-answer">可以,但要改 tokens/semantic 的两个文件并重跑断言:对比度是按语义键实测的,换了色就必须重新验一遍。</div>
+        </details>
+        <details class="faq-item">
+          <summary>表单报错为什么不是红色?</summary>
+          <div class="faq-answer">这套语言里没有色相,报错靠加粗描边、圆形叹号和文案三件事,圆点与文案都沿用墨色。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery-sec gallery-anchor" id="contact">
+    <div class="wrap contact-section" style="padding:0 0 64px">
+      <div class="contact-layout">
+        <div class="contact-intro">
+          <span class="eyebrow">Contact</span>
+          <h2 class="h-section" style="text-align:left">表单与校验态</h2>
+          <p class="lede" style="margin-left:0">输入框底跟着页面底走,描边用 line-field;聚焦时描边提到墨色并加一圈 surface-pressed 外环。</p>
+          <p class="contact-note">邮箱一格故意留成报错态,点提交可以看它怎么恢复。</p>
+          <div class="contact-checklist"><span>提示一</span><span>提示二</span><span>提示三</span></div>
+          <p class="contact-fallback">也可以用邮件联系:<a href="#contact">hello@example.com</a>(中性占位)</p>
+        </div>
+        <div class="contact-form-card">
+          <h3 class="form-title">需求表</h3>
+          <form class="project-form" data-project-form novalidate>
+            <div class="field-row">
+              <label class="field">
+                <span>称呼</span>
+                <input type="text" name="name" autocomplete="name" placeholder="怎么称呼你">
+              </label>
+              <label class="field">
+                <span>邮箱</span>
+                <input type="email" name="email" autocomplete="email" data-field-email aria-invalid="true" aria-describedby="email-error" value="not-an-email">
+                <span class="field-error" id="email-error" data-error-email>邮箱格式不对,例如 name@example.com</span>
+              </label>
+            </div>
+            <label class="field">
+              <span>项目类型</span>
+              <select name="kind">
+                <option>营销落地页</option>
+                <option>服务型站点</option>
+                <option>产品页改版</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>需求说明 <em>选填</em></span>
+              <textarea name="brief" placeholder="一段话说明要做什么"></textarea>
+              <small>上限 500 字;这里只做排版演示。</small>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="consent">
+              <span>我同意用这份信息回信;提交不会真的发送任何请求。</span>
+            </label>
+            <div class="honeypot" aria-hidden="true"><label>不要填<input type="text" name="company" tabindex="-1"></label></div>
+            <button class="btn btn-primary" type="submit">提交</button>
+            <p class="form-status" data-form-status aria-live="polite"></p>
+            <p class="form-privacy">本页是静态预览,不发请求、不写任何本地存储。</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-text">Token Harbor</span>
+          <span class="brand-sub">墨色双模</span>
+        </div>
+        <p class="footer-tagline">近黑与暖白互换的设计语言;正文 14px,按钮 4px,卡片 14px,无渐变。</p>
+        <p class="footer-company">示例公司名(中性占位)</p>
+        <p class="footer-meta">设计语言 v1.0 · 预览页</p>
+      </div>
+      <div class="footer-col">
+        <h2>构件</h2>
+        <a href="#parts">按钮 / tag / chip</a>
+        <a href="#work">作品卡</a>
+        <a href="#cases">案例卡</a>
+        <a href="#pricing">定价卡</a>
+      </div>
+      <div class="footer-col">
+        <h2>文档</h2>
+        <a href="#tokens">token 表</a>
+        <a href="#type">字阶</a>
+        <a href="#faq">常见问题</a>
+      </div>
+      <div class="footer-col">
+        <h2>其它</h2>
+        <a href="#contact">联系</a>
+        <a href="#top">回到顶部</a>
+        <a href="#tokens">对比度实测</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>本页自包含:零外部子资源,加载时不跳转,不用 localStorage 也能看。</p>
+      <div class="footer-lang"><a href="#top">ZH</a><a href="#top">EN</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var toggle = document.querySelector('[data-theme-toggle]');
+  var modeLabels = document.querySelectorAll('[data-mode-label]');
+
+  function mode() {
+    return root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+
+  function paintTokens() {
+    var styles = getComputedStyle(root);
+    var cells = document.querySelectorAll('[data-token]');
+    for (var i = 0; i < cells.length; i++) {
+      var name = cells[i].getAttribute('data-token');
+      cells[i].textContent = styles.getPropertyValue(name).trim();
+    }
+  }
+
+  function sync() {
+    var m = mode();
+    toggle.setAttribute('aria-pressed', m === 'light' ? 'true' : 'false');
+    toggle.setAttribute('aria-label', m === 'light' ? '切到近黑模式' : '切到暖白模式');
+    for (var i = 0; i < modeLabels.length; i++) {
+      modeLabels[i].textContent = m === 'light' ? '暖白(light)' : '近黑(dark)';
+    }
+    paintTokens();
+  }
+
+  toggle.addEventListener('click', function () {
+    root.setAttribute('data-theme', mode() === 'dark' ? 'light' : 'dark');
+    sync();
+  });
+
+  var menu = document.querySelector('.menu-toggle');
+  var nav = document.querySelector('.nav');
+  menu.addEventListener('click', function () {
+    var open = menu.getAttribute('aria-expanded') === 'true';
+    menu.setAttribute('aria-expanded', open ? 'false' : 'true');
+    nav.classList.toggle('is-open', !open);
+  });
+
+  var form = document.querySelector('[data-project-form]');
+  var status = document.querySelector('[data-form-status]');
+  var email = document.querySelector('[data-field-email]');
+  var emailError = document.querySelector('[data-error-email]');
+
+  function check() {
+    var ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    if (ok) {
+      email.removeAttribute('aria-invalid');
+      emailError.hidden = true;
+    } else {
+      email.setAttribute('aria-invalid', 'true');
+      emailError.hidden = false;
+    }
+    return ok;
+  }
+
+  email.addEventListener('input', function () {
+    if (status.textContent) { check(); }
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (!check()) {
+      status.className = 'form-status is-error';
+      status.textContent = '邮箱一格还没通过,先改它。';
+      email.focus();
+      return;
+    }
+    status.className = 'form-status is-ok';
+    status.textContent = '通过校验(预览页不发请求)。';
+  });
+
+  sync();
+})();
+</script>
+</body>
+</html>

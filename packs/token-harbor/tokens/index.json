@@ -1,0 +1,55 @@
+{
+  "id": "token-harbor",
+  "default": "dark",
+  "note": "变体目录:两个变体(dark 近黑 / light 暖白),default = dark。两模共用同一套语义键名,只有中性色与影翻面;footer-* 与 overlay-* 是两模同值的常量(页脚本来就是深色块、图上徽标本来就压在图里),列在 invariant 里以免被误当成漏翻。",
+  "variants": [
+    {
+      "id": "dark",
+      "name": "近黑",
+      "mode": "dark",
+      "contrast": "high",
+      "path": "tokens/semantic/dark.json",
+      "default": true,
+      "aliases": ["ink", "墨"],
+      "note": "默认变体。css/default.css 的 :root 就是这一份。"
+    },
+    {
+      "id": "light",
+      "name": "暖白",
+      "mode": "light",
+      "contrast": "high",
+      "path": "tokens/semantic/light.json",
+      "default": false,
+      "aliases": ["paper", "纸"],
+      "note": "与 dark 并存时用 css/themes.css 里的 [data-theme=\"light\"]。"
+    }
+  ],
+  "axes": {
+    "theme": {
+      "attr": "data-theme",
+      "values": ["dark", "light"],
+      "default": "dark",
+      "note": "写在 <html> 上。dark 是默认,可省;light 需要同时引入 css/themes.css。切换按钮要写 aria-pressed 与 aria-label,并且不依赖 localStorage 也能看。"
+    }
+  },
+  "invariant": {
+    "note": "两模同值,不需要翻面;若你的项目只引 css/themes.css,这些值也已各写一份在两边的 token 块里。",
+    "tokens": [
+      "footer-bg",
+      "footer-fg",
+      "footer-strong",
+      "footer-link",
+      "footer-muted",
+      "footer-faint",
+      "footer-line",
+      "footer-line-strong",
+      "overlay-bg",
+      "overlay-fg",
+      "overlay-line"
+    ]
+  },
+  "css_layers": {
+    "css/default.css": ":root = dark 全量 token + 全部基础 chrome;单主题(近黑)直接可用",
+    "css/themes.css": "只出 [data-theme=\"dark\"] / [data-theme=\"light\"] 两个作用域的 token 块,不含任何构件规则;与项目自带主题体系并存时用这一份"
+  }
+}

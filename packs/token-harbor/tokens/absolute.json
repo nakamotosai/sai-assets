@@ -1,0 +1,257 @@
+{
+  "id": "token-harbor",
+  "note": "原色表:只收源样式表里实际出现的原子值(去重后 38 个色值 + 6 组影),不设近似值、不设外推色。色值一律 6 位 hex 或 rgba();影值里的每个颜色段也必须是这两种之一。",
+  "alpha": "源表用 8 位 hex 写透明度(#rrggbbaa),本表统一折算为 rgba(r, g, b, aa/255) 并保留四位小数:23/255=0.0902、13/255=0.0510、41/255=0.1608、92/255=0.3608、10/255=0.0392、20/255=0.0784、26/255=0.1020、15/255=0.0588、61/255=0.2392、128/255=0.5020、9/255=0.0353、36/255=0.1412、71/255=0.2784、34/255=0.1333、68/255=0.2667、38/255=0.1490、51/255=0.2000、85/255=0.3333、89/255=0.3490。",
+  "colors": {
+    "#141413": {
+      "section": ["变量块 · 暗模", "定价 · 主推卡"],
+      "origin": ["--background", "--promo-fg", ".sku-card.is-featured 的文字与按钮底"],
+      "used_as": ["暗模 bg", "accent 上的文字 on-accent", "promo-fg"]
+    },
+    "#1b1b19": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--card"],
+      "used_as": ["暗模 surface(卡面、hero 胶囊底)"]
+    },
+    "#232320": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--raised"],
+      "used_as": ["暗模 surface-raised(媒体框底)"]
+    },
+    "#e8e6e1": {
+      "section": ["变量块 · 暗模", "定价 · 主推卡"],
+      "origin": ["--foreground", "--accent-fg", "--promo-bg", ".sku-card.is-featured 的底与按钮文字"],
+      "used_as": ["暗模 ink", "暗模 accent", "暗模 promo-bg"]
+    },
+    "#9a9793": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--muted"],
+      "used_as": ["暗模 muted(次要文字、图注、导航默认色)"]
+    },
+    "#6f6c68": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--muted-soft"],
+      "used_as": ["暗模 muted-soft(法务页脚注等最弱一档)"]
+    },
+    "rgba(255, 255, 255, 0.0902)": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--border"],
+      "used_as": ["暗模 line(announce 条与吸顶 header 的分隔线)"]
+    },
+    "rgba(255, 255, 255, 0.0510)": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--border-hairline"],
+      "used_as": ["暗模 line-hairline(卡片描边、卡内分隔线)"]
+    },
+    "rgba(255, 255, 255, 0.1608)": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--border-field"],
+      "used_as": ["暗模 line-field(输入框与次要按钮描边)"]
+    },
+    "rgba(255, 255, 255, 0.3608)": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--border-control"],
+      "used_as": ["暗模 line-control(交互描边、下划线)"]
+    },
+    "rgba(255, 255, 255, 0.0392)": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--surface-hover"],
+      "used_as": ["暗模 surface-hover(悬停洗色)"]
+    },
+    "rgba(255, 255, 255, 0.0784)": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--surface-pressed", "--accent-bg"],
+      "used_as": ["暗模 surface-pressed(tag 底、当前态洗色)"]
+    },
+    "#0c0d09": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--footer-bg"],
+      "used_as": ["暗模 footer-bg"]
+    },
+    "#fafaf9": {
+      "section": ["变量块 · 暗模", "变量块 · 亮模"],
+      "origin": ["--footer-fg"],
+      "used_as": ["两模共用的 footer-fg"]
+    },
+    "#f7f6f2": {
+      "section": ["变量块 · 亮模", "作品卡 · 类型徽标"],
+      "origin": ["--background", "--promo-fg", ".work-type 的文字", ".sku-card.is-featured 亮模的文字"],
+      "used_as": ["亮模 bg", "亮模 on-accent", "亮模 promo-fg", "图上叠加 overlay-fg"]
+    },
+    "#ffffff": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--card"],
+      "used_as": ["亮模 surface"]
+    },
+    "#faf9f5": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--raised"],
+      "used_as": ["亮模 surface-raised"]
+    },
+    "#17170f": {
+      "section": ["变量块 · 亮模", "定价 · 主推卡"],
+      "origin": ["--foreground", "--accent-fg", "--promo-bg", ".sku-card.is-featured 亮模的底", ".sku-card.is-featured 亮模的按钮文字"],
+      "used_as": ["亮模 ink", "亮模 accent", "亮模 promo-bg"]
+    },
+    "#6b6a64": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--muted"],
+      "used_as": ["亮模 muted"]
+    },
+    "#96948d": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--muted-soft"],
+      "used_as": ["亮模 muted-soft"]
+    },
+    "rgba(23, 23, 15, 0.1020)": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--border"],
+      "used_as": ["亮模 line"]
+    },
+    "rgba(23, 23, 15, 0.0588)": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--border-hairline", "--surface-pressed"],
+      "used_as": ["亮模 line-hairline 与 surface-pressed(同一原子)"]
+    },
+    "rgba(23, 23, 15, 0.2392)": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--border-field"],
+      "used_as": ["亮模 line-field"]
+    },
+    "rgba(23, 23, 15, 0.5020)": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--border-control"],
+      "used_as": ["亮模 line-control"]
+    },
+    "rgba(23, 23, 15, 0.0353)": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--surface-hover"],
+      "used_as": ["亮模 surface-hover"]
+    },
+    "#11120d": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--footer-bg"],
+      "used_as": ["亮模 footer-bg"]
+    },
+    "rgba(250, 250, 249, 0.9)": {
+      "section": ["页脚"],
+      "origin": [".footer-col h2"],
+      "used_as": ["footer-strong(页脚列标题)"]
+    },
+    "rgba(250, 250, 249, 0.6)": {
+      "section": ["页脚"],
+      "origin": [".footer-col a", ".footer-lang a"],
+      "used_as": ["footer-link(页脚链接)"]
+    },
+    "rgba(250, 250, 249, 0.55)": {
+      "section": ["页脚"],
+      "origin": [".footer-tagline", ".footer-company", ".footer-meta", ".footer-bottom"],
+      "used_as": ["footer-muted(页脚正文)"]
+    },
+    "rgba(250, 250, 249, 0.45)": {
+      "section": ["页脚"],
+      "origin": [".footer-brand .brand-sub"],
+      "used_as": ["footer-faint(页脚品牌副标)"]
+    },
+    "rgba(250, 250, 249, 0.12)": {
+      "section": ["页脚"],
+      "origin": [".footer-bottom 的上边线"],
+      "used_as": ["footer-line"]
+    },
+    "rgba(250, 250, 249, 0.18)": {
+      "section": ["页脚"],
+      "origin": [".footer-brand .brand-sub 的左边线"],
+      "used_as": ["footer-line-strong"]
+    },
+    "rgba(20, 20, 19, 0.72)": {
+      "section": ["作品卡 · 类型徽标"],
+      "origin": [".work-type 的底", ".work-type 的 backdrop-filter 底色"],
+      "used_as": ["overlay-bg(压在媒体图上的徽标底)"]
+    },
+    "rgba(255, 255, 255, 0.14)": {
+      "section": ["作品卡 · 类型徽标"],
+      "origin": [".work-type 的描边"],
+      "used_as": ["overlay-line"]
+    },
+    "rgba(20, 20, 19, 0.7)": {
+      "section": ["定价 · 主推卡"],
+      "origin": [".sku-card.is-featured 暗模的次要文字"],
+      "used_as": ["暗模 promo-muted"]
+    },
+    "rgba(20, 20, 19, 0.12)": {
+      "section": ["定价 · 主推卡"],
+      "origin": [".sku-card.is-featured 暗模的 tag 底"],
+      "used_as": ["暗模 promo-tag-bg"]
+    },
+    "rgba(247, 246, 242, 0.7)": {
+      "section": ["定价 · 主推卡"],
+      "origin": [".sku-card.is-featured 亮模的次要文字"],
+      "used_as": ["亮模 promo-muted"]
+    },
+    "rgba(247, 246, 242, 0.16)": {
+      "section": ["定价 · 主推卡"],
+      "origin": [".sku-card.is-featured 亮模的 tag 底"],
+      "used_as": ["亮模 promo-tag-bg"]
+    }
+  },
+  "shadows": {
+    "0 1px rgba(0, 0, 0, 0.1020), 0 2px 4px rgba(0, 0, 0, 0.2000), 0 8px 22px -4px rgba(0, 0, 0, 0.3490)": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--shadow-btn"],
+      "used_as": ["暗模 shadow-btn"]
+    },
+    "0 1px 2px rgba(0, 0, 0, 0.1333), 0 8px 24px -12px rgba(0, 0, 0, 0.2667)": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--shadow-card"],
+      "used_as": ["暗模 shadow-card"]
+    },
+    "0 1px rgba(0, 0, 0, 0.1490), 0 2px 4px rgba(0, 0, 0, 0.2000), 0 12px 28px -8px rgba(0, 0, 0, 0.3333)": {
+      "section": ["变量块 · 暗模"],
+      "origin": ["--shadow-pill"],
+      "used_as": ["暗模 shadow-pill"]
+    },
+    "0 1px rgba(0, 0, 0, 0.0588), 0 2px 4px rgba(26, 25, 24, 0.1412), 0 8px 22px -4px rgba(26, 25, 24, 0.2784)": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--shadow-btn"],
+      "used_as": ["亮模 shadow-btn"]
+    },
+    "0 1px 2px rgba(23, 23, 15, 0.0392), 0 8px 24px -12px rgba(23, 23, 15, 0.1020)": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--shadow-card"],
+      "used_as": ["亮模 shadow-card"]
+    },
+    "0 1px rgba(26, 25, 24, 0.0510), 0 2px 4px rgba(26, 25, 24, 0.0588), 0 12px 28px -8px rgba(26, 25, 24, 0.1608)": {
+      "section": ["变量块 · 亮模"],
+      "origin": ["--shadow-pill"],
+      "used_as": ["亮模 shadow-pill"]
+    }
+  },
+  "folded_aliases": {
+    "note": "源表里有 3 个变量只被定义、没有构件引用;本包不另立同名 token,值仍在,语义并入下列 token(出处见 docs/usage.md §token 折叠)。",
+    "--accent-fg": "accent(= ink 本身)",
+    "--accent-bg": "surface-pressed(同值原子)",
+    "--border": "line(同一原子;源构件全部走 hairline / field / control 三档)"
+  },
+  "source_map": {
+    "--background": "bg",
+    "--card": "surface",
+    "--raised": "surface-raised",
+    "--foreground": "ink",
+    "--muted": "muted",
+    "--muted-soft": "muted-soft",
+    "--border": "line",
+    "--border-hairline": "line-hairline",
+    "--border-field": "line-field",
+    "--border-control": "line-control",
+    "--surface-hover": "surface-hover",
+    "--surface-pressed": "surface-pressed",
+    "--accent-fg": "accent / on-accent(源表按钮文字误用 --card,本包统一为 on-accent)",
+    "--promo-bg": "promo-bg",
+    "--promo-fg": "promo-fg",
+    "--footer-bg": "footer-bg",
+    "--footer-fg": "footer-fg",
+    "--shadow-btn": "shadow-btn",
+    "--shadow-card": "shadow-card",
+    "--shadow-pill": "shadow-pill"
+  }
+}
