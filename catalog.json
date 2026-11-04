@@ -219,19 +219,13 @@
   {
    "id": "references",
    "title": "外部参考观测",
-   "count": 2,
+   "count": 1,
    "items": [
     {
      "id": "references",
      "version": "1.0.0",
      "one_liner": "选版式 / 定字号 / 定网格前先读的 40 条外部站…",
      "path": "packs/references/"
-    },
-    {
-     "id": "upload-smoke",
-     "version": "0.0.1",
-     "one_liner": "临时冒烟条目:验证「只往 packs/ 丢一个目录、c…",
-     "path": "packs/upload-smoke/"
     }
    ]
   },
