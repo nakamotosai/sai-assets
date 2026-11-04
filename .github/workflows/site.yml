@@ -2,6 +2,8 @@ name: site
 
 # 展示站自动导入管线:main 上有任何改动(packs/ 新增、包修改、docs)→ 重建站点 → 部署 Cloudflare Pages。
 # 唯一入口是 packs/*/pack.json:新增一个包目录即自动上站,没有第二个注册表。
+# catalog.json 是**派生**文件(packs/ 是真相源):提交里那份过期时本工作流自动重建并回提交,
+# 于是「只往 packs/ 丢一个目录、catalog 没跟」也能上站,不必依赖人记得跑 build_catalog。
 # 自检在 scripts/build_site.py 的 verify():详情页/预览/zip/子 demo/sitemap 任一对不上即非零退出,不会部署坏产物。
 
 on:
@@ -9,8 +11,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# 自动对齐 catalog.json 需要写权限;gate.yml / preview.yml 各自显式声明 read,不受影响。
+# 注意:BOT 用 GITHUB_TOKEN 推的提交不会再触发工作流,天然无回环。
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: site-main
@@ -28,13 +32,21 @@ jobs:
       - name: 公开内容闸 + 包内断言
         run: python scripts/gate.py
 
-      - name: 重建 catalog(并校验提交里那份不过期)
+      - name: 重建 catalog(packs/ 为真相源;提交里那份过期就自动对齐并回提交)
         run: |
           python scripts/build_catalog.py
-          git diff --exit-code -- catalog.json \
-            || (echo "::error::catalog.json 与 packs/ 不一致,请本地重建后提交" && exit 1)
+          if git diff --quiet -- catalog.json; then
+            echo "catalog.json 与 packs/ 一致,无需对齐"
+            exit 0
+          fi
+          echo "::notice::catalog.json 与 packs/ 不一致 —— 本次由 CI 重建并回提交,站点照常部署"
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog.json
+          git commit -m "chore(catalog): CI 自动对齐 packs/(提交里那份过期)"
+          git push origin HEAD:main
 
-      - name: 构建站点(含 verify:29 包详情页 / 预览 / zip / 子 demo / sitemap)
+      - name: 构建站点(含 verify:30 包详情页 / 预览 / zip / 子 demo / sitemap)
         run: python scripts/build_site.py --out dist
 
       - name: 部署 Cloudflare Pages

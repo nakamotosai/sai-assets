@@ -46,7 +46,7 @@ python scripts/build_catalog.py && python scripts/build_site.py && git add -A &&
 # 3) 推 main → CI 自动部署;开 PR 会额外给一个 pr-<n> 预览环境
 ```
 
-站点唯一入口是 `packs/*/pack.json`:没有第二个注册表。构建自检(详情页/预览/zip/子 demo/sitemap/零外链)任一不成立就不部署。
+站点唯一入口是 `packs/*/pack.json`:没有第二个注册表。`catalog.json` 是**派生**文件 —— 提交里那份没跟上时,CI 会重建它并自动回提交,所以「只往 `packs/` 丢一个目录」也能上站(本地先跑 `build_catalog.py` 只是让你更早看到结果)。构建自检(详情页/预览/zip/子 demo/sitemap/零外链)任一不成立就不部署。
 
 ## 类目
 

@@ -93,3 +93,13 @@
 - 顺手:`ouuut-editorial` 的 `css/type.css` @font-face 补 `font-display: swap` → 包版本 **1.0.0 → 1.0.1**(包内断言重跑 PASS)。
 - 线上实测:30 条索引、ouuut-com 详情页 200、`app.json` counts={packs:30,surfaces:39}、悬停浮层 src=https://ouuut.com/(545×341)、首页初始 iframe 数 = 0。
 - 体检(`web_audit.py report`):exit 1;适用项 S2/S3/S4/S5/S7/D4/Z2/A4 通过,红项与「未跑」集中在两类 —— ①`dist/packs/**` 的 400+ 个预览页被当成站点页面(它们是**资产内容**,不是本站页面);②单语站不适用的 i18n 组。**工具未实现 `exclude`/`scan_roots`**,本轮据实记录、不刷绿;尾巴见 CLOSEOUT。
+
+## 2026-11-04 · catalog 派生化(裸上传也能自动上站)
+
+回答「以后往库里传新东西,站会自动更新吗」时测出的一处人工依赖:原来 `site.yml` 用 `git diff --exit-code -- catalog.json` 把关 —— **只要 `packs/` 有新增(或改 `version`/`when`),忘了跑 `build_catalog.py` 就会 CI 红、不部署**。改成 CI 自己重建 + bot 回提交:
+
+- `site.yml`:`permissions: contents: write` → 重建 `catalog.json` → 有差异就 `github-actions[bot]` 提交并 `git push origin HEAD:main` → 再构建部署(同一 run 里用的是重建后的 catalog)。GITHUB_TOKEN 推出的提交不会再触发工作流,天然无回环。
+- `preview.yml`:构建前也 `build_catalog.py`(不提交),PR 预览里的 `catalog.json` 不再可能落后于分支内容。
+- 本地实测裸上传路径:只丢 `packs/upload-smoke/` 不重建 catalog → `build_site` 出 **31 条索引 + 详情页 + app.json=31**,但 `dist/catalog.json` 仍是 30 条(机器目录与站点不一致)—— 这正是原来 CI 要拦的状态;删包重建后回到 30。
+- 线上自测:故意推一份少一条的 `catalog.json` → CI 自动对齐(见 E9),站点照常部署。
+- 结论口径:**改包内容/pack.json 之外的任何文件 = 直接传就上站;新增包或改 `version`/`when` = 以前必须跑 `build_catalog`,现在 CI 兜底**。

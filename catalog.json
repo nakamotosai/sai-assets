@@ -8,16 +8,8 @@
   {
    "id": "sites",
    "title": "线上作品",
-   "count": 1,
-   "items": [
-    {
-     "id": "ouuut-com",
-     "version": "1.0.0",
-     "one_liner": "想看库内资产拼成一个真实上线站是什么样:ouuut 主…",
-     "path": "packs/ouuut-com/",
-     "home": "https://ouuut.com/"
-    }
-   ]
+   "count": 0,
+   "items": []
   },
   {
    "id": "themes",

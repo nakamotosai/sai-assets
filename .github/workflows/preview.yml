@@ -28,6 +28,9 @@ jobs:
       - name: 公开内容闸 + 包内断言
         run: python scripts/gate.py
 
+      - name: 重建 catalog(packs/ 为真相源;预览不提交,只保证预览里的 catalog 与内容一致)
+        run: python scripts/build_catalog.py
+
       - name: 构建站点
         run: python scripts/build_site.py --out dist
 
