@@ -124,14 +124,14 @@
 
 用户问三件事:旧库退役了吗 / 从 omp 里移除了吗 / 入库→前端 skill 自动调用闭环了吗。查完三件都不彻底,全部修掉:
 
-**A 旧库运行时退役**(vps-jp):`theme-lab.service`(Tailscale 内网 `:18466` 的旧预览墙)原为 enabled+active → `disable --now`,墙目录与 unit 归档到 `~/archive/20261104-themelab-retire/`;`housekeeper_heartbeat.py` 里每小时 SSH 回本机跑「模板库 promote + 漂移 deploy」的两条窄边 chore(672B 常量 + 3776B 两个函数 + 调用点 + docstring 段)整段摘除,`py_compile` + `--dry-run` 实跑通过、输出里再无 `模板库` 字样;private 双仓(Gitea + GitHub)此前已归档 ✓。
+**A 旧库运行时退役**(日区主机):`theme-lab.service`(只为内网草稿预览、绑定 tailnet 地址的旧预览墙)原为 enabled+active → `disable --now`,墙目录与 unit 归档进该机归档目录;`housekeeper_heartbeat.py` 里每小时 SSH 回本机跑「旧库 promote + 漂移 deploy」的两条窄边 chore(常量块 + 两个函数 + 调用点 + docstring 段)整段摘除,`py_compile` + `--dry-run` 实跑通过、输出里再无旧库字样;private 双仓(Gitea + GitHub)此前已归档 ✓。
 
-**B 旧口径清出 omp / Claude / 两台 vps**:真正的问题不在「有没有提旧库」而在「还有没有 *指令* 指向它」。修了 7 处:
-- `sai-frontend references/design-gates.md §7` 的**入库腿**(两侧共用文件):原文是「原子可直接写对应目录 + 更新 `catalog.json` / 含 demo 走 harvest → sanitize → gate → PR」—— 那是旧库的四类目录口径;改成公开包仓的三步(harvest 参数全列 + 包内断言 + build_catalog + gate + PR)、主题必带 `accept`、消费后写项目 `design-lock.json.assets[]`。
-- `sai-closeout` 条件档 ③(omp + Claude 两侧):「回写 `F:\模板库` + 更新 `registry.json`」→ 入库到 `F:/projects/sai-assets` 并报 pack id + PR 链接,明写旧库已退役禁再回写。
-- 两台 vps 的 `sai-frontend/SKILL.md`:是旧 Windows 版的陈旧副本(`0` 处 `sai-assets`,§1 仍指 `F:/模板库` + 内网 `:18466`,§7 入库腿仍写 `registry.json`)。整块 §1/§1.5 换成公开库取用协议(vps 版:clone 在 `~/sai-assets`),§7 入库腿同上改;顺手把两台的 `SKILL.md.bak-20261019-*` 墓碑收进归档;并在两台 `git clone` 了公开仓,`apply.py --list` 实跑通过 —— 取用腿在 vps 上也能走。
+**B 旧口径清出 omp / Claude / 两台 vps**:真正的问题不在「有没有提旧库」,而在「还有没有 *指令* 指向它」。修了 7 处:
+- `sai-frontend references/design-gates.md §7` 的**入库腿**(两侧共用文件):原文是「原子可直接写对应目录 + 更新 `catalog.json` / 含 demo 走 harvest → sanitize → gate → PR」——那是旧库的四类目录口径;改成公开包仓三步(harvest 参数全列 + 包内断言 + build_catalog + gate + PR)、主题必带 `accept`、消费后写项目 `design-lock.json.assets[]`。
+- `sai-closeout` 条件档 ③(omp + Claude 两侧):原写「回写本机旧素材库 + 更新 `registry.json`」→ 改为入库到本公开包仓并报 pack id + PR 链接,明写旧库已退役禁再回写。
+- 两台 vps 的 `sai-frontend/SKILL.md`:都是旧 Windows 版的陈旧副本(`0` 处 `sai-assets`,§1 仍指本机旧库目录 + 内网预览端口,§7 入库腿仍写 `registry.json`)。整块 §1/§1.5 换成公开库取用协议(vps 版 clone 到家目录),§7 入库腿同上改;顺手把两台的 `SKILL.md.bak-20261019-*` 墓碑收进归档;并在两台 clone 了公开仓,`apply.py --list` 实跑通过 —— 取用腿在 vps 上也能走。
 - 校验:三台复扫,残留仅剩「出处/进化账」的历史记录行(非指令),已逐条说明。
 
-**C 回收链真跑一次**(README 里挂了很久的 "待跑一次真 PR"):从旧库 `components/param-panel/` 收 **`param-panel`** 包(web-ui)。harvest → 人工补 SKILL/README/usage/assert → 包内断言 → `build_catalog` → `gate 0 findings` → 分支 PR #3 → PR 预览环境 → CI 全绿 → 合并 → 线上 34 包 · 43 可看面。入包时修 4 处:前缀 `tl-`→`pp-`、localStorage 去旧库前缀、删 `.prev.*`、**修 `shouldMountLabPanel()` 路径判定**(原只认 `*.preview.html`;本仓预览是 `preview/index.html`,站点 iframe(`/dist/packs/<id>/preview/index.html`)与静态服务器两种落法都挂不上板 → 现四态命中、三反例不中,断言里用 Python 复算该正则)。真机:三态挂载、三栏切换、6 个控件即时驱动卡片、色板跨刷新保留、收起 56×56、Tab 焦点环、console 0 报错。
+**C 回收链真跑一次**(README 里挂了很久的 "待跑一次真 PR"):从旧库 `components/param-panel/` 收 **`param-panel`** 包(web-ui)。harvest → 人工补 SKILL/README/usage/assert → 包内断言 → `build_catalog` → `gate 0 findings` → 分支 PR #3 → PR 预览环境 → CI 全绿 → 合并 → 线上 34 包 · 43 可看面。入包时修 4 处:前缀 `tl-`→`pp-`、localStorage 去旧库前缀、删 `.prev.*`、**修 `shouldMountLabPanel()` 路径判定**(原只认 `*.preview.html`;本仓预览是 `preview/index.html`,站点卡片 iframe 与静态服务器两种落法都挂不上板 → 现四态命中、三反例不中,断言里用 Python 复算该正则)。真机:三态挂载、三栏切换、6 个控件即时驱动卡片、色板跨刷新保留、收起 56×56、Tab 焦点环、console 0 报错。
 
-**闸的一次反咬**:新断言里写了 `"F:\\"`/`"C:\\"` 字面量做旧标记检测 → CI 的 banned 规则当场命中(「检查规则自己成为被禁形态的载体」),改成拆字拼接;本地仓级闸此前跑绿是因为……(如实记:本地合并层跑时该文件尚未 `git add`,漏扫)。教训:改断言后必须 `git add -A` 再跑闸。
+**闸的一次反咬(如实记)**:新断言里为检测旧库残留写了盘符字面量 → CI 的 banned 规则当场命中(「检查规则自己成为被禁形态的载体」),改成拆字拼接;而本地仓级闸此前报绿是因为那次跑闸时该文件还没 `git add`(闸只扫跟踪文件),漏扫。教训:**改断言后必须 `git add -A` 再跑闸**。
