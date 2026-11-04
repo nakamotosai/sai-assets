@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "id": "upload-smoke",
+  "title": "Upload Smoke · 上传冒烟(临时)",
+  "kind": "meta",
+  "category": "references",
+  "version": "0.0.1",
+  "license": "本仓只有索引条目、不含内容;内容许可随本家(外部工程为私有 / UNLICENSED,渲染框架另有其上游条款)",
+  "attribution": [
+    {
+      "name": "mv-studio(外部视频工程)",
+      "license": "UNLICENSED · 私有工程(2026-11-03 起有私有远端 nakamotosai/mv-studio;内容不公开)",
+      "what": "被索引的内容本体:15 个成品 archetype + 1 个 Placeholder 兜底 = 16 个注册项、riso 风格包、beat / motion 库"
+    },
+    {
+      "name": "Remotion",
+      "url": "https://www.remotion.dev/docs/the-fundamentals",
+      "license": "上游自有许可(部分实体需公司授权,条款见上游)",
+      "what": "该工程的渲染框架(4.0.539):React + Remotion CLI,与网页运行时不同,故只索引不承载"
+    }
+  ],
+  "origin": {
+    "project": "mv-studio",
+    "path": "mv-studio/",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [],
+    "css": [],
+    "src": [],
+    "upstream": [],
+    "usage": null,
+    "assert": null,
+    "preview": null
+  },
+  "tags": [
+    "smoke",
+    "temp"
+  ],
+  "when": "临时冒烟条目:验证「只往 packs/ 丢一个目录、catalog 没跟」时站点会不会自动上站。",
+  "not_for": "真实取用:冒烟测试条目,验证完即删。",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-03",
+    "how": "本仓只做索引、未复制任何内容:清点外部工程结构(16 个 archetype 注册项 + riso 风格包 + beat / motion 库)后落一行索引;可达性检查记在 evidence",
+    "evidence": "本机私有、无远端、仅索引:外部工程只存在于本机(mv-studio,单 commit、零备份、无 git 远端),故 canonical_home = null;本仓 packs/video-motion 内 files 全空、零内容复制;补齐双远端后回填 canonical_home 并重跑 schema 校验"
+  },
+  "canonical_home": null,
+  "external": true,
+  "changelog": [
+    "0.0.1 · 冒烟:验证裸上传路径"
+  ]
+}
