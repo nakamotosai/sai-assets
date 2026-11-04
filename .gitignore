@@ -12,3 +12,7 @@ __pycache__/
 
 # 站点构建产物(CI 生成,不入库)
 dist/
+
+# 体检产物:只留 config.json(口径),状态与报告属本机
+.audit/*
+!.audit/config.json

@@ -4,7 +4,7 @@
   "title": "ouuut Editorial · 和色六景(纸白 / 炭黑)",
   "kind": "theme",
   "category": "themes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "attribution": [
     {
@@ -55,9 +55,13 @@
   "not_for": "霓虹 / 赛博、密集数据工具面板、依赖强渐变与厚阴影的营销页",
   "default_variant": "paper",
   "verified": {
-    "date": "2026-11-03",
+    "date": "2026-11-04",
     "how": "python packs/ouuut-editorial/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens ouuut-editorial / 17 强调色 Y=0.199-0.203 · 深底 ≥4.57 · 浅底 ≥3.75 · ink 15.73/16.20 · muted 6.24/7.47"
+    "evidence": "PASS assert_tokens ouuut-editorial · paper ink/bg 15.73 muted 6.24 · charcoal ink/bg 16.20 muted 7.47 · 24 accents Y 0.199-0.203"
   },
-  "canonical_home": null
+  "canonical_home": null,
+  "changelog": [
+    "1.0.1 · css/type.css 的 @font-face 补 font-display: swap(本地度量回退字体,规范属性齐全)",
+    "1.0.0 · 首次发布:纸白/炭黑双模 + 和色六景 A/B/C/D + 排版刻度"
+  ]
 }

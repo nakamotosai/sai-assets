@@ -6,7 +6,7 @@
 ## 1 现在是什么状态(2026-11-04)
 
 - **M0/M1/M2 全部完成**,M3 除"真 PR 回收链"已跑通(PR #1 已 squash 合并),M4 只剩旧私仓归档与最终收尾。
-- 仓内 **29 个包**、闸全绿(`PASS gate: 0 findings, 29 packs, 27 assertions`)、`catalog.json` 6698B ≤ 8KB、展示站 **https://assets.ouuut.com** 29 卡(38 个可看面)。
+- 仓内 **30 个包**(29 个资产包 + 1 个线上作品条目 `ouuut-com`)、闸全绿(`PASS gate: 0 findings, 29 packs, 27 assertions`)、`catalog.json` 6698B ≤ 8KB、展示站 **https://assets.ouuut.com** 30 条索引(39 个可看面;索引式版式,悬停出右侧活预览)。
 - 三个 CI workflow:`gate.yml`(公开内容闸 + 断言)、`site.yml`(闸 → 重建 catalog → `build_site.py` 构建自检 → `wrangler pages deploy`)、`preview.yml`(PR → `pr-<n>` 预览环境 + 回评地址)。旧 `pages.yml` 已退役,GitHub Pages 已下线。
 - 已发布 tag:`pack/ouuut-editorial@1.0.0`、`pack/minimalist-essential@1.0.1`。
 

@@ -11,7 +11,8 @@
   const apply = (name, persist) => {
     document.documentElement.dataset.theme = name;
     if (btn) btn.setAttribute('aria-pressed', name === 'charcoal' ? 'true' : 'false');
-    if (persist) { try { localStorage.setItem(THEME_KEY, name); } catch (e) { /* 隐私模式忽略 */ } }
+    /* localStorage 在隐私模式/禁用存储时会抛错:主题仍生效,只是不记住 —— 预期内失败,故空 catch */
+    if (persist) { try { localStorage.setItem(THEME_KEY, name); } catch (e) { /* 预期:存储不可用 */ } }
   };
   apply(current(), false);
   if (btn) btn.addEventListener('click', () => apply(current() === 'charcoal' ? 'paper' : 'charcoal', true));
@@ -47,7 +48,8 @@
     if (!peek || !wide()) return;
     const src = row.dataset.src;
     if (!src) {
-      peek.innerHTML = '<div class="peek-empty"><b>' + (row.dataset.title || '') + '</b>'
+      const safe = String(row.dataset.title || '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+      peek.innerHTML = '<div class="peek-empty"><b>' + safe + '</b>'
         + '<span>外部索引 · 内容在其本家仓库</span></div>';
       peek.classList.add('on');
       return;
@@ -201,7 +203,7 @@
     box.querySelectorAll('pre code').forEach((c) => {
       const rel = c.closest('.pane')?.querySelector('.pane-head code')?.textContent || '';
       c.dataset.raw = c.textContent;
-      c.innerHTML = tokenize(c.dataset.raw, rel.trim());
+      c.innerHTML = tokenize(c.dataset.raw, rel.trim());   // tokenize 内部先转义 &<> 再套高亮 span,内容不含未转义输入
     });
     box.querySelectorAll('.tab').forEach((t) => t.addEventListener('click', () => {
       box.querySelectorAll('.tab').forEach((x) => { x.classList.remove('selected'); x.setAttribute('aria-selected', 'false'); });
@@ -215,9 +217,10 @@
     try { await navigator.clipboard.writeText(text); } catch (e) {
       const ta = document.createElement('textarea');
       ta.value = text; ta.setAttribute('readonly', '');
-      ta.style.cssText = 'position:absolute;left:-9999px';
+      ta.style.cssText = 'position:absolute;left:-9999px';   // 兜底复制用的离屏 textarea
       document.body.appendChild(ta); ta.select();
-      try { document.execCommand('copy'); } catch (e2) { /* 放弃 */ }
+      /* execCommand 在老浏览器可能失败:复制失败不改 UI 文案之外的任何状态 —— 预期内失败 */
+      try { document.execCommand('copy'); } catch (e2) { /* 预期:剪贴板不可用 */ }
       ta.remove();
     }
     if (el) {

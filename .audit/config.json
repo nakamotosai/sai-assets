@@ -1,0 +1,130 @@
+{
+  "project": "sai-assets",
+  "kind": "static-site",
+  "note": "assets.ouuut.com · 可复用网页资产库展示站(30 包 / 39 可看面 / 44 页)。交付面 = 仓内生成器 scripts/build_site.py 产出的 dist/(首页索引 + 每包详情 + 12 子 demo + zip + sitemap/robots/llms/_headers/404),由 GitHub Actions 直传 Cloudflare Pages。无后端、无账号、无 i18n、无数据库;唯一外部请求是 sites 类目条目的跨域活预览(仅悬停/打开时发生)。2026-11-04 按 skill://web-audit-gate §0.1 建体检配置,audit_scope 按本项目实际裁剪。",
+  "origins": {
+    "live": "https://assets.ouuut.com",
+    "pages": "https://sai-assets.pages.dev"
+  },
+  "site": {
+    "base_url": "https://assets.ouuut.com/"
+  },
+  "pages": {
+    "home": ".audit/site/index.html",
+    "detail_glob": ".audit/site/p/*/index.html",
+    "demo_glob": ".audit/site/p/*/demo/*/index.html",
+    "notfound": ".audit/site/404.html"
+  },
+  "source_globs": [
+    "site/*.css",
+    "site/*.js",
+    "scripts/build_site.py"
+  ],
+  "exclude": [
+    "(本工具未实现 exclude:体检跑在 site-only 导出上,见 audit_export)"
+  ],
+  "data": {
+    "source_glob": "packs/*/pack.json",
+    "built": ".audit/site/assets/app.json",
+    "id_key": "id",
+    "count_expected": 30,
+    "note": "30 个包;catalog.json 6698–6946B(≤8KB 承诺)、dist/assets/app.json 同源同数、首页索引行数 = 包数(verify() 构建期断言)",
+    "media_roots": [
+      "dist"
+    ],
+    "built_key": "items"
+  },
+  "i18n": {
+    "source_lang": "zh",
+    "langs": [
+      "zh"
+    ],
+    "default_lang_is_bare": true,
+    "dict_glob": [],
+    "fields": [],
+    "dir": "."
+  },
+  "matrix": {
+    "viewports": [
+      390,
+      1440
+    ],
+    "langs": [
+      "zh"
+    ],
+    "themes": [
+      "paper",
+      "charcoal"
+    ],
+    "note": "themes 两档都是真实现:data-theme=paper|charcoal,由顶栏按钮切换并写 localStorage('sai-assets-theme')"
+  },
+  "dom_anchors": {
+    "home": "body",
+    "list_container": "#rows",
+    "item": ".row",
+    "theme_switch": "#theme-btn",
+    "title": "h1",
+    "filter": ".filter[data-cat]",
+    "peek": "#peek",
+    "stage": "#stage",
+    "note": "索引行 = .row(30 条);筛选 = .filter(8 个类目 chip);悬停浮层 = #peek;详情舞台 = #stage"
+  },
+  "audit_scope": [
+    "W1",
+    "W2",
+    "W3",
+    "W4",
+    "W5",
+    "D1",
+    "D2",
+    "D4",
+    "I1",
+    "I2",
+    "I3",
+    "I5",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "P1",
+    "P4",
+    "P5",
+    "S1",
+    "S2",
+    "S3",
+    "S5",
+    "S6",
+    "S7",
+    "A1",
+    "A2",
+    "A4",
+    "A5",
+    "A6",
+    "Z1",
+    "Z2",
+    "Z3",
+    "Z4"
+  ],
+  "not_applicable": {
+    "D3": "单语 zh:0 个翻译缓存目录、0 个目标语言,i18n 新鲜度无判据面",
+    "C1": "单语 zh:0 个字典 key、0 处 data-i18n,多语字典齐全无判据面",
+    "C2": "单语 zh:0 个目标语言,源语言泄漏无判据面",
+    "C3": "单语 zh:0 个目标语言;每页仍各自生成 title/description/og(见 S1/S3),但“三语对照”这一判据面不成立",
+    "C4": "0 条需本地化的数据记录:pack.json 的 when/not_for 就是中文原文,无 locales 字段",
+    "C5": "单语 zh:可见文案即源语言本身,硬编码检查无对照基准",
+    "I4": "0 个弹层/模态:悬停浮层 #peek 是随指针出现的预览面板(不困焦点、不锁滚动、Esc 即关),不是焦点陷阱弹层",
+    "I6": "失败态只存在于两处且都有可见兜底:预览 iframe 加载失败时保留带文案的占位(class=poster),构建失败时 CI 不部署(线上保持上一版);无数据/存储失败面(站点无后端、无 localStorage 业务态)",
+    "P2": "页内 0 张 <img>:全部视觉来自 CSS 与 iframe 里的真实预览;og.png 只在分享卡里用,不进页面",
+    "P3": "0 个 <video>/媒体播放器:视频类资产(video-motion)是外部索引条目,不在本站加载",
+    "S4": "单语 zh:0 条 hreflang 声明、0 个语言树目录,hreflang 一致性无判据面",
+    "A3": "0 个定时任务:部署由 GitHub Actions 在 push 时触发,无 cron/排期脚本"
+  },
+  "waive": {
+    "P4": "Web Vitals 需真机 Lighthouse/字段数据:本站为纯静态、零外链、首屏无 iframe(实测初始 iframe 数 = 0),LCP 元素是文本;已在 MASTER-CHECKLIST E8 留为发布后 24h 内补测项,不在本轮收口阻断",
+    "V4": "触控目标已按 44px 下限设计(图标按钮 40–44px、筛选 chip 6px 上下内边距 + 行高、行内链接整行 84px 可点),真机像素级复核留在下一轮巡检",
+    "Z3": "TLS 由 Cloudflare 托管(证书自动续期);HSTS 有意不加(资产目录站子域频繁增删,preload 有锁死风险),理由写在 MASTER-CHECKLIST F1 与 ADR-0002"
+  },
+  "audit_export": "体检口径:先 `python scripts/build_site.py`,再 `cp -r dist .audit/site && rm -rf .audit/site/packs` —— packs/ 下的 400+ 个 HTML 是资产内容(被嵌的预览页),不是站点页面,纳入会淹没判据"
+}

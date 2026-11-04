@@ -90,5 +90,6 @@
 - [x] **J2 一键回滚** — CF Deployments 面板回滚,或用 git revert + push 重新构建;目标 <5 分钟。
 - [x] **J3 URL 与状态码** — 目录 `/`、详情 `/p/<id>/`、子 demo `/p/<id>/demo/<slug>/`、下载 `/downloads/<id>.zip`;不存在路径由 CF Pages 返回站内 `404.html`;站内链接无 404(构建期 verify 覆盖)、无 HTTP 链接。
 - [x] **J4 发布后冒烟** — 线上实测:目录 200 且 29 张卡、`/assets/site.css|site.js` 200、`/p/ouuut-editorial/` 200、`/downloads/bg-fx.zip` 200、`/robots.txt|sitemap.xml|llms.txt` 200;控制台 0 error(探针)。
+- [x] **体检(web_audit)本轮实跑留档** — `web_audit.py report` exit 1;**适用项通过**:S2 sitemap/robots、S3 JSON-LD、S4 hreflang(单语)、S5 站内 934 链 0 死链、S7 无 JS 可见正文、D4 字段完整 30/30、Z2 git 历史无凭据、A4 闸门 59 处。**红项不适用**:①`dist/packs/**` 下 400+ 个预览页被当作站点页面判 canonical/meta(它们是资产内容,是被嵌的目标);②单语站的 i18n 组(C1–C5/D3)无判据面。工具**未实现 `exclude`/`scan_roots`**,已留为尾巴,不刷绿。
 - [x] **J5 变更日志** — `progress.md` 逐条记本次改动;`CLOSEOUT.md`/`HANDOFF.md` 同步站点节。
 - [ ] **J6 发布后监控(24h / 首周)** — 待做:24h 内看一次 CF 部署状态与访问情况(无统计,改看 CF Analytics 的请求数与 5xx);首周确认 Search Console 收录(依赖 D3)。

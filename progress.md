@@ -84,3 +84,12 @@
 - **闸真的会拦**:第一次推冒烟包时忘了重建 `catalog.json`,site workflow 直接红在「catalog 新鲜度」这一步,**没有部署**;错误信息就是"请本地重建后提交"。这就是设计意图,不是故障。
 - 文档补齐:README「加一个包(自动上站)」三步;HANDOFF 关键约定表同一行(漏了 ① 会被 CI 拦)。
 - PR 预览环境:另开 `smoke/preview-test` 分支 + PR #2 验证 `preview.yml`(构建 → `pr-2` 预览别名 → 回评),验证后关闭并删分支。
+
+## 2026-11-04 · ouuut.com 入索引 + 本轮收口
+
+- **新增 sites 类目**(schema + catalog + 站内 chip「作品」):`packs/ouuut-com` 把 ouuut.com 作为**线上作品条目**入索引,内容不复制进仓。
+- **新增顶层 `preview_url`**(schema):站点型条目没有本地预览页,浮层与舞台直接嵌本家 https 地址;该站响应无 `X-Frame-Options`、无 CSP `frame-ancestors`,已验证可嵌。
+- **动画与其它条目完全一致**:同一 `.row` / `.reveal` 入场 / 同一浮层过渡;外部条目箭头显示 ↗,不出 zip。
+- 顺手:`ouuut-editorial` 的 `css/type.css` @font-face 补 `font-display: swap` → 包版本 **1.0.0 → 1.0.1**(包内断言重跑 PASS)。
+- 线上实测:30 条索引、ouuut-com 详情页 200、`app.json` counts={packs:30,surfaces:39}、悬停浮层 src=https://ouuut.com/(545×341)、首页初始 iframe 数 = 0。
+- 体检(`web_audit.py report`):exit 1;适用项 S2/S3/S4/S5/S7/D4/Z2/A4 通过,红项与「未跑」集中在两类 —— ①`dist/packs/**` 的 400+ 个预览页被当成站点页面(它们是**资产内容**,不是本站页面);②单语站不适用的 i18n 组。**工具未实现 `exclude`/`scan_roots`**,本轮据实记录、不刷绿;尾巴见 CLOSEOUT。

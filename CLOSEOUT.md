@@ -90,8 +90,15 @@
 - **探针**:1440 / 390 / 500 三档 `ovx = 0`,对比度违例 0,字号 5 档(14/15/17/22/hero),首页 iframe 初始 0 / 悬停 1,`class=card` 残留 0,`html.js` 兜底 + `@media print` 可见。
 - **修掉**:舞台 iframe 相对路径在 detail 两层深度下 404(现在按 `up` 前缀生成);`.reveal` 无 JS 时整页不可见。
 
+## ouuut.com 入索引(2026-11-04 第三轮)
+
+- 新增 `sites` 类目(线上作品)与顶层 `preview_url`:站点型条目无本地预览,浮层/舞台直接嵌本家;`packs/ouuut-com` 为第一条(索引 01)。
+- 动画与其它条目同一套(行入场 / 浮层过渡 / hover 位移);外部条目箭头 ↗、不出 zip。
+- 顺手修:包内 `@font-face` 补 `font-display: swap` → `ouuut-editorial` 升 1.0.1(断言重跑 PASS)。
+
 ## 未完成(明确留档)
 
+- **体检工具口径**:`web_audit.py` 未实现 `exclude`/`scan_roots`,会把 `dist/packs/**`(400+ 个被嵌的预览页)当站点页面判 canonical/meta,且把 `<title>` 文本误判为资源引用;本轮据实记录为「红项不适用」,未刷绿。修这一条要动 harness 侧工具,不在本仓范围。
 - `MASTER-CHECKLIST.md` 未勾 5 项:C3(社交卡平台实测)、D3(Search Console/Bing 验证)、E8(Lighthouse 移动端基线)、G3(Uptime Kuma 监控项)、J6(发布后 24h/首周巡检)。都不阻断首发。
 - 展示站的 `mv-studio` / `gruvbox-dark` / `video-motion` 三个外部索引包只有降级卡(内容在本家),没有活预览 —— 这是设计选择,不是缺口。
 - 账本比对撞 1/8(与 `jewelry-site-lab` 色板距离 0.026):刻意接受(默认配色是用户拍板),理由写在 `concept.md` 与 `direction-approved.json`。
