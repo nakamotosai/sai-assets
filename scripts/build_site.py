@@ -33,6 +33,7 @@ REPO = "nakamotosai/sai-assets"
 SITE = "https://assets.ouuut.com"
 RAW = f"https://raw.githubusercontent.com/{REPO}/main/"
 CDN = f"https://cdn.jsdelivr.net/gh/{REPO}@pack"
+CDN_MAIN = f"https://cdn.jsdelivr.net/gh/{REPO}@main"  # 未打 tag 的包跟随 main
 GH = f"https://github.com/{REPO}"
 
 CAT_ORDER = ["sites", "themes", "fonts", "web-fx", "web-ui", "fx-engines", "references", "video-motion"]
@@ -323,6 +324,19 @@ def stage_html(row: dict, preview: str | None, heavy: bool, up: str = "") -> str
             f'<button class="run" type="button">运行预览</button></div></div>')
 
 
+_TAG_CACHE: dict[str, bool] = {}
+
+
+def tag_exists(pid: str, ver: str) -> bool:
+    """该包是否已有 `pack/<id>@<ver>` tag —— 固定版本 URL 只有打过 tag 才成立。"""
+    key = f"{pid}@{ver}"
+    if key not in _TAG_CACHE:
+        r = subprocess.run(["git", "rev-parse", "-q", "--verify", f"refs/tags/pack/{key}"],
+                           cwd=ROOT, capture_output=True, text=True)
+        _TAG_CACHE[key] = r.returncode == 0
+    return _TAG_CACHE[key]
+
+
 def install_html(row: dict, up: str) -> str:
     pid, ver = row["id"], row["version"]
     raw = f"{RAW}packs/{pid}/"
@@ -339,7 +353,9 @@ def install_html(row: dict, up: str) -> str:
     # 零安装单文件:挑该包**真有**的主产物(主题/字体优先 css,组件/动效优先 src),
     # 不再写死 css/default.css —— ui / fx 包没有 css/ 目录,写死会给出 404 链接。
     primary = (first("css", "src", "tokens") or [row.get("pack", {}).get("entry") or "SKILL.md"])[0]
-    onefile = cdn + primary
+    # 版本面:只有打过 tag 的包才能用「固定版本」URL;其余跟随 main(否则整条链接 404)
+    pinned = tag_exists(pid, ver)
+    onefile = f"{cdn}{primary}" if pinned else f"{CDN_MAIN}/packs/{pid}/{primary}"
     if primary.endswith(".css"):
         onefile_code = f'<link rel="stylesheet" href="{onefile}">'
     elif primary.endswith(".js"):
@@ -347,7 +363,7 @@ def install_html(row: dict, up: str) -> str:
     else:
         onefile_code = f"curl -O {onefile}"
     snippets = [
-        ("固定版本(CDN)", onefile_code),
+        ("固定版本(CDN)" if pinned else "CDN(未打 tag · 跟随 main)", onefile_code),
         ("raw 直取(跟随 main)", f'curl -O {raw}SKILL.md'),
         ("仓库内落地", f'python scripts/apply.py {pid} --to <项目目录>'),
         ("整包下载", f'{SITE}/downloads/{pid}.zip' if not row["external"] else str(row.get("preview_url") or "")),

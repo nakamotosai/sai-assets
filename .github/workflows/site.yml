@@ -25,6 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+          with:
+            fetch-depth: 0  # 需要 tags 才能给详情页生成「固定版本」链接
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
