@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="zh-Hans" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>motion-kit · 动效层舞台</title>
+<link rel="stylesheet" href="../src/motion.css">
+<script>
+  /* 宿主启动脚本(照抄即可):先给 html 挂 js-motion 让入场态生效,2.5s 内 JS 没就绪就摘掉,不留白屏。 */
+  (function () {
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      document.documentElement.classList.add('js-motion');
+      window.setTimeout(function () {
+        if (!document.documentElement.classList.contains('motion-ready')) {
+          document.documentElement.classList.remove('js-motion');
+        }
+      }, 2500);
+    } catch (e) {}
+  })();
+</script>
+<style>
+  /* ── 舞台外壳:预览专用,不属于组件本体。组件只认 token 名,不认这些排版。 ── */
+  :root {
+    --background: #141413;
+    --card: #1b1b19;
+    --foreground: #e8e6e1;
+    --muted: #9a9793;
+    --muted-soft: #6f6c68;
+    --border-hairline: #ffffff0d;
+    --border-control: #ffffff5c;
+    --surface-hover: #ffffff0a;
+  }
+  html[data-theme="light"] {
+    --background: #f7f6f2;
+    --card: #ffffff;
+    --foreground: #17170f;
+    --muted: #6b6a64;
+    --muted-soft: #96948d;
+    --border-hairline: #17170f0f;
+    --border-control: #17170f80;
+    --surface-hover: #17170f09;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 92px; }
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--foreground);
+    font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC",
+      "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    transition: background .2s ease, color .2s ease;
+  }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, p { margin: 0; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--muted); font-weight: 600;
+  }
+  .h-d { font-size: clamp(32px, 5.4vw, 56px); line-height: 1.08; letter-spacing: -.02em; font-weight: 700; max-width: 13em; text-wrap: balance; }
+  .h-s { font-size: clamp(22px, 3vw, 30px); line-height: 1.2; letter-spacing: -.01em; font-weight: 650; }
+  .lede { color: var(--muted); font-size: 15px; line-height: 1.8; max-width: 40em; }
+  .section { padding: 96px 0; border-top: 1px solid var(--border-hairline); }
+  .section-head { display: flex; flex-direction: column; gap: 18px; margin-bottom: 44px; }
+
+  /* header */
+  .site-header {
+    position: sticky; top: 0; z-index: 60;
+    border-bottom: 1px solid transparent;
+    backdrop-filter: blur(12px);
+    transition: border-color .3s ease, background .3s ease;
+  }
+  .site-header.is-scrolled {
+    border-bottom-color: var(--border-hairline);
+    background: color-mix(in srgb, var(--background) 82%, transparent);
+  }
+  .header-inner { display: flex; align-items: center; gap: 20px; height: 64px; }
+  .brand { font-weight: 800; letter-spacing: -.01em; }
+  .brand span { color: var(--muted); font-weight: 500; margin-left: 8px; }
+  .nav { display: flex; gap: 22px; margin-left: auto; font-size: 12.5px; }
+  .nav a { color: var(--muted); transition: color .16s ease; }
+  .nav a:hover { color: var(--foreground); }
+  .chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    height: 34px; padding: 0 16px; border-radius: 999px;
+    border: 1px solid var(--border-control); background: transparent;
+    font-size: 12.5px; cursor: pointer; color: var(--foreground);
+  }
+  .chip:hover { background: var(--surface-hover); }
+
+  /* hero */
+  .hero { position: relative; padding: 104px 0 88px; overflow: hidden; }
+  .hero-pill {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 7px 14px; border-radius: 999px;
+    border: 1px solid var(--border-hairline); background: var(--card);
+    font-size: 11.5px; letter-spacing: .1em; color: var(--muted);
+    margin-bottom: 30px;
+  }
+  .hero-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--foreground); }
+  .hero .h-d { max-width: 15em; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 22px; border-radius: 4px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    border: 1px solid transparent; will-change: transform;
+  }
+  .btn-primary { background: var(--foreground); color: var(--background); }
+  .btn-outline { border-color: var(--border-control); }
+
+  /* ticker */
+  .ticker { margin-top: 74px; }
+  .ticker-item { font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .ticker-sep { color: var(--border-control); }
+
+  /* stats */
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: var(--border-hairline); }
+  .stat { background: var(--background); padding: 26px 22px; }
+  .stat b { display: block; font-size: 34px; line-height: 1; font-weight: 700; letter-spacing: -.02em; }
+  .stat span { display: block; margin-top: 10px; font-size: 12px; color: var(--muted); }
+
+  /* cards */
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; align-items: start; }
+  .card {
+    position: relative; overflow: hidden; padding: 24px;
+    background: var(--card); border: 1px solid var(--border-hairline); border-radius: 14px;
+  }
+  .card h3 { font-size: 15px; margin-bottom: 8px; }
+  .card p { font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+  .card .num { font-size: 11px; letter-spacing: .2em; color: var(--muted-soft); margin-bottom: 18px; }
+  .work-card { padding: 0; }
+  .work-media { aspect-ratio: 16 / 10; overflow: hidden; background: var(--background); }
+  .work-media img { width: 100%; height: 100%; object-fit: cover; transform: translate3d(0, var(--py, 0px), 0) scale(1.08); }
+  .work-body { padding: 18px 20px 22px; }
+
+  /* process */
+  .process-wrap { position: relative; }
+  .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 26px; padding-top: 26px; border-top: 1px solid var(--border-hairline); }
+  .process-num { font-size: 11px; letter-spacing: .2em; color: var(--muted-soft); }
+  .process-title { margin-top: 8px; font-size: 15px; font-weight: 600; }
+  .process-step p { margin-top: 8px; font-size: 12.5px; color: var(--muted); line-height: 1.7; }
+
+  /* faq */
+  .faq { border-top: 1px solid var(--border-hairline); }
+  .faq-item { border-bottom: 1px solid var(--border-hairline); }
+  .faq-item summary {
+    display: flex; justify-content: space-between; gap: 20px;
+    padding: 20px 0; cursor: pointer; font-size: 14px; font-weight: 600;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after { content: "+"; color: var(--muted); font-weight: 400; }
+  .faq-item[open] summary::after { content: "–"; }
+  .faq-answer { padding: 0 0 20px; font-size: 13px; color: var(--muted); line-height: 1.85; max-width: 52em; }
+
+  /* footer */
+  .site-footer { border-top: 1px solid var(--border-hairline); padding: 60px 0 0; }
+  .footer-marquee span { color: color-mix(in srgb, var(--foreground) 38%, transparent); }
+  .site-footer .wrap { padding-bottom: 40px; font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 720px) {
+    .nav { display: none; }
+    .section { padding: 68px 0; }
+    .hero { padding: 72px 0 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <div class="brand">motion-kit<span>动效层</span></div>
+    <nav class="nav">
+      <a href="#field">场</a>
+      <a href="#count">计数</a>
+      <a href="#rail">轨道</a>
+      <a href="#works">漂移</a>
+      <a href="#faq">折叠</a>
+    </nav>
+    <button class="chip" id="theme-toggle" type="button" aria-pressed="false">切换明暗</button>
+  </div>
+</header>
+
+<section class="hero" data-hero>
+  <canvas class="hero-canvas" data-hero-canvas aria-hidden="true"></canvas>
+  <div class="hero-glow" data-hero-glow aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-pill"><span class="dot" aria-hidden="true"></span>一根文件 · 十个模块 · 无依赖</div>
+    <h1 class="h-d" data-split="chars">滚动、指针、折叠、过场,一层接住。</h1>
+    <p class="lede" style="margin-top:26px" data-reveal>按需生效:页面上没有对应标记的模块自己退出,不会多跑一毫秒。全程尊重 prefers-reduced-motion,关掉 JS 就是一张静态页。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#field" data-magnetic>看场</a>
+      <a class="btn btn-outline" href="#faq" data-magnetic>看折叠</a>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item">reveal</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">split</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">stagger</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">counter</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">tilt</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">magnetic</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">cursor</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">hero field</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">parallax</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">faq</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">view transition</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">reveal</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">split</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">stagger</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">counter</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">tilt</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">magnetic</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">cursor</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">hero field</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">parallax</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">faq</span><span class="ticker-item ticker-sep">·</span>
+      <span class="ticker-item">view transition</span><span class="ticker-item ticker-sep">·</span>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="count">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>计数器与错峰</p>
+      <h2 class="h-s" data-reveal>进入视口才起跑,离开不重跑。</h2>
+    </div>
+    <div class="stats" data-reveal-stagger>
+      <div class="stat"><b data-count="10">0</b><span>个模块</span></div>
+      <div class="stat"><b data-count="0">0</b><span>个运行时依赖</span></div>
+      <div class="stat"><b data-count="2">0</b><span>根文件</span></div>
+      <div class="stat"><b data-count="60">0</b><span>帧预算(ms/帧)</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="rail">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>过程轨道</p>
+      <h2 class="h-s" data-reveal>一条线跟着滚动长出来,当前步自己亮。</h2>
+    </div>
+    <div class="process-wrap" data-process>
+      <div class="process-track"><span></span></div>
+      <div class="process-grid">
+        <div class="process-step"><div class="process-num">01</div><div class="process-title">丢进容器</div><p>标好 data-reveal / data-process,别的不用管。</p></div>
+        <div class="process-step"><div class="process-num">02</div><div class="process-title">共享一条滚动帧</div><p>所有滚动监听合并进同一个 rAF,不各扫一遍。</p></div>
+        <div class="process-step"><div class="process-num">03</div><div class="process-title">进视口才动</div><p>IntersectionObserver 优先,顺手补一次视口预扫。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="works">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>倾斜 · 磁吸 · 漂移</p>
+      <h2 class="h-s" data-reveal>指针挪到卡片上,光会跟着走。</h2>
+    </div>
+    <div class="grid-3" data-reveal-stagger>
+      <article class="card" data-tilt data-cursor-label="倾斜 · 光斑">
+        <div class="num">TILT</div>
+        <h3>倾斜 + 指针光斑</h3>
+        <p>±6°/±8° 上限,两个 CSS 变量喂给 ::after 的径向光。</p>
+      </article>
+      <article class="card" data-cursor-label="磁吸 · 位移">
+        <div class="num">MAGNETIC</div>
+        <h3>磁吸控件</h3>
+        <p>按中心偏移算 ±7px,离开即复位,不抢原生 focus。</p>
+      </article>
+      <article class="card work-card" data-tilt>
+        <div class="work-media">
+          <img alt="" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23232320'/%3E%3Cstop offset='1' stop-color='%230c0d09'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='800' height='500' fill='url(%23g)'/%3E%3Cg stroke='%23e8e6e1' stroke-opacity='.28'%3E%3Cpath d='M0 380 L800 140'/%3E%3Cpath d='M0 440 L800 200'/%3E%3Cpath d='M0 320 L800 80'/%3E%3C/g%3E%3Ccircle cx='560' cy='240' r='120' fill='none' stroke='%23e8e6e1' stroke-opacity='.22'/%3E%3C/svg%3E">
+        </div>
+        <div class="work-body">
+          <div class="num">PARALLAX</div>
+          <h3>滚动漂移</h3>
+          <p>按卡片中心到视口的距离,写一个 --py 给图片。</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-reveal>折叠</p>
+      <h2 class="h-s" data-reveal>高度是量出来的,不是猜的。</h2>
+    </div>
+    <div class="faq">
+      <details class="faq-item" open>
+        <summary>关掉 JS 会怎样?</summary>
+        <div class="faq-answer">整层是渐进增强:html 上没有 js-motion / motion-ready,所有动效规则都不命中,页面就是静态排版;折叠退回原生 details/summary。</div>
+      </details>
+      <details class="faq-item">
+        <summary>会不会影响首屏?</summary>
+        <div class="faq-answer">一条 <code>script defer</code> 即可;场只有一块 2D canvas,粒子数按面积夹在 26–88,离开视口与切后台都停帧。</div>
+      </details>
+      <details class="faq-item">
+        <summary>怎么接自己的主题切换?</summary>
+        <div class="faq-answer">把「应用主题」的函数挂到 <code>window.motionKit.applyTheme</code>,切换按钮点一下就会走圆形揭示的 View Transition。</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-marquee" aria-hidden="true">
+    <div class="footer-marquee-track">
+      <span>motion-kit</span><span class="footer-marquee-dot">·</span><span>十模块</span><span class="footer-marquee-dot">·</span>
+      <span>motion-kit</span><span class="footer-marquee-dot">·</span><span>十模块</span><span class="footer-marquee-dot">·</span>
+    </div>
+  </div>
+  <div class="wrap">预览舞台 · 组件来自 motion-kit 包本体</div>
+</footer>
+
+<script>
+  /* 主题切换的最小宿主实现:只负责改 data-theme,过场交给 motion-kit 的 View Transition。 */
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('theme-toggle');
+    function apply(theme, persist) {
+      root.setAttribute('data-theme', theme);
+      btn.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+      if (persist) { try { localStorage.setItem('motion-kit-theme', theme); } catch (e) {} }
+    }
+    window.motionKit = window.motionKit || {};
+    window.motionKit.applyTheme = apply;
+    var stored = null;
+    try { stored = localStorage.getItem('motion-kit-theme'); } catch (e) {}
+    apply(stored === 'light' ? 'light' : 'dark', false);
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      if (typeof window.motionKit.viewTheme === 'function') window.motionKit.viewTheme(next);
+      else apply(next, true);
+    });
+  })();
+</script>
+<script src="../src/motion.js" defer></script>
+</body>
+</html>
