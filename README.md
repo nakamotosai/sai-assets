@@ -67,7 +67,7 @@ python scripts/build_catalog.py && python scripts/build_site.py && git add -A &&
 
 - **M0 建档拍板** ✅ 生产根 + 门规 + ADR-0001 + PACK 契约 v1 + 公开收录判据 `docs/SCOPE.md`
 - **M1 单包打通** ✅ 生成器 + 清洗闸 + catalog + 公开仓 + skill 取用协议 + 一次真消费(`design-lock.assets[]` 已记版本)
-- **展示站** ✅ `https://assets.ouuut.com`(34 包 / 43 可看面;含 sites 类目:ouuut.com 作为线上作品条目):卡片跑包内真实预览、详情页可切视口 + 代码页签 + 四路取用、每包确定性 zip;加包即上站(preview/pr-<n> 预览环境)
+- **展示站** ✅ `https://assets.ouuut.com`(34 包 / 43 可看面):首页是**探索器** —— 左栏 300px(类目/深浅 facet + 搜索 + 34 行缩略图列表 + 键盘提示)、右栏**常驻预览框**(上/下一个、段 combobox、桌面/平板/手机宽度、隐藏预览、假地址栏),三维状态进 URL(`?pack=&w=&s=`),键盘 ↑↓ j k / ↵ / o / / 全程可操作,「取用」对话框四段片段一键复制;详情页仍保留可切视口 + 代码页签 + 断言证据;每包确定性 zip。加包即上站(preview/pr-<n> 预览环境)
 - **M2 存量迁移** ✅ 29 包:themes 14 · fonts 2 · web-fx 4 · web-ui 6 · fx-engines 1 · references 1 · video-motion 1(索引)
 - **M5 从成品站拆件** ✅ 3 包(from `make-site`,2026-11-04):web-fx **motion-kit**(动效层十模块)· themes **token-harbor**(墨色双模设计语言)· web-ui **locale-router**(语言路由 + 三态语言开关)。现计 sites 1 · themes 15 · fonts 2 · web-fx 5 · web-ui 8 · fx-engines 1 · references 1 · video-motion 1
 - **M3 自动化** ✅ gate + pages 全绿;harvest → PR 回收链**已真跑一次**(PR #3:`param-panel` 从旧库 `components/param-panel/` 收包 → 包内断言 → 闸 → PR 预览环境 → 合并 → 上站 → 打 tag),PR 预览环境 `pr-<n>.sai-assets.pages.dev` 已实测
@@ -76,5 +76,6 @@ python scripts/build_catalog.py && python scripts/build_site.py && git add -A &&
 ## 链接
 
 - `TRACK_TREE.md` 里程碑与验收 · `SPEC.md` / `PLAN.md` 当前里程碑
+- 站点外壳:`site/site.css` · `site/site.js` · `site/thumbs/*.webp`(29 张缩略图) · 行为测试 `scripts/test_explorer.mjs`(本地 jsdom)
 - `progress.md` 会话流水 · `HANDOFF.md` 接手(首次收口时生成)
 - 素材源(私有,本地):旧主题库 → 只作素材与草稿,不再是公开资产真相源

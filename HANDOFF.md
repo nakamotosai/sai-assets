@@ -6,7 +6,7 @@
 ## 1 现在是什么状态(2026-11-04)
 
 - **M0–M4 全部完成**:harvest → gate → PR → tag → 上站 的回收链已真跑一次(PR #3 `param-panel`);旧主题库两头(私仓归档 + 运行时退役)都已收口。
-- 仓内 **34 个包**(33 个资产包 + 1 个线上作品条目 `ouuut-com`)、闸全绿(`PASS gate: 0 findings, 34 packs, 32 assertions`)、`catalog.json` 7722B ≤ 8KB、展示站 **https://assets.ouuut.com** 34 条索引(43 个可看面;索引式版式,悬停出右侧活预览)。
+- 仓内 **34 个包**(33 个资产包 + 1 个线上作品条目 `ouuut-com`)、闸全绿(`PASS gate: 0 findings, 34 packs, 32 assertions`)、`catalog.json` 7722B ≤ 8KB、展示站 **https://assets.ouuut.com** 首页为**探索器**(列表栏 + 常驻预览框 + 三维 URL 状态 + 取用对话框,34 包 / 43 可看面)。
 - 2026-11-04 再有 1 包入仓:**param-panel**(web-ui,悬浮调参板)从旧主题库 `components/param-panel/` 收来 —— 旧库时代它被手抄出 12 份副本并漂移,入包即为终结手抄;入包时修了一处真 bug(`shouldMountLabPanel()` 原判定只认 `*.preview.html`,而本仓预览是 `preview/index.html`,站点卡片 iframe 与静态服务器两种落法都挂不上板)。
 - 2026-11-04 新并入 3 包,全部来自自家成品站 `https://make.ouuut.com/`(源站(本机另一个工作目录)仍在迭代,包是当时的快照):**motion-kit**(web-fx,动效层十模块:入场/逐字/错峰/计数/倾斜/磁吸/光标/首屏粒子场/轨道/漂移/进度线/当前段/折叠/VT 过场)、**token-harbor**(themes,Token Harbor 墨色双模设计语言,32 条语义 token × 2 模 + 全套构件)、**locale-router**(web-ui,四规则语言路由 + 三态语言开关)。
 - 三个 CI workflow:`gate.yml`(公开内容闸 + 断言)、`site.yml`(闸 → 重建 catalog → `build_site.py` 构建自检 → `wrangler pages deploy`)、`preview.yml`(PR → `pr-<n>` 预览环境 + 回评地址)。旧 `pages.yml` 已退役,GitHub Pages 已下线。
@@ -55,3 +55,13 @@ python scripts/harvest.py <id> --from <src> --kind fx --category web-fx \
 | 私有规则补充表 | `.private/banned.local.json`(gitignore) |
 | 设计规则(harness 级) | `skill://sai-frontend` §1(取用协议)、`skill://design-system`、`sai-frontend/references/` |
 | 消费记录 | 各项目 `design-lock.json.assets[]` |
+
+## 2026-11-04 · 站点改版:首页从「文字索引 + 悬停浮层」→「列表栏 + 常驻预览框」探索器
+
+用户判定旧排布不可行(单列 34 行文字,预览藏在 hover 里、触屏等于没有)。照 designprompts.dev 的模式重建,挑/看/拿 同屏:
+
+- **布局**:左 300px 栏(说明 + 类目/深浅 facet + 搜索 + 34 行**缩略图列表** + 键盘提示),右**常驻预览框**(工具条:上/下一个、段 combobox、桌面/平板/手机宽度、重新加载、隐藏预览;假地址栏显示包内真实路径;手机/平板宽度加描边)。<1100px 单栏:预览在上、列表在下。
+- **状态**:`?pack=&w=&s=` 三维进 URL(`history.replaceState`),刷新/分享/回退都不丢;段来自**构建期抽取**的 `<section id=…>`。
+- **交互**:↑↓ 与 j k 切换、↵ 取用、o 详情、/ 搜索、esc 关;打字时不抢键;取用对话框四段片段(固定版本/raw/apply/zip)一键复制,口径与详情页同一份(`snip_list()`)。
+- **缩略图**:29 张 640×400 WebP(414KB),离线 ego 截图 → PIL 转码,流程在 `scripts/make_thumbs*.{py,mjs}`;3 个无预览的包 + 2 个预览卡住的包回落序号瓦片。
+- **测试**:`scripts/test_explorer.mjs`(jsdom,本地跑不进 CI)30 条断言,当场抓出两个真 bug —— iframe 没尺寸(默认 300×150)、`<dialog>` 缺 `showModal` 时整段交互挂掉。

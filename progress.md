@@ -135,3 +135,19 @@
 **C 回收链真跑一次**(README 里挂了很久的 "待跑一次真 PR"):从旧库 `components/param-panel/` 收 **`param-panel`** 包(web-ui)。harvest → 人工补 SKILL/README/usage/assert → 包内断言 → `build_catalog` → `gate 0 findings` → 分支 PR #3 → PR 预览环境 → CI 全绿 → 合并 → 线上 34 包 · 43 可看面。入包时修 4 处:前缀 `tl-`→`pp-`、localStorage 去旧库前缀、删 `.prev.*`、**修 `shouldMountLabPanel()` 路径判定**(原只认 `*.preview.html`;本仓预览是 `preview/index.html`,站点卡片 iframe 与静态服务器两种落法都挂不上板 → 现四态命中、三反例不中,断言里用 Python 复算该正则)。真机:三态挂载、三栏切换、6 个控件即时驱动卡片、色板跨刷新保留、收起 56×56、Tab 焦点环、console 0 报错。
 
 **闸的一次反咬(如实记)**:新断言里为检测旧库残留写了盘符字面量 → CI 的 banned 规则当场命中(「检查规则自己成为被禁形态的载体」),改成拆字拼接;而本地仓级闸此前报绿是因为那次跑闸时该文件还没 `git add`(闸只扫跟踪文件),漏扫。教训:**改断言后必须 `git add -A` 再跑闸**。
+
+## 2026-11-04 · 站点改版 + 两处线上取用面故障(CDN 片段 / CF 邮箱混淆)
+
+用户判定首页排布不可行,点名 designprompts.dev 让学。抓了对方整套产物(HTML / 1.18MB CSS / 349KB 主包 / 88 chunk / 21 风格页 / sitemap)拆完,得出它的本质:**一个预览器 + 一份可复制的设计说明书**(内容固定 11 段,变量只有 风格 × 段 × 宽度;三维状态进 URL;预览用 `container-type:inline-size` 内联渲染,350 条 `@container` vs 74 条 `@media`),而不是"作品墙"。
+
+据此重建本仓首页:
+- **两栏探索器**:左 300px(类目/深浅 facet + 搜索 + 34 行缩略图列表 + 键盘提示),右常驻预览框(上/下一个、段 combobox、桌面/平板/手机、隐藏预览、假地址栏);<1100px 预览在上。
+- **URL 三维** `?pack=&w=&s=`,`replaceState` 同步;段来自构建期抽的 `<section id=…>`(token-harbor 10 段)。
+- **键盘** ↑↓ j k / ↵ / o / /,打字不抢键;取用对话框四段一键复制(与详情页共用 `snip_list()`)。
+- **缩略图** 29 张 640×400 WebP/414KB(离线 ego 截 → PIL 转),构建期接入 + verify 覆盖;5 个包(3 无预览 + 2 预览卡住)回落序号瓦片。
+- **行为测试** `scripts/test_explorer.mjs`(jsdom,本地)30 断言,抓出两个真 bug:**iframe 没尺寸**(默认 300×150,缩放盒 390×844 里只画一小块)、**`<dialog>` 在缺 `showModal` 的环境里整段交互挂掉**(已收敛成 useShow/useClose/useOpen 三个 helper)。
+
+同一轮修掉的两处线上故障(实测抓的,不是看文档):
+- **详情页 CDN 片段**:写死 `css/default.css`(ui/fx 包 404)+ 未打 tag 的包拼 `@pack/<id>@<ver>` 也是 404 → 改为按包产物挑主文件 + 按 tag 有无分流,线上 **34/34 链接 200**(7 固定 + 27 跟随 main);`site.yml` 的 checkout 补 `fetch-depth: 0`。
+- **Cloudflare Email Obfuscation** 把页面里 `…@pack/<id>@<ver>/…` 当邮箱打碎(浏览器靠 CF 脚本还原,抓 HTML 的下游拿到残片)→ 整页 body 包 `<!--email_off-->`,`__cf_email__` 归零;顺手补齐 `</body></html>`。
+- 附带:`site.yml` 一次 YAML 缩进写错导致工作流整体失效(已修 + 本地解析校验)。

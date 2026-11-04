@@ -182,8 +182,8 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad) 96px; }
 .pk-empty { padding: 22px 16px; color: var(--muted); font-size: var(--fs-body); }
 .pk-empty .txt-btn { text-decoration: underline; }
 .rail-hints {
-  display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
-  padding: 8px 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px;
+  display: flex; gap: 11px; align-items: center; white-space: nowrap; overflow: hidden;
+  padding: 8px 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10.5px;
 }
 .rail-hints li { display: inline-flex; align-items: center; gap: 4px; }
 .rail-hints kbd { font-size: 10px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 1px 4px; }

@@ -500,7 +500,9 @@ def render_home(rows: list[dict], updated: str) -> str:
     mode_counts: dict[str, int] = {}
     for r in rows:
         mode_counts[r["modes"] or "none"] = mode_counts.get(r["modes"] or "none", 0) + 1
-    mode_chips = ['<button class="chip on" type="button" data-mode="all" aria-pressed="true">全部</button>']
+    n_moded = sum(v for k, v in mode_counts.items() if k != "none")
+    mode_chips = [f'<button class="chip on" type="button" data-mode="all" aria-pressed="true">'
+                  f'全部<em>{n_moded}</em></button>']
     for key in ("dark", "light", "dual"):
         if mode_counts.get(key):
             mode_chips.append(f'<button class="chip" type="button" data-mode="{key}" aria-pressed="false">'
@@ -529,7 +531,7 @@ def render_home(rows: list[dict], updated: str) -> str:
     <aside class="rail" aria-label="资产列表">
       <div class="rail-top">
         <h1 class="rail-h1">可复用的网页资产库</h1>
-        <p class="rail-lede">挑一个包,右边跑的就是它自己的预览页;宽度切到手机看它在小屏的样子。</p>
+        <p class="rail-lede">挑一个包,右边就是它自己的预览页;宽度可切手机。</p>
         <div class="rail-counts">
           <span><b class="nums">{len(rows)}</b>包</span>
           <span><b class="nums">{n_surf}</b>可看面</span>
