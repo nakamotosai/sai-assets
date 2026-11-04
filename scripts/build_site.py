@@ -397,6 +397,22 @@ def code_html(row: dict, up: str) -> str:
             f'<div class="panes">{"".join(panes)}</div>')
 
 
+def write_page(path: Path, html: str) -> None:
+    """写 HTML 页:整页包在 Cloudflare 的 `email_off` 注释里。
+
+    为什么:CF 的 Email Obfuscation 会把页面里像邮箱的串(典型是 CDN 链接里的
+    `.../sai-assets@pack/<id>@<ver>/...`)替换成 `__cf_email__` 锚点 —— 浏览器里
+    由 CF 的 decode 脚本还原,但**抓 HTML 的下游(agent / 爬虫 / 我们的闸)拿到的是残片**。
+    本站在展示的正是包内文本与取用 URL,没有需要保护的邮箱,整页关掉更合适。
+    """
+    i = html.find("<body")
+    assert i >= 0, "页面缺少 <body>"
+    j = html.find(">", i) + 1
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(html[:j] + "<!--email_off-->" + html[j:] + "<!--/email_off-->\n</body>\n</html>\n",
+                    encoding="utf-8")
+
+
 def page_footer(up: str, updated: str) -> str:
     return f"""<footer class="foot">
   <span>本站用库内 <code>ouuut-editorial</code> 包的 token 与字阶构建 —— 展示站本身就是取用示例。</span>
@@ -753,16 +769,16 @@ def build(out: Path) -> None:
     ASSET_VER = h.hexdigest()[:8]
     shutil.copy2(ROOT / "catalog.json", out / "catalog.json")
 
-    (out / "index.html").write_text(render_home(rows, updated), encoding="utf-8")
-    (out / "404.html").write_text(render_404(rows, updated), encoding="utf-8")
+    write_page(out / "index.html", render_home(rows, updated))
+    write_page(out / "404.html", render_404(rows, updated))
     for r in rows:
         d = out / "p" / r["id"]
         d.mkdir(parents=True, exist_ok=True)
-        (d / "index.html").write_text(render_detail(r, rows, updated), encoding="utf-8")
+        write_page(d / "index.html", render_detail(r, rows, updated))
         for demo in r["demos"]:
             dd = d / "demo" / demo["slug"]
             dd.mkdir(parents=True, exist_ok=True)
-            (dd / "index.html").write_text(render_demo(r, demo, updated), encoding="utf-8")
+            write_page(dd / "index.html", render_demo(r, demo, updated))
         if not r["external"]:
             write_zip(out / "downloads" / f'{r["id"]}.zip', r["dir"])
     write_app_json(out, rows, updated)
