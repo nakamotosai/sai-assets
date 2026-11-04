@@ -327,8 +327,27 @@ def install_html(row: dict, up: str) -> str:
     pid, ver = row["id"], row["version"]
     raw = f"{RAW}packs/{pid}/"
     cdn = f"{CDN}/{pid}@{ver}/packs/{pid}/"
+    files = (row.get("pack") or {}).get("files") or {}
+
+    def first(*keys: str) -> list[str]:
+        out: list[str] = []
+        for k in keys:
+            v = files.get(k) or []
+            out += [v] if isinstance(v, str) else list(v)
+        return [x for x in out if isinstance(x, str) and x]
+
+    # 零安装单文件:挑该包**真有**的主产物(主题/字体优先 css,组件/动效优先 src),
+    # 不再写死 css/default.css —— ui / fx 包没有 css/ 目录,写死会给出 404 链接。
+    primary = (first("css", "src", "tokens") or [row.get("pack", {}).get("entry") or "SKILL.md"])[0]
+    onefile = cdn + primary
+    if primary.endswith(".css"):
+        onefile_code = f'<link rel="stylesheet" href="{onefile}">'
+    elif primary.endswith(".js"):
+        onefile_code = f'<script type="module" src="{onefile}"></script>'
+    else:
+        onefile_code = f"curl -O {onefile}"
     snippets = [
-        ("固定版本(CDN)", f'<link rel="stylesheet" href="{cdn}css/default.css">'),
+        ("固定版本(CDN)", onefile_code),
         ("raw 直取(跟随 main)", f'curl -O {raw}SKILL.md'),
         ("仓库内落地", f'python scripts/apply.py {pid} --to <项目目录>'),
         ("整包下载", f'{SITE}/downloads/{pid}.zip' if not row["external"] else str(row.get("preview_url") or "")),
