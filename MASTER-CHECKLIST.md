@@ -43,7 +43,7 @@
 - [x] **E3 JS 体积与长任务** — `site.js` 单文件约 10 KB,无依赖、无框架、无 polyfill;`defer` 加载;卡片的 iframe 由 IntersectionObserver 控制,视口外立刻卸载。
 - [x] **E4 LCP 元素可被预扫描器发现** — LCP 是文本(h1/卡片标题),由 HTML 直出;iframe 是 `data-src` 懒挂,不参评 LCP。
 - [x] **E5 CLS 预留空间** — 卡片缩略区固定 `aspect-ratio: 4/3`,详情舞台由 JS 按视口比例设高(首帧即定高),iframe 挂载不移位。
-- [x] **E9 catalog 派生化(裸上传可上站)** — `catalog.json` 由 CI 重建:不一致时 `site.yml` 用 `github-actions[bot]` 回提交再部署(`permissions: contents: write`,其余工作流仍 `read`;GITHUB_TOKEN 推的提交不触发工作流,无回环);`preview.yml` 也先重建再构建,保证预览里的 `catalog.json` 与分支内容一致。自测:2026-11-04 故意推一份过期 catalog → CI 自动对齐并部署,线上 `catalog.json` 仍 30 条。
+- [x] **E9 catalog 派生化(裸上传可上站)** — `catalog.json` 由 CI 重建:不一致时 `site.yml` 用 `github-actions[bot]` 回提交再部署(`permissions: contents: write`,其余工作流仍 `read`;GITHUB_TOKEN 推的提交不触发工作流,无回环);`preview.yml` 也先重建再构建,保证预览里的 `catalog.json` 与分支内容一致。自测(2026-11-04):故意推一份 29 条的 `catalog.json` → `site.yml` 绿、自动产出 bot 提交 `d7d3d8b`「chore(catalog): CI 自动对齐 packs/(提交里那份过期)」、raw `catalog.json` 回 30 条含 `ouuut-com`、线上站点与线上 catalog 均 30 条,且 bot 推送未再触发第二个 run(无回环)。
 - [x] **E6 缓存策略** — `dist/_headers`:`/*` `max-age=300` + 安全头(实测生效);静态文件(`/assets/*`、`/robots.txt` 等)CF Pages 会用它自己的 `max-age=14400` 覆盖 `_headers` 里的 Cache-Control —— 因此外壳 CSS/JS 的 URL 带**内容哈希** `?v=<sha8>`(每次部署变),刷新即拿到新版,不靠缓存头。
 - [x] **E7 发布即生效、验收带 cache-bust** — 每次 push 生成新 deployment;外壳资源 URL 带内容哈希,HTML 变更即切换;验证命令另带 `?cb=$(date +%s)` 避免把边缘缓存滞后当故障。
 - [ ] **E8 Lighthouse(移动端)基线** — 待做:发布后跑一次记录 LCP/INP/CLS 数字并写进 `progress.md`。**发布后 24h 内补**。

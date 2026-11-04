@@ -101,5 +101,5 @@
 - `site.yml`:`permissions: contents: write` → 重建 `catalog.json` → 有差异就 `github-actions[bot]` 提交并 `git push origin HEAD:main` → 再构建部署(同一 run 里用的是重建后的 catalog)。GITHUB_TOKEN 推出的提交不会再触发工作流,天然无回环。
 - `preview.yml`:构建前也 `build_catalog.py`(不提交),PR 预览里的 `catalog.json` 不再可能落后于分支内容。
 - 本地实测裸上传路径:只丢 `packs/upload-smoke/` 不重建 catalog → `build_site` 出 **31 条索引 + 详情页 + app.json=31**,但 `dist/catalog.json` 仍是 30 条(机器目录与站点不一致)—— 这正是原来 CI 要拦的状态;删包重建后回到 30。
-- 线上自测:故意推一份少一条的 `catalog.json` → CI 自动对齐(见 E9),站点照常部署。
+- 线上自测:`bef2948` 里故意少写一条 → `site.yml` 绿、bot 提交 `d7d3d8b` 自动补回、raw `catalog.json` 30 条含 `ouuut-com`、线上站点 30 行与线上 catalog 30 条,且 bot 推送没有再触发第二个 run。
 - 结论口径:**改包内容/pack.json 之外的任何文件 = 直接传就上站;新增包或改 `version`/`when` = 以前必须跑 `build_catalog`,现在 CI 兜底**。
