@@ -43,7 +43,9 @@ JS_CUES = (
     "localStorage",
     "aria-label",
 )
-LEGACY_CUES = ("themelab", "tl-param", "Theme Lab", "F:\\", "C:\\")
+# 旧库标记:字面量拆开拼,免得"检查规则"自己变成被禁形态的载体(同仓 nav-rail 断言的口径)
+LEGACY_CUES = ("theme" + "lab", "tl-" + "param", "Theme " + "Lab",
+               "F" + ":" + "\\", "C" + ":" + "\\")
 ATTR_RE = re.compile(r"""(?:src|href)\s*=\s*["']([^"']+)["']""")
 SCHEME_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.\-]*:")
 CLASS_RE = re.compile(r"pp-[a-z0-9]+(?:-[a-z0-9]+)*")
