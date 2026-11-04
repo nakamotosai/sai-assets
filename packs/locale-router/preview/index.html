@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>locale-router · 决策演示(加载不跳转)</title>
+<link rel="stylesheet" href="../src/locale-router.css">
+<style>
+  /* 页面 chrome:只为演示排版,不属于包产物;预览零外部子资源(无 webfont / 无外链图片)。 */
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 28px 20px 64px;
+    background: #f7f7f5;
+    color: #1b1b1b;
+    font: 14px/1.65 ui-sans-serif, system-ui, "Segoe UI", "Noto Sans", sans-serif;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; }
+  h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 0.01em; }
+  h2 { margin: 34px 0 10px; font-size: 15px; }
+  p.lead { margin: 0 0 18px; color: #5c5c5c; }
+  .strip {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 10px 14px; background: #ffffff; border: 1px solid #e3e3e0; border-radius: 6px;
+  }
+  .strip .label { font-size: 12px; color: #5c5c5c; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
+  table { width: 100%; border-collapse: collapse; background: #ffffff; border: 1px solid #e3e3e0; }
+  caption { caption-side: top; text-align: left; font-size: 12px; color: #5c5c5c; padding: 0 0 8px; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid #eeedeb; text-align: left; vertical-align: top; }
+  th { font-size: 12px; font-weight: 600; color: #5c5c5c; background: #fbfbfa; }
+  tr:last-child td { border-bottom: 0; }
+  td.win { font-weight: 600; }
+  .stay { color: #5c5c5c; }
+  .go { color: #1a4fb4; }
+  details { background: #ffffff; border: 1px solid #e3e3e0; border-radius: 6px; padding: 0 14px; }
+  details[open] { padding-bottom: 14px; }
+  summary { cursor: pointer; padding: 12px 0; font-weight: 600; font-size: 13px; }
+  .fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin: 4px 0 14px; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 12px; color: #5c5c5c; }
+  select, input[type="text"] { padding: 6px 8px; border: 1px solid #d9d8d5; border-radius: 4px; font: inherit; background: #fff; }
+  .check { flex-direction: row; align-items: center; gap: 8px; font-size: 13px; }
+  .verdict {
+    margin: 0; padding: 12px; background: #f4f5f8; border-left: 3px solid #1f6feb; border-radius: 0 4px 4px 0;
+    font-size: 13px;
+  }
+  footer { margin-top: 34px; font-size: 12px; color: #5c5c5c; }
+</style>
+<script>
+  /* 预览配置:dryRun: true = 只算不跳、不写记忆;本地双击打开时路径不是根路径,
+     规则 2 会直接放行。两重保险,保证加载与点击都不发生任何导航。 */
+  window.LOCALE_ROUTER_CONFIG = {
+    locales: { en: "/", zh: "/zh/", ja: "/ja/" },
+    defaultLocale: "en",
+    storageKey: "locale-router-preview",
+    param: "lang",
+    rootPath: "/",
+    auto: true,
+    dryRun: true
+  };
+  document.addEventListener("localerouter:decide", function (e) { window.__lrLoad = e.detail; });
+</script>
+<script src="../src/locale-router.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <h1>locale-router · 决策演示</h1>
+  <p class="lead">本页加载不跳转、点击不跳转:入口脚本以 <code>dryRun: true</code> 加载,只算不跳也不写记忆。下表与推演器的结果全部由包内 <code>LocaleRouter.decide()</code> 现算,没有写死的结论。</p>
+
+  <div class="strip">
+    <span class="label">语言开关(点击只切换演示状态,不导航)</span>
+    <nav class="locale-switch" data-lr-switch aria-label="语言">
+      <button type="button" class="locale-switch__item" data-lr-locale="en" lang="en">English</button>
+      <button type="button" class="locale-switch__item" data-lr-locale="zh" lang="zh-CN">中文</button>
+      <button type="button" class="locale-switch__item" data-lr-locale="ja" lang="ja">日本語</button>
+    </nav>
+  </div>
+  <p class="lead" style="margin-top:10px">演示中的「当前语言」=<code id="demo-lang">en</code>;它写进 <code>&lt;html lang&gt;</code>,开关的 <code>aria-current="page"</code> 由 <code>LocaleRouter.mark()</code> 同步。<span id="load-line"></span></p>
+
+  <h2>谁赢:五种输入下的决定</h2>
+  <table>
+    <caption>输入列就是传给 <code>decide()</code> 的原样参数;<code>?lang=ja</code> 与「记忆=ja」两行的 <code>current</code> 跟随上面的演示语言,其余三行按各自场景固定。</caption>
+    <thead>
+      <tr><th>输入</th><th>命中规则</th><th>动作</th><th>结果</th><th>写入记忆</th></tr>
+    </thead>
+    <tbody id="matrix"></tbody>
+  </table>
+
+  <h2>按此配置会跳到哪(推演器)</h2>
+  <details>
+    <summary>展开推演器:改输入,看决定结果(纯前端计算,真站不会发生任何跳转)</summary>
+    <div class="fields">
+      <div class="field">
+        <label for="sim-path">落地路径</label>
+        <select id="sim-path">
+          <option value="/">/ (根路径:触发自动决定)</option>
+          <option value="/zh/">/zh/ (深链)</option>
+          <option value="/ja/">/ja/ (深链)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sim-param">?lang= 参数</label>
+        <select id="sim-param">
+          <option value="">无</option>
+          <option value="en">?lang=en</option>
+          <option value="zh">?lang=zh</option>
+          <option value="ja">?lang=ja</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sim-store">记忆(存储里的值)</label>
+        <select id="sim-store">
+          <option value="">空</option>
+          <option value="en">en</option>
+          <option value="zh">zh</option>
+          <option value="ja">ja</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="sim-langs">navigator.languages</label>
+        <input id="sim-langs" type="text" value="zh-CN,en-US" spellcheck="false">
+      </div>
+      <div class="field check">
+        <input id="sim-robot" type="checkbox">
+        <label for="sim-robot">爬虫 / headless UA</label>
+      </div>
+    </div>
+    <p class="verdict" id="verdict"></p>
+  </details>
+
+  <footer>
+    locales = { en: "/", zh: "/zh/", ja: "/ja/" } · defaultLocale = en · 参数名 = lang · rootPath = / · dryRun = true。
+    查全部字段与接入步骤见 <code>docs/usage.md</code>;断言 <code>python packs/locale-router/scripts/assert_tokens.py</code>。
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var R = window.LocaleRouter;
+  var el = function (id) { return document.getElementById(id); };
+  var ESC = function (s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  };
+  var REASONS = {
+    "param": "参数优先 ?lang=",
+    "deep-link": "深链保留",
+    "memory": "记忆优先",
+    "detect": "navigator.languages 探测",
+    "default": "默认语言",
+    "robot": "爬虫放行"
+  };
+  var demo = "en";
+
+  function brief(input) {
+    var parts = ["path=" + input.pathname];
+    if (input.search) parts.push("search=" + input.search);
+    parts.push("current=" + input.current);
+    parts.push("stored=" + (input.stored === null || input.stored === undefined ? "空" : input.stored));
+    if (input.languages) parts.push("languages=[" + input.languages.join(",") + "]");
+    if (input.robot) parts.push("robot=true");
+    return parts.join(" · ");
+  }
+
+  /* 五种输入的固定场景;只有需要跟随演示语言的两行把 current 交给 demo。 */
+  function cases() {
+    return [
+      { input: { pathname: "/", search: "?lang=ja", stored: null, current: demo, robot: false } },
+      { input: { pathname: "/zh/", search: "", stored: null, current: "zh", robot: false } },
+      { input: { pathname: "/", search: "", stored: "ja", current: demo, languages: ["en-US"], robot: false } },
+      { input: { pathname: "/", search: "", stored: null, current: "en", languages: ["zh-CN", "en-US"], robot: false } },
+      { input: { pathname: "/", search: "", stored: null, current: "en", languages: ["zh-CN"], robot: true } }
+    ];
+  }
+
+  function renderMatrix() {
+    var rows = cases().map(function (c) {
+      var d = R.decide(c.input);
+      var jump = d.action === "redirect" && d.to;
+      return "<tr>"
+        + "<td><code>" + ESC(brief(c.input)) + "</code></td>"
+        + "<td class=\"win\">" + ESC(REASONS[d.reason] || d.reason) + "</td>"
+        + "<td>" + (jump ? "<span class=\"go\">跳转</span>" : "<span class=\"stay\">留在原地</span>") + "</td>"
+        + "<td>" + (jump ? "<code>" + ESC(d.to) + "</code>" : "已是最佳版本(" + ESC(d.target) + ")") + "</td>"
+        + "<td>" + (d.remember ? "<code>" + ESC(d.remember) + "</code>" : "不写") + "</td>"
+        + "</tr>";
+    });
+    el("matrix").innerHTML = rows.join("");
+  }
+
+  function renderVerdict() {
+    var langs = el("sim-langs").value.split(",").map(function (s) { return s.trim(); }).filter(function (s) { return s; });
+    var input = {
+      pathname: el("sim-path").value,
+      search: el("sim-param").value ? ("?lang=" + el("sim-param").value) : "",
+      current: demo,
+      stored: el("sim-store").value ? el("sim-store").value : null,
+      languages: langs,
+      robot: el("sim-robot").checked
+    };
+    var d = R.decide(input);
+    var jump = d.action === "redirect" && d.to;
+    el("verdict").innerHTML = "命中规则:<strong>" + ESC(REASONS[d.reason] || d.reason) + "</strong>"
+      + " · 决定语言:<code>" + ESC(d.target) + "</code>"
+      + " · " + (jump ? "真站会 <code>location.replace('" + ESC(d.to) + "')</code>(本页 dryRun,不执行)" : "留在原地,不发生导航")
+      + " · 写入记忆:<code>" + (d.remember ? ESC(d.remember) : "不写") + "</code>"
+      + "<br>输入:<code>" + ESC(brief(input)) + "</code>";
+  }
+
+  function sync() {
+    document.documentElement.setAttribute("lang", demo === "zh" ? "zh-CN" : demo);
+    el("demo-lang").textContent = demo;
+    R.mark();
+    renderMatrix();
+    renderVerdict();
+  }
+
+  var items = document.querySelectorAll("[data-lr-locale]");
+  for (var i = 0; i < items.length; i++) {
+    items[i].addEventListener("click", function () {
+      demo = this.getAttribute("data-lr-locale");
+      sync();
+    });
+  }
+  ["sim-path", "sim-param", "sim-store", "sim-langs", "sim-robot"].forEach(function (id) {
+    el(id).addEventListener("change", renderVerdict);
+    el(id).addEventListener("input", renderVerdict);
+  });
+
+  var loaded = window.__lrLoad;
+  el("load-line").innerHTML = loaded
+    ? "加载时真实入口 <code>run()</code> 的判定:命中 <code>" + ESC(REASONS[loaded.reason] || loaded.reason)
+      + "</code>," + (loaded.action === "redirect" ? "会跳 <code>" + ESC(loaded.to) + "</code>" : "不跳") + "(dryRun,未执行)。"
+    : "加载时真实入口 <code>run()</code> 没有产出判定。";
+  sync();
+})();
+</script>
+</body>
+</html>

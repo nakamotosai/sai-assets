@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "id": "locale-router",
+  "title": "Locale Router · 语言路由 + 三态语言开关",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "静态多语言站的语言路由脚本(源:assets/js/lang.js)",
+      "license": "MIT",
+      "what": "四条规则(参数优先 / 深链保留 / 根路径单次重定向 / 爬虫放行)、UA 名单、记忆与探测的判定顺序,以及只用 location.replace 拼 hash 的写法"
+    },
+    {
+      "name": "静态多语言站的头部语言开关样式(源:assets/css/site.css 的 .lang-switch 段)",
+      "license": "MIT",
+      "what": "开关的结构原型:横向胶囊、12px/500 字重、4px 圆角、悬停与当前项的底色区分"
+    },
+    {
+      "name": "sai-assets PACK-CONTRACT v1",
+      "license": "MIT",
+      "what": "包形状、pack.json 字段与断言最低集的规则来源"
+    }
+  ],
+  "origin": {
+    "project": "make-site",
+    "path": "assets/js/lang.js",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/locale-router.js",
+      "src/locale-router.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "locale",
+    "language-switch",
+    "redirect",
+    "navigator-languages",
+    "localstorage",
+    "aria-current",
+    "head-inline",
+    "no-deps",
+    "a11y"
+  ],
+  "when": "多语言静态站要决定「第一次来的人进哪一版」时:根路径按记忆或 `navigator.languages` 探测后只重定向一次、带 `?lang=` 的参数永远优先并写进记忆、深链(如 `/zh/`)不被夺回、爬虫与 headless 一概不动;配一个三态语言开关。纯前端、无依赖、可同步内联在 `<head>` 里跑,不留闪白。",
+  "not_for": "需要服务端按 `Accept-Language` 内容协商或构建期生成 hreflang(那是构建/边缘侧的事);需要完整 i18n 运行时(文案抽取、复数与格式化,走 i18n 库);单语言站;SPA 内置路由前缀。",
+  "verified": {
+    "date": "2026-11-04",
+    "how": "python packs/locale-router/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens locale-router / 引用 2 个(包内 2 https 0)· 声明路径 5 个全部存在 · src 2 文件 15218 字节 · node 干跑 src/locale-router.js 的 decide() 7 例全部与期望一致:参数优先 reason=param action=redirect to=/ja/ remember=ja;深链保留 reason=deep-link action=stay to=- remember=zh;深链+已有记忆 reason=deep-link action=stay to=- remember=-;记忆优先 reason=memory action=redirect to=/ja/ remember=ja;探测 reason=detect action=redirect to=/zh/ remember=zh;默认 reason=default action=stay to=- remember=en;爬虫放行 reason=robot action=stay to=- remember=- · 开关对比度实测 --lr-dim on --lr-bg 6.69:1 / --lr-ink on --lr-hover-bg 15.11:1 / --lr-current-ink on --lr-current-bg 15.25:1 / --lr-ring on --lr-bg 4.63:1 · 预览以 dryRun 在 Node 里带桩干跑:加载判定 deep-link 不跳、点开关后 aria-current 跟随、navigations=0 storageWrites=0"
+  },
+  "canonical_home": null
+}

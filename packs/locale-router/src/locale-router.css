@@ -1,0 +1,81 @@
+/* locale-router · src/locale-router.css
+   语言开关:一枚胶囊按钮组,三态(静息 / 悬停 / 当前 aria-current="page")+ 焦点环。
+   只含开关本身,不含页面 chrome;页面配色只消费下面这组变量,不要改组件规则。
+
+   两条硬结论:
+   1 当前态只由 [aria-current="page"] 驱动,禁用 .is-active 这类第二套高亮;
+     属性由 locale-router.js 的 mark() 写(或在服务端模板里直出)。
+   2 三态的声明顺序必须保持「静息 -> 悬停 -> 当前」:当前态与悬停特异性相同(都是
+     类 + 伪类 / 类 + 属性),后写的赢;把当前态挪到悬停前面,悬停就会吃掉当前态的底色。
+
+   接入片段与参数表见 docs/usage.md。 */
+
+.locale-switch {
+  /* ---- 配色(改配色只动这一段;浅底示例值,深底换成深色一组即可)---- */
+  --lr-bg: #ffffff;          /* 所在条带的底色:对比度按它算,请与页面实际底色一致 */
+  --lr-ink: #1b1b1b;         /* 悬停 / 常态正文色 */
+  --lr-dim: #5c5c5c;         /* 静息文字色 */
+  --lr-hover-bg: #f0f0f0;    /* 悬停底 */
+  --lr-current-bg: #e6e6e6;  /* 当前项底 */
+  --lr-current-ink: #101010; /* 当前项文字色 */
+  --lr-ring: #1f6feb;        /* 焦点环 */
+
+  /* ---- 尺寸(命中区只增不减)---- */
+  --lr-hit: 32px;            /* 每个可点项的最小高度;触屏页建议 44px */
+  --lr-pad: 8px;             /* 左右内边距 */
+  --lr-radius: 4px;          /* 胶囊圆角 */
+  --lr-gap: 2px;             /* 项间距 */
+  --lr-t: 0.16s;             /* 过渡时长(减少动效时归零) */
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lr-gap);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.locale-switch__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--lr-hit);
+  padding: 0 var(--lr-pad);
+  border: 0;
+  border-radius: var(--lr-radius);
+  background: transparent;
+  color: var(--lr-dim);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--lr-t) ease, background-color var(--lr-t) ease;
+}
+
+/* 状态二:悬停 / 键盘聚焦(不是当前项也会亮底色) */
+.locale-switch__item:hover,
+.locale-switch__item:focus-visible {
+  background: var(--lr-hover-bg);
+  color: var(--lr-ink);
+}
+
+/* 状态三:当前项(唯一来源是 aria-current,由 mark() 或服务端模板写) */
+.locale-switch__item[aria-current="page"] {
+  background: var(--lr-current-bg);
+  color: var(--lr-current-ink);
+}
+
+/* 焦点环:焦点可见时才有,鼠标点击不会留下残影 */
+.locale-switch__item:focus-visible {
+  outline: 2px solid var(--lr-ring);
+  outline-offset: 2px;
+}
+
+/* 触屏:命中区抬到 44px(桌面保持 32px 的紧凑胶囊) */
+@media (pointer: coarse) {
+  .locale-switch { --lr-hit: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .locale-switch__item { transition: none; }
+}
