@@ -175,7 +175,7 @@
   {
    "id": "web-ui",
    "title": "UI 组件",
-   "count": 7,
+   "count": 8,
    "items": [
     {
      "id": "dual-theme-toggle",
@@ -200,6 +200,12 @@
      "version": "1.0.0",
      "one_liner": "单页作品集 / 工作室首页 / 长页叙事需要一层压在画…",
      "path": "packs/nav-rail-marquee/"
+    },
+    {
+     "id": "param-panel",
+     "version": "1.0.0",
+     "one_liner": "做可调参 demo / 动效预览 / 主题试色页:参数…",
+     "path": "packs/param-panel/"
     },
     {
      "id": "slide-master-senior",

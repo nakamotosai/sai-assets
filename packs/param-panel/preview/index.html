@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>param-panel · 活预览</title>
+<link rel="stylesheet" href="../src/param-panel.css" />
+<style>
+  :root {
+    --bg: #0e0e0c; --surface: #17170f; --ink: #edebe4; --muted: #a9a698; --line: #2e2c24;
+    --accent: #0c8b7a; --radius: 14px; --pad: 24px; --shadow: 12px; --speed: 1.6s;
+    --pp-bg: #17170f; --pp-ink: #edebe4; --pp-muted: #a9a698; --pp-line: #2e2c24; --pp-accent: #0c8b7a;
+  }
+  html[data-theme="light"] {
+    --bg: #f5f3ed; --surface: #ffffff; --ink: #1a1a16; --muted: #6b6759; --line: #ddd8ca;
+    --pp-bg: #ffffff; --pp-ink: #1a1a16; --pp-muted: #6b6759; --pp-line: #ddd8ca;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink);
+    font: 15px/1.6 system-ui, -apple-system, "Segoe UI", "Noto Sans SC", sans-serif;
+    display: flex; flex-direction: column; gap: 28px; padding: 32px 24px 96px;
+    transition: background .25s ease, color .25s ease;
+  }
+  @media (prefers-reduced-motion: reduce) { body { transition: none; } }
+  header { display: flex; align-items: center; justify-content: space-between; gap: 16px; max-width: 720px; width: 100%; margin: 0 auto; }
+  .eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: 22px; margin: 2px 0 0; font-weight: 600; }
+  #toggle {
+    width: 44px; height: 44px; flex: 0 0 44px; display: grid; place-items: center;
+    background: none; border: 0; border-radius: 50%; color: var(--ink); cursor: pointer; font-size: 20px;
+  }
+  #toggle:hover { background: color-mix(in srgb, var(--ink) 10%, transparent); }
+  #toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  main { max-width: 720px; width: 100%; margin: 0 auto; display: grid; gap: 20px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: var(--pad); box-shadow: 0 calc(var(--shadow) / 2) var(--shadow) color-mix(in srgb, var(--ink) 14%, transparent);
+    display: grid; gap: 14px; transition: border-radius .18s ease, padding .18s ease, box-shadow .18s ease;
+  }
+  .card h2 { margin: 0; font-size: 18px; font-weight: 600; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .swatchdot { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 1px var(--line) inset; }
+  .track { position: relative; height: 44px; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .dot { position: absolute; top: 50%; left: 6px; width: 26px; height: 26px; margin-top: -13px; border-radius: 50%; background: var(--accent); animation: slide var(--speed) ease-in-out infinite alternate; }
+  @keyframes slide { from { left: 6px; } to { left: calc(100% - 32px); } }
+  @media (prefers-reduced-motion: reduce) { .dot { animation: none; left: calc(50% - 13px); } }
+  .grid-demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; }
+  .grid-demo span { padding: 12px; border: 1px dashed var(--line); border-radius: 10px; font-size: 13px; color: var(--muted); text-align: center; }
+  .hidden { display: none; }
+  footer { max-width: 720px; width: 100%; margin: 0 auto; color: var(--muted); font-size: 13px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <div class="eyebrow">sai-assets · web-ui</div>
+    <h1>param-panel · 悬浮调参板</h1>
+  </div>
+  <button id="toggle" type="button" aria-label="切换深浅模式" aria-pressed="true">◐</button>
+</header>
+
+<main>
+  <section class="card">
+    <h2 id="cardTitle">调参板正在驱动这张卡</h2>
+    <p>右下角的小板由 <code>params.schema</code> 生成;每个输入都直接改这张卡的 CSS 变量。</p>
+    <div class="grid-demo" id="swatchRow">
+      <span class="swatchdot" aria-hidden="true"></span>
+      <span>accent 只允许从 swatches 里挑</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <p>动效档(速度可变,<code>prefers-reduced-motion</code> 时停在中间不做动画)</p>
+    <div class="track" aria-hidden="true"><span class="dot"></span></div>
+  </section>
+
+  <section class="card" id="gridCard">
+    <p>网格档(checkout 开关控制这块的显隐)</p>
+    <div class="grid-demo" id="gridWrap">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+    </div>
+  </section>
+</main>
+
+<footer>
+  调完点板底栏「复制」,把 JSON 粘回 <code>params.json.defaults</code> 即为定稿;生产环境不挂板(<code>?lab=0</code>)。
+</footer>
+
+<script type="module">
+  import { mountParamPanel, shouldMountLabPanel } from "../src/param-panel.js";
+
+  const SWATCHES = ["#0C8B7A", "#A77109", "#CD5545", "#3F7DCA", "#678618", "#A165AE"];
+
+  const params = {
+    slug: "param-panel-preview",
+    version: 1,
+    defaults: { accent: "#0C8B7A", radius: 14, pad: 24, shadow: 12, speed: 1.6, cardTitle: "调参板正在驱动这张卡", showGrid: true },
+    schema: [
+      { key: "accent", label: "强调色", type: "swatch", tab: "颜色", swatches: SWATCHES },
+      { key: "radius", label: "圆角", type: "range", tab: "版式", min: 0, max: 28, step: 2 },
+      { key: "pad", label: "内边距", type: "range", tab: "版式", min: 8, max: 48, step: 4 },
+      { key: "shadow", label: "投影", type: "range", tab: "组件", min: 0, max: 40, step: 4 },
+      { key: "speed", label: "动效速度 (s)", type: "range", tab: "其它", min: 0.2, max: 4, step: 0.2 },
+      { key: "cardTitle", label: "卡片标题", type: "text", tab: "其它" },
+      { key: "showGrid", label: "显示网格块", type: "checkbox", tab: "组件" }
+    ]
+  };
+
+  const root = document.documentElement.style;
+  const el = (id) => document.getElementById(id);
+
+  function apply(p) {
+    root.setProperty("--accent", p.accent);
+    root.setProperty("--pp-accent", p.accent);
+    root.setProperty("--radius", p.radius + "px");
+    root.setProperty("--pad", p.pad + "px");
+    root.setProperty("--shadow", p.shadow + "px");
+    root.setProperty("--speed", p.speed + "s");
+    el("cardTitle").textContent = p.cardTitle || " ";
+    el("gridCard").classList.toggle("hidden", !p.showGrid);
+  }
+  apply(params.defaults);
+
+  if (shouldMountLabPanel()) mountParamPanel({ params, title: "调参", corner: "br", onChange: apply });
+
+  // 深浅切换:默认跟系统,点过之后记本地
+  const KEY = "saiassets.param-panel.preview.theme";
+  const saved = localStorage.getItem(KEY);
+  const sysLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+  let theme = saved || (sysLight ? "light" : "dark");
+  function paint() {
+    document.documentElement.dataset.theme = theme;
+    const b = el("toggle");
+    b.textContent = theme === "dark" ? "◐" : "☀";
+    b.setAttribute("aria-pressed", String(theme === "dark"));
+    b.setAttribute("aria-label", theme === "dark" ? "切到浅色" : "切到深色");
+  }
+  paint();
+  el("toggle").addEventListener("click", () => {
+    theme = theme === "dark" ? "light" : "dark";
+    localStorage.setItem(KEY, theme);
+    paint();
+  });
+</script>
+</body>
+</html>

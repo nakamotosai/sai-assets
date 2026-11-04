@@ -1,0 +1,375 @@
+/* Sai Assets · floating param panel
+ * 顶标签 / 中参数 / 底动作 · 可拖可缩放 · 无可见滚动条 · gruvbox 壳
+ */
+.pp-param-panel {
+  --pp-bg: #1d2021;
+  --pp-bg-2: #282828;
+  --pp-fg: #ebdbb2;
+  --pp-muted: #a89984;
+  --pp-accent: #fe8019;
+  --pp-border: #504945;
+  --pp-swatch-ring: #fbf1c7;
+  position: fixed;
+  z-index: 99999;
+  width: min(420px, calc(100vw - 24px));
+  height: min(72vh, 640px);
+  min-width: 340px;
+  min-height: 320px;
+  max-width: min(560px, calc(100vw - 16px));
+  max-height: min(90vh, 900px);
+  display: flex;
+  flex-direction: column;
+  background: var(--pp-bg);
+  color: var(--pp-fg);
+  border: 1px solid var(--pp-border);
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+  font: 14px/1.45 "Noto Sans SC", "Segoe UI", system-ui, sans-serif;
+  backdrop-filter: blur(12px);
+  user-select: none;
+  overflow: hidden;
+}
+
+.pp-param-panel[data-corner="br"] { right: 14px; bottom: 14px; }
+.pp-param-panel[data-corner="bl"] { left: 14px; bottom: 14px; }
+.pp-param-panel[data-corner="tr"] { right: 14px; top: 14px; }
+.pp-param-panel[data-corner="tl"] { left: 14px; top: 14px; }
+
+/* Wall / iframe embed: compact + default collapsed */
+.pp-param-panel.is-embed {
+  width: min(280px, calc(100vw - 16px));
+  height: auto;
+  max-height: min(48vh, 360px);
+  min-width: 200px;
+  min-height: 0;
+  font-size: 13px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+}
+.pp-param-panel.is-embed .pp-param-panel__resize {
+  display: none;
+}
+
+/* dock FAB: whole panel collapses to bottom-right square */
+.pp-param-panel.is-collapsed {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  min-height: 56px !important;
+  max-width: 56px !important;
+  max-height: 56px !important;
+  right: 14px !important;
+  bottom: 14px !important;
+  left: auto !important;
+  top: auto !important;
+  border-radius: 14px;
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0.96;
+}
+.pp-param-panel.is-collapsed:hover {
+  opacity: 1;
+  border-color: var(--pp-accent);
+}
+.pp-param-panel.is-collapsed .pp-param-panel__head,
+.pp-param-panel.is-collapsed .pp-param-panel__tabs,
+.pp-param-panel.is-collapsed .pp-param-panel__body,
+.pp-param-panel.is-collapsed .pp-param-panel__foot,
+.pp-param-panel.is-collapsed .pp-param-panel__resize {
+  display: none !important;
+}
+.pp-param-panel__fab {
+  display: none;
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  border: 0;
+  background: linear-gradient(145deg, #3c3836, #1d2021);
+  color: var(--pp-accent);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font: inherit;
+}
+.pp-param-panel.is-collapsed .pp-param-panel__fab {
+  display: flex;
+}
+.pp-param-panel__fab-mark {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--pp-fg);
+}
+.pp-param-panel__fab:hover .pp-param-panel__fab-mark {
+  color: var(--pp-accent);
+}
+
+.pp-param-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--pp-bg-2);
+  border-bottom: 1px solid var(--pp-border);
+  cursor: grab;
+  flex: 0 0 auto;
+}
+.pp-param-panel__head:active { cursor: grabbing; }
+.pp-param-panel__title {
+  flex: 1;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pp-param-panel__tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  padding: 8px 10px 0;
+  flex: 0 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.pp-param-panel__tabs::-webkit-scrollbar { width: 0; height: 0; display: none; }
+.pp-param-panel__tab {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--pp-muted);
+  border-radius: 8px 8px 0 0;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.pp-param-panel__tab:hover {
+  color: var(--pp-fg);
+  background: color-mix(in srgb, var(--pp-bg-2) 80%, transparent);
+}
+.pp-param-panel__tab.is-active {
+  color: var(--pp-fg);
+  background: var(--pp-bg-2);
+  border-color: var(--pp-border);
+  border-bottom-color: var(--pp-bg-2);
+}
+
+.pp-param-panel__btn {
+  appearance: none;
+  border: 1px solid var(--pp-border);
+  background: transparent;
+  color: var(--pp-fg);
+  border-radius: 8px;
+  padding: 7px 12px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1.35;
+}
+.pp-param-panel__btn:hover {
+  border-color: var(--pp-accent);
+  color: var(--pp-accent);
+}
+.pp-param-panel__btn--accent {
+  border-color: color-mix(in srgb, var(--pp-accent) 55%, var(--pp-border));
+  background: color-mix(in srgb, var(--pp-accent) 14%, transparent);
+  color: var(--pp-accent);
+}
+.pp-param-panel__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.pp-param-panel__btn--icon {
+  min-width: 34px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.pp-param-panel__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--pp-bg-2);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.pp-param-panel__body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.pp-param-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 6px 10px;
+  align-items: center;
+}
+.pp-param-row label {
+  grid-column: 1 / -1;
+  color: var(--pp-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.pp-param-row input[type="range"] {
+  width: 100%;
+  accent-color: var(--pp-accent);
+  height: 22px;
+}
+.pp-param-row input[type="number"],
+.pp-param-row input[type="text"],
+.pp-param-row select {
+  width: 100%;
+  grid-column: 1 / -1;
+  background: var(--pp-bg);
+  border: 1px solid var(--pp-border);
+  color: var(--pp-fg);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: 14px;
+}
+.pp-param-row select {
+  cursor: pointer;
+}
+.pp-param-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--pp-accent);
+  justify-self: start;
+}
+.pp-param-val {
+  color: var(--pp-accent);
+  font-variant-numeric: tabular-nums;
+  min-width: 3.6em;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* gruvbox swatch grid — no free color picker */
+.pp-param-swatches {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pp-param-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: 2px solid color-mix(in srgb, var(--pp-border) 80%, #000);
+  cursor: pointer;
+  padding: 0;
+  appearance: none;
+  background: var(--sw, #282828);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.pp-param-swatch:hover {
+  transform: scale(1.06);
+}
+.pp-param-swatch.is-active {
+  border-color: var(--pp-swatch-ring);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--pp-accent) 70%, transparent),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+.pp-param-swatch-meta {
+  grid-column: 1 / -1;
+  font-size: 12px;
+  color: var(--pp-muted);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+.pp-param-panel__foot {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--pp-border);
+  background: var(--pp-bg);
+}
+.pp-param-panel__foot-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pp-param-panel__foot-row .pp-param-panel__btn {
+  flex: 1 1 auto;
+  min-width: 6.5em;
+  text-align: center;
+}
+.pp-param-panel__foot-row--primary .pp-param-panel__btn {
+  min-height: 38px;
+}
+
+.pp-param-panel__resize {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  width: 18px;
+  height: 18px;
+  cursor: nwse-resize;
+  background:
+    linear-gradient(
+      135deg,
+      transparent 0 46%,
+      var(--pp-muted) 46% 54%,
+      transparent 54% 70%,
+      var(--pp-muted) 70% 78%,
+      transparent 78%
+    );
+  opacity: 0.75;
+}
+.pp-param-panel__resize:hover {
+  opacity: 1;
+}
+
+/* select + option contrast — Windows native dropdown needs explicit option colors */
+.pp-param-row select,
+.pp-param-board select {
+  background: var(--pp-bg, #1d2021) !important;
+  color: var(--pp-fg, #ebdbb2) !important;
+  color-scheme: dark;
+}
+.pp-param-row select option,
+.pp-param-row select optgroup,
+.pp-param-board select option,
+.pp-param-board select optgroup {
+  background-color: #1d2021;
+  color: #ebdbb2;
+}
+
+/* ── 入包增补(2026-11-04):可见焦点 + 减少动效 ─────────────────────────────
+   原库版本两块都缺:键盘用户看不到焦点落在哪个控件上;系统开了「减少动效」时
+   展开/拖动仍有过渡。这里只补无障碍兜底,不改任何视觉取值与交互逻辑。 */
+.pp-param-panel :is(button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--pp-accent, #fe8019);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pp-param-panel,
+  .pp-param-panel *,
+  .pp-param-panel *::before,
+  .pp-param-panel *::after {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

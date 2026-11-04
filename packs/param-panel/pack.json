@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "id": "param-panel",
+  "title": "Param Panel · 悬浮调参板",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "旧主题库 components/param-panel(自产)",
+      "license": "MIT",
+      "what": "面板本体:pattern 结构、tab 分栏、swatch 吸附、拖/缩放/折叠、localStorage 记忆与底栏动作"
+    },
+    {
+      "name": "sai-assets PACK-CONTRACT v1",
+      "license": "MIT",
+      "what": "包形状、pack.json 字段与断言最低集的规则来源"
+    }
+  ],
+  "origin": {
+    "project": "theme-lab (旧主题库)",
+    "path": "components/param-panel",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/param-panel.css",
+      "src/param-panel.js",
+      "src/params.schema.json"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "tuner",
+    "demo",
+    "lab",
+    "swatch",
+    "palette",
+    "slider",
+    "localstorage",
+    "drag",
+    "resize",
+    "export",
+    "a11y",
+    "reduced-motion"
+  ],
+  "when": "做可调参 demo / 动效预览 / 主题试色页:参数 ≥3 个、需要当场看两档差别、颜色要受色板约束、调完要把当前值带走回写 params.json 的场景",
+  "not_for": "面向最终用户的生产界面(板只该在 lab/preview 挂)、没有参数可调的静态页、需要表单校验与提交的表单场景、移动端为主的阅读页",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-04",
+    "how": "python packs/param-panel/scripts/assert_tokens.py + 真机 ego lite 逐项",
+    "evidence": "PASS assert_tokens param-panel / css 8887 字节 · 14 个类 / js 27678 字节 · 导出 2 · 用到类 6 个(缺定义 0) / schema 类型 6 种 / 预览引用 1 条全部解析 / 预览 hex 27 个 / 挂载判定 命中 4 例 · 反例 3 例全不中 / 真机:站内 iframe、直开 preview/index.html、?lab=0 三态各一测(前两态挂板、lab=0 不挂但默认值照落);版式/组件/其它三栏切换正确;圆角 14→28px、内边距 24→40px、投影 12→32px、速度 1.6→3s、标题文本、网格开关全部即时驱动卡片;色板点 #3f7dca 生效且刷新后仍在;收起 56×56 方块→点开还原;Tab 焦点环 solid 2px rgb(254,128,25);console 无报错"
+  },
+  "canonical_home": null
+}

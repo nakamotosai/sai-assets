@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "saiassets-params-v1",
+  "title": "Sai Assets demo params",
+  "type": "object",
+  "required": ["slug", "defaults", "schema"],
+  "properties": {
+    "slug": { "type": "string" },
+    "version": { "type": "integer", "default": 1 },
+    "defaults": { "type": "object" },
+    "current": { "type": "object" },
+    "schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "label", "type"],
+        "properties": {
+          "key": { "type": "string" },
+          "label": { "type": "string" },
+          "type": { "enum": ["range", "number", "text", "color", "checkbox", "select"] },
+          "min": { "type": "number" },
+          "max": { "type": "number" },
+          "step": { "type": "number" },
+          "options": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}
