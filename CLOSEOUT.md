@@ -103,6 +103,7 @@
 ## 未完成(明确留档)
 
 - **体检工具口径**:`web_audit.py` 未实现 `exclude`/`scan_roots`,会把 `dist/packs/**`(400+ 个被嵌的预览页)当站点页面判 canonical/meta,且把 `<title>` 文本误判为资源引用;本轮据实记录为「红项不适用」,未刷绿。修这一条要动 harness 侧工具,不在本仓范围。
+- **`files` 清单单向校验**:闸只查「声明了却不存在」,不查「存在却没声明」;实测未登记的文件会照样进 zip 与详情页清单(只有 `apply.py` 取用不到)。要收紧得在 `gate.py` 加一条反向比对,会牵动 30 个包的既有清单 —— 未动,先记口径。
 - `MASTER-CHECKLIST.md` 未勾 5 项:C3(社交卡平台实测)、D3(Search Console/Bing 验证)、E8(Lighthouse 移动端基线)、G3(Uptime Kuma 监控项)、J6(发布后 24h/首周巡检)。都不阻断首发。
 - 展示站的 `mv-studio` / `gruvbox-dark` / `video-motion` 三个外部索引包只有降级卡(内容在本家),没有活预览 —— 这是设计选择,不是缺口。
 - 账本比对撞 1/8(与 `jewelry-site-lab` 色板距离 0.026):刻意接受(默认配色是用户拍板),理由写在 `concept.md` 与 `direction-approved.json`。

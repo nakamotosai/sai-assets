@@ -17,6 +17,7 @@
 | 提交前 | **先 `git add -A` 再 `python scripts/gate.py`**——闸只扫 git 跟踪文件,未 add 的新文件不在扫描面 |
 | 加一个包(自动上站)三步 | ① `python scripts/build_catalog.py` ② `python scripts/build_site.py` ③ `git add -A && python scripts/gate.py` 然后 push。**漏了 ①,CI 的 catalog 新鲜度闸会红、不部署**(错误信息就是叫你跑这条命令) |
 | 站点 | `scripts/build_site.py` 扫 `packs/*/pack.json` 出 `dist/`。**版式 = 印刷索引**:首页 30 条索引行(无卡片),悬停/聚焦某行右侧浮层跑该包真预览(一次一个 iframe,≥1100px 才出);详情页舞台在标题正下方,宽高双向 fit + 居中。构建自带 `verify()`(行数/详情页/预览/zip/子 demo/sitemap/零外链),任一不符即失败。CF 项目 `sai-assets`,域 `assets.ouuut.com`。 |
+| 往包里加文件 | 记得同时登记进该包 `pack.json` 的 `files`(tokens/css/src/usage…):闸是**单向**校验(声明了却不存在 → 红),反方向不拦 —— 实测未登记的文件**照样进 zip 与详情页清单**,只是 `apply.py` 取用时看不到它 |
 | 规则 | 禁用形态的**字面量只有一份**在公开层 `schema/banned.json`;内部标识在本地 `.private/banned.local.json`(gitignore)。**包内断言不许复刻规则**(源码里出现该形态即被判自伤) |
 | 行尾 | 仓内统一 LF(`.gitattributes`)。**任何 sha256 必须"LF 归一后再算"**,否则 Windows 工作区(CRLF)与 CI 检出(LF)会算出两个值 |
 | 版本 | 包级 `pack.json.version`,只增不改;`versions.json` 若记录文件哈希,改文件必须同轮重算 |
