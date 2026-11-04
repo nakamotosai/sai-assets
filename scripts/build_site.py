@@ -29,6 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 ASSET_VER = ""        # build() 里按外壳文件内容算,写进 URL 的 ?v=,避免部署后用户拿旧 JS
 PACKS = ROOT / "packs"
 SHELL = ROOT / "site"
+THUMBS = SHELL / "thumbs"          # 列表缩略图(离线截 + 入库,见 scripts/make_thumbs.mjs)
 REPO = "nakamotosai/sai-assets"
 SITE = "https://assets.ouuut.com"
 RAW = f"https://raw.githubusercontent.com/{REPO}/main/"
@@ -185,6 +186,43 @@ def code_files(pack: dict, pack_dir: Path) -> list[dict]:
 
 
 # ---------------------------------------------------------------- 数据装载
+SEC_RE = re.compile(r"<section[^>]*\sid=\"([A-Za-z0-9_-]+)\"[^>]*>(.*?)</section>", re.S)
+H_RE = re.compile(r"<h[1-3][^>]*>(.*?)</h[1-3]>", re.S)
+TAG_RE = re.compile(r"<[^>]+>")
+
+
+def preview_sections(text: str) -> list[dict]:
+    """从预览页抽段:取每个 <section id="x"> 里的第一个标题当标签。
+
+    失败了不装:没有 <section id=...> 的包就是「整页」一项,combobox 会禁用。
+    """
+    out = []
+    for m in SEC_RE.finditer(text or ""):
+        sid, body = m.group(1), m.group(2)
+        h = H_RE.search(body)
+        label = " ".join(TAG_RE.sub(" ", h.group(1)).split())[:34] if h else ""
+        out.append({"id": sid, "label": label or sid})
+    seen = set()
+    return [s for s in out if not (s["id"] in seen or seen.add(s["id"]))]
+
+
+def pack_modes(pd: Path) -> str:
+    """深浅:看 tokens/semantic/*.json 的档名。双档 → dual,单档 → dark/light,没有 → ''。"""
+    sem = pd / "tokens" / "semantic"
+    if not sem.is_dir():
+        return ""
+    names = [f.stem.lower() for f in sorted(sem.glob("*.json"))]
+    dark = [n for n in names if "dark" in n]
+    light = [n for n in names if "light" in n or "paper" in n]
+    if dark and light:
+        return "dual"
+    if dark:
+        return "dark"
+    if light:
+        return "light"
+    return ""
+
+
 def load_packs() -> list[dict]:
     rows = []
     for path in sorted(PACKS.glob("*/pack.json")):
@@ -223,6 +261,10 @@ def load_packs() -> list[dict]:
             "kb": round(nbytes / 1024),
             "swatches": swatches(pd),
             "code": code_files(pack, pd),
+            "sections": preview_sections(ptext),
+            "modes": pack_modes(pd),
+            "thumb": (f"assets/thumbs/{pack['id']}.webp"
+                      if (THUMBS / f"{pack['id']}.webp").is_file() else None),
         })
     return rows
 
@@ -290,24 +332,29 @@ def head(title: str, desc: str, canonical: str, *, depth: int, jsonld: str = "",
 
 
 def row_html(row: dict, index: int) -> str:
-    """索引行:编号 / 名称+id / 一句话 / 类目 / 版本+箭头。悬停由 JS 唤起右侧预览。"""
-    src = (f'packs/{row["id"]}/{row["preview"]}' if row["preview"]
-           else (row.get("preview_url") or ""))
-    search = " ".join([row["id"], row["title"], row["category"], " ".join(row["tags"]),
-                       row["when"], row["one_liner"]]).lower()
-    ext = " data-external" if row["external"] else ""
-    return (
-        f'<li class="row reveal" id="row-{esc(row["id"])}" data-cat="{esc(row["category"])}"'
-        f' data-search="{esc(search)}" data-src="{esc(src)}" data-heavy="{"1" if row["heavy"] else "0"}"'
-        f' data-title="{esc(row["title"])}" data-id="{esc(row["id"])}"{ext}>'
-        f'<a href="p/{esc(row["id"])}/">'
-        f'<span class="no">{index:02d}</span>'
-        f'<span class="name"><span class="dot" aria-hidden="true"></span>{esc(row["title"])}'
-        f'<small>{esc(row["id"])}</small></span>'
-        f'<span class="desc">{esc((row["when"] or row["one_liner"]).split(":")[0])}</span>'
-        f'<span class="cat">{esc(CAT_CHIP.get(row["category"], row["category"]))}</span>'
-        f'<span class="ver">v{esc(row["version"])}<span class="arrow" aria-hidden="true">→</span></span>'
-        f'</a></li>')
+    """左栏一行:缩略图 / 序号 / 名称 + 一句话 / 深浅 pill。
+
+    筛选、搜索、键盘全跑在 data-* 上,不在渲染期查第二张表。
+    """
+    pill = {"dark": "暗", "light": "亮", "dual": "双模"}.get(row["modes"], "")
+    thumb = (f'<img src="{esc(row["thumb"])}" alt="" width="160" height="100" loading="lazy" decoding="async">'
+             if row["thumb"] else f'<span class="pk-nothumb nums" aria-hidden="true">{index:02d}</span>')
+    search = " ".join([row["id"], row["title"], row["category"], CAT_CHIP.get(row["category"], ""),
+                       row["modes"], " ".join(row["tags"]), row["when"], row["one_liner"]]).lower()
+    desc = " ".join((row["one_liner"] or row["when"] or "").split(":")[0].split())[:64]
+    pill_html = f'<span class="pk-pill">{pill}</span>' if pill else ""
+    return (f'<li class="pk" data-id="{esc(row["id"])}" data-cat="{esc(row["category"])}"'
+            f' data-mode="{esc(row["modes"] or "none")}" data-search="{esc(search)}"'
+            f' data-name="{esc(row["title"])}" data-when="{esc(row["when"])}"'
+            f' data-cat-label="{esc(CAT_CHIP.get(row["category"], row["category"]))}"'
+            f' data-mode-label="{esc(pill)}" data-preview="{esc(row["preview"] or "")}"'
+            f' data-sections="{esc(json.dumps(row["sections"], ensure_ascii=False))}">'
+            f'<a class="pk-a" href="p/{esc(row["id"])}/">'
+            f'<span class="pk-thumb">{thumb}</span>'
+            f'<span class="pk-no nums">{index:02d}</span>'
+            f'<span class="pk-txt"><b>{esc(row["title"])}</b><span>{esc(desc)}</span></span>'
+            f'{pill_html}'
+            f'</a></li>')
 
 
 def stage_html(row: dict, preview: str | None, heavy: bool, up: str = "") -> str:
@@ -337,7 +384,8 @@ def tag_exists(pid: str, ver: str) -> bool:
     return _TAG_CACHE[key]
 
 
-def install_html(row: dict, up: str) -> str:
+def snip_list(row: dict) -> list[tuple[str, str]]:
+    """四段取用片段(详情页与探索器对话框共用一份口径,别再写第二套)。"""
     pid, ver = row["id"], row["version"]
     raw = f"{RAW}packs/{pid}/"
     cdn = f"{CDN}/{pid}@{ver}/packs/{pid}/"
@@ -362,14 +410,17 @@ def install_html(row: dict, up: str) -> str:
         onefile_code = f'<script type="module" src="{onefile}"></script>'
     else:
         onefile_code = f"curl -O {onefile}"
-    snippets = [
+    return [
         ("固定版本(CDN)" if pinned else "CDN(未打 tag · 跟随 main)", onefile_code),
         ("raw 直取(跟随 main)", f'curl -O {raw}SKILL.md'),
         ("仓库内落地", f'python scripts/apply.py {pid} --to <项目目录>'),
         ("整包下载", f'{SITE}/downloads/{pid}.zip' if not row["external"] else str(row.get("preview_url") or "")),
     ]
+
+
+def install_html(row: dict, up: str) -> str:
     blocks = []
-    for label, code in snippets:
+    for label, code in snip_list(row):
         blocks.append(
             f'<div class="snip"><div class="snip-head"><span>{esc(label)}</span>'
             f'<button class="copy" type="button" data-copy="{esc(code)}">复制</button></div>'
@@ -426,17 +477,43 @@ def page_footer(up: str, updated: str) -> str:
 
 
 # ---------------------------------------------------------------- 页面
+WIDTHS = {"desktop": (1280, 800), "tablet": (834, 1112), "phone": (390, 844)}
+MODE_LABEL = {"dark": "暗", "light": "亮", "dual": "双模"}
+
+
 def render_home(rows: list[dict], updated: str) -> str:
+    """首页 = 「列表栏 + 常驻预览框」的探索器。
+
+    三件事同屏:挑(列表/筛选/键盘)、看(自己的预览页,宽度可切)、拿(取用片段)。
+    状态进 URL(?pack=&w=&s=),刷新/分享不丢;没有 JS 时退化成一份完整的可点索引。
+    """
     shown = [r for r in rows if r["category"] in CAT_ORDER]
     ordered = sorted(shown, key=lambda r: (CAT_ORDER.index(r["category"]), r["id"]))
     rows_html = "\n".join(row_html(r, i + 1) for i, r in enumerate(ordered))
     counts = {c: sum(1 for r in rows if r["category"] == c) for c in CAT_ORDER}
-    chips = ['<button class="filter on" type="button" data-cat="all">全部<em>%d</em></button>' % len(rows)]
+    chips = [f'<button class="chip on" type="button" data-cat="all" aria-pressed="true">'
+             f'全部<em>{len(rows)}</em></button>']
     for c in CAT_ORDER:
         if counts[c]:
-            chips.append(f'<button class="filter" type="button" data-cat="{c}">'
+            chips.append(f'<button class="chip" type="button" data-cat="{c}" aria-pressed="false">'
                          f'{esc(CAT_CHIP[c])}<em>{counts[c]}</em></button>')
+    mode_counts: dict[str, int] = {}
+    for r in rows:
+        mode_counts[r["modes"] or "none"] = mode_counts.get(r["modes"] or "none", 0) + 1
+    mode_chips = ['<button class="chip on" type="button" data-mode="all" aria-pressed="true">全部</button>']
+    for key in ("dark", "light", "dual"):
+        if mode_counts.get(key):
+            mode_chips.append(f'<button class="chip" type="button" data-mode="{key}" aria-pressed="false">'
+                              f'{MODE_LABEL[key]}<em>{mode_counts[key]}</em></button>')
     n_surf = sum(surfaces(r) for r in rows)
+    seeded = next((r for r in ordered if r["preview"]), ordered[0])
+    payload = {}
+    for r in rows:
+        payload[r["id"]] = {
+            "name": r["title"],
+            "snips": [[label, code] for label, code in snip_list(r)],
+        }
+    body_json = json.dumps(payload, ensure_ascii=False).replace("<", "\\u003c")
     jsonld = ld({
         "@context": "https://schema.org", "@type": "WebSite", "name": "sai-assets",
         "url": SITE + "/",
@@ -447,41 +524,118 @@ def render_home(rows: list[dict], updated: str) -> str:
                  f"{len(rows)} 个可复用网页资产包:{('、'.join(CAT_CHIP[c] for c in CAT_ORDER if counts[c]))}"
                  f"。每一包 = 入口 + 产物 + 配对规则 + 断言,带活预览与整包下载。",
                  SITE + "/", depth=0, jsonld=jsonld)
-            + f"""<main id="main">
-  <section class="hero">
-    <div class="hero-top">
-      <div>
-        <h1>可复用的<em>网页资产库</em></h1>
-        <p class="lede">主题、排版、动效、组件 —— 每一包都是一份<strong>能当场试印</strong>的样张:
-          悬停任意一行,右边跑的就是它自己的预览页。</p>
+            + f"""<main id="main" class="ex">
+  <div class="ex-grid">
+    <aside class="rail" aria-label="资产列表">
+      <div class="rail-top">
+        <h1 class="rail-h1">可复用的网页资产库</h1>
+        <p class="rail-lede">挑一个包,右边跑的就是它自己的预览页;宽度切到手机看它在小屏的样子。</p>
+        <div class="rail-counts">
+          <span><b class="nums">{len(rows)}</b>包</span>
+          <span><b class="nums">{n_surf}</b>可看面</span>
+          <span><b class="nums">{len([c for c in CAT_ORDER if counts[c]])}</b>类目</span>
+          <span><b class="nums">{esc(updated[5:])}</b>更新</span>
+        </div>
+        <fieldset class="facet">
+          <legend class="eyebrow">类目</legend>
+          <div class="chips" role="group" aria-label="按类目筛选">{"".join(chips)}</div>
+        </fieldset>
+        <fieldset class="facet">
+          <legend class="eyebrow">深浅</legend>
+          <div class="chips" role="group" aria-label="按深浅筛选">{"".join(mode_chips)}</div>
+        </fieldset>
+        <div class="rail-search">
+          <label class="sr" for="q">搜索资产</label>
+          <input id="q" type="search" placeholder="搜索 id / 标签 / 场景" autocomplete="off">
+          <kbd aria-hidden="true">/</kbd>
+        </div>
       </div>
-      <div class="counts">
-        <div><b>{len(rows)}</b><span>包</span></div>
-        <div><b>{n_surf}</b><span>可看面</span></div>
-        <div><b>{len([c for c in CAT_ORDER if counts[c]])}</b><span>类目</span></div>
-        <div><b>{esc(updated[5:])}</b><span>更新</span></div>
-      </div>
-    </div>
-  </section>
-  <section class="toolbar" id="index">
-    <div class="filters" role="group" aria-label="按类目筛选">{"".join(chips)}</div>
-    <div class="search">
-      <label class="sr" for="q">搜索资产</label>
-      <input id="q" type="search" placeholder="搜索 id / 标签 / 场景" autocomplete="off">
-      <kbd aria-hidden="true">/</kbd>
-      <span class="hint" id="q-hint" aria-live="polite"></span>
-    </div>
-  </section>
-  <section class="index">
-    <ol class="rows" id="rows">
+      <ol class="pk-list" id="pk-list" data-seed="{esc(seeded["id"])}">
 {rows_html}
-    </ol>
-    <p class="empty" id="empty" hidden>没有匹配的资产。清空搜索或换个类目再看看。</p>
-  </section>
-  <aside class="peek" id="peek" aria-hidden="true"></aside>
+      </ol>
+      <p class="pk-empty" id="pk-empty" hidden>没有匹配的资产。<button class="txt-btn" id="pk-reset" type="button">清空筛选</button></p>
+      <ul class="rail-hints" aria-label="键盘操作">
+        <li><kbd>↑</kbd><kbd>↓</kbd><span>切换</span></li>
+        <li><kbd>↵</kbd><span>取用</span></li>
+        <li><kbd>o</kbd><span>详情</span></li>
+        <li><kbd>/</kbd><span>搜索</span></li>
+        <li><kbd>esc</kbd><span>关闭</span></li>
+      </ul>
+    </aside>
+
+    <section class="stage-col" aria-label="预览与取用">
+      <header class="stage-head-live">
+        <p class="stage-title">
+          <span class="nums" id="h-no">01</span>
+          <span class="sep" aria-hidden="true">·</span>
+          <span id="h-name">{esc(seeded["title"])}</span>
+          <span class="pill" id="h-mode" hidden></span>
+          <span class="pill" id="h-cat">{esc(CAT_CHIP.get(seeded["category"], seeded["category"]))}</span>
+        </p>
+        <p class="stage-when" id="h-when">{esc(seeded["when"])}</p>
+        <div class="stage-actions">
+          <button class="btn-primary" type="button" id="btn-use">取用<svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 12h8M12.5 8.5 16 12l-3.5 3.5"/></svg></button>
+          <a class="btn-ghost" id="h-detail" href="p/{esc(seeded["id"])}/">详情与断言</a>
+        </div>
+      </header>
+
+      <div class="frame rim" id="frame">
+        <div class="frame-bar">
+          <button class="icon-btn sq" type="button" id="prev" aria-label="上一个包" title="上一个 (k)">‹</button>
+          <button class="icon-btn sq" type="button" id="next" aria-label="下一个包" title="下一个 (j)">›</button>
+          <label class="seg-label" for="sect">段</label>
+          <select id="sect" aria-label="预览段">
+            <option value="">整页</option>
+          </select>
+          <fieldset class="widthseg" aria-label="预览宽度">
+            <button type="button" data-w="desktop" class="on" aria-pressed="true">桌面</button>
+            <button type="button" data-w="tablet" aria-pressed="false">平板</button>
+            <button type="button" data-w="phone" aria-pressed="false">手机</button>
+          </fieldset>
+          <button class="txt-btn ml" type="button" id="reload">重新加载</button>
+          <button class="txt-btn" type="button" id="hide" aria-pressed="false">隐藏预览</button>
+        </div>
+        <div class="urlbar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <code id="url">packs/{esc(seeded["id"])}/{esc(seeded["preview"] or "")}</code>
+          <a class="txt-btn" id="open-new" href="packs/{esc(seeded["id"])}/{esc(seeded["preview"] or "")}" target="_blank" rel="noopener">新窗口 ↗</a>
+        </div>
+        <div class="viewport" id="viewport">
+          <div class="fit" id="fit">
+          <div class="scaler" id="scaler">
+            <iframe id="pv" title="包预览" loading="eager" referrerpolicy="no-referrer"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"{f' src="packs/{esc(seeded["id"])}/{esc(seeded["preview"])}"' if seeded["preview"] else ""}></iframe>
+          </div>
+          </div>
+          <p class="frame-empty" id="pv-empty" hidden>这个包没有预览页 —— 内容在详情页(GitHub 索引)。</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <dialog class="use" id="use" aria-label="取用片段">
+    <div class="use-in">
+      <header class="use-head">
+        <div>
+          <p class="eyebrow">取用</p>
+          <h2 id="use-name">—</h2>
+        </div>
+        <button class="icon-btn sq" type="button" id="use-close" aria-label="关闭">✕</button>
+      </header>
+      <div class="snips" id="use-snips"></div>
+      <p class="use-foot"><a id="use-detail" href="#">详情页(元数据 · 断言 · 代码)</a>
+        <span class="muted">取用后请在项目 <code>design-lock.json</code> 的 <code>assets[]</code> 记一行。</span></p>
+    </div>
+  </dialog>
+
+  <script type="application/json" id="pack-json">{body_json}</script>
 </main>
 """
             + page_footer("", updated))
+
+
+WIDTHS = {"desktop": (1280, 800), "tablet": (834, 1112), "phone": (390, 844)}
+MODE_LABEL = {"dark": "暗", "light": "亮", "dual": "双模"}
 
 
 def render_detail(row: dict, rows: list[dict], updated: str) -> str:
@@ -696,9 +850,21 @@ def verify(out: Path, rows: list[dict]) -> None:
     """构建自检:任一不成立即非零退出(CI 里等于阻断部署)。"""
     bad: list[str] = []
     home = (out / "index.html").read_text(encoding="utf-8")
-    n_rows = home.count('class="row reveal"')
+    n_rows = home.count('<li class="pk" ')
     if n_rows != len(rows):
-        bad.append(f"索引行数 {n_rows} != 包数 {len(rows)}")
+        bad.append(f"探索器行数 {n_rows} != 包数 {len(rows)}")
+    for need in ('id="pk-list"', 'id="pv"', 'id="use"', 'id="pack-json"', 'class="widthseg"'):
+        if need not in home:
+            bad.append(f"首页缺探索器零件 {need}")
+    # 缩略图:有图就必须拷进 dist,且列表里真的用上了
+    with_thumb = [r for r in rows if r["thumb"]]
+    for r in with_thumb:
+        if not (out / r["thumb"]).is_file():
+            bad.append(f"缺缩略图 {r['thumb']}")
+        if r["thumb"] not in home:
+            bad.append(f"缩略图没进列表 {r['id']}")
+    if with_thumb and len(with_thumb) < len([r for r in rows if r["preview"]]) - 3:
+        bad.append(f"缩略图覆盖太少:{len(with_thumb)} 张,{len([r for r in rows if r['preview']])} 个包有预览")
     for r in rows:
         page = out / "p" / r["id"] / "index.html"
         if not page.is_file():
@@ -763,6 +929,8 @@ def build(out: Path) -> None:
     ed = PACKS / "ouuut-editorial" / "css"
     shutil.copy2(ed / "all.css", out / "assets" / "all.css")
     shutil.copy2(ed / "type.css", out / "assets" / "type.css")
+    if THUMBS.is_dir():
+        shutil.copytree(THUMBS, out / "assets" / "thumbs")
     h = hashlib.sha256()
     for name in ("site.css", "site.js", "all.css", "type.css"):
         h.update((out / "assets" / name).read_bytes())
