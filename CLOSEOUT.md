@@ -100,6 +100,10 @@
 
 用户问「以后传新东西会不会自动更新」时验证出的唯一人工依赖:新增包/改 `version`·`when` 时 `catalog.json` 过期 → 旧 CI 直接红、不部署。现改为 CI 重建 + bot 回提交。线上用真包验过两个方向:只丢目录不重建 catalog → 自动补齐上线(31 条);只删目录不重建 → 自动收回(30 条)。裸上传(含 GitHub 网页拖文件)从此可上站;真会拦下不部署的只剩 `gate.py` 与 `build_site.py verify()`。见 `MASTER-CHECKLIST` E9。
 
+## make.ouuut.com 拆件(2026-11-04 第五轮)
+
+三包入库:motion-kit(动效层十四模块)· token-harbor(墨色双模设计语言,32 token × 2 模)· locale-router(语言路由 + 三态开关)。均带 preview / docs/usage / 包内断言,闸与断言全绿,浏览器逐项实测(含无 JS 降级)。**未拆**:三语生成器、构建自检、部署脚本、埋点服务(站点绑定或基建,且无对应类目);表单状态机列为候选。口径见 `progress.md`。
+
 ## 未完成(明确留档)
 
 - **体检工具口径**:`web_audit.py` 未实现 `exclude`/`scan_roots`,会把 `dist/packs/**`(400+ 个被嵌的预览页)当站点页面判 canonical/meta,且把 `<title>` 文本误判为资源引用;本轮据实记录为「红项不适用」,未刷绿。修这一条要动 harness 侧工具,不在本仓范围。

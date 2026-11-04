@@ -22,7 +22,7 @@
   {
    "id": "themes",
    "title": "主题 · 配色与字体",
-   "count": 14,
+   "count": 15,
    "items": [
     {
      "id": "abyss-lab-record",
@@ -103,6 +103,12 @@
      "path": "packs/swiss-inverted/"
     },
     {
+     "id": "token-harbor",
+     "version": "1.0.0",
+     "one_liner": "营销 / 服务型站点与产品落地页要一套「无色相」设计语…",
+     "path": "packs/token-harbor/"
+    },
+    {
      "id": "tokyo-crime-dark",
      "version": "1.0.0",
      "one_liner": "暖黑底 #16130e 配暖色顺序带：深色底上把 Co…",
@@ -132,13 +138,19 @@
   {
    "id": "web-fx",
    "title": "网页动效",
-   "count": 4,
+   "count": 5,
    "items": [
     {
      "id": "bg-fx",
      "version": "1.0.0",
      "one_liner": "需要一块有机制、经得起近看的动态背景:首屏 hero、…",
      "path": "packs/bg-fx/"
+    },
+    {
+     "id": "motion-kit",
+     "version": "1.0.0",
+     "one_liner": "长页 / 落地页 / 作品集要在零依赖前提下加一层动效…",
+     "path": "packs/motion-kit/"
     },
     {
      "id": "page-transition",
@@ -163,7 +175,7 @@
   {
    "id": "web-ui",
    "title": "UI 组件",
-   "count": 6,
+   "count": 7,
    "items": [
     {
      "id": "dual-theme-toggle",
@@ -176,6 +188,12 @@
      "version": "1.0.0",
      "one_liner": "想在一页里横向对比 border-beam / thi…",
      "path": "packs/libraries-dev-fx/"
+    },
+    {
+     "id": "locale-router",
+     "version": "1.0.0",
+     "one_liner": "多语言静态站要决定「第一次来的人进哪一版」时:根路径按…",
+     "path": "packs/locale-router/"
     },
     {
      "id": "nav-rail-marquee",

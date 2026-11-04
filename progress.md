@@ -107,3 +107,15 @@
   - **改 catalog 本身**:29 条 → bot 补 `d7d3d8b` 回 30 含 `ouuut-com`。
   - 三次 bot 推送均未触发第二个 run(无回环);写权限靠工作流 `permissions: contents: write` 提权(仓库默认是 read)。
 - 结论口径:**改包内容/pack.json 之外的任何文件 = 直接传就上站;新增包或改 `version`/`when` = 以前必须跑 `build_catalog`,现在 CI 兜底**。
+
+## 2026-11-04 · 从 make.ouuut.com 拆件入库(3 包)
+
+用户要求把另一条线正在做的 `https://make.ouuut.com/`(源码在工作目录 `make-site`)"各个零件拆出来"复用。先做只读侦察(一个 scout 全量清点 + 我读动效层与 CSS),对照既有 30 包划出三处真空位,再收三包:
+
+- **motion-kit**(web-fx,kind fx)← `assets/css/motion.css` + `assets/js/motion.js`(两文件 38.9KB)。十四个模块,每个只在页面上存在对应标记时启动:入场(位移+模糊)、逐字上浮、错峰、计数、倾斜+指针光斑、磁吸、自定义光标+上下文标签、首屏 2D 粒子场+指针光、过程轨道、图片漂移、顶部进度线、导航当前段、FAQ 高度折叠、明暗切换的 View Transition 圆形揭示。**两处本包增补**(源站没有,已写进 SKILL/usage 并在源码里注释):`data-split="chars"` 逐字切 + 禁则粘标点 —— 源站是英文站,空白切词对中文标题只会切出一个 token。脚本里两个主题钩子改成中性命名空间 `window.motionKit.applyTheme / viewTheme`。
+- **token-harbor**(themes,kind theme)← `assets/css/site.css`(1025 行)。按契约拆成 tokens/absolute.json(38 色 + 6 影)+ tokens/index.json + tokens/semantic/{dark,light}.json(32 条 × 2)+ css/default.css(暗色默认 + 全套构件 38KB)+ css/themes.css(只出两个 [data-theme] 作用域)。实测对比度:近黑 ink/bg 14.78:1、muted/bg 6.34:1;暖白 16.66:1 / 5.02:1。与源表 6 处归一化差异(无引用的 accent-fg/bg 与 border 折叠、chrome 分隔线改 --line、主按钮文字统一 --on-accent、主推卡删掉 light 覆盖、去 @font-face 自托管字体、8 位 hex 折 rgba)全部写进 docs。
+- **locale-router**(web-ui,kind ui)← `assets/js/lang.js` + `.lang-switch` 段。改写成配置化零件(四规则逐条保留:参数优先/深链保留/根路径单次重定向/爬虫放行),决策层抽成纯函数 `decide()` 可用 Node 单测;预览 `dryRun:true` 保证加载与点击都不跳转。命中区桌面 32px、`@media (pointer: coarse)` 自动抬到 44px(我加的)。
+
+**没拆的(明确留档)**:`build.py` + `templates/` + `content.json`(三语生成器)、`tools/check_build.py`、`tools/deploy.py`(原子替换 + nginx)、`deploy/analytics_api.py`(第一方无 cookie 事件汇)—— 都是站点绑定或基建:硬编码 host/域名/本机凭据路径、断言与当前内容强耦合、仓内无 requirements/manifest,且 `fx-engines` 是"动效引擎"、没有装"生成器/服务"的类目。表单状态机(原生校验 + 蜜罐 + 状态文案)与主题包重叠,列为候选。
+
+验收:三包各自断言 PASS(31 assertions 全绿);`gate.py` 0 findings / 33 packs;`build_site.py` PASS 33 包 · 42 可看面 · 47 页 · 568 文件;浏览器实测 motion-kit 预览(js-motion/motion-ready 正常、16 个入场元素、逐字 17 字、计数到 10/0/2/60、倾斜 --rx/--ry、磁吸 ±7px、光标标签、进度线、折叠、footer 跑马灯);**降级实测**:摘掉 js-motion/motion-ready 后 16 个入场元素与 17 个字全部可见、进度线/画布/光标 display:none;token-harbor 画廊两模切换实测(暗/亮各截,亮色 body #f7f6f2 + ink #17170f);locale-router 点开关只换 aria-current、URL 不变。站点侧:33 行索引、悬停新行浮层跑包内预览、三张详情页舞台 src 指向包内 preview。

@@ -1,12 +1,12 @@
 # sai-assets · 可复用网页资产库(themes / web-fx / web-ui / fonts)
 
 > 一个包 = 一个能直接抄进项目的自洽单元:配色与字体、配对规则、断言、活预览。
-> 公开仓:`github.com/nakamotosai/sai-assets` · 展示站:**https://assets.ouuut.com**(Cloudflare Pages,29 包带活预览与下载)
+> 公开仓:`github.com/nakamotosai/sai-assets` · 展示站:**https://assets.ouuut.com**(Cloudflare Pages,33 包带活预览与下载)
 > 事实源:sai-assets `docs/PACK-CONTRACT.md`(契约的原始范例 gruvbox-theme 已于 2026-11-04 整体并入本仓 `packs/gruvbox-dark/`,旧仓归档)
 
 ## 状态
 
-- 阶段:**M2 完成(29 包全绿)→ M3/M4 收尾**
+- 阶段:**M2 完成(33 包全绿)→ M3/M4 收尾**
 - 里程碑树:`TRACK_TREE.md` · 范围白名单:`docs/WHITELIST.md` · 包契约:`docs/PACK-CONTRACT.md`
 - 决策记录:`docs/adr/adr-0001-single-repo-multi-pack-fresh-history.md`
 
@@ -67,8 +67,9 @@ python scripts/build_catalog.py && python scripts/build_site.py && git add -A &&
 
 - **M0 建档拍板** ✅ 生产根 + 门规 + ADR-0001 + PACK 契约 v1 + 公开收录判据 `docs/SCOPE.md`
 - **M1 单包打通** ✅ 生成器 + 清洗闸 + catalog + 公开仓 + skill 取用协议 + 一次真消费(`design-lock.assets[]` 已记版本)
-- **展示站** ✅ `https://assets.ouuut.com`(30 包 / 39 可看面;含 sites 类目:ouuut.com 作为线上作品条目):卡片跑包内真实预览、详情页可切视口 + 代码页签 + 四路取用、每包确定性 zip;加包即上站(preview/pr-<n> 预览环境)
+- **展示站** ✅ `https://assets.ouuut.com`(33 包 / 42 可看面;含 sites 类目:ouuut.com 作为线上作品条目):卡片跑包内真实预览、详情页可切视口 + 代码页签 + 四路取用、每包确定性 zip;加包即上站(preview/pr-<n> 预览环境)
 - **M2 存量迁移** ✅ 29 包:themes 14 · fonts 2 · web-fx 4 · web-ui 6 · fx-engines 1 · references 1 · video-motion 1(索引)
+- **M5 从成品站拆件** ✅ 3 包(from `make-site`,2026-11-04):web-fx **motion-kit**(动效层十模块)· themes **token-harbor**(墨色双模设计语言)· web-ui **locale-router**(语言路由 + 三态语言开关)。现计 sites 1 · themes 15 · fonts 2 · web-fx 5 · web-ui 7 · fx-engines 1 · references 1 · video-motion 1
 - **M3 自动化** ⏳ CI 已绿(gate + pages);tag/release 可用;harvest → PR 回收链已备待跑一次真 PR
 - M4 私有侧收口 ⏳ 旧库已降级;待:旧私仓归档、最终 closeout
 

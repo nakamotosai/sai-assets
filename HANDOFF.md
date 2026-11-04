@@ -6,9 +6,10 @@
 ## 1 现在是什么状态(2026-11-04)
 
 - **M0/M1/M2 全部完成**,M3 除"真 PR 回收链"已跑通(PR #1 已 squash 合并),M4 只剩旧私仓归档与最终收尾。
-- 仓内 **30 个包**(29 个资产包 + 1 个线上作品条目 `ouuut-com`)、闸全绿(`PASS gate: 0 findings, 29 packs, 27 assertions`)、`catalog.json` 6698B ≤ 8KB、展示站 **https://assets.ouuut.com** 30 条索引(39 个可看面;索引式版式,悬停出右侧活预览)。
+- 仓内 **33 个包**(32 个资产包 + 1 个线上作品条目 `ouuut-com`)、闸全绿(`PASS gate: 0 findings, 33 packs, 31 assertions`)、`catalog.json` 7542B ≤ 8KB、展示站 **https://assets.ouuut.com** 33 条索引(42 个可看面;索引式版式,悬停出右侧活预览)。
+- 2026-11-04 新并入 3 包,全部来自自家成品站 `https://make.ouuut.com/`(源站(本机另一个工作目录)仍在迭代,包是当时的快照):**motion-kit**(web-fx,动效层十模块:入场/逐字/错峰/计数/倾斜/磁吸/光标/首屏粒子场/轨道/漂移/进度线/当前段/折叠/VT 过场)、**token-harbor**(themes,Token Harbor 墨色双模设计语言,32 条语义 token × 2 模 + 全套构件)、**locale-router**(web-ui,四规则语言路由 + 三态语言开关)。
 - 三个 CI workflow:`gate.yml`(公开内容闸 + 断言)、`site.yml`(闸 → 重建 catalog → `build_site.py` 构建自检 → `wrangler pages deploy`)、`preview.yml`(PR → `pr-<n>` 预览环境 + 回评地址)。旧 `pages.yml` 已退役,GitHub Pages 已下线。
-- 已发布 tag:`pack/ouuut-editorial@1.0.0`、`pack/minimalist-essential@1.0.1`。
+- 已发布 tag:`pack/ouuut-editorial@1.0.1`、`pack/minimalist-essential@1.0.1`、`pack/gruvbox-dark@2.0.0`。
 
 ## 2 关键约定(别踩)
 
