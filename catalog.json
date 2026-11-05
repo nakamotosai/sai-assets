@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "repo": "nakamotosai/sai-assets",
- "updated": "2026-11-04",
+ "updated": "2026-11-06",
  "base": "https://raw.githubusercontent.com/nakamotosai/sai-assets/main/",
  "how_to_use": "读本文件选包(只有发现字段)→ 取 base+path+pack.json 看完整元数据 → 读 SKILL.md 按 apply 步骤落地;项目侧用 python scripts/apply.py <id> --to <dir>",
  "categories": [
