@@ -471,7 +471,7 @@ def page_footer(up: str, updated: str) -> str:
   <span><a href="{up}catalog.json">catalog.json</a></span>
   <span><a href="{up}assets/app.json">app.json</a></span>
   <span><a href="{GH}">源码</a></span>
-  <span><a href="mailto:out@saaaai.com">out@saaaai.com</a></span>
+  <span><a href="mailto:out@ouuut.com">out@ouuut.com</a></span>
   <span><a href="https://ouuut.com/#contact">联系 / Contact</a></span>
   <span>更新 {esc(updated)}</span>
 </footer>
