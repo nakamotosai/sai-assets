@@ -1,0 +1,72 @@
+{
+  "id": "opsz-axes",
+  "title": "光学尺寸轴的实测范围(可核对的轴值)",
+  "note": "轴名是 OpenType 标准小写 opsz。下面四组都在本机用 fontTools 读过 fvar,不是抄文档。拿到新字族先跑同一段读一遍再填表。",
+  "how_to_read": "python -c \"from fontTools.ttLib import TTFont; f=TTFont('X.woff2'); print([(a.axisTag,a.minValue,a.defaultValue,a.maxValue) for a in f['fvar'].axes])\"",
+  "fonts": [
+    {
+      "family": "Fraunces",
+      "license": "OFL-1.1",
+      "axes": {
+        "opsz": {
+          "min": 9,
+          "default": 9,
+          "max": 144
+        },
+        "wght": {
+          "min": 100,
+          "default": 900,
+          "max": 900
+        }
+      },
+      "has_opsz": true,
+      "verified": "2026-11-10 本机读 fvar:opsz 9–144(default 9)、wght 100–900(default 900)"
+    },
+    {
+      "family": "JetBrains Mono",
+      "license": "OFL-1.1",
+      "axes": {
+        "wght": {
+          "min": 100,
+          "default": 400,
+          "max": 800
+        }
+      },
+      "has_opsz": false,
+      "verified": "2026-11-10 本机读 fvar:只有 wght,无 opsz"
+    },
+    {
+      "family": "Figtree",
+      "license": "OFL-1.1",
+      "axes": {
+        "wght": {
+          "min": 300,
+          "default": 300,
+          "max": 900
+        }
+      },
+      "has_opsz": false,
+      "verified": "2026-11-10 本机读 fvar:只有 wght,无 opsz"
+    },
+    {
+      "family": "Jost",
+      "license": "OFL-1.1",
+      "axes": {
+        "wght": {
+          "min": 100,
+          "default": 400,
+          "max": 900
+        }
+      },
+      "has_opsz": false,
+      "verified": "2026-11-10 本机读 fvar:只有 wght,无 opsz"
+    }
+  ],
+  "coverage_note": "本表只列本机实测过的四个字族,不是全网扫描 —— 别把它当「只有这几个带轴」的依据。",
+  "hard_rules": [
+    "没有 opsz 轴的字族写 has_opsz:false,不许标 true —— 假轴会让整页对照看起来「全都一样」,却被当成设计问题去排查",
+    "字体文件不进本包(许可与体积都不合适):只给轴值、档位与配方,字体由使用者按各自许可自取",
+    "读到 default 不等于该用哪档:Fraunces 的 wght 默认值是 900(最粗),做正文时几乎一定不是你要的",
+    "同字号对照五档只是验证法;若五行完全一样,先怀疑字族没有 opsz,别先怀疑 CSS 写错"
+  ]
+}

@@ -1,0 +1,308 @@
+/*!
+ * roller-controls — 滚筒选择器 + 波形滑杆 + 锥形 dock
+ * MIT License · sai-assets pack roller-controls v1.0.0
+ * 作用域限定在 .rc 内。滑杆底层是原生 input[type=range](键盘、屏幕阅读器、触控全免费),
+ * 波形只是它的可视化层;滚筒走原生滚动 + scroll-snap,惯性回弹由浏览器给。
+ */
+
+/* ── 0 · 变量 ─────────────────────────────────────────────── */
+.rc {
+  --rc-ink: var(--ink, #1a1a16);
+  --rc-bg: var(--bg, #f5f3ed);
+  --rc-muted: var(--muted, #5b5a53);
+  --rc-rule: var(--rule, rgba(26, 26, 22, 0.16));
+  --rc-rule-soft: var(--rule-soft, rgba(26, 26, 22, 0.085));
+  --rc-accent: var(--accent, #cd5545);
+  --rc-accent-ink: var(--accent-ink, #ae4b3d);
+  --rc-surface: var(--surface, rgba(26, 26, 22, 0.05));
+
+  --rc-font: var(--sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans SC", sans-serif);
+  --rc-mono: var(--mono, "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  --rc-serif: var(--serif, Georgia, "Noto Serif SC", serif);
+
+  /* 滚筒:行高 × 可见行数 = 高度。改这两个数要同时改 JS 里的读取(用 getComputedStyle 读,不用手抄) */
+  --rc-item: 34px;
+  --rc-rows: 5;
+  --rc-mask: 18%;
+
+  --rc-t: 0.22s;
+  --rc-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  color: var(--rc-ink);
+  font-family: var(--rc-font);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.rc[data-mode="dark"] {
+  --rc-ink: var(--ink, #edebe4);
+  --rc-bg: var(--bg, #0e0e0c);
+  --rc-muted: var(--muted, #a3a199);
+  --rc-rule: var(--rule, rgba(237, 235, 228, 0.18));
+  --rc-rule-soft: var(--rule-soft, rgba(237, 235, 228, 0.09));
+  --rc-surface: var(--surface, rgba(237, 235, 228, 0.06));
+  --rc-accent-ink: var(--accent-ink, #d76e5d);
+}
+.rc *,
+.rc *::before,
+.rc *::after {
+  box-sizing: border-box;
+}
+
+/* ── 1 · 滚筒 ─────────────────────────────────────────────── */
+.rc-wheel {
+  position: relative;
+  width: 88px;
+  height: calc(var(--rc-item) * var(--rc-rows));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  border-radius: 6px;
+  /* 上下淡出:靠两层 linear-gradient 遮罩,不用额外的渐变元素 */
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 var(--rc-mask),
+    #000 calc(100% - var(--rc-mask)),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 var(--rc-mask),
+    #000 calc(100% - var(--rc-mask)),
+    transparent 100%
+  );
+}
+.rc-wheel::-webkit-scrollbar {
+  display: none;
+}
+.rc-wheel:focus-visible {
+  outline: 2px solid var(--rc-accent);
+  outline-offset: 2px;
+}
+/* 首尾补白:让第一项与最后一项也能滚到正中 */
+.rc-wheel::before,
+.rc-wheel::after {
+  content: "";
+  display: block;
+  height: calc(var(--rc-item) * (var(--rc-rows) - 1) / 2);
+}
+
+.rc-wheel-item {
+  position: relative; /* 选中线的锚点必须在这一项上,不能落在滚动容器上(否则滚完线不跟) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--rc-item);
+  scroll-snap-align: center;
+  font-family: var(--rc-serif);
+  font-size: 22px;
+  font-weight: 200;
+  font-variant-numeric: tabular-nums;
+  color: var(--rc-muted);
+  cursor: pointer;
+  user-select: none;
+  /* 远离中心时压扁一点:纯 transform,不触发重排 */
+  transition: color var(--rc-t) var(--rc-ease), opacity var(--rc-t) var(--rc-ease);
+}
+.rc-wheel-item[aria-selected="true"] {
+  color: var(--rc-ink);
+  font-weight: 300;
+}
+/* 选中带一道细线,给「当前值」一个非颜色的回执 */
+.rc-wheel-item[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 22px;
+  height: 1px;
+  transform: translateX(-50%);
+  background: var(--rc-accent);
+}
+
+/* 两枚滚筒并排:必须给固定栏宽,否则块级子项各吃一半宽度,中间冒号被挤出去 */
+.rc-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.rc-colon {
+  font-family: var(--rc-serif);
+  font-size: 26px;
+  font-weight: 200;
+  color: var(--rc-muted);
+  padding: 0 2px;
+}
+.rc-readout {
+  font-family: var(--rc-mono);
+  font-size: 13px;
+  color: var(--rc-muted);
+  margin-top: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 2 · 波形滑杆 ─────────────────────────────────────────── */
+.rc-wave {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  max-width: 460px;
+}
+.rc-wave-field {
+  position: relative;
+  height: 78px;
+  display: flex;
+  align-items: center;
+}
+/* 柱:高度由 --rc-bar 给,由 JS 按拇指距离写。纯 CSS 时是静态梯度。 */
+.rc-bars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.rc-bars i {
+  flex: 1 1 0;
+  min-width: 2px;
+  height: calc(var(--rc-bar, 0.2) * 100%);
+  border-radius: 1px;
+  background: var(--rc-rule);
+  transition: background-color var(--rc-t) var(--rc-ease), height 0.08s linear;
+}
+.rc-bars i[data-on] {
+  background: var(--rc-accent);
+}
+
+/* 原生 range 盖在柱上:全透明,只留交互与无障碍。拇指给一圈可见回执。 */
+.rc-range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.rc-range:focus-visible {
+  outline: none;
+}
+.rc-range::-webkit-slider-runnable-track {
+  height: 100%;
+  background: transparent;
+}
+.rc-range::-moz-range-track {
+  height: 100%;
+  background: transparent;
+}
+.rc-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--rc-bg);
+  border: 1.5px solid var(--rc-accent);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
+  margin-top: 0;
+}
+.rc-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--rc-bg);
+  border: 1.5px solid var(--rc-accent);
+}
+.rc-range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--rc-accent) 35%, transparent);
+}
+.rc-range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--rc-accent) 35%, transparent);
+}
+.rc-value {
+  font-family: var(--rc-mono);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  min-width: 2.6em;
+  text-align: right;
+  color: var(--rc-ink);
+}
+
+/* ── 3 · 锥形 dock ────────────────────────────────────────── */
+.rc-dock {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 10px 12px;
+  width: fit-content;
+  border: 1px solid var(--rc-rule-soft);
+  border-radius: 12px;
+  background: var(--rc-bg);
+}
+.rc-dock-btn {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--rc-rule-soft);
+  border-radius: 10px;
+  background: var(--rc-surface);
+  color: var(--rc-ink);
+  font: inherit;
+  font-family: var(--rc-mono);
+  font-size: 15px;
+  cursor: pointer;
+  /* 缩放锚在底部,放大时像从桌面「长起来」 */
+  transform-origin: 50% 100%;
+  transform: scale(var(--rc-s, 1)) translateY(calc((var(--rc-s, 1) - 1) * -6px));
+  transition: transform 0.14s var(--rc-ease), border-color var(--rc-t) var(--rc-ease);
+  will-change: transform;
+}
+.rc-dock-btn:hover {
+  border-color: var(--rc-rule);
+}
+.rc-dock-btn:focus-visible {
+  outline: 2px solid var(--rc-accent);
+  outline-offset: 2px;
+}
+/* 工具条的标签:默认藏起,指针进入 dock 才显示 */
+.rc-dock-label {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  font-family: var(--rc-mono);
+  font-size: 12px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  background: var(--rc-ink);
+  color: var(--rc-bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--rc-t) var(--rc-ease);
+  white-space: nowrap;
+}
+.rc-dock-btn {
+  position: relative;
+}
+.rc-dock-btn:hover .rc-dock-label,
+.rc-dock-btn:focus-visible .rc-dock-label {
+  opacity: 1;
+}
+
+/* ── 4 · 降级 ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .rc *,
+  .rc *::before,
+  .rc *::after {
+    transition-duration: 0.001ms !important;
+    animation-duration: 0.001ms !important;
+  }
+  /* 减速时不做锥形放大:只保留底部对齐,不再随指针变形 */
+  .rc-dock-btn {
+    transform: none;
+  }
+}

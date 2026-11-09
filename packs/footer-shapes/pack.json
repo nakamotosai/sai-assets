@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "id": "footer-shapes",
+  "title": "Footer Shapes · 页脚五形态(排印 / 栅格 / 大字 / 动效 / 小字)",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "sai-assets PACK-CONTRACT v1",
+      "license": "MIT",
+      "what": "包形状、pack.json 字段与断言最低集的规则来源"
+    },
+    {
+      "name": "sai-assets pack ouuut-editorial",
+      "license": "MIT",
+      "what": "回退配色取自纸白 / 炭黑两档语义层,包内对比度断言同口径"
+    }
+  ],
+  "origin": {
+    "project": "five-sites-demos",
+    "path": "public/demos.css",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/footer-shapes.css",
+      "src/footer-shapes.js"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "footer",
+    "wordmark",
+    "link-grid",
+    "subscribe-form",
+    "marquee",
+    "details-faq",
+    "optical-size",
+    "reduced-motion",
+    "information-density"
+  ],
+  "when": "站点底部需要的不只是版权行:要在「品牌当唯一大件 / 链接成栅格并带订阅表单 / 联系语最大化 / 动效带节奏 / 只留一行」五种信息密度里选一个落地,且要求换类名即可切换、骨架不变",
+  "not_for": "只需要一行版权(取小字式一段即可);页脚要承载三层以上站点地图(栅格式最多四列平铺);跑马灯文字必须被完整索引;需要 cookie 同意与语言切换等合规件",
+  "verified": {
+    "date": "2026-11-10",
+    "how": "python packs/footer-shapes/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens footer-shapes | 引用 2 个(包内 2 / https 0)· 声明路径 5 个全部存在 · src 2 文件 10461 字节 · 包内 8 文件 40883 字节 | 对比度 light ink 15.73 · muted 6.24 · accent-ink 4.89 · accent(图形) 3.80 | dark ink 16.20 · muted 7.47 · accent-ink 5.78 · accent(图形) 4.58"
+  },
+  "canonical_home": null
+}

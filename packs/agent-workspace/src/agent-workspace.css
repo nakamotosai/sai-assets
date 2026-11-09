@@ -1,0 +1,611 @@
+/*!
+ * agent-workspace — 对话工作台外壳(线程 / 流式气泡 / 流水 / 工具回执 / 审批卡 / 输入框)
+ * MIT License · sai-assets pack agent-workspace v1.0.0
+ * 全部规则限定在 .aw 内;配色只读宿主 token,缺省走下面的回退值(取自库内已验过的双模色)。
+ */
+
+/* ── 0 · 变量 ─────────────────────────────────────────────── */
+.aw {
+  --aw-bg: var(--bg, #f5f3ed);
+  --aw-surface: var(--surface, rgba(26, 26, 22, 0.05));
+  --aw-surface-2: var(--surface-2, rgba(26, 26, 22, 0.085));
+  --aw-ink: var(--ink, #1a1a16);
+  --aw-muted: var(--muted, #5b5a53);
+  --aw-rule: var(--rule, rgba(26, 26, 22, 0.16));
+  --aw-rule-soft: var(--rule-soft, rgba(26, 26, 22, 0.085));
+  --aw-accent: var(--accent, #cd5545);
+  --aw-accent-ink: var(--accent-ink, #ae4b3d);
+  --aw-ok: var(--green, #678618);
+  --aw-warn: var(--blue, #3f7dca);
+  --aw-err: var(--red, #cd5545);
+
+  --aw-font: var(--sans, ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Noto Sans SC", sans-serif);
+  --aw-mono: var(--mono, "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+  --aw-serif: var(--serif, Georgia, "Noto Serif SC", serif);
+
+  --aw-radius: 6px;
+  --aw-pad: 14px;
+  --aw-gap: 12px;
+  --aw-t: 0.22s;
+  --aw-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  color: var(--aw-ink);
+  font-family: var(--aw-font);
+  font-size: 15px;
+  line-height: 1.66;
+}
+
+/* 深色回退值:宿主自己给 token 时这两组都不生效 */
+.aw[data-mode="dark"] {
+  --aw-bg: var(--bg, #0e0e0c);
+  --aw-surface: var(--surface, rgba(237, 235, 228, 0.06));
+  --aw-surface-2: var(--surface-2, rgba(237, 235, 228, 0.1));
+  --aw-ink: var(--ink, #edebe4);
+  --aw-muted: var(--muted, #a3a199);
+  --aw-rule: var(--rule, rgba(237, 235, 228, 0.18));
+  --aw-rule-soft: var(--rule-soft, rgba(237, 235, 228, 0.09));
+  --aw-accent-ink: var(--accent-ink, #d76e5d);
+}
+
+.aw *,
+.aw *::before,
+.aw *::after {
+  box-sizing: border-box;
+}
+
+/* ── 1 · 两栏外壳 ─────────────────────────────────────────── */
+.aw-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 330px) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .aw-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* 网格子项默认 min-width:auto,内部超宽内容会把轨道顶出去 → 必须锁 0 */
+.aw-side,
+.aw-main {
+  min-width: 0;
+}
+.aw-side {
+  display: grid;
+  gap: var(--aw-gap);
+  position: sticky;
+  top: 24px;
+}
+@media (max-width: 900px) {
+  .aw-side {
+    position: static;
+  }
+}
+.aw-main {
+  display: grid;
+  gap: var(--aw-gap);
+  grid-template-columns: minmax(0, 1fr);
+}
+.aw-main > * {
+  min-width: 0;
+}
+
+/* ── 2 · 小标题 ───────────────────────────────────────────── */
+.aw-h {
+  margin: 0;
+  font-family: var(--aw-mono);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--aw-muted);
+}
+
+/* ── 3 · 任务计划 ─────────────────────────────────────────── */
+.aw-card {
+  border: 1px solid var(--aw-rule-soft);
+  border-radius: var(--aw-radius);
+  background: var(--aw-bg);
+  overflow: hidden;
+}
+.aw-card-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px var(--aw-pad);
+  border-bottom: 1px solid var(--aw-rule-soft);
+  font-size: 14px;
+}
+.aw-card-h b {
+  font-weight: 500;
+}
+.aw-card-h .aw-count {
+  margin-left: auto;
+  font-family: var(--aw-mono);
+  font-size: 12px;
+  color: var(--aw-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.aw-todo {
+  margin: 0;
+  padding: 6px var(--aw-pad) 12px;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+}
+.aw-todo li {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  padding: 7px 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.aw-todo li[data-status="pending"] {
+  color: var(--aw-muted);
+}
+.aw-todo li[data-status="active"] {
+  color: var(--aw-ink);
+}
+.aw-todo li[data-status="complete"] {
+  color: var(--aw-muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--aw-rule);
+}
+
+/* 状态点:圆形三态,不用图标字体 */
+.aw-dot {
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--aw-rule);
+  position: relative;
+}
+.aw-todo li[data-status="complete"] .aw-dot {
+  border-color: var(--aw-ok);
+  background: var(--aw-ok);
+}
+.aw-todo li[data-status="complete"] .aw-dot::after {
+  content: "";
+  position: absolute;
+  left: 3.5px;
+  top: 1px;
+  width: 4px;
+  height: 7px;
+  border: solid var(--aw-bg);
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(42deg);
+}
+.aw-todo li[data-status="active"] .aw-dot {
+  border-color: var(--aw-accent);
+}
+.aw-todo li[data-status="active"] .aw-dot::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: var(--aw-accent);
+  animation: aw-pulse 1.6s var(--aw-ease) infinite;
+}
+@keyframes aw-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* 进行中任务的进度条 */
+.aw-bar {
+  grid-column: 2;
+  height: 2px;
+  margin-top: 6px;
+  background: var(--aw-rule-soft);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.aw-bar > i {
+  display: block;
+  height: 100%;
+  width: calc(var(--aw-progress, 0) * 100%);
+  background: var(--aw-accent);
+  transition: width 0.6s var(--aw-ease);
+}
+
+/* ── 4 · 流水(推理 / 搜索 / 工具调用) ──────────────────── */
+.aw-feed {
+  margin: 0;
+  padding: 10px var(--aw-pad) 12px;
+  list-style: none;
+  display: grid;
+  gap: 2px;
+  font-size: 14px;
+}
+.aw-feed li {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 0;
+  color: var(--aw-muted);
+}
+.aw-feed li[data-status="active"] {
+  color: var(--aw-ink);
+}
+.aw-feed .aw-ico {
+  width: 14px;
+  height: 14px;
+  color: var(--aw-muted);
+}
+.aw-feed .aw-meta {
+  font-family: var(--aw-mono);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  color: var(--aw-muted);
+}
+.aw-feed code {
+  font-family: var(--aw-mono);
+  font-size: 13px;
+  color: var(--aw-ink);
+  background: var(--aw-surface);
+  padding: 1px 5px;
+  border-radius: 3px;
+  overflow-wrap: anywhere;
+}
+.aw-feed .aw-plus {
+  color: var(--aw-ok);
+  font-family: var(--aw-mono);
+  font-size: 12px;
+}
+.aw-feed .aw-minus {
+  color: var(--aw-err);
+  font-family: var(--aw-mono);
+  font-size: 12px;
+}
+
+/* 展开后的搜索结果条目。
+   这里必须显式覆盖 .aw-feed li 的三列网格与 6px 上下 padding —— 条目本身是 ul>li,
+   会命中上面的后代选择器,于是 <a> 落进 16px 的首列,文字被挤成一字一行。 */
+.aw-hits {
+  grid-column: 2 / -1;
+  margin: 6px 0 2px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+.aw-hits li {
+  display: block;
+  padding: 0;
+}
+.aw-hits a {
+  display: block;
+  padding: 5px 8px;
+  border-left: 1px solid var(--aw-rule);
+  color: var(--aw-ink);
+  font-size: 13px;
+  text-decoration: none;
+  transition: background-color var(--aw-t) var(--aw-ease), border-color var(--aw-t) var(--aw-ease);
+}
+.aw-hits a:hover {
+  background: var(--aw-surface);
+  border-left-color: var(--aw-accent);
+}
+.aw-hits a:focus-visible {
+  outline: 2px solid var(--aw-accent);
+  outline-offset: 1px;
+}
+.aw-hits .aw-host {
+  color: var(--aw-muted);
+  font-family: var(--aw-mono);
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+/* ── 5 · 对话气泡 ─────────────────────────────────────────── */
+.aw-thread {
+  display: grid;
+  gap: var(--aw-gap);
+  grid-template-columns: minmax(0, 1fr);
+}
+.aw-thread > * {
+  min-width: 0;
+}
+.aw-bubble {
+  max-width: 62ch;
+  padding: 11px 14px;
+  border-radius: var(--aw-radius);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.aw-bubble[data-align="end"] {
+  margin-left: auto;
+  justify-self: end;
+}
+/* 四种变体:soft(浅底)/ solid(墨底反白)/ tint(强调淡底)/ outline(只描边) */
+.aw-bubble[data-variant="soft"] {
+  background: var(--aw-surface);
+}
+.aw-bubble[data-variant="solid"] {
+  background: var(--aw-ink);
+  color: var(--aw-bg);
+}
+.aw-bubble[data-variant="tint"] {
+  background: color-mix(in srgb, var(--aw-accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--aw-accent) 22%, transparent);
+}
+.aw-bubble[data-variant="outline"] {
+  background: transparent;
+  border: 1px solid var(--aw-rule);
+}
+
+/* ── 6 · 流式回答 ─────────────────────────────────────────── */
+.aw-stream {
+  border-top: 1px solid var(--aw-rule-soft);
+  padding-top: var(--aw-gap);
+}
+.aw-stream-body {
+  font-size: 15px;
+  line-height: 1.78;
+  min-height: 3.6em;
+  overflow-wrap: anywhere;
+}
+/* 光标:只在流式进行中出现,不占位 */
+.aw-stream[data-state="streaming"] .aw-stream-body::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 2px;
+  vertical-align: -0.16em;
+  background: var(--aw-accent);
+  animation: aw-caret 1s steps(2, start) infinite;
+}
+@keyframes aw-caret {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+.aw-stream[data-state="done"] .aw-stream-body::after {
+  display: none;
+}
+
+/* 引用标记:上标小方块,编号跳到底部列表 */
+.aw-cite {
+  font-family: var(--aw-mono);
+  font-size: 11px;
+  line-height: 1;
+  padding: 2px 4px;
+  margin-left: 2px;
+  border-radius: 3px;
+  background: var(--aw-surface-2);
+  color: var(--aw-accent-ink);
+  text-decoration: none;
+  vertical-align: 0.35em;
+  transition: background-color var(--aw-t) var(--aw-ease);
+}
+.aw-cite:hover {
+  background: color-mix(in srgb, var(--aw-accent) 18%, transparent);
+}
+.aw-cite:focus-visible {
+  outline: 2px solid var(--aw-accent);
+  outline-offset: 1px;
+}
+
+/* ── 7 · 工具回执 ─────────────────────────────────────────── */
+.aw-tool {
+  border: 1px solid var(--aw-rule-soft);
+  border-left: 2px solid var(--aw-ok);
+  border-radius: var(--aw-radius);
+  background: var(--aw-bg);
+  font-family: var(--aw-mono);
+  font-size: 13px;
+  overflow: hidden;
+}
+.aw-tool-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  color: var(--aw-muted);
+}
+.aw-tool-h .aw-status {
+  margin-left: auto;
+  color: var(--aw-ok);
+}
+.aw-tool pre {
+  margin: 0;
+  padding: 0 12px 10px;
+  overflow-x: auto;
+  line-height: 1.7;
+  color: var(--aw-ink);
+}
+/* 语法着色只用三档灰 + 一个强调,不引入调色板 */
+.aw-tool .k { color: var(--aw-accent-ink); }
+.aw-tool .n { color: var(--aw-ok); }
+.aw-tool .c { color: var(--aw-muted); }
+
+/* ── 8 · 审批卡 ───────────────────────────────────────────── */
+.aw-approve {
+  border: 1px solid var(--aw-rule);
+  border-radius: var(--aw-radius);
+  padding: var(--aw-pad);
+  display: grid;
+  gap: 12px;
+  background: var(--aw-bg);
+}
+.aw-approve-q {
+  display: grid;
+  gap: 6px;
+}
+.aw-approve-q > span {
+  font-size: 14px;
+  font-weight: 500;
+}
+.aw-opts {
+  display: grid;
+  gap: 6px;
+}
+.aw-opt {
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+  padding: 8px 10px;
+  border: 1px solid var(--aw-rule-soft);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: border-color var(--aw-t) var(--aw-ease), background-color var(--aw-t) var(--aw-ease);
+}
+.aw-opt:hover {
+  border-color: var(--aw-rule);
+  background: var(--aw-surface);
+}
+.aw-opt input {
+  margin: 3px 0 0;
+  accent-color: var(--aw-accent);
+  width: 14px;
+  height: 14px;
+}
+.aw-opt:focus-within {
+  outline: 2px solid var(--aw-accent);
+  outline-offset: 1px;
+}
+.aw-opt b {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+}
+.aw-opt small {
+  display: block;
+  color: var(--aw-muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.aw-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.aw-btn {
+  font: inherit;
+  font-size: 14px;
+  padding: 0 16px;
+  min-height: 38px;
+  border-radius: 4px;
+  border: 1px solid var(--aw-rule);
+  background: transparent;
+  color: var(--aw-ink);
+  cursor: pointer;
+  transition: background-color var(--aw-t) var(--aw-ease), border-color var(--aw-t) var(--aw-ease);
+}
+.aw-btn:hover {
+  background: var(--aw-surface);
+}
+.aw-btn:focus-visible {
+  outline: 2px solid var(--aw-accent);
+  outline-offset: 2px;
+}
+.aw-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.aw-btn--primary {
+  background: var(--aw-ink);
+  border-color: var(--aw-ink);
+  color: var(--aw-bg);
+}
+.aw-btn--primary:hover {
+  background: color-mix(in srgb, var(--aw-ink) 88%, var(--aw-bg));
+}
+.aw-verdict {
+  font-size: 13.5px;
+  color: var(--aw-muted);
+}
+.aw-verdict[data-tone="ok"] {
+  color: var(--aw-ok);
+}
+.aw-verdict[data-tone="no"] {
+  color: var(--aw-err);
+}
+
+/* ── 9 · 输入框 ───────────────────────────────────────────── */
+.aw-composer {
+  border-top: 1px solid var(--aw-rule-soft);
+  padding-top: var(--aw-gap);
+  display: grid;
+  gap: 8px;
+}
+.aw-input {
+  position: relative;
+  border: 1px solid var(--aw-rule);
+  border-radius: var(--aw-radius);
+  background: var(--aw-bg);
+  transition: border-color var(--aw-t) var(--aw-ease);
+}
+.aw-input:focus-within {
+  border-color: var(--aw-accent);
+}
+.aw-input textarea {
+  display: block;
+  width: 100%;
+  min-height: 46px;
+  max-height: 168px;
+  padding: 12px 14px;
+  border: 0;
+  background: transparent;
+  color: var(--aw-ink);
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  overflow-y: auto;
+}
+.aw-input textarea::placeholder {
+  color: var(--aw-muted);
+}
+.aw-input-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px 8px;
+}
+.aw-model {
+  font: inherit;
+  font-family: var(--aw-mono);
+  font-size: 12px;
+  padding: 4px 8px;
+  min-height: 30px;
+  border: 1px solid var(--aw-rule-soft);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--aw-muted);
+  cursor: pointer;
+}
+.aw-model:focus-visible {
+  outline: 2px solid var(--aw-accent);
+  outline-offset: 1px;
+}
+.aw-hint {
+  font-size: 12.5px;
+  color: var(--aw-muted);
+  margin-left: auto;
+  font-family: var(--aw-mono);
+}
+
+/* ── 10 · 降级:无脚本 / 减动效 ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .aw *,
+  .aw *::before,
+  .aw *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .aw-todo li[data-status="active"] .aw-dot::after {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>roller-controls · 滚筒 / 波形滑杆 / dock</title>
+<link rel="stylesheet" href="../src/roller-controls.css">
+<style>
+  html { background: #f5f3ed; color-scheme: light dark; }
+  body { margin: 0; padding: clamp(20px, 4vw, 44px); color: #1a1a16; font-family: system-ui, sans-serif; }
+  .stage { max-width: 900px; margin: 0 auto; display: grid; gap: 34px; }
+  .group { display: grid; gap: 34px; }
+  .stage-h { margin: 0 0 4px; font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+  .stage-d { margin: 0 0 18px; font-size: 14px; line-height: 1.7; color: #5b5a53; max-width: 46em; }
+  .k { font-family: ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: #5b5a53; margin: 0 0 12px; }
+  @media (prefers-color-scheme: dark) {
+    html { background: #0e0e0c; }
+    body { color: #edebe4; }
+    .stage-d, .k { color: #a3a199; }
+  }
+</style>
+</head>
+<body>
+<main class="stage">
+
+  <div>
+    <h1 class="stage-h">滚筒 · 波形滑杆 · dock</h1>
+    <p class="stage-d">
+      三件控件都真的能用:<b>滚筒</b>可以拖、可以滚、可以点某一项,也能用方向键走一档,松手自己吸附回正中;
+      <b>滑杆</b>底层是原生 <code>input[type=range]</code>,键盘与屏幕阅读器照常工作,柱子只是它的可视化;
+      <b>dock</b> 按指针到各按钮的距离做锥形放大,按 Tab 聚焦也会放大。
+    </p>
+  </div>
+
+  <section class="group">
+    <div>
+      <p class="k">滚筒选择器 · 两枚联动成时:分</p>
+      <div class="rc" data-rc-root data-mode="light">
+        <div class="rc-row">
+          <div class="rc-wheel" data-rc-wheel data-rc-readout="#rc-h" tabindex="0" role="listbox" aria-label="小时">
+            <div class="rc-wheel-item" role="option">07</div>
+            <div class="rc-wheel-item" role="option" aria-selected="true">08</div>
+            <div class="rc-wheel-item" role="option">09</div>
+            <div class="rc-wheel-item" role="option">10</div>
+            <div class="rc-wheel-item" role="option">11</div>
+            <div class="rc-wheel-item" role="option">12</div>
+            <div class="rc-wheel-item" role="option">13</div>
+            <div class="rc-wheel-item" role="option">14</div>
+          </div>
+          <span class="rc-colon" aria-hidden="true">:</span>
+          <div class="rc-wheel" data-rc-wheel data-rc-readout="#rc-m" tabindex="0" role="listbox" aria-label="分钟">
+            <div class="rc-wheel-item" role="option">20</div>
+            <div class="rc-wheel-item" role="option">25</div>
+            <div class="rc-wheel-item" role="option" aria-selected="true">30</div>
+            <div class="rc-wheel-item" role="option">35</div>
+            <div class="rc-wheel-item" role="option">40</div>
+            <div class="rc-wheel-item" role="option">45</div>
+            <div class="rc-wheel-item" role="option">50</div>
+            <div class="rc-wheel-item" role="option">55</div>
+          </div>
+        </div>
+        <p class="rc-readout" aria-live="polite">当前 <span id="rc-h">08</span>:<span id="rc-m">30</span></p>
+      </div>
+    </div>
+
+    <div>
+      <p class="k">波形滑杆 · 原生 range 的可视化层</p>
+      <div class="rc" data-rc-root data-mode="light">
+        <div class="rc-wave">
+          <div class="rc-wave-field" data-rc-wave>
+            <div class="rc-bars" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <input class="rc-range" type="range" min="0" max="100" value="62" aria-label="强度">
+          </div>
+          <span class="rc-value">62</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="k">锥形 dock · 指针距离驱动缩放</p>
+      <div class="rc" data-rc-root data-mode="light">
+        <div class="rc-dock" data-rc-dock role="toolbar" aria-label="工具">
+          <button class="rc-dock-btn" type="button"><span class="rc-dock-label">网格</span>▦</button>
+          <button class="rc-dock-btn" type="button"><span class="rc-dock-label">排版</span>Aa</button>
+          <button class="rc-dock-btn" type="button"><span class="rc-dock-label">取色</span>◐</button>
+          <button class="rc-dock-btn" type="button"><span class="rc-dock-label">动效</span>◔</button>
+          <button class="rc-dock-btn" type="button"><span class="rc-dock-label">导出</span>↧</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script src="../src/roller-controls.js"></script>
+</body>
+</html>

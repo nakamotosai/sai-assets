@@ -1,0 +1,159 @@
+/*!
+ * optical-type — 可变字体光学尺寸档(opsz)与字阶配方
+ * MIT License · sai-assets pack optical-type v1.0.0
+ * 本文件不含字体文件:只给「档位 → 轴值 → 字号」的映射与安全回退。
+ * 作用域限定在 .ot;所有轴名都是 CSS 标准 `font-variation-settings` 的写法。
+ */
+
+/* ── 0 · 变量与回退 ───────────────────────────────────────── */
+.ot {
+  /* 光学尺寸轴:9 最小(笔画最厚) → 144 最大(笔画最细、字腔最开)。
+     这是 OpenType 标准轴(小写 opsz),不是某家字体的私有轴。 */
+  --ot-opsz-display: 144;   /* 大标题 / 字标 */
+  --ot-opsz-lead: 48;       /* 引导句 */
+  --ot-opsz-body: 24;       /* 正文大字 */
+  --ot-opsz-small: 14;      /* 小字 */
+
+  /* 与 opsz 配对的字重档:字越大,光学尺寸自动变细,字重跟着降一档才不显得发飘 */
+  --ot-wght-display: 200;
+  --ot-wght-lead: 260;
+  --ot-wght-body: 340;
+  --ot-wght-small: 420;
+
+  /* 字阶:CJK 用 em 上限,不用 ch 限宽 */
+  --ot-size-display: clamp(2.6rem, 9vw, 5.6rem);
+  --ot-size-lead: clamp(1.25rem, 2.2vw, 1.75rem);
+  --ot-size-body: clamp(1rem, 1.15vw, 1.125rem);
+  --ot-size-small: 0.875rem;
+
+  --ot-lh-display: 0.94;
+  --ot-lh-lead: 1.34;
+  --ot-lh-body: 1.72;
+
+  /* 字距:display 收紧,小字放宽(小字收紧会糊成一团) */
+  --ot-ls-display: -0.03em;
+  --ot-ls-lead: -0.012em;
+  --ot-ls-body: 0;
+  --ot-ls-small: 0.01em;
+
+  color: inherit;
+  font-family: var(--serif, Georgia, "Noto Serif SC", serif);
+  font-synthesis: none; /* 缺档时不许浏览器合成假粗/假斜 */
+}
+
+/* ── 1 · 四档 ─────────────────────────────────────────────── */
+/* 每一档都给两个属性:标准 `font-variation-settings`(精确控轴)与
+   `font-optical-sizing: auto`(让浏览器按字号自己推 opsz)。
+   两者同时写时 variation-settings 优先 —— 所以想「自动」就别写它。 */
+
+.ot-display {
+  font-size: var(--ot-size-display);
+  line-height: var(--ot-lh-display);
+  letter-spacing: var(--ot-ls-display);
+  font-weight: var(--ot-wght-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" var(--ot-opsz-display), "wght" var(--ot-wght-display);
+}
+
+.ot-lead {
+  font-size: var(--ot-size-lead);
+  line-height: var(--ot-lh-lead);
+  letter-spacing: var(--ot-ls-lead);
+  font-weight: var(--ot-wght-lead);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" var(--ot-opsz-lead), "wght" var(--ot-wght-lead);
+}
+
+.ot-body {
+  font-size: var(--ot-size-body);
+  line-height: var(--ot-lh-body);
+  letter-spacing: var(--ot-ls-body);
+  font-weight: var(--ot-wght-body);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" var(--ot-opsz-body), "wght" var(--ot-wght-body);
+}
+
+.ot-small {
+  font-size: var(--ot-size-small);
+  line-height: 1.62;
+  letter-spacing: var(--ot-ls-small);
+  font-weight: var(--ot-wght-small);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" var(--ot-opsz-small), "wght" var(--ot-wght-small);
+}
+
+/* 纯自动档:只想让浏览器按字号推 opsz,不手工指定 */
+.ot-auto {
+  font-optical-sizing: auto;
+}
+
+/* ── 2 · 对照台:同一句话逐档摆开 ─────────────────────────── */
+.ot-compare {
+  display: grid;
+  gap: 18px;
+}
+.ot-row {
+  display: grid;
+  grid-template-columns: minmax(0, 84px) minmax(0, 1fr);
+  gap: 16px;
+  align-items: baseline;
+}
+@media (max-width: 620px) {
+  .ot-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+.ot-row > * {
+  min-width: 0;
+}
+.ot-row-k {
+  font-family: var(--mono, "JetBrains Mono", ui-monospace, monospace);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--muted, #5b5a53);
+  font-variant-numeric: tabular-nums;
+}
+/* 对照项统一在同一字号下比 opsz:这样才能看出「光学会变什么」 */
+.ot-row-s {
+  font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+  line-height: 1.24;
+  letter-spacing: -0.01em;
+  font-optical-sizing: auto;
+  overflow-wrap: anywhere;
+}
+
+/* ── 3 · 降级:没有可变轴时不许合成假粗细 ─────────────────── */
+/* 不支持 font-variation-settings 的浏览器会忽略上面那些声明,
+   落到 font-weight 上;`font-synthesis: none` 保证它不会伪造粗细造成错档。 */
+@supports not (font-variation-settings: "wght" 400) {
+  .ot-display,
+  .ot-lead,
+  .ot-body,
+  .ot-small {
+    font-variation-settings: normal;
+  }
+  .ot-display {
+    font-weight: 300;
+  }
+  .ot-lead {
+    font-weight: 400;
+  }
+  .ot-body {
+    font-weight: 400;
+  }
+  .ot-small {
+    font-weight: 400;
+  }
+}
+
+/* ── 4 · 打印:光学尺寸在纸面上失去意义,退回固定字重 ────── */
+@media print {
+  .ot-display,
+  .ot-lead,
+  .ot-body,
+  .ot-small {
+    font-variation-settings: normal;
+    font-optical-sizing: auto;
+  }
+}

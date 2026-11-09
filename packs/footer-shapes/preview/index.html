@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>footer-shapes · 页脚五形态</title>
+<link rel="stylesheet" href="../src/footer-shapes.css">
+<style>
+  html { background: #f5f3ed; color-scheme: light dark; }
+  body { margin: 0; padding: clamp(20px, 4vw, 44px); color: #1a1a16; font-family: system-ui, sans-serif; }
+  .wrap { max-width: 980px; margin: 0 auto; display: grid; gap: 30px; }
+  .h1 { margin: 0 0 4px; font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+  .lead { margin: 0; font-size: 14px; line-height: 1.7; color: #5b5a53; max-width: 46em; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .tab {
+    font: inherit; font-size: 14px; padding: 8px 14px; border: 0; border-radius: 2px;
+    background: rgba(26,26,22,.05); color: #5b5a53; cursor: pointer;
+    transition: background-color .2s, color .2s;
+  }
+  .tab:hover { color: #1a1a16; }
+  .tab[aria-selected="true"] { background: #1a1a16; color: #f5f3ed; }
+  .tab:focus-visible { outline: 2px solid #cd5545; outline-offset: 2px; }
+  .stage { border: 1px solid rgba(26,26,22,.085); border-radius: 3px; overflow: hidden; }
+  .note { font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; line-height: 1.7; color: #5b5a53; margin: 0; }
+  [hidden] { display: none !important; }
+  @media (prefers-color-scheme: dark) {
+    html { background: #0e0e0c; }
+    body { color: #edebe4; }
+    .lead, .note { color: #a3a199; }
+    .tab { background: rgba(237,235,228,.06); color: #a3a199; }
+    .tab:hover { color: #edebe4; }
+    .tab[aria-selected="true"] { background: #edebe4; color: #0e0e0c; }
+    .stage { border-color: rgba(237,235,228,.09); }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <div>
+    <h1 class="h1">页脚五形态</h1>
+    <p class="lead">
+      同一份数据、同一个类名骨架,换一个形态类就换一种排法。五种不是「五种设计风格」,是五种**信息密度**取向:
+      品牌当唯一大件(排印式)、链接成栅格(栅格式)、联系语最大化(大字式)、动效带节奏(动效式)、只留一行(小字式)。
+    </p>
+    <div class="tabs" role="tablist" aria-label="页脚形态">
+      <button class="tab" role="tab" type="button" aria-selected="true" data-pane="p-typo">排印式</button>
+      <button class="tab" role="tab" type="button" aria-selected="false" data-pane="p-grid">栅格式</button>
+      <button class="tab" role="tab" type="button" aria-selected="false" data-pane="p-large">大字式</button>
+      <button class="tab" role="tab" type="button" aria-selected="false" data-pane="p-anim">动效式</button>
+      <button class="tab" role="tab" type="button" aria-selected="false" data-pane="p-small">小字式</button>
+    </div>
+  </div>
+
+  <!-- 1 · 排印式 -->
+  <div class="stage" id="p-typo">
+    <footer class="fs ft--typo" data-mode="light">
+      <div class="fs-in">
+        <p class="fs-wordmark">Example Studio</p>
+        <div class="fs-typo-meta">
+          <span>独立工作室 · 东京 / 上海</span>
+          <span><a class="fs-link" href="mailto:out@example.com" style="display:inline">out@example.com</a></span>
+          <span>© 2026</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 2 · 栅格式 -->
+  <div class="stage" id="p-grid" hidden>
+    <footer class="fs ft--grid" data-mode="light">
+      <div class="fs-in">
+        <div class="fs-cols">
+          <div>
+            <p class="fs-k">作品</p>
+            <a class="fs-link" href="#">案例</a>
+            <a class="fs-link" href="#">方法</a>
+            <a class="fs-link" href="#">归档</a>
+          </div>
+          <div>
+            <p class="fs-k">关于</p>
+            <a class="fs-link" href="#">工作室</a>
+            <a class="fs-link" href="#">成员</a>
+            <a class="fs-link" href="#">招聘</a>
+          </div>
+          <div>
+            <p class="fs-k">联系</p>
+            <a class="fs-link" href="mailto:out@example.com">out@example.com</a>
+            <a class="fs-link" href="#">RSS</a>
+          </div>
+          <div>
+            <p class="fs-k">月刊</p>
+            <form class="fs-form" data-fs-form novalidate>
+              <input class="fs-input" type="email" placeholder="邮箱" aria-label="邮箱" autocomplete="email">
+              <button class="fs-btn" type="submit">订阅</button>
+            </form>
+            <p class="fs-form-msg" data-fs-msg aria-live="polite">一周最多一封。</p>
+          </div>
+        </div>
+        <div class="fs-bar">
+          <span>© 2026 Example Studio</span>
+          <span class="fs-bar-links"><a href="#">隐私</a><a href="#">条款</a></span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 3 · 大字式 -->
+  <div class="stage" id="p-large" hidden>
+    <footer class="fs ft--large" data-mode="light">
+      <div class="fs-in">
+        <p class="fs-huge">有活要聊?<a href="mailto:out@example.com">写封信</a>。</p>
+        <div class="fs-large-row">
+          <span>东京 · 上海 · 远程</span>
+          <a class="fs-large-link" href="mailto:out@example.com">out@example.com</a>
+          <span>© 2026</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 4 · 动效式 -->
+  <div class="stage" id="p-anim" hidden>
+    <footer class="fs ft--anim" data-mode="light">
+      <div class="fs-in">
+        <div class="fs-marquee">
+          <div class="fs-marquee-track">
+            <span>排版 · 网格 · 动效 · 配色 · 字体 · 留白 · 层级 · 节奏 · </span>
+            <span aria-hidden="true">排版 · 网格 · 动效 · 配色 · 字体 · 留白 · 层级 · 节奏 · </span>
+          </div>
+        </div>
+        <div class="fs-acc">
+          <details>
+            <summary>你们接什么样的活?</summary>
+            <p>品牌网站、编辑型长页、设计系统落地。不接纯外包改稿与竞价页。</p>
+          </details>
+          <details>
+            <summary>报价怎么算?</summary>
+            <p>按阶段固定价,不按时薪。首轮沟通后给一页范围与价格,不做无边界试稿。</p>
+          </details>
+          <details>
+            <summary>多久能上线?</summary>
+            <p>单页 2–3 周,多语言与动效齐的 4–6 周。排期以定金到账为准。</p>
+          </details>
+        </div>
+        <div class="fs-bar">
+          <span>© 2026 Example Studio</span>
+          <span class="fs-bar-links"><a href="mailto:out@example.com">out@example.com</a></span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 5 · 小字式 -->
+  <div class="stage" id="p-small" hidden>
+    <footer class="fs ft--small" data-mode="light">
+      <div class="fs-in">
+        <p class="fs-small-line">
+          独立工作室,做品牌网站与编辑型长页。全部交付含源码与设计令牌,不锁定在自家平台。
+        </p>
+        <div class="fs-small-meta">
+          <span>© 2026 Example Studio</span>
+          <a href="#">隐私</a>
+          <a href="#">条款</a>
+          <a href="mailto:out@example.com">out@example.com</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <p class="note">形态切换只换类名(ft--typo / ft--grid / ft--large / ft--anim / ft--small),HTML 骨架不变。</p>
+
+</main>
+<script src="../src/footer-shapes.js"></script>
+<script>
+  var tabs = [...document.querySelectorAll(".tab")];
+  tabs.forEach(function (t) {
+    t.addEventListener("click", function () {
+      tabs.forEach(function (o) {
+        var on = o === t;
+        o.setAttribute("aria-selected", on ? "true" : "false");
+        document.getElementById(o.dataset.pane).hidden = !on;
+      });
+    });
+  });
+</script>
+</body>
+</html>

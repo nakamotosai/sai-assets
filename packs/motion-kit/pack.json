@@ -4,7 +4,7 @@
   "title": "Motion Kit · 动效层(十模块)",
   "kind": "fx",
   "category": "web-fx",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "attribution": [
     {
@@ -32,22 +32,27 @@
     "preview": "preview/index.html"
   },
   "tags": [
-    "motion",
-    "scroll",
-    "reveal",
-    "split-text",
     "counter",
-    "tilt",
-    "magnetic",
     "cursor",
-    "hero-canvas",
-    "parallax",
     "faq",
-    "view-transition",
+    "hero-canvas",
+    "keyboard",
+    "magnetic",
+    "motion",
+    "odometer",
+    "parallax",
     "progressive-enhancement",
-    "reduced-motion"
+    "reduced-motion",
+    "reveal",
+    "scramble",
+    "scroll",
+    "sparkline",
+    "split-text",
+    "tabular-nums",
+    "tilt",
+    "view-transition"
   ],
-  "when": "长页 / 落地页 / 作品集要在零依赖前提下加一层动效时:滚动入场(位移+模糊)、标题按词逐字上浮、子项错峰、数字滚动、卡面倾斜+指针光斑、磁吸控件、跟随光标+上下文标签、首屏 canvas 粒子场+指针光、过程轨道进度、图片滚动漂移、顶部进度线、导航当前段高亮、FAQ 高度折叠、明暗切换的圆形揭示过场。每个模块只在页面上存在对应标记时才启动,可以只留你要的那几个。",
+  "when": "长页 / 落地页 / 作品集要在零依赖前提下加一层动效时:滚动入场(位移+模糊)、标题按词逐字上浮、子项错峰、数字滚动、卡面倾斜+指针光斑、磁吸控件、跟随光标+上下文标签、首屏 canvas 粒子场+指针光、过程轨道进度、图片滚动漂移、顶部进度线、导航当前段高亮、FAQ 高度折叠、明暗切换的圆形揭示过场、逐位滚动(odometer 每位数一根滚筒)、解谜式换字(未定型位滚字符)、带读数与键盘取点的趋势线(sparkline)。每个模块只在页面上存在对应标记时才启动,可以只留你要的那几个。",
   "not_for": "需要 3D/WebGL 或满屏重背景(走 bg-fx / three-fx);需要整页翻页过场或文字解散回聚(走 page-transition);需要压在四角的竖排跑马灯导航(走 nav-rail-marquee);要的是「深浅两态按钮 + 无闪切换」本身(走 dual-theme-toggle,本包只做切换那一刻的圆形揭示);React/Vue 组件封装(这是无依赖经典脚本层)。",
   "default_variant": null,
   "verified": {
@@ -55,5 +60,8 @@
     "how": "python packs/motion-kit/scripts/assert_tokens.py(元数据/声明路径/预览引用/data-URI 除外/实现标记/站点专有标识)+ python scripts/gate.py(仓级三层闸)",
     "evidence": "PASS assert_tokens motion-kit · declared=5 entry=SKILL.md preview=yes refs=2 · src=2 files / 38895B · cues: css 11 · js 20 · docs 8 · 无站点专有标识;仓级 gate 本包 0 命中(30→31 包,29 assertions)"
   },
-  "canonical_home": null
+  "canonical_home": null,
+  "changelog": [
+    "1.1.0:新增三模块 —— 逐位滚动 / 解谜式换字 / 带读数的趋势线;修两处宿主导致的退化(宿主把 b 设成 block 会把滚筒拉成整行宽、IntersectionObserver 阈值过高会让数字永远停在初始值)。"
+  ]
 }

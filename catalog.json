@@ -13,7 +13,7 @@
     {
      "id": "ouuut-com",
      "version": "1.0.0",
-     "one_liner": "想看库内资产拼成一个真实上线站是什么样:ouuut 主…",
+     "one_liner": "想看库内资产拼成一个真实上线站是什么样…",
      "path": "packs/ouuut-com/",
      "home": "https://ouuut.com/"
     }
@@ -27,91 +27,91 @@
     {
      "id": "abyss-lab-record",
      "version": "1.0.0",
-     "one_liner": "近黑底 + 工程网格 + 等宽 HUD + 单关键词橙…",
+     "one_liner": "近黑底 + 工程网格 + 等宽 HUD…",
      "path": "packs/abyss-lab-record/"
     },
     {
      "id": "fm-void",
      "version": "1.0.0",
-     "one_liner": "全黑 void + 半透明等宽字；戏在 canvas…",
+     "one_liner": "全黑 void + 半透明等宽字；戏在…",
      "path": "packs/fm-void/"
     },
     {
      "id": "gruvbox-dark",
      "version": "2.0.0",
-     "one_liner": "工具型暗色面板、终端风 UI、需要暖灰底 + 米黄字…",
+     "one_liner": "工具型暗色面板、终端风 UI、需要暖灰…",
      "path": "packs/gruvbox-dark/"
     },
     {
      "id": "minimalist-essential",
      "version": "1.0.1",
-     "one_liner": "删到不能再删：中性底 + 单强调色 + 8pt 网格…",
+     "one_liner": "删到不能再删：中性底 + 单强调色 +…",
      "path": "packs/minimalist-essential/"
     },
     {
      "id": "mohe-mono-blue",
      "version": "1.0.0",
-     "one_liner": "近黑冷蓝底 + 单一色相 218–223° 明度梯；唯…",
+     "one_liner": "近黑冷蓝底 + 单一色相 218–22…",
      "path": "packs/mohe-mono-blue/"
     },
     {
      "id": "ouuut-editorial",
      "version": "1.0.1",
-     "one_liner": "内容型 / 杂志型站点:纸白与炭黑双模、六色章节体系、…",
+     "one_liner": "内容型 / 杂志型站点:纸白与炭黑双模…",
      "path": "packs/ouuut-editorial/"
     },
     {
      "id": "paper-editorial",
      "version": "1.0.0",
-     "one_liner": "纸感编辑：米白画布、墨色正文、刊头朱红;适用:浅色 o…",
+     "one_liner": "纸感编辑：米白画布、墨色正文、刊头朱红…",
      "path": "packs/paper-editorial/"
     },
     {
      "id": "popart-neubrutal",
      "version": "1.0.0",
-     "one_liner": "奶油底 + 厚黑描边 + 硬偏移阴影 + 贴纸撞色;适…",
+     "one_liner": "奶油底 + 厚黑描边 + 硬偏移阴影…",
      "path": "packs/popart-neubrutal/"
     },
     {
      "id": "saaaai-mono",
      "version": "1.0.0",
-     "one_liner": "近黑 void + 银灰 ink + 等高线轮廓当 a…",
+     "one_liner": "近黑 void + 银灰 ink +…",
      "path": "packs/saaaai-mono/"
     },
     {
      "id": "saaaai-paper",
      "version": "1.0.0",
-     "one_liner": "暖纸浅底 + 陶土 accent，主页 t6;适用:陶…",
+     "one_liner": "暖纸浅底 + 陶土 accent，主页…",
      "path": "packs/saaaai-paper/"
     },
     {
      "id": "slow-ride-cream",
      "version": "1.0.0",
-     "one_liner": "暖奶油纸面 + 鼠尾草绿 + 番茄围巾，慢日子编辑风；…",
+     "one_liner": "暖奶油纸面 + 鼠尾草绿 + 番茄围巾…",
      "path": "packs/slow-ride-cream/"
     },
     {
      "id": "swiss-classic",
      "version": "1.0.0",
-     "one_liner": "暖米白纸底 + 暖黑 + 单一结构红；平涂无投影，靠明…",
+     "one_liner": "暖米白纸底 + 暖黑 + 单一结构红；…",
      "path": "packs/swiss-classic/"
     },
     {
      "id": "swiss-inverted",
      "version": "1.0.0",
-     "one_liner": "暖黑纸底 + 暖白墨 + 同一个结构红；纸↔墨互换，红…",
+     "one_liner": "暖黑纸底 + 暖白墨 + 同一个结构红…",
      "path": "packs/swiss-inverted/"
     },
     {
      "id": "token-harbor",
      "version": "1.0.0",
-     "one_liner": "营销 / 服务型站点与产品落地页要一套「无色相」设计语…",
+     "one_liner": "营销 / 服务型站点与产品落地页要一套…",
      "path": "packs/token-harbor/"
     },
     {
      "id": "tokyo-crime-dark",
      "version": "1.0.0",
-     "one_liner": "暖黑底 #16130e 配暖色顺序带：深色底上把 Co…",
+     "one_liner": "暖黑底 #16130e 配暖色顺序带：…",
      "path": "packs/tokyo-crime-dark/"
     }
    ]
@@ -119,19 +119,25 @@
   {
    "id": "fonts",
    "title": "排版配方",
-   "count": 2,
+   "count": 3,
    "items": [
     {
      "id": "cjk-thin-type-system",
      "version": "1.0.0",
-     "one_liner": "中文 / 日文暗色单页站、作品集、个人站要求「细、干净…",
+     "one_liner": "中文 / 日文暗色单页站、作品集、个人…",
      "path": "packs/cjk-thin-type-system/"
     },
     {
      "id": "cjk-typography",
      "version": "1.0.0",
-     "one_liner": "新中文项目定字族与字号时:先对三场景字号总表,再定回退…",
+     "one_liner": "新中文项目定字族与字号时:先对三场景字…",
      "path": "packs/cjk-typography/"
+    },
+    {
+     "id": "optical-type",
+     "version": "1.0.0",
+     "one_liner": "用带 opsz 轴的可变衬线做编辑型排…",
+     "path": "packs/optical-type/"
     }
    ]
   },
@@ -143,31 +149,31 @@
     {
      "id": "bg-fx",
      "version": "1.0.0",
-     "one_liner": "需要一块有机制、经得起近看的动态背景:首屏 hero、…",
+     "one_liner": "需要一块有机制、经得起近看的动态背景:…",
      "path": "packs/bg-fx/"
     },
     {
      "id": "motion-kit",
-     "version": "1.0.0",
-     "one_liner": "长页 / 落地页 / 作品集要在零依赖前提下加一层动效…",
+     "version": "1.1.0",
+     "one_liner": "长页 / 落地页 / 作品集要在零依赖…",
      "path": "packs/motion-kit/"
     },
     {
      "id": "page-transition",
      "version": "1.0.0",
-     "one_liner": "静态站/长页需要过场:多页站翻页过渡与页内进出场(原生…",
+     "one_liner": "静态站/长页需要过场:多页站翻页过渡与…",
      "path": "packs/page-transition/"
     },
     {
      "id": "particle-fx",
      "version": "1.0.0",
-     "one_liner": "页面需要一层轻量粒子:字标粒子组字、星野背景、银河盘视…",
+     "one_liner": "页面需要一层轻量粒子:字标粒子组字、星…",
      "path": "packs/particle-fx/"
     },
     {
      "id": "three-fx",
      "version": "1.0.0",
-     "one_liner": "需要一块**三维**、有物理感的空间效果:体波测地线盘…",
+     "one_liner": "需要一块**三维**、有物理感的空间效…",
      "path": "packs/three-fx/"
     }
    ]
@@ -175,54 +181,72 @@
   {
    "id": "web-ui",
    "title": "UI 组件",
-   "count": 8,
+   "count": 11,
    "items": [
+    {
+     "id": "agent-workspace",
+     "version": "1.0.0",
+     "one_liner": "做 agent / copilot 控…",
+     "path": "packs/agent-workspace/"
+    },
     {
      "id": "dual-theme-toggle",
      "version": "1.0.0",
-     "one_liner": "任何需要深浅两态的站点:内容型 / 工具型 / 文档站…",
+     "one_liner": "任何需要深浅两态的站点:内容型 / 工…",
      "path": "packs/dual-theme-toggle/"
+    },
+    {
+     "id": "footer-shapes",
+     "version": "1.0.0",
+     "one_liner": "站点底部需要的不只是版权行:要在「品牌…",
+     "path": "packs/footer-shapes/"
     },
     {
      "id": "libraries-dev-fx",
      "version": "1.0.0",
-     "one_liner": "想在一页里横向对比 border-beam / thi…",
+     "one_liner": "想在一页里横向对比 border-be…",
      "path": "packs/libraries-dev-fx/"
     },
     {
      "id": "locale-router",
      "version": "1.0.0",
-     "one_liner": "多语言静态站要决定「第一次来的人进哪一版」时:根路径按…",
+     "one_liner": "多语言静态站要决定「第一次来的人进哪一…",
      "path": "packs/locale-router/"
     },
     {
      "id": "nav-rail-marquee",
      "version": "1.0.0",
-     "one_liner": "单页作品集 / 工作室首页 / 长页叙事需要一层压在画…",
+     "one_liner": "单页作品集 / 工作室首页 / 长页叙…",
      "path": "packs/nav-rail-marquee/"
     },
     {
      "id": "param-panel",
      "version": "1.0.0",
-     "one_liner": "做可调参 demo / 动效预览 / 主题试色页:参数…",
+     "one_liner": "做可调参 demo / 动效预览 /…",
      "path": "packs/param-panel/"
+    },
+    {
+     "id": "roller-controls",
+     "version": "1.0.0",
+     "one_liner": "需要「手感型」控件的界面:时间/日期/…",
+     "path": "packs/roller-controls/"
     },
     {
      "id": "slide-master-senior",
      "version": "1.0.0",
-     "one_liner": "做 1920×1080 演示母版 / 讲义 / 可打印…",
+     "one_liner": "做 1920×1080 演示母版 /…",
      "path": "packs/slide-master-senior/"
     },
     {
      "id": "spectral-glass-prism",
      "version": "1.0.0",
-     "one_liner": "落地页 / 作品集要一块能拖能转、有真火彩的实时玻璃舞…",
+     "one_liner": "落地页 / 作品集要一块能拖能转、有真…",
      "path": "packs/spectral-glass-prism/"
     },
     {
      "id": "swiss-style",
      "version": "1.0.0",
-     "one_liner": "瑞士 / 国际主义风格的版式与构件:可推导的模块网格(…",
+     "one_liner": "瑞士 / 国际主义风格的版式与构件:可…",
      "path": "packs/swiss-style/"
     }
    ]
@@ -235,7 +259,7 @@
     {
      "id": "fx-engines",
      "version": "1.0.0",
-     "one_liner": "需要持续仿真的粒子效果(径向波前/吸引子/Curl 流…",
+     "one_liner": "需要持续仿真的粒子效果(径向波前/吸引…",
      "path": "packs/fx-engines/"
     }
    ]
@@ -248,7 +272,7 @@
     {
      "id": "references",
      "version": "1.0.0",
-     "one_liner": "选版式 / 定字号 / 定网格前先读的 40 条外部站…",
+     "one_liner": "选版式 / 定字号 / 定网格前先读的…",
      "path": "packs/references/"
     }
    ]
@@ -261,7 +285,7 @@
     {
      "id": "video-motion",
      "version": "1.0.0",
-     "one_liner": "要把一首歌排成一支「印刷质感」的 MV / 歌词影像时…",
+     "one_liner": "要把一首歌排成一支「印刷质感」的 MV…",
      "path": "packs/video-motion/"
     }
    ]

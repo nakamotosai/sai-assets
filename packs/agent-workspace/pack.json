@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "id": "agent-workspace",
+  "title": "Agent Workspace · 对话工作台外壳(计划 / 流水 / 审批 / 流式)",
+  "kind": "ui",
+  "category": "web-ui",
+  "version": "1.0.0",
+  "license": "MIT",
+  "attribution": [
+    {
+      "name": "sai-assets PACK-CONTRACT v1",
+      "license": "MIT",
+      "what": "包形状、pack.json 字段与断言最低集的规则来源"
+    },
+    {
+      "name": "sai-assets pack ouuut-editorial",
+      "license": "MIT",
+      "what": "回退配色取自该包的纸白 / 炭黑两档语义层(bg/ink/muted/accent/accent-ink),包内对比度断言同口径"
+    }
+  ],
+  "origin": {
+    "project": "five-sites-demos",
+    "path": "src/islands/agent-workspace.tsx",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "src/agent-workspace.css",
+      "src/agent-workspace.js"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "agent",
+    "chat",
+    "streaming",
+    "approval",
+    "todo",
+    "activity-feed",
+    "tool-result",
+    "composer",
+    "zero-dependency",
+    "reduced-motion"
+  ],
+  "when": "做 agent / copilot 控制台,要让「计划 → 过程 → 产物 → 人审」四段同时在屏:左栏任务计划与审批卡(提交后锁死),右栏线程气泡、执行流水、工具回执、逐字流式回答与自成长输入框",
+  "not_for": "纯客服/FAQ 单线程聊天窗(过程不可见时这套结构是负担);需要多轮历史侧栏、分支、编辑重发的完整产品状态机;需要 contenteditable 富文本输入或 @ 提及",
+  "verified": {
+    "date": "2026-11-10",
+    "how": "python packs/agent-workspace/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens agent-workspace | 引用 4 个(包内 2 / https 2)· 声明路径 5 个全部存在 · src 2 文件 20367 字节 · 包内 8 文件 51943 字节 | 对比度 light ink 15.73 · muted 6.24 · accent-ink 4.89 · accent(图形) 3.80 | dark ink 16.20 · muted 7.47 · accent-ink 5.78 · accent(图形) 4.58"
+  },
+  "canonical_home": null
+}

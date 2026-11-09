@@ -27,14 +27,16 @@ DOC_CUES = ("## 1 接入步骤", "## 2 宿主 token 清单", "## 3 模块与标�
 # CSS 侧必须逐字存在的实现标记(防止退化成静态样式或删掉降级块)
 CSS_CUES = ("--ease-out", "--reveal-delay", "--i, 0", "html.js-motion [data-reveal]",
             "html.motion-ready", "@media (prefers-reduced-motion: reduce)",
-            "view-transition", "vt-theme", "--py, 0px", ".split-word", ".footer-marquee")
+            "view-transition", "vt-theme", "--py, 0px", ".split-word", ".footer-marquee", ".odo-col", ".odo-strip",
+            ".scramble-out", ".spark-line", ".spark-hit")
 
 # JS 侧必须逐字存在的实现标记(防止删模块或去掉守卫)
 JS_CUES = ("data-reveal", "data-reveal-stagger", "data-split", "data-count", "data-tilt",
            "data-magnetic", "data-cursor-label", "data-hero-canvas", "data-process", "work-card",
            "faq-answer", "prefers-reduced-motion", "pointer: fine", "requestAnimationFrame",
            "IntersectionObserver", "onScrollFrame", "doc.hidden", "devicePixelRatio", "Array.from(text)", "NO_LINE_START",
-           "window.motionKit.applyTheme", "window.motionKit.viewTheme")
+           "window.motionKit.applyTheme", "window.motionKit.viewTheme",
+           "data-odometer", "data-scramble", "data-sparkline", "setOdometer")
 
 # 仓库外泄检查:这些字样不该出现在包里(站点专有标识)
 FOREIGN_MARKERS = ("ouuut", "make-theme", "make-lang", "make.ouuut", "saaaai", "make-site")

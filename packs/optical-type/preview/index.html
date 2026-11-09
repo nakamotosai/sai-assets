@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>optical-type · 光学尺寸档</title>
+<link rel="stylesheet" href="../src/optical-type.css">
+<style>
+  html { background: #f5f3ed; color-scheme: light dark; }
+  body { margin: 0; padding: clamp(20px, 4vw, 44px); color: #1a1a16;
+    font-family: Georgia, "Times New Roman", "Noto Serif SC", serif; }
+  .wrap { max-width: 880px; margin: 0 auto; display: grid; gap: 36px; }
+  .h1 { margin: 0 0 4px; font-size: 20px; font-weight: 500; letter-spacing: -.01em; font-family: system-ui, sans-serif; }
+  .lead { margin: 0; font-size: 14px; line-height: 1.7; color: #5b5a53; max-width: 48em; font-family: system-ui, sans-serif; }
+  .lead code, .warn code { font-family: ui-monospace, Menlo, monospace; font-size: 13px; background: rgba(26,26,22,.06); padding: 1px 5px; border-radius: 3px; }
+  .k { font-family: ui-monospace, Menlo, monospace; font-size: 12px; letter-spacing: .08em;
+    text-transform: uppercase; color: #5b5a53; margin: 0 0 14px; }
+  .rule { border: 0; border-top: 1px solid rgba(26,26,22,.085); margin: 0; }
+  .warn { border-left: 2px solid #cd5545; padding: 10px 0 10px 14px; margin: 0;
+    font-size: 13.5px; line-height: 1.7; color: #5b5a53; font-family: system-ui, sans-serif; }
+  .warn b { color: #1a1a16; font-weight: 500; }
+  @media (prefers-color-scheme: dark) {
+    html { background: #0e0e0c; } body { color: #edebe4; }
+    .h1 { color: #edebe4; } .lead, .k, .warn { color: #a3a199; }
+    .warn b { color: #edebe4; } .warn { border-left-color: #d76e5d; }
+    .rule { border-top-color: rgba(237,235,228,.09); }
+    .lead code, .warn code { background: rgba(237,235,228,.09); }
+  }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <div>
+    <h1 class="h1">光学尺寸档 · opsz</h1>
+    <p class="lead">
+      可变字体里的「光学尺寸」轴(OpenType 标准轴 <code>opsz</code>)不是放大缩小,而是让字在大字号时
+      <b>自动变细、字腔变开</b>,小字号时<b>笔画加厚、字腔收紧</b>——铅字时代的刻字逻辑,搬到屏幕上。
+      这一页给四档配方(display / lead / body / small)与一张同字号对照台。
+    </p>
+  </div>
+
+  <hr class="rule">
+
+  <div>
+    <p class="k">四档 · 同一套字族</p>
+    <p class="ot ot-display">Design is an Argument</p>
+    <p class="ot ot-lead">大字变小字,不是把同一张字形压扁:笔画该加厚,字腔该收拢。四档各配一组轴值,别一档走天下。</p>
+    <p class="ot ot-body">
+      正文档要的是稳定与可读,不是展示。这一档 opsz 取 24、字重 340,在 17px 上下时笔画既不糊也不发飘。
+      行高 1.72、字距 0(中文不需要额外字距)。
+    </p>
+    <p class="ot ot-small">小字档 opsz 14、字重 420:小字号下笔画变厚才站得住,字距略放 0.01em,避免糊成一团。</p>
+  </div>
+
+  <div class="warn">
+    <b>本页的对照要怎么看:</b>当前宿主字体是系统衬线 Georgia,它<b>没有 opsz 轴</b>,所以下面五行会长得一样。
+    换成带该轴的字族(如 OFL 的 Fraunces,实测轴范围 <code>9 – 144</code>,默认 9)之后,同一字号下才能看出
+    「越大的 opsz 越细、字腔越开」。这张对照台同时是<b>轴是否生效的验证法</b>,不是装饰。
+  </div>
+
+  <hr class="rule">
+
+  <div>
+    <p class="k">对照台 · 同一字号,只改 opsz</p>
+    <div class="ot ot-compare">
+      <div class="ot-row">
+        <span class="ot-row-k">opsz 9</span>
+        <span class="ot-row-s" style="font-variation-settings: 'opsz' 9, 'wght' 300">Handgloves 光学尺寸</span>
+      </div>
+      <div class="ot-row">
+        <span class="ot-row-k">opsz 24</span>
+        <span class="ot-row-s" style="font-variation-settings: 'opsz' 24, 'wght' 300">Handgloves 光学尺寸</span>
+      </div>
+      <div class="ot-row">
+        <span class="ot-row-k">opsz 48</span>
+        <span class="ot-row-s" style="font-variation-settings: 'opsz' 48, 'wght' 300">Handgloves 光学尺寸</span>
+      </div>
+      <div class="ot-row">
+        <span class="ot-row-k">opsz 96</span>
+        <span class="ot-row-s" style="font-variation-settings: 'opsz' 96, 'wght' 300">Handgloves 光学尺寸</span>
+      </div>
+      <div class="ot-row">
+        <span class="ot-row-k">opsz 144</span>
+        <span class="ot-row-s" style="font-variation-settings: 'opsz' 144, 'wght' 300">Handgloves 光学尺寸</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="rule">
+
+  <div>
+    <p class="k">自动档 · 让浏览器按字号推</p>
+    <p class="ot ot-auto ot-body">这一段没手工指定 opsz,由 <code>font-optical-sizing: auto</code> 按当前字号推算。</p>
+  </div>
+
+</main>
+</body>
+</html>

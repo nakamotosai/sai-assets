@@ -1,0 +1,19 @@
+{
+  "id": "optical-type",
+  "kind": "fonts",
+  "title": "Optical Type · 可变字体光学尺寸档(opsz)",
+  "version": "1.0.0",
+  "summary": "四档配方 + 一张同字号对照台:大字自动变细、小字自动加厚。本包不含字体文件,只给轴值与字号/字重/字距的配对。",
+  "cards": [
+    { "id": "opsz-axes", "file": "tokens/opsz-axes.json", "what": "本机实测的 opsz / wght 轴范围(含是否真有 opsz 轴)" }
+  ],
+  "related_pack": "cjk-thin-type-system",
+  "split": "本包管「一条可变轴怎么用:哪些字号该给哪个 opsz、配多重的字重」;cjk-thin-type-system 管「中文细体用几档、多细、多宽」。字族不在这里定义,字体文件也不随包分发。",
+  "hard_rules": [
+    "字体文件不入包:只给轴值与配方,字体按各自许可由使用者自取",
+    "没有 opsz 轴的字族必须标 has_opsz:false;假轴会把「全都一样」误诊成排版 bug",
+    "font-synthesis 必须为 none:缺档时禁浏览器合成假粗/假斜,否则对照台会显示不存在的档",
+    "手动写 font-variation-settings 时优先于 font-optical-sizing: auto,两者别同时依赖",
+    "中文正文不额外加字距;小字档最多 0.01em"
+  ]
+}

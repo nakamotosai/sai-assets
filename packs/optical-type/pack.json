@@ -1,0 +1,57 @@
+{
+  "schema": 1,
+  "id": "optical-type",
+  "title": "Optical Type · 可变字体光学尺寸档(opsz 四档)",
+  "kind": "fonts",
+  "category": "fonts",
+  "version": "1.0.0",
+  "license": "MIT(本包 CSS / JSON / 文档 / 断言为自产;所列字族各沿自己许可,字体文件不随包分发)",
+  "attribution": [
+    {
+      "name": "sai-assets PACK-CONTRACT v1",
+      "license": "MIT",
+      "what": "包形状、pack.json 字段与断言语义"
+    },
+    {
+      "name": "OpenType 光学尺寸轴(opsz)规范",
+      "license": "公开规范",
+      "what": "轴名与语义:大字更细、小字更厚;本包四档的取值规律依据该轴的设计意图"
+    }
+  ],
+  "origin": {
+    "project": "five-sites-demos",
+    "path": "src/islands/editorial.tsx",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "tokens": [
+      "tokens/index.json",
+      "tokens/opsz-axes.json"
+    ],
+    "css": [
+      "src/optical-type.css"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
+  },
+  "tags": [
+    "variable-font",
+    "optical-size",
+    "opsz",
+    "typography",
+    "type-scale",
+    "editorial",
+    "font-synthesis",
+    "print-fallback"
+  ],
+  "when": "用带 opsz 轴的可变衬线做编辑型排版:要从 5.6rem 的展示标题一路到 14px 小字都站得住,并有一套「哪档给哪个 opsz、配多重的字重、多紧的字距」的口径与一张能验证轴是否生效的同字号对照台",
+  "not_for": "字族没有 opsz 轴(JetBrains Mono / Figtree / Jost 只有 wght);需要字体文件本身(本包不分发字体);要中文细体整套档位(走 cjk-thin-type-system);静态字体加 font-weight 分档",
+  "verified": {
+    "date": "2026-11-10",
+    "how": "python packs/optical-type/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens optical-type | 引用 1 个(包内 1 / https 0)· 声明路径 6 个全部存在 · src 1 文件 5035 字节 · 包内 9 文件 37090 字节 | 轴值 Fraunces opsz 9–144(default 9) | JetBrains Mono 无 opsz | Figtree 无 opsz | Jost 无 opsz"
+  },
+  "canonical_home": null
+}

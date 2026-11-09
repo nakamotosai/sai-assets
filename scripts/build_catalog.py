@@ -49,7 +49,7 @@ def clip(text: str, n: int) -> str:
     return text if len(text) <= n else text[: n - 1].rstrip() + "…"
 
 
-def collect() -> dict:
+def collect(clip_n: int = 20) -> dict:
     items = []
     for path in sorted(PACKS.glob("*/pack.json")):
         pack = json.loads(path.read_text(encoding="utf-8"))
@@ -67,7 +67,7 @@ def collect() -> dict:
             entry = {
                 "id": p["id"],
                 "version": p["version"],
-                "one_liner": clip(p.get("when", ""), 28),
+                "one_liner": clip(p.get("when", ""), clip_n),
                 "path": f"packs/{p['id']}/",
             }
             if p.get("canonical_home"):
@@ -89,11 +89,25 @@ def main() -> None:
     ap.add_argument("--check", action="store_true", help="只校验,不写盘")
     args = ap.parse_args()
 
-    payload = json.dumps(collect(), ensure_ascii=False, indent=1)
-    size = len(payload.encode("utf-8"))
+    # 体量守 8KB:超限先自动收紧 one_liner(28→20→16→12),而不是让人手改;
+    # 收到 12 还超,说明该改分层索引了,那时才失败。
+    payload = ""
+    size = 0
+    used = 0
+    # 目标不是「刚好卡在 8192」:留 5% 缓冲,否则下一个包一加就红。
+    soft = int(LIMIT * 0.95)
+    for clip_n in (28, 24, 20, 16, 12):
+        payload = json.dumps(collect(clip_n), ensure_ascii=False, indent=1)
+        size = len(payload.encode("utf-8"))
+        used = clip_n
+        if size <= soft:
+            break
     if size > LIMIT:
-        print(f"FAIL catalog too big: {size}B > {LIMIT}B — 裁剪 when/tags 或改成分层索引", file=sys.stderr)
+        print(f"FAIL catalog too big: {size}B > {LIMIT}B(one_liner 已收到 {used} 字)"
+              f" — 该改成分层索引了,别再压文案", file=sys.stderr)
         sys.exit(1)
+    if used != 28:
+        print(f"[clip] one_liner 收到 {used} 字以守住 {soft}B 缓冲线(当前 {size}B / 上限 {LIMIT}B)")
 
     if args.check:
         if not OUT.is_file():
@@ -109,7 +123,7 @@ def main() -> None:
         return
 
     OUT.write_text(payload, encoding="utf-8")
-    total = sum(c["count"] for c in collect()["categories"])
+    total = sum(c["count"] for c in collect(used)["categories"])
     print(f"PASS build_catalog: {total} packs, {size}B ≤ {LIMIT}B")
 
 

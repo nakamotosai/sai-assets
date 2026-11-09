@@ -73,6 +73,9 @@
 | FAQ 折叠 | `.faq-item`(`<details>`) > `summary` + `.faq-answer` | 打开前量 `scrollHeight` 再过渡(0.38s),关闭 0.32s;动画中屏蔽二次点击 |
 | 跑马灯 | `.ticker` / `.footer-marquee` | 纯 CSS:36s / 44s 线性无限;`.ticker:hover` 暂停 |
 | 明暗过场 | `window.motionKit.applyTheme` | 宿主把"应用主题"挂上去;调用 `window.motionKit.viewTheme('light' \| 'dark')` 走 View Transition 圆形揭示(不支持则直接应用) |
+| 逐位滚动 | `[data-odometer="4182"]`(+ `data-odometer-format="percent"`) | 每位数一根滚筒(0–10 共 11 格,末尾多一格 0 让 9→0 继续向下滚);真实值写在容器 `aria-label`;`window.motionKit.setOdometer(el, v)` 改值,列数按位数自动重建 |
+| 解谜换字 | `[data-scramble="目标文本"]`(+ `data-scramble-ms`,默认 700) | 未定型位随机滚字符,定型位定格;**视觉层 `aria-hidden`,真实文本在 `aria-label`**;`window.motionKit.scramble(el)` 重放 |
+| 趋势线 | `[data-sparkline="12,18,…"]` + `data-spark-label` + 容器 `tabindex="0"`;同级 `[data-spark-readout]` | 生成 SVG 折线与面积层,每点一个透明命中条;指针悬停、`←→`、`Home`/`End` 都能取点,读数写回 readout,`<svg aria-label>` 同步第 N 点与值 |
 
 ## 4 参数
 
@@ -93,6 +96,9 @@
 - 入场优先 `IntersectionObserver`(`rootMargin 0 0 -10%`,`threshold .06`),并额外做一次视口预扫,首屏元素两条 rAF 后直接放行。
 - 粒子场是唯一持续绘制的模块:粒子数上限 88、`dpr` 上限 1.5、离开视口或 `document.hidden` 停帧。**这三条不许放宽**。
 - `will-change` 只加在入场与倾斜元素上,`.is-inview` 后立刻回收。
+- 滚筒只改 `transform`(每位数一根 strip),不逐帧改文字;列数按位数变化时才重建 DOM。
+- 换字模块每帧只写一个 `textContent`,不碰 `innerHTML`;定型位不重算。
+- 趋势线是**一次构建**的静态 SVG(不逐帧重绘),交互只移动一个 `<circle>` 的 `cx/cy`;这是它比 canvas 方案省的地方。
 
 ## 6 反模式
 
@@ -103,6 +109,10 @@
 - ❌ 用 `max-height` 猜 FAQ 高度:答案换行一变就露馅,这里量的是 `scrollHeight`。
 - ❌ 把 `.work-card` / `.faq-item` / `.site-header` 改成别的类名后不同步脚本 —— 模块会静默不启动(看起来像"没效果"),这是最容易被当成 bug 的一类。
 - ❌ 需要"整页翻页"或"文字解散重聚"却用本包硬塞:那两件在 `page-transition` 里,本包只做页内。
+- ❌ 把滚筒的初始化绑在"进视口"上:宿主锁成固定视口(演示台、模态、整屏翻页)时元素永远不可见,数字会永远停在初始值。本包现在**先建好再滚**,可见性只作节奏。
+- ❌ 给滚筒容器写 `width: fit-content`:在 flex 容器上它会把宽度压到一个子项,4 位数直接变 1 位;要收缩就用 `display: inline-flex` + 每列 `width: 1ch`。
+- ❌ 让宿主把滚筒元素设成 `display: block`(`.stat b` 这类选择器):宽度会吃满整行,所以组件里用了 `.odometer.odometer` 双写类名提权,宿主别再覆盖它。
+- ❌ 换字模块把最终文本只写在视觉层:必须同时写 `aria-label`,否则读屏会念出一串随机字符。
 
 ## 7 配对
 

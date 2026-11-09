@@ -597,6 +597,229 @@
     };
   }
 
+
+  /* ── Digit roller: odometer-style, one wheel per place ──────────────── */
+  /* 每个数位一根滚筒:旧值向上滚出、新值从下滚入。等宽 + tabular-nums 才不会抖。
+     无标记无害;减速模式已在文件顶部 return,这里不会被调用。 */
+  function initOdometer() {
+    var els = [].slice.call(doc.querySelectorAll('[data-odometer]'));
+    if (!els.length) return;
+
+    function build(el, digits) {
+      el.textContent = '';
+      el.classList.add('odometer');
+      var cols = [];
+      for (var i = 0; i < digits.length; i++) {
+        var col = doc.createElement('span');
+        col.className = 'odo-col';
+        var strip = doc.createElement('span');
+        strip.className = 'odo-strip';
+        // 0-9 各一格,末尾再放一份 0:从 9 滚到 0 时不用瞬间跳,直接继续向下滚
+        for (var d = 0; d <= 10; d++) {
+          var cell = doc.createElement('span');
+          cell.className = 'odo-cell';
+          cell.textContent = String(d % 10);
+          strip.appendChild(cell);
+        }
+        col.appendChild(strip);
+        el.appendChild(col);
+        cols.push({ strip: strip, value: -1 });
+      }
+      return cols;
+    }
+
+    function paint(cols, digits) {
+      for (var i = 0; i < cols.length; i++) {
+        var v = Number(digits.charAt(i));
+        if (cols[i].value === v) continue;
+        cols[i].value = v;
+        cols[i].strip.style.transform = 'translate3d(0,' + (-v * 1) + 'em,0)';
+      }
+    }
+
+    function run(el) {
+      var format = el.getAttribute('data-odometer-format') || '';
+      var target = parseFloat(el.getAttribute('data-odometer'));
+      if (isNaN(target)) return;
+      var digits = Math.round(target).toString();
+      if (!el.children.length) {
+        el._cols = build(el, digits);
+      }
+      var cols = el._cols;
+      if (cols.length !== digits.length) {
+        cols = el._cols = build(el, digits);
+      }
+      // 读数交给辅助技术:滚筒是装饰,真实值写在 aria-label 上
+      el.setAttribute('aria-label', (format === 'percent' ? digits + '%' : digits));
+      paint(cols, digits);
+    }
+
+    // 先把结构建好并把值滚到位,「进视口才动」只是加一层节奏:
+    // 不能把初始化绑在 IntersectionObserver 上 —— 宿主常把页面锁成固定视口
+    // (演示台、模态、整屏翻页),那时元素永远「不可见」,数字会永远停在初始的 0。
+    for (var i = 0; i < els.length; i++) {
+      (function (el) {
+        run(el);
+        if (!('IntersectionObserver' in window)) return;
+        var io = new IntersectionObserver(function (entries) {
+          for (var e = 0; e < entries.length; e++) {
+            if (entries[e].isIntersecting) { io.disconnect(); return; }
+          }
+        }, { threshold: 0 });
+        io.observe(el);
+      })(els[i]);
+    }
+
+    // 对外:窗口可主动改值(演示与真实数据都走这条)
+    window.motionKit.setOdometer = function (el, value) {
+      el.setAttribute('data-odometer', String(value));
+      run(el);
+    };
+  }
+
+  /* ── Text scramble: resolve character by character ─────────────────── */
+  /* 未定型位随机滚字符,定型位定格。关键两点:
+     1) 最终文本写进 aria-label,并把视觉层标 aria-hidden —— 否则读屏会念出中间那堆随机字符;
+     2) 用等宽/定宽字体或 tabular-nums,字宽变化会让整行左右抽搐。 */
+  function initScramble() {
+    var els = [].slice.call(doc.querySelectorAll('[data-scramble]'));
+    if (!els.length) return;
+
+    var POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#*+-/<>=';
+    function rand() { return POOL.charAt(Math.floor(Math.random() * POOL.length)); }
+
+    function scramble(el) {
+      var target = el.getAttribute('data-scramble') || '';
+      if (!target) return;
+      el.setAttribute('aria-label', target);
+      el.classList.add('scramble');
+      var out = el.querySelector('.scramble-out');
+      if (!out) {
+        out = doc.createElement('span');
+        out.className = 'scramble-out';
+        out.setAttribute('aria-hidden', 'true');
+        el.textContent = '';
+        el.appendChild(out);
+      }
+      var duration = Number(el.getAttribute('data-scramble-ms') || 700);
+      var start = null;
+      var len = target.length;
+      function tick(t) {
+        if (start === null) start = t;
+        var p = clamp((t - start) / duration, 0, 1);
+        var settled = Math.floor(p * len * 1.6);
+        var s = '';
+        for (var i = 0; i < len; i++) {
+          var ch = target.charAt(i);
+          if (i < settled || ch === ' ') s += ch;
+          else s += rand();
+        }
+        out.textContent = s;
+        if (p < 1) raf(tick); else { out.textContent = target; el.setAttribute('data-scramble-done', '1'); }
+      }
+      raf(tick);
+    }
+
+    for (var i = 0; i < els.length; i++) scramble(els[i]);
+    window.motionKit.scramble = scramble;
+  }
+
+  /* ── Sparkline with a readable point ────────────────────────────────── */
+  /* 画的是一条 SVG 折线 + 一层面积。指针/方向键选点,读数写进同级的 [data-spark-readout]。
+     键盘可达:SVG 容器 tabindex=0,←→ 移动选点,Home/End 到两端。 */
+  function initSparkline() {
+    var charts = [].slice.call(doc.querySelectorAll('[data-sparkline]'));
+    if (!charts.length) return;
+
+    function build(chart) {
+      var raw = chart.getAttribute('data-sparkline') || '';
+      var data = raw.split(',').map(Number).filter(function (n) { return !isNaN(n); });
+      if (data.length < 2) return;
+
+      var W = 100, H = 34, PAD = 2;
+      var min = Math.min.apply(null, data);
+      var max = Math.max.apply(null, data);
+      var span = (max - min) || 1;
+      var pts = data.map(function (v, i) {
+        var x = PAD + (i / (data.length - 1)) * (W - PAD * 2);
+        var y = H - PAD - ((v - min) / span) * (H - PAD * 2);
+        return [x, y];
+      });
+
+      var NS = 'http://www.w3.org/2000/svg';
+      var svg = doc.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      svg.setAttribute('preserveAspectRatio', 'none');
+      svg.setAttribute('class', 'spark-svg');
+      svg.setAttribute('role', 'img');
+
+      var area = doc.createElementNS(NS, 'path');
+      var d = 'M' + pts[0][0] + ',' + H;
+      for (var i = 0; i < pts.length; i++) d += 'L' + pts[i][0].toFixed(2) + ',' + pts[i][1].toFixed(2);
+      d += 'L' + pts[pts.length - 1][0] + ',' + H + 'Z';
+      area.setAttribute('d', d);
+      area.setAttribute('class', 'spark-area');
+
+      var line = doc.createElementNS(NS, 'polyline');
+      line.setAttribute('points', pts.map(function (p) { return p[0].toFixed(2) + ',' + p[1].toFixed(2); }).join(' '));
+      line.setAttribute('class', 'spark-line');
+      line.setAttribute('vector-effect', 'non-scaling-stroke');
+
+      var dot = doc.createElementNS(NS, 'circle');
+      dot.setAttribute('r', '1.6');
+      dot.setAttribute('class', 'spark-dot');
+
+      svg.appendChild(area); svg.appendChild(line); svg.appendChild(dot);
+      chart.textContent = '';
+      chart.appendChild(svg);
+
+      var readout = chart.parentElement.querySelector('[data-spark-readout]');
+      var label = chart.getAttribute('data-spark-label') || '趋势';
+      var picked = data.length - 1;
+
+      function show(idx) {
+        picked = clamp(idx, 0, data.length - 1);
+        var p = pts[picked];
+        dot.setAttribute('cx', p[0].toFixed(2));
+        dot.setAttribute('cy', p[1].toFixed(2));
+        svg.setAttribute('aria-label', label + ':第 ' + (picked + 1) + ' 个点,' + data[picked]);
+        if (readout) readout.textContent = String(data[picked]);
+        var cells = chart.querySelectorAll('.spark-hit');
+        for (var c = 0; c < cells.length; c++) cells[c].classList.toggle('is-on', c === picked);
+      }
+
+      // 命中层:每个点一个透明矩形,pointer 与键盘都走同一套 show()
+      var hitWrap = doc.createElement('div');
+      hitWrap.className = 'spark-hits';
+      for (var k = 0; k < data.length; k++) {
+        var hit = doc.createElement('span');
+        hit.className = 'spark-hit';
+        hit.setAttribute('data-i', String(k));
+        hitWrap.appendChild(hit);
+      }
+      chart.appendChild(hitWrap);
+
+      hitWrap.addEventListener('pointermove', function (e) {
+        var t = e.target;
+        if (!t || !t.getAttribute) return;
+        var idx = t.getAttribute('data-i');
+        if (idx === null) return;
+        show(Number(idx));
+      });
+      chart.addEventListener('keydown', function (e) {
+        var key = e.key;
+        if (key === 'ArrowRight') { e.preventDefault(); show(picked + 1); }
+        else if (key === 'ArrowLeft') { e.preventDefault(); show(picked - 1); }
+        else if (key === 'Home') { e.preventDefault(); show(0); }
+        else if (key === 'End') { e.preventDefault(); show(data.length - 1); }
+      });
+      chart.addEventListener('pointerleave', function () { show(data.length - 1); });
+      show(picked);
+    }
+
+    for (var i = 0; i < charts.length; i++) build(charts[i]);
+  }
+
   /* ── Boot ──────────────────────────────────────────────────────────── */
   function boot() {
     prepareStagger();
@@ -609,6 +832,9 @@
     initParallax();
     initHeaderAndNav();
     initFaq();
+    initOdometer();
+    initScramble();
+    initSparkline();
     initThemeTransition();
     requestScroll();
   }

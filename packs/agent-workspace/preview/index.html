@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>agent-workspace · 对话工作台外壳</title>
+<link rel="stylesheet" href="../src/agent-workspace.css">
+<style>
+  /* 舞台外壳:只为本页撑出可读的版心,不属于组件本体 */
+  html { background: #f5f3ed; color-scheme: light dark; }
+  body {
+    margin: 0;
+    padding: clamp(20px, 4vw, 44px);
+    font-family: var(--aw-font, system-ui, sans-serif);
+    color: #1a1a16;
+  }
+  .stage { max-width: 1080px; margin: 0 auto; }
+  .stage-h { margin: 0 0 4px; font-size: 20px; font-weight: 500; letter-spacing: -0.01em; }
+  .stage-d { margin: 0 0 22px; font-size: 14px; line-height: 1.7; color: #5b5a53; max-width: 46em; }
+  .stage-d code { font-family: ui-monospace, Menlo, monospace; font-size: 13px; background: rgba(26,26,22,.06); padding: 1px 5px; border-radius: 3px; }
+  @media (prefers-color-scheme: dark) {
+    html { background: #0e0e0c; }
+    body { color: #edebe4; }
+    .stage-d { color: #a3a199; }
+    .stage-d code { background: rgba(237,235,228,.09); }
+  }
+</style>
+</head>
+<body>
+<main class="stage">
+
+  <h1 class="stage-h">对话工作台外壳</h1>
+  <p class="stage-d">
+    左栏是任务计划与审批,右栏是线程、流水、工具回执、流式回答。<b>在输入框里按回车</b>会重放一次逐字流出;
+    审批卡选中一项才能提交;任务进度条进视口才推到目标值。组件只读宿主 token,下面全用回退色。
+  </p>
+
+  <section id="shell" class="aw" data-aw-root data-mode="light">
+    <div class="aw-shell">
+
+      <aside class="aw-side">
+        <h2 class="aw-h">任务计划</h2>
+        <div class="aw-card">
+          <div class="aw-card-h">
+            <b>把五个组件拼成工作台</b>
+            <span class="aw-count" data-aw-todo-count>2/4</span>
+          </div>
+          <ul class="aw-todo">
+            <li data-status="complete"><span class="aw-dot" aria-hidden="true"></span><span>读 registry · 列出依赖</span></li>
+            <li data-status="complete"><span class="aw-dot" aria-hidden="true"></span><span>拉 25 个组件源码 · 查私有依赖</span></li>
+            <li data-status="active" data-aw-progress-to="0.62">
+              <span class="aw-dot" aria-hidden="true"></span>
+              <span>拼一个对话工作台 · 把组件串起来</span>
+              <span class="aw-bar" aria-hidden="true"><i></i></span>
+            </li>
+            <li data-status="pending"><span class="aw-dot" aria-hidden="true"></span><span>量首屏、对比度、reduced-motion 回退</span></li>
+          </ul>
+        </div>
+
+        <h2 class="aw-h">审批</h2>
+        <div class="aw-approve" data-aw-approve>
+          <div class="aw-approve-q">
+            <span>允许写入 src/islands/ 吗?</span>
+            <div class="aw-opts">
+              <label class="aw-opt">
+                <input type="radio" name="aw-scope" value="one">
+                <span><b>只写一个岛</b><small>最小改动,先验证</small></span>
+              </label>
+              <label class="aw-opt">
+                <input type="radio" name="aw-scope" value="all">
+                <span><b>五个岛全写</b><small>一次到位,回滚面积大</small></span>
+              </label>
+            </div>
+          </div>
+          <div class="aw-actions">
+            <button class="aw-btn aw-btn--primary" type="button" data-aw-submit disabled>确认</button>
+            <button class="aw-btn" type="button" data-aw-reject>拒绝</button>
+          </div>
+          <p class="aw-verdict" data-aw-verdict>等待选择…</p>
+        </div>
+      </aside>
+
+      <section class="aw-main">
+        <div class="aw-thread">
+          <div class="aw-bubble" data-variant="soft" data-align="start">
+            哪些组件能直接拼成 agent 界面?
+          </div>
+          <div class="aw-bubble" data-variant="tint" data-align="end">
+            按功能分三组:计划、过程、产物。先看左栏。
+          </div>
+        </div>
+
+        <h2 class="aw-h">执行流水</h2>
+        <div class="aw-card">
+          <ul class="aw-feed">
+            <li data-status="complete">
+              <span class="aw-ico" aria-hidden="true">◇</span>
+              <span>解析 registry.json(157 条)</span>
+              <span class="aw-meta">1.2s</span>
+            </li>
+            <li data-status="complete">
+              <span class="aw-ico" aria-hidden="true">◎</span>
+              <span>搜索 spring duration 与 bounce <span class="aw-host">motion.dev</span></span>
+              <span class="aw-meta">+4</span>
+              <ul class="aw-hits">
+                <li><a href="https://motion.dev/docs">Spring · duration + bounce<span class="aw-host">motion.dev</span></a></li>
+                <li><a href="https://motion.dev/docs">useReducedMotion<span class="aw-host">motion.dev</span></a></li>
+              </ul>
+            </li>
+            <li data-status="complete">
+              <span class="aw-ico" aria-hidden="true">▤</span>
+              <span>read <code>components/agents/todo-list.tsx</code></span>
+              <span class="aw-meta"></span>
+            </li>
+            <li data-status="complete">
+              <span class="aw-ico" aria-hidden="true">✎</span>
+              <span>edit <code>src/islands/workspace.tsx</code></span>
+              <span><span class="aw-plus">+84</span> <span class="aw-minus">−6</span></span>
+            </li>
+            <li data-status="active">
+              <span class="aw-ico" aria-hidden="true">●</span>
+              <span>跑 build · esbuild 打包</span>
+              <span class="aw-meta">—</span>
+            </li>
+          </ul>
+        </div>
+
+        <h2 class="aw-h">工具回执</h2>
+        <div class="aw-tool">
+          <div class="aw-tool-h">
+            <span>node tools/fetch.mjs</span>
+            <span class="aw-status">✓ 完成</span>
+          </div>
+          <pre><span class="c"># 每个组件一行 · 依赖去重</span>
+<span class="k">text-scramble</span>      2 files   deps: clsx, motion, tailwind-merge
+<span class="k">todo-list</span>          6 files   deps: clsx, lucide-react, motion
+<span class="k">agent-activity</span>     9 files   deps: clsx, lucide-react, motion
+<span class="n">25 components, 138 files written</span></pre>
+        </div>
+
+        <div class="aw-stream" data-aw-stream data-state="idle">
+          <h2 class="aw-h">回答</h2>
+          <p class="aw-stream-body" data-aw-stream-body
+             data-aw-source="这 25 个组件全部来自 registry,逻辑一行没改。样式靠宿主给的语义 token 供给,所以真正决定好不好看的不是组件本身,是你给的色板与字号档。上面这张任务卡、流水、引用列表都是同一批组件;下面这个输入框自带模型选择。">按回车重放一次流式回答</p>
+          <div class="aw-actions">
+            <button class="aw-btn" type="button" data-aw-replay>重放</button>
+          </div>
+        </div>
+
+        <div class="aw-composer">
+          <label class="aw-input">
+            <textarea data-aw-input rows="1" placeholder="问点什么 · 回车发送…"></textarea>
+            <span class="aw-input-foot">
+              <select class="aw-model" aria-label="模型">
+                <option>fast</option>
+                <option>deep</option>
+              </select>
+              <span class="aw-hint">Enter 发送 · Shift+Enter 换行</span>
+            </span>
+          </label>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+</main>
+<script src="../src/agent-workspace.js"></script>
+</body>
+</html>
