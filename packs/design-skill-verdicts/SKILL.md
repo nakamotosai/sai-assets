@@ -28,7 +28,10 @@ description: Observation notes on 13 public design skills from the Interface reg
 | `data/ref-ds01…13-*.json` | 13 条上游 skill 逐个评审:`verdict` / `license` / `observed` / `when` / `not_for` / `own_counterpart` |
 | `data/r01…r33.json` | 33 条判据:`rule`(含数值/阈值/反例) / `evidence` / `group` / `own_gap` |
 | `docs/usage.md` | 字段语义、配对规则、用法示例、反模式、冲突表 |
-| `scripts/assert_tokens.py` | 断言:条数/id 连续/必备字段/index 一致/分组计数/形态规则 0 命中/用法三节齐 |
+| `preview/index.html` | 活预览:46 条逐条成卡、按分组筛选、深浅切换(生成物,勿手改) |
+| `tokens/palette.json` | 预览页配色真相源(和色六景 + 章色 ink 档 + 实测对比度) |
+| `scripts/build_preview.py` | 预览页生成器:`data/*.json` → `preview/index.html`,`--check` 验同步 |
+| `scripts/assert_tokens.py` | 断言:条数/id 连续/必备字段/index 一致/分组计数/形态规则 0 命中/用法三节齐/预览与数据同步/对比度 ≥4.5 |
 
 ## 分组
 

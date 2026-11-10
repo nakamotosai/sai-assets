@@ -1,7 +1,7 @@
 {
  "schema": 1,
  "repo": "nakamotosai/sai-assets",
- "updated": "2026-11-09",
+ "updated": "2026-11-10",
  "base": "https://raw.githubusercontent.com/nakamotosai/sai-assets/main/",
  "how_to_use": "读本文件选包(只有发现字段)→ 取 base+path+pack.json 看完整元数据 → 读 SKILL.md 按 apply 步骤落地;项目侧用 python scripts/apply.py <id> --to <dir>",
  "categories": [
@@ -271,7 +271,7 @@
    "items": [
     {
      "id": "design-skill-verdicts",
-     "version": "1.0.0",
+     "version": "1.1.0",
      "one_liner": "评审或打磨 UI 前,先按 g…",
      "path": "packs/design-skill-verdicts/"
     },

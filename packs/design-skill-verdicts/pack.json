@@ -4,7 +4,7 @@
   "title": "外部设计规则观测 · 13 skill 逐个评审 + 33 条可落地判据",
   "kind": "meta",
   "category": "references",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "CC0-1.0",
   "attribution": [
     {
@@ -116,11 +116,16 @@
       "data/ref-ds10-make-interfaces-feel-better.json",
       "data/ref-ds11-userinterface-wiki.json",
       "data/ref-ds12-oklch-skill.json",
-      "data/ref-ds13-extract-design-system.json"
+      "data/ref-ds13-extract-design-system.json",
+      "docs/usage.md",
+      "SKILL.md",
+      "README.md",
+      "scripts/build_preview.py",
+      "tokens/palette.json"
     ],
     "usage": "docs/usage.md",
     "assert": "scripts/assert_tokens.py",
-    "preview": null
+    "preview": "preview/index.html"
   },
   "tags": [
     "design-review",
@@ -136,7 +141,7 @@
   "verified": {
     "date": "2026-11-10",
     "how": "python packs/design-skill-verdicts/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens design-skill-verdicts — verdict 13 条 · rule 33 条 · index 46 条一致 · 分组 33 条齐 · 必备字段齐 · 形态规则 0 命中 · 用法三节齐"
+    "evidence": "PASS assert_tokens — verdict 13 · rule 33 · index 46 一致 · 分组 33 齐 · 形态规则 0 命中 · preview 63683B 卡片 46 张 零外链 · 对比度最低 4.61:1(dark/verdict)"
   },
   "canonical_home": null
 }

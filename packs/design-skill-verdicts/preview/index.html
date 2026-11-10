@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>外部设计规则观测 · 13 skill 判定 + 33 条判据</title>
+<meta name="theme-color" content="#F5F3ED" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0E0C" media="(prefers-color-scheme: dark)">
+<style>
+/* 和色六景 · 纸白 / 炭黑(skill://design-system §2.5) */
+:root{
+  --bg:#F5F3ED; --ink:#1A1A16; --muted:#5B5A53; --surface:rgba(26,26,22,0.045);
+  --line:rgba(26,26,22,0.10); --line-2:rgba(26,26,22,0.18);
+  --c1:#0C8B7A; --c2:#A77109; --c3:#CD5545; --c4:#3F7DCA; --c5:#678618; --c6:#A165AE;
+  --accent:var(--c3);
+  --shadow:0 1px 2px rgba(26,26,22,.06), 0 12px 28px -18px rgba(26,26,22,.28);
+  color-scheme:light;
+}
+html[data-theme=dark]{
+  --bg:#0E0E0C; --ink:#EDEBE4; --muted:#A3A199; --surface:rgba(237,235,228,0.055);
+  --line:rgba(237,235,228,0.12); --line-2:rgba(237,235,228,0.22);
+  --c1:#0C8B7A; --c2:#A77109; --c3:#CD5545; --c4:#3F7DCA; --c5:#678618; --c6:#A165AE;
+  --accent:var(--c3);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 32px -20px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]){
+    --bg:#0E0E0C; --ink:#EDEBE4; --muted:#A3A199; --surface:rgba(237,235,228,0.055);
+    --line:rgba(237,235,228,0.12); --line-2:rgba(237,235,228,0.22);
+    --c1:#0C8B7A; --c2:#A77109; --c3:#CD5545; --c4:#3F7DCA; --c5:#678618; --c6:#A165AE;
+    --accent:var(--c3);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 32px -20px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:14px; font-weight:400; line-height:1.68;
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+}
+a{color:inherit; text-decoration-color:var(--line-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.skip{position:absolute; left:-9999px; top:8px; padding:8px 16px; background:var(--bg); border:1px solid var(--line-2); border-radius:8px}
+.skip:focus{left:16px; z-index:9}
+.wrap{max-width:1180px; margin:0 auto; padding:40px 24px 64px}
+h1,h2,h3{margin:0; font-weight:600; line-height:1.28}
+h1{font-size:34px; line-height:1.2}
+h2{font-size:22px}
+h3{font-size:17px}
+p{margin:0}
+.head{display:flex; align-items:flex-start; gap:16px; justify-content:space-between}
+.lede{margin-top:12px; max-width:72ch; color:var(--muted)}
+.facts{margin-top:16px; font-size:13px; color:var(--muted)}
+.facts b{color:var(--ink); font-weight:600}
+.facts .sep{margin:0 8px; color:var(--line-2)}
+.tt{
+  flex:none; width:44px; height:44px; display:grid; place-items:center;
+  background:transparent; border:0; color:var(--ink); border-radius:8px; cursor:pointer;
+  transition:opacity 120ms ease-out;
+}
+.tt:hover{opacity:.72}
+.tt:active{opacity:.55}
+.sun,.moon{fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round}
+html[data-theme=dark] .sun{display:none}
+html:not([data-theme=dark]) .moon{display:none}
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]) .sun{display:none}
+  html:not([data-theme]) .moon{display:block}
+}
+.facets{position:sticky; top:0; z-index:5; background:var(--bg); padding:16px 0 8px; margin-top:24px; border-bottom:1px solid var(--line)}
+.chips{display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin:0; padding:0}
+.chip{
+  min-height:44px; padding:0 16px; display:inline-flex; align-items:center; gap:8px;
+  background:transparent; border:1px solid var(--line-2); border-radius:8px;
+  color:var(--muted); font:inherit; font-size:13px; font-weight:500; cursor:pointer;
+}
+.chip:hover{color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--surface); border-color:var(--ink); color:var(--ink)}
+.chip .n{font-weight:600}
+.shown{margin-top:8px; font-size:12px; color:var(--muted)}
+section{margin-top:32px}
+section + section{margin-top:96px}
+.sec-head{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:24px}
+.sec-head p{color:var(--muted); font-size:13px}
+.grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); align-items:start}
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  padding:16px; box-shadow:var(--shadow);
+}
+.card[hidden]{display:none}
+.card-top{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px}
+.badge{
+  display:inline-flex; align-items:center; min-height:24px; padding:0 8px; border-radius:8px;
+  font-size:12px; font-weight:500; border:1px solid var(--g-line);
+  background:var(--g-soft); color:var(--g-ink);
+}
+.num{font-size:12px; color:var(--muted); font-weight:400}
+.card p.body{margin-top:8px; max-width:68ch; line-height:1.68}
+.card dl{margin:16px 0 0; display:grid; gap:8px}
+.card dl div{display:grid; grid-template-columns:64px 1fr; gap:8px}
+.card dt{font-size:12px; color:var(--muted)}
+.card dd{margin:0; font-size:13px; color:var(--ink)}
+.card .src{margin-top:16px; font-size:12px; color:var(--muted)}
+.g-verdict{--g:#0C8B7A; --g-soft:rgba(12,139,122,0.12); --g-line:rgba(12,139,122,0.28); --g-ink:#1E6759}
+html[data-theme=dark] .g-verdict{--g-ink:#449B8A}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-verdict{--g-ink:#449B8A} }
+.g-review{--g:#CD5545; --g-soft:rgba(205,85,69,0.12); --g-line:rgba(205,85,69,0.28); --g-ink:#944335}
+html[data-theme=dark] .g-review{--g-ink:#D76E5D}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-review{--g-ink:#D76E5D} }
+.g-guidelines{--g:#3F7DCA; --g-soft:rgba(63,125,202,0.12); --g-line:rgba(63,125,202,0.28); --g-ink:#345E90}
+html[data-theme=dark] .g-guidelines{--g-ink:#6294D3}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-guidelines{--g-ink:#6294D3} }
+.g-motion{--g:#A165AE; --g-soft:rgba(161,101,174,0.12); --g-line:rgba(161,101,174,0.28); --g-ink:#764D7D}
+html[data-theme=dark] .g-motion{--g-ink:#B280BB}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-motion{--g-ink:#B280BB} }
+.g-craft{--g:#678618; --g-soft:rgba(103,134,24,0.12); --g-line:rgba(103,134,24,0.28); --g-ink:#4E631B}
+html[data-theme=dark] .g-craft{--g-ink:#819B4A}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-craft{--g-ink:#819B4A} }
+.g-rules{--g:#A77109; --g-soft:rgba(167,113,9,0.12); --g-line:rgba(167,113,9,0.28); --g-ink:#7A5516}
+html[data-theme=dark] .g-rules{--g-ink:#B4843C}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-rules{--g-ink:#B4843C} }
+footer{margin-top:64px; padding-top:24px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); max-width:68ch}
+@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主内容</a>
+<div class="wrap">
+  <header class="head">
+    <div>
+      <h1>外部设计规则观测</h1>
+      <p class="lede">13 个 Interface 设计类 skill 逐个读完上游原文后的判定,以及从里面提炼的 33 条可落地判据。全部是观测与结论:零上游原文、零代码、零图像、零字体二进制。</p>
+    </div>
+    <button class="tt" id="tt" type="button" aria-label="切换深浅配色" hidden>
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <circle class="sun" cx="12" cy="12" r="4.6"></circle>
+        <path class="sun" d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"></path>
+        <path class="moon" d="M20 14.4A8.2 8.2 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z"></path>
+      </svg>
+    </button>
+  </header>
+
+  <p class="facts"><b>46</b> 条观测<span class="sep">/</span><b>8</b> 个判定为收<span class="sep">/</span><b>13</b> 个 skill 逐个评审<span class="sep">/</span><b>33</b> 条判据 · 5 组<span class="sep">/</span>数据是真相源,页面是派生物</p>
+
+  <nav class="facets" aria-label="按分组筛选">
+    <ul class="chips">
+      <li><button class="chip" type="button" data-facet="all" aria-pressed="true">全部 <span class="n">46</span></button></li>
+      <li><button class="chip" type="button" data-facet="verdict" aria-pressed="false">判定 <span class="n">13</span></button></li>
+      <li><button class="chip" type="button" data-facet="review" aria-pressed="false">审查 <span class="n">8</span></button></li>
+      <li><button class="chip" type="button" data-facet="guidelines" aria-pressed="false">审计 <span class="n">6</span></button></li>
+      <li><button class="chip" type="button" data-facet="motion" aria-pressed="false">动效 <span class="n">5</span></button></li>
+      <li><button class="chip" type="button" data-facet="craft" aria-pressed="false">细节 <span class="n">4</span></button></li>
+      <li><button class="chip" type="button" data-facet="rules" aria-pressed="false">规则库 <span class="n">10</span></button></li>
+    </ul>
+    <p class="shown" id="shown" role="status">显示 46 / 46 条</p>
+  </nav>
+
+  <main id="main">
+    <section id="verdicts">
+      <div class="sec-head">
+        <h2>13 个 skill 的判定</h2>
+        <p>判定为「收」= 有自家空白且可落断言;「只记观测」= 重复度高、口径冲突或形态不符。</p>
+      </div>
+      <div class="grid">
+      <article class="card" id="ref-ds01-canvas-design" data-facet="verdict" data-kind="只记观测">
+        <div class="card-top"><span class="badge g-verdict">只记观测</span><span class="num">01</span></div>
+        <h3>anthropics/canvas-design</h3>
+        <p class="body">仓库自带 Apache-2.0 + 54 个 OFL 字体,但规则层 0 个量化值(0 hex / 0 字号 / 0 网格 / 0 对比度),'先立概念再出图' 已被自家 §4.12 立意闸(概念四问+concept.md 三行)更硬地覆盖;字体二进制自家 fonts 包已定'只列清单不打包'先例,且两族缺许可正文</p>
+        <dl>
+          <div><dt>许可</dt><dd>Apache-2.0(逐 skill);字体 OFL-1.1</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/anthropics/skills/tree/main/skills/canvas-design" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds01-canvas-design.json</p>
+      </article>
+      <article class="card" id="ref-ds02-quieter" data-facet="verdict" data-kind="收">
+        <div class="card-top"><span class="badge g-verdict">收(提炼)</span><span class="num">02</span></div>
+        <h3>pbakaus/quieter(图作 quiter)</h3>
+        <p class="body">降噪唯一给出可量数值带:饱和度降到 70–85%、位移幅度 40→10–20px、字重 900→600/700→500、Never bounce or elastic;自家只有'强调 ≤10% 面积/150–300ms',缺饱和度与位移幅度量化</p>
+        <dl>
+          <div><dt>许可</dt><dd>Apache-2.0</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds02-quieter.json</p>
+      </article>
+      <article class="card" id="ref-ds03-distill" data-facet="verdict" data-kind="只记观测">
+        <div class="card-top"><span class="badge g-verdict">只记观测(摘 3 条)</span><span class="num">03</span></div>
+        <h3>pbakaus/distill</h3>
+        <p class="body">减法六维与自家 design-system §3 极简风(主色 ≤3/字族 ≤2/字重 ≤3/字号档 ≤6/8pt 间距/留白 40–60%)几乎逐条同构;仅'禁 card 套 card''card 非布局默认容器''一个间距刻度'三条有增量</p>
+        <dl>
+          <div><dt>许可</dt><dd>Apache-2.0</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds03-distill.json</p>
+      </article>
+      <article class="card" id="ref-ds04-critique" data-facet="verdict" data-kind="收">
+        <div class="card-top"><span class="badge g-verdict">收(提炼)</span><span class="num">04</span></div>
+        <h3>pbakaus/critique</h3>
+        <p class="body">Nielsen 10 项 0–4 分、分母=4×实评项数、36–40/28–35/20–27/12–19/0–11 五档;≤4 可见选项/≤4 同组/≤5 顶级导航;双评估隔离 + 降级必须显式 banner(防假绿)——自家只有红/绿二值,无评分可比口径与降级可见性</p>
+        <dl>
+          <div><dt>许可</dt><dd>Apache-2.0</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds04-critique.json</p>
+      </article>
+      <article class="card" id="ref-ds05-polish" data-facet="verdict" data-kind="收">
+        <div class="card-top"><span class="badge g-verdict">收(提炼)</span><span class="num">05</span></div>
+        <h3>pbakaus/polish</h3>
+        <p class="body">漂移四分类(缺 token/一次性实现/概念错位/局部缺陷)+ 最窄正确层修因;五档 triage;'禁为让打磨可见而加动画''检测器只作缺陷证据,clean scan ≠ quality'两条反假绿;自家 motion 规则偏'怎么动',缺'不许为验收而动'</p>
+        <dl>
+          <div><dt>许可</dt><dd>Apache-2.0</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds05-polish.json</p>
+      </article>
+      <article class="card" id="ref-ds06-web-design-guidelines" data-facet="verdict" data-kind="收">
+        <div class="card-top"><span class="badge g-verdict">收(提炼)</span><span class="num">06</span></div>
+        <h3>vercel-labs/web-design-guidelines</h3>
+        <p class="body">SKILL.md 仅 1.2KB 薄壳,每次 review 外抓 command.md;正本在 vercel-labs/web-interface-guidelines(MIT)约 90 条。自家空白且可断言:URL 即状态/深链、表单提交契约(禁预禁用 submit + 幂等键)、spinner 150–300ms delay + 300–500ms 最短可见、Intl.* 本地化 + translate=&quot;no&quot;、touch-action/overscroll-behavior/safe-area、tooltip 首条延迟同伴即时</p>
+        <dl>
+          <div><dt>许可</dt><dd>MIT(web-interface-guidelines 正本);agent-skills 仓无 LICENSE 文件,仅 README 口头 MIT</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/vercel-labs/web-interface-guidelines" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds06-web-design-guidelines.json</p>
+      </article>
+      <article class="card" id="ref-ds07-prototype" data-facet="verdict" data-kind="只记观测">
+        <div class="card-top"><span class="badge g-verdict">只记观测</span><span class="num">07</span></div>
+        <h3>emilkowalski/prototype</h3>
+        <p class="body">发散式方案选择器:一次只做一件、默认 3 个变体(≤5)、每个变体必须能独立上线、变体按命名轴发散、picker 规格逐字固定、选完删原型面。与自家 design-system §9 多方案对照台(≥4 档/装载整页真实内容/选定后先瘦身)同题且口径不同,照搬会产生第二套标准</p>
+        <dl>
+          <div><dt>许可</dt><dd>MIT</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/emilkowalski/skills/tree/main/skills/prototype" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds07-prototype.json</p>
+      </article>
+      <article class="card" id="ref-ds08-ui-skills" data-facet="verdict" data-kind="收">
+        <div class="card-top"><span class="badge g-verdict">收(局部提炼)</span><span class="num">08</span></div>
+        <h3>ibelick/ui-skills</h3>
+        <p class="body">注册表条目实为路由层:ui-skills-root/SKILL.md 仅 1.4KB,规定'优先 1 个 skill / 最多 3 个'并用 npx ui-skills CLI 取最小上下文;仓体是 Astro 站点 + D1 + OAuth + CLI(1.36MB)。规则分散在 9 个子 skill,且与自家 harn-ess/skill 路由机制不同构;无独立可搬的规则产物</p>
+        <dl>
+          <div><dt>许可</dt><dd>MIT</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/ibelick/ui-skills" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds08-ui-skills.json</p>
+      </article>
+      <article class="card" id="ref-ds09-emil-design-eng" data-facet="verdict" data-kind="收">
+        <div class="card-top"><span class="badge g-verdict">收(提炼)</span><span class="num">09</span></div>
+        <h3>emilkowalski/emil-design-eng</h3>
+        <p class="body">27.5KB 单文件,动效参数密度最高且可断言:按频率决定要不要动(100+/日 一律不动)、UI 动效 &lt;300ms 分档(按压 100–160 / tooltip 125–200 / 下拉 150–250 /  modal 200–500)、禁 scale(0) 入场改 scale(0.95)+opacity、按压 scale(0.97)、stagger 30–80ms、退场快于进场、blur(2px) 遮瑕且 &lt;20px、冬青 ease-out 曲线三条;自家只有 150–300ms 一条带</p>
+        <dl>
+          <div><dt>许可</dt><dd>MIT</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/emilkowalski/skills/tree/main/skills/emil-design-eng" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds09-emil-design-eng.json</p>
+      </article>
+      <article class="card" id="ref-ds10-make-interfaces-feel-better" data-facet="verdict" data-kind="收">
+        <div class="card-top"><span class="badge g-verdict">收(提炼)</span><span class="num">10</span></div>
+        <h3>jakubkrehel/make-interfaces-feel-better</h3>
+        <p class="body">19 条编号原则 + 5 篇细则,数值型判据最密:同心圆角 padding&gt;24px 例外、图片描边 1px oklch(0/1 0 0 /.1)+outline-offset:-1px、图标描边对字重三档(1.5/2/2.5px)、图标上下文动画 scale 0.25→1 + blur(4px) + bounce=0、text-wrap balance ≤6 行(Chromium)/≤10 行(Firefox)、press scale(0.96)/150ms、高频交互 ≤150ms、will-change 三限</p>
+        <dl>
+          <div><dt>许可</dt><dd>MIT</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/jakubkrehel/make-interfaces-feel-better" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds10-make-interfaces-feel-better.json</p>
+      </article>
+      <article class="card" id="ref-ds11-userinterface-wiki" data-facet="verdict" data-kind="收">
+        <div class="card-top"><span class="badge g-verdict">收(提炼)</span><span class="num">11</span></div>
+        <h3>raphaelsalaja/userinterface-wiki</h3>
+        <p class="body">152 条规则 / 12 类 / 四级影响;自家完全空白的整块:音效与合成 27 条(默认音量 0.3 / click 5–15ms / Q 2–5 / 3000–6000Hz / AudioContext 单例 / ramp 目标 0.001)、Morphing Icons 9 条、Container 两 div 模式 7 条、UX 定律可测值(400ms 响应/5–9 分块/组内 4px 组间 24px)、OpenType 6 条;输出格式 file:line - [rule-id]</p>
+        <dl>
+          <div><dt>许可</dt><dd>MIT(license.md);rules/ 为自产规则文本,站点源码与 public/ 资产不收</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/raphaelsalaja/userinterface-wiki" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds11-userinterface-wiki.json</p>
+      </article>
+      <article class="card" id="ref-ds12-oklch-skill" data-facet="verdict" data-kind="只记观测">
+        <div class="card-top"><span class="badge g-verdict">只记观测</span><span class="num">12</span></div>
+        <h3>jakubkrehel/oklch-skill</h3>
+        <p class="body">配色数学增量最大(色阶 delta 0.4 / L clamp 0.05–0.95 / C=pct×maxChroma / 多色相同 C% / 越界只降 C / P3 两层兜底 / hue drift &gt;10° / APCA Lc 60-45-30);但自家 packs 契约 §5 硬定'所有色值为 6 位 hex 或合法 rgba()',收 oklch 值需先改契约与 15 个 assert_tokens.py,本轮不改契约 → 记观测,算法不落包</p>
+        <dl>
+          <div><dt>许可</dt><dd>MIT</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/jakubkrehel/oklch-skill" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds12-oklch-skill.json</p>
+      </article>
+      <article class="card" id="ref-ds13-extract-design-system" data-facet="verdict" data-kind="只记观测">
+        <div class="card-top"><span class="badge g-verdict">只记观测</span><span class="num">13</span></div>
+        <h3>arvindrk/extract-design-system</h3>
+        <p class="body">MIT CLI(0.1.11)+ MCP + skill 三合一,内核依赖 dembrandt 0.13.0 + Playwright;从公网反向抽 token 在自家(自产 tokens.css 单入口)无真实需求位;真正增量是'源码侧裸色值/间距扫描'——自家 front-rules §10 有规则无实现,但按其口径(RGB 欧氏距离阈值 15、无档位白名单、无对比度)弱于自家 4/8/…/96 白名单,只值得借思路,不整包搬</p>
+        <dl>
+          <div><dt>许可</dt><dd>MIT</dd></div>
+          <div><dt>何时用</dt><dd>评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准</dd></div>
+          <div><dt>别用</dt><dd>当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站</dd></div>
+          <div><dt>自家对应</dt><dd>见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/arvindrk/extract-design-system" target="_blank" rel="noopener">回源核对 ↗</a> · ref-ds13-extract-design-system.json</p>
+      </article>
+      </div>
+    </section>
+
+    <section id="rules">
+      <div class="sec-head">
+        <h2>33 条可落地判据</h2>
+        <p>每条都带数值或阈值,可直接写成项目 design-lock.json 的断言;冲突项以自家正本为准。</p>
+      </div>
+      <div class="grid">
+      <article class="card" id="r01" data-facet="review">
+        <div class="card-top"><span class="badge g-review">审查 · review</span><span class="num">r01</span></div>
+        <h3>评审评分分母随实评项走</h3>
+        <p class="body">Nielsen 十项各 0–4 分;总分分母必须写成 4×实评项数(全评 /40,两项 n/a 则 /32),禁止在部分评估上印 /40;档位 36–40 / 28–35 / 20–27 / 12–19 / 0–11,跨次比较先看分母是否一致。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>出评审报告、做趋势线时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 accept 只有红/绿,没有跨次可比的分数口径</dd></div>
+          <div><dt>出处</dt><dd>critique.md: 'Never print /40 over a partial set'; 'Most real interfaces score 20-32 out of 40'</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r01.json</p>
+      </article>
+      <article class="card" id="r02" data-facet="review">
+        <div class="card-top"><span class="badge g-review">审查 · review</span><span class="num">r02</span></div>
+        <h3>认知负荷三个可数阈值</h3>
+        <p class="body">每个决策点可见选项 ≤4;每组条目 ≤4;顶级导航 ≤5;文档侧栏同级 ≤4;行动按钮 1 主 + 1–2 次,其余入菜单。启发式失败计数 0–1 低 / 2–3 中 / 4+ 高。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>定导航/选项/分组数量时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 design-system §3 只有'顶导 ≤5、深度 ≤3',缺选项与同组计数</dd></div>
+          <div><dt>出处</dt><dd>critique.md 认知负荷八项清单,引 Miller/Cowan 工作记忆 ≤4</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r02.json</p>
+      </article>
+      <article class="card" id="r03" data-facet="review">
+        <div class="card-top"><span class="badge g-review">审查 · review</span><span class="num">r03</span></div>
+        <h3>降级必须显式可见</h3>
+        <p class="body">评审必须由设计评审(A)与检测器/浏览器取证(B)两个隔离评估合成;任一降级(单上下文、检测器跳过)必须在报告首行打显式标记并写原因,静默降级=评审失败。 【可验锚点:报告首行 1 个显式降级标记;A/B 两个隔离评估,缺一即失败】</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>分身评审、自检报告抬头时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家'防假绿'缺降级可见性纪律</dd></div>
+          <div><dt>出处</dt><dd>critique.md: 'A silent degraded critique is a failed critique'; 首行 banner 契约</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r03.json</p>
+      </article>
+      <article class="card" id="r04" data-facet="review">
+        <div class="card-top"><span class="badge g-review">审查 · review</span><span class="num">r04</span></div>
+        <h3>漂移四分类 + 最窄层修因</h3>
+        <p class="body">把每处不一致先归类为:缺 token / 一次性实现 / 概念错位 / 局部缺陷;再在最窄的正确层修因(该建 token 就建 token,该换共享组件就换组件),禁止在下游逐个打补丁。 【可验锚点:把不一致归进 4 类之一,每处只修 1 个最窄层】</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>code review、发现同一视觉值多处重复时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 front-rules §10 有 tokens 单文件规则,缺上游归因分类</dd></div>
+          <div><dt>出处</dt><dd>polish.md: 'Fix the cause at the narrowest correct level'</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r04.json</p>
+      </article>
+      <article class="card" id="r05" data-facet="review">
+        <div class="card-top"><span class="badge g-review">审查 · review</span><span class="num">r05</span></div>
+        <h3>打磨按五档顺序走</h3>
+        <p class="body">triage 强制顺序:① 阻断任务/丢数据/误导状态/不可达 ② 缺 loading/empty/error/success/disabled/permission 态 ③ flow/层级/响应式/设计系统漂移 ④ 视觉与动效不一致 ⑤ 代码与资产清理。禁止把某个角落磨到满分而其余仍低于同一质量线。 【可验锚点:按 5 档顺序 triage,每档清零后才进下一档】</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>交付前最后一轮巡查</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 hard-gates-web §4.0/§4.6 覆盖各态,缺强制顺序</dd></div>
+          <div><dt>出处</dt><dd>polish.md 五档 triage; 'Do not perfect one corner while leaving the rest below the same quality bar'</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r05.json</p>
+      </article>
+      <article class="card" id="r06" data-facet="review">
+        <div class="card-top"><span class="badge g-review">审查 · review</span><span class="num">r06</span></div>
+        <h3>检测器结果只是缺陷证据</h3>
+        <p class="body">检测器/静态扫描通过 ≠ 质量达标;必须看真实渲染与交互路径;禁止为了让打磨'看得见'而新增动画;禁止重复跑同一轮检测仪式。 【可验锚点:0 次为验收新增动画;clean scan 只记 1 票,不代替目视】</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>闸报全绿就宣布完工时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 motion 规则偏'怎么动',缺'不许为验收而动'</dd></div>
+          <div><dt>出处</dt><dd>polish.md: 'A detector result is defect evidence, not proof of quality'; 'A clean scan does not replace visual judgment'</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r06.json</p>
+      </article>
+      <article class="card" id="r07" data-facet="review">
+        <div class="card-top"><span class="badge g-review">审查 · review</span><span class="num">r07</span></div>
+        <h3>降噪的可量数值带</h3>
+        <p class="body">压视觉强度而不是压信息:饱和度降到 70–85%;动效位移幅度从 40px 降到 10–20px;字重 900→600、700→500;强调色面积 ≤10%;禁 bounce/elastic;禁'灰字压在彩色底上',改同色相深一档;禁把所有元素做成同尺寸同字重、禁把颜色全去掉。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>评审判定'太吵/太刺激'时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家只有 ≤10% 面积 / 150–300ms,缺饱和度与位移幅度量化</dd></div>
+          <div><dt>出处</dt><dd>quieter.md 数值段; 'Never gray on color'; 'Quiet design is harder than bold design'</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r07.json</p>
+      </article>
+      <article class="card" id="r08" data-facet="review">
+        <div class="card-top"><span class="badge g-review">审查 · review</span><span class="num">r08</span></div>
+        <h3>减法三条硬边界</h3>
+        <p class="body">禁 card 套 card;card 不是布局的默认容器(基础布局用间距与对齐);全站只允许一个间距刻度,禁任意 gap;语义色(success/warning/error)每个都必须配非颜色线索;禁'简化到看不懂'。 【可验锚点:3 条硬边界:0 层嵌套 card、1 个间距刻度、语义色各配 1 个非颜色线索】</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>极简/减法评审时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 design-system §3 已覆盖大部分,这三条是增量</dd></div>
+          <div><dt>出处</dt><dd>distill.md IA/视觉/布局三维; 'Cards aren't needed for basic layout'; 'Pick one spacing scale'</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r08.json</p>
+      </article>
+      <article class="card" id="r09" data-facet="guidelines">
+        <div class="card-top"><span class="badge g-guidelines">审计 · guidelines</span><span class="num">r09</span></div>
+        <h3>状态必须进 URL</h3>
+        <p class="body">筛选、标签页、分页、展开面板等任何有状态的 UI 都要映射进 URL 查询参数;前进/后退要能恢复状态与滚动位置;破坏性操作给确认或 Undo 窗口,禁立即执行。 【可验锚点:状态 1:1 映射查询参数;前进/后退恢复 2 项(状态+滚动位置)】</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>做交互原型、SPA 收口时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家全库 0 命中,属最大空白</dd></div>
+          <div><dt>出处</dt><dd>web-interface-guidelines/command.md Navigation &amp; State 段</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r09.json</p>
+      </article>
+      <article class="card" id="r10" data-facet="guidelines">
+        <div class="card-top"><span class="badge g-guidelines">审计 · guidelines</span><span class="num">r10</span></div>
+        <h3>表单提交契约</h3>
+        <p class="body">提交按钮在请求开始前保持 enabled;请求中才 disable + spinner;写操作带幂等键;禁预禁用 submit;禁阻止粘贴;错误内联到字段旁并在提交时聚焦首个错误;输入框字号 ≥16px 防移动端聚焦缩放。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>做表单、做写操作时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 hard-gates-web 覆盖错误态,无提交契约与幂等键</dd></div>
+          <div><dt>出处</dt><dd>command.md Forms / Anti-patterns 段</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r10.json</p>
+      </article>
+      <article class="card" id="r11" data-facet="guidelines">
+        <div class="card-top"><span class="badge g-guidelines">审计 · guidelines</span><span class="num">r11</span></div>
+        <h3>加载指示的防闪烁窗口</h3>
+        <p class="body">spinner 显示延迟 150–300ms,显示后最短可见 300–500ms,避免一闪而过;加载中按钮保留原标签;自动播放 &gt;5s 的动效要有暂停/停止/隐藏控件。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>定加载态时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 front-rules §8 是 1s 阈值与形态,维度互补不冲突</dd></div>
+          <div><dt>出处</dt><dd>command.md Animation / Loading 段</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r11.json</p>
+      </article>
+      <article class="card" id="r12" data-facet="guidelines">
+        <div class="card-top"><span class="badge g-guidelines">审计 · guidelines</span><span class="num">r12</span></div>
+        <h3>本地化与标点微规</h3>
+        <p class="body">日期/数字/货币走 Intl.DateTimeFormat / Intl.NumberFormat,禁硬编码格式;语言取 Accept-Language / navigator.languages,禁靠 IP;品牌名与代码词包 translate=&quot;no&quot;;单位与快捷键用 &amp;nbsp; 粘连(10 MB、⌘ K);用弯引号与单个 … 字符;货币小数位全站统一 0 或 2 不得混用。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>多语站收口、文案审计时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 design-system §6 只审小标题,无 i18n 与标点断言</dd></div>
+          <div><dt>出处</dt><dd>command.md Locale &amp; i18n / Content &amp; Copy / Typography 段</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r12.json</p>
+      </article>
+      <article class="card" id="r13" data-facet="guidelines">
+        <div class="card-top"><span class="badge g-guidelines">审计 · guidelines</span><span class="num">r13</span></div>
+        <h3>触控三件套与安全区</h3>
+        <p class="body">touch-action: manipulation 防双击缩放延迟;有意设置 -webkit-tap-highlight-color;模态/抽屉 overscroll-behavior: contain;橡皮筋压制只在 @media (pointer: fine) 下作用于 html,粗指针保留下拉刷新;全出血布局用 env(safe-area-inset-*)。 【可验锚点:3 件套 + 1 个安全区;橡皮筋压制只在 1 个媒体查询内生效】</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>移动端验收时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家仅在侧栏与媒体站零星出现,未成条</dd></div>
+          <div><dt>出处</dt><dd>command.md Touch &amp; Interaction / Safe Areas 段</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r13.json</p>
+      </article>
+      <article class="card" id="r14" data-facet="guidelines">
+        <div class="card-top"><span class="badge g-guidelines">审计 · guidelines</span><span class="num">r14</span></div>
+        <h3>URL 与输入的可访问性底线</h3>
+        <p class="body">图标按钮 aria-label;装饰图标 aria-hidden;异步结果 aria-live=&quot;polite&quot;;语义 HTML 优先于 ARIA;标题层级 + skip link;标题锚点 scroll-margin-top;禁仅用颜色传达状态;禁 user-scalable=no / maximum-scale=1 禁缩放。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>无障碍闸时</dd></div>
+          <div><dt>自家缺口</dt><dd>多数自家已覆盖;此处合并成一条便于对照,冲突项以自家为准</dd></div>
+          <div><dt>出处</dt><dd>command.md Accessibility / Anti-patterns 段</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r14.json</p>
+      </article>
+      <article class="card" id="r15" data-facet="motion">
+        <div class="card-top"><span class="badge g-motion">动效 · motion</span><span class="num">r15</span></div>
+        <h3>按频率决定要不要动</h3>
+        <p class="body">先问用户多久看一次:≥100 次/日(快捷键、命令面板切换)一律不动;高频交互给即时反馈或 ≤150ms 的 opacity/颜色过渡;常规 UI 动效一律 &lt;300ms。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>写任何 animation/transition 之前</dd></div>
+          <div><dt>自家缺口</dt><dd>自家只有 150–300ms 一条带,缺频率维度</dd></div>
+          <div><dt>出处</dt><dd>emil-design-eng/SKILL.md The Animation Decision Framework: '100+ times/day … No animation. Ever.'; 'UI animations should stay under 300ms'</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r15.json</p>
+      </article>
+      <article class="card" id="r16" data-facet="motion">
+        <div class="card-top"><span class="badge g-motion">动效 · motion</span><span class="num">r16</span></div>
+        <h3>动效时长分档与曲线</h3>
+        <p class="body">按压反馈 100–160ms;tooltip/小 popover 125–200ms;下拉/select 150–250ms;modal/抽屉 200–500ms;入场 ease-out、退场 ease-in、禁 UI 用 ease-in 起手;退场比入场快(如 enter 2s / exit 200ms);stagger 间隔 30–80ms;blur 遮瑕 2px 且动画 blur 一律 &lt;20px。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>定 tokens 里的 duration/easing 时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 motion-scroll 有 d1/d2/d3 三档,缺按控件类型分档</dd></div>
+          <div><dt>出处</dt><dd>emil-design-eng 时长表与 Performance Rules;ui-cheatsheet / performance-cheatsheet</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r16.json</p>
+      </article>
+      <article class="card" id="r17" data-facet="motion">
+        <div class="card-top"><span class="badge g-motion">动效 · motion</span><span class="num">r17</span></div>
+        <h3>入场不从 scale(0) 起</h3>
+        <p class="body">入场起点 scale(0.95) + opacity 0,禁 scale(0);按压 scale(0.97)(范围 0.95–0.98);popover 的 transform-origin 跟触发器走,modal 保持居中;禁 transition: all,显式列属性;clip-path 可做按住进度(2s linear)与松手快回(200ms ease-out)。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>写入场/按压动效时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 hard-gates-web 有 pressed scale(.96),缺起点与 origin 口径</dd></div>
+          <div><dt>出处</dt><dd>emil-design-eng Review Format 与 Component Building Principles 段</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r17.json</p>
+      </article>
+      <article class="card" id="r18" data-facet="motion">
+        <div class="card-top"><span class="badge g-motion">动效 · motion</span><span class="num">r18</span></div>
+        <h3>10% 慢放逐态复检</h3>
+        <p class="body">评审时把界面降到 10% 速度重放,逐个走 hover / focus / active / loading / empty 五态;10% 下才看得出的别扭就是问题。报告必须列'考虑过但否决'的 1–5 个真候选,并给 Block / Needs changes / Approve 三档判词。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>动效评审时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家'改前 baseline 截图'是静态,缺慢放逐态法</dd></div>
+          <div><dt>出处</dt><dd>make-interfaces-feel-better/SKILL.md: 'replay motion at 10% speed'; Review Output Format</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r18.json</p>
+      </article>
+      <article class="card" id="r19" data-facet="craft">
+        <div class="card-top"><span class="badge g-craft">细节 · craft</span><span class="num">r19</span></div>
+        <h3>图标描边对字重三档</h3>
+        <p class="body">24px 网格下:正文 400 / 14–16px → 描边 1.5px;500–600 → 2px;700 或强调独立 → 2.5px;一套图标只用一个描边档,禁混图标库;inline 图标取 1em–1.25em;只在最小实际尺寸(常为 16px)验收。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>选/画图标时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家各包预览固定 1.5/1.6px,无档位规则</dd></div>
+          <div><dt>出处</dt><dd>icons.md 描边-字重表</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r19.json</p>
+      </article>
+      <article class="card" id="r20" data-facet="craft">
+        <div class="card-top"><span class="badge g-craft">细节 · craft</span><span class="num">r20</span></div>
+        <h3>图标上下文动画四值</h3>
+        <p class="body">两图标交叉淡出:scale 0.25→1(不用 0.5/0.6)、opacity 0→1、blur(4px)→blur(0px)、spring duration 0.3 且 bounce 恒为 0;无动效库时用双图标常驻 DOM + cubic-bezier(0.2,0,0,1);一图多态用 currentColor + CSS 切 hover/selected/disabled,outline 默认、fill 只标选中。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>做图标状态切换时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家全库无,高增量</dd></div>
+          <div><dt>出处</dt><dd>animations.md / icons.md</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r20.json</p>
+      </article>
+      <article class="card" id="r21" data-facet="craft">
+        <div class="card-top"><span class="badge g-craft">细节 · craft</span><span class="num">r21</span></div>
+        <h3>表面与图片描边数值</h3>
+        <p class="body">同心圆角 outer = inner + padding;当 padding &gt;24px 时两层视为独立表面、各自定半径;图标侧内边距 = 文字侧 − 2px;播放三角右移 2px;图片描边用 outline: 1px solid oklch(0 0 0 / 0.1)(暗模 oklch(1 0 0 / 0.1)) + outline-offset:-1px,且必须纯黑/纯白不用近似中性色。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>定卡片/图片表面时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家有同心圆角规则,缺 &gt;24px 例外与描边数值;注意与 r26 冲突见 docs/usage.md</dd></div>
+          <div><dt>出处</dt><dd>surfaces.md; 'Color rules (non-negotiable)'</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r21.json</p>
+      </article>
+      <article class="card" id="r22" data-facet="craft">
+        <div class="card-top"><span class="badge g-craft">细节 · craft</span><span class="num">r22</span></div>
+        <h3>文本与性能细则</h3>
+        <p class="body">text-wrap: balance 仅对 ≤6 行(Chromium)/≤10 行(Firefox)生效,text-wrap: pretty 作短中文本默认,10+ 行两者都不用;tabular-nums 只给计数器/计时器/变动价格/表格列/数字动效,静态数字与版本号不用;will-change 只给 transform/opacity/filter 且只在发现首帧卡顿时加,禁 will-change: all;字体平滑只在 html 根写一次。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>排版与性能验收时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家已用 tnum/balance,缺阈值与白名单</dd></div>
+          <div><dt>出处</dt><dd>typography.md / performance.md</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r22.json</p>
+      </article>
+      <article class="card" id="r23" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r23</span></div>
+        <h3>音效与合成的硬数值</h3>
+        <p class="body">默认音量 0.3;点击音 5–15ms;点击滤波 3000–6000Hz;Q=2–5;gain &lt;1.0;AudioContext 全站单例且 suspended 必 resume;包络指数衰减目标 0.001(0 非法);打字/键盘导航不加音效;每个音效必须有视觉等价物、可关闭、有音量控制;高频确认/错误/装饰/惩罚性音效一律禁。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>做音频反馈、做播放器时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家全库无规则条文,整块空白</dd></div>
+          <div><dt>出处</dt><dd>userinterface-wiki skills/rules/ a11y-* / appropriate-* / param-* / context-* 共 27 条</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r23.json</p>
+      </article>
+      <article class="card" id="r24" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r24</span></div>
+        <h3>容器动画两 div 模式</h3>
+        <p class="body">禁对同一元素既测量又动画:外层负责动画、内层负责测量;bounds.width===0 时回退 'auto' 而不是写死数值;用 ResizeObserver + contentRect 并在卸载时 disconnect();容器 overflow:hidden;拖拽期对元素设 inert 并禁文本选中。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>做展开/折叠、列表重排时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 motion-kit 有量高 FAQ,无该模式</dd></div>
+          <div><dt>出处</dt><dd>rules/container-* 7 条; 'Never measure and animate the same element'</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r24.json</p>
+      </article>
+      <article class="card" id="r25" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r25</span></div>
+        <h3>UX 定律的可测值</h3>
+        <p class="body">交互响应 &lt;400ms 才'即时'(乐观 UI);分组 5–9 项;组内间距 4px / 2px、组间 24px;命中目标 ≥32×32px + 8px padding;危险操作用独立样式做差异项;进度与未完成态要可见。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>定交互节奏与分组时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家有 44px 触区(更硬),余下 0 命中</dd></div>
+          <div><dt>出处</dt><dd>rules/ux-doherty-under-400ms / ux-millers-chunking / ux-proximity-grouping / ux-fitts-target-size / ux-von-restorff-emphasis</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r25.json</p>
+      </article>
+      <article class="card" id="r26" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r26</span></div>
+        <h3>阴影与伪元素方向</h3>
+        <p class="body">阴影用≥3 层递增模糊递减透明度(0 1px 2px/.06, 0 4px 8px/.04, 0 12px 24px/.03);全站同一光照方向;投影禁用纯黑,改中性色;三档 elevation 对应 card/dropdown/modal;原生 ::backdrop / ::placeholder / ::selection / ::marker / ::first-line 优先于新增 DOM 节点;view-transition-name 必须唯一且切换后清理。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>定表面层级、做视图过场时</dd></div>
+          <div><dt>自家缺口</dt><dd>与自家 design-system §3'阴影 1 套'及部分主题包纯黑投影冲突:按 docs/usage.md 的冲突表裁决,不自动生效</dd></div>
+          <div><dt>出处</dt><dd>rules/visual-* 9 条 / pseudo-* 5 条 / transition-name-* 3 条</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r26.json</p>
+      </article>
+      <article class="card" id="r27" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r27</span></div>
+        <h3>OpenType 与渲染六条</h3>
+        <p class="body">font-synthesis: none(禁合成字形);font-display: swap;可变字重用连续值(450/550);正文用 oldstyle-nums、表格用 lining-nums tabular-nums;text-underline-offset: 3px + text-decoration-skip-ink: auto;易混字符用 ss02、分数用 diagonal-fractions、0 用 slashed-zero。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>中文/多语排版验收时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 front-rules §17 有可变字体与合成斜体回退,缺 OpenType 档位</dd></div>
+          <div><dt>出处</dt><dd>rules/type-* 16 条中自家未覆盖的 6 条</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r27.json</p>
+      </article>
+      <article class="card" id="r28" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r28</span></div>
+        <h3>规则库输出格式</h3>
+        <p class="body">评审报告统一 file:line - [rule-id] 描述,末尾附 Rule | Count | Severity 汇总表;每条规则带影响级(CRITICAL/HIGH/MEDIUM/LOW),先按影响级排序再按主题。 【可验锚点:每行 1 个 rule-id;汇总表 3 列(Rule/Count/Severity)】</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>出评审报告时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 web_audit.py 有 48 项清单,缺统一 rule-id 引用格式</dd></div>
+          <div><dt>出处</dt><dd>skills/AGENTS.md 文末 Output Format / Summary Table</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r28.json</p>
+      </article>
+      <article class="card" id="r29" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r29</span></div>
+        <h3>发布元数据一致闸</h3>
+        <p class="body">每页元数据只在一处定义且必须确定(禁随机值);og:url 必须等于 canonical;OG/Twitter 图片用绝对 URL;twitter:card 默认 summary_large_image;预览/预发页默认 noindex;JSON-LD 禁编造评分/评价/价格/组织信息;社交卡片在真实 URL 上验,不在 localhost。 【可验锚点:4 个字段一致(title/description/canonical/og:url);预发页 1 个 noindex】</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>静态站发布前收口</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 option-lab-and-prod §10 已点名'漏抄 meta description 无闸门',但无成清单</dd></div>
+          <div><dt>出处</dt><dd>ibelick/ui-skills skills/fixing-metadata/SKILL.md 工作流与规则表</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r29.json</p>
+      </article>
+      <article class="card" id="r30" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r30</span></div>
+        <h3>审计三证明门</h3>
+        <p class="body">审计他人既有界面时每条发现必须过三证明:Contract(引用有约束力的设计决定,'prefer/generally/命名/省略/重复'不算)、Runtime(沿可追踪运行路径证明能到达)、Correction(写出证据要求的一处改动);报告每条必带 Confidence,缺列即删行;最多报 3 条;只读源码,产物只写 design-plans/。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>评审既有站点/外部设计系统时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家闸主要面向新建项目,缺审计既有系统的证据契约</dd></div>
+          <div><dt>出处</dt><dd>ibelick/ui-skills skills/improve-ui/SKILL.md 三证明门与 Stop at three</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r30.json</p>
+      </article>
+      <article class="card" id="r31" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r31</span></div>
+        <h3>动效性能四条禁令</h3>
+        <p class="body">同一帧内禁读写交错;禁从 scrollTop/scrollY/scroll 事件驱动动画;rAF 循环必须有停止条件;禁混用多套各自测量/改布局的动效系统;离屏暂停用 IntersectionObserver;禁动画继承型 CSS 变量;blur 动画 ≤8px 且一次性、不连续;View Transitions 只给导航级变化。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>掉帧排查、动效性能验收时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家 motion-scroll 有 scrub/采样口径,缺这四条显式禁令与 FLIP/View Timelines</dd></div>
+          <div><dt>出处</dt><dd>ibelick/ui-skills skills/fixing-motion-performance/SKILL.md</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r31.json</p>
+      </article>
+      <article class="card" id="r32" data-facet="motion">
+        <div class="card-top"><span class="badge g-motion">动效 · motion</span><span class="num">r32</span></div>
+        <h3>动效频率与手势数值组</h3>
+        <p class="body">键盘发起的动作一律不动;按压进度可慢(2s linear)但松手必须快(200ms ease-out);拖拽释放按速度否决:velocity&gt;0.11 或位移 40–50% 或 velocity.y&gt;500;dragElastic≈0.2;帧预算按 16.7ms(120Hz 为 8ms)设计;tooltip 首次有延迟、相邻同伴即时。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>做手势、拖拽、命令面板时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家只有'动效=频率×幅度×缓动'概念,无按频次否决与手势阈值</dd></div>
+          <div><dt>出处</dt><dd>emil-design-eng/SKILL.md 频率闸、gestures/SKILL.md、animation-performance/SKILL.md 与两张 cheatsheet</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r32.json</p>
+      </article>
+      <article class="card" id="r33" data-facet="rules">
+        <div class="card-top"><span class="badge g-rules">规则库 · rules</span><span class="num">r33</span></div>
+        <h3>命中区与表面分层</h3>
+        <p class="body">命中目标 44×44px(密集桌面 40×40),两个命中区禁重叠;固定元素用 100dvh 不用 100vh 并尊重 safe-area-inset;z-index 用固定刻度禁任意值;空态必须给一个明确下一步动作;不可逆操作用确认弹层。</p>
+        <dl>
+          <div><dt>何时核对</dt><dd>定命中区与层级时</dd></div>
+          <div><dt>自家缺口</dt><dd>自家已覆盖 40/44px,此处把'固定刻度+空态动作'并成一条对照项</dd></div>
+          <div><dt>出处</dt><dd>userinterface-wiki rules/ux-fitts-* 与 ibelick/ui-skills baseline-ui; 与自家 front-rules §6 对齐</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/nakamotosai/sai-assets" target="_blank" rel="noopener">回源核对 ↗</a> · r33.json</p>
+      </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>本页由 <code>scripts/build_preview.py</code> 从 <code>data/*.json</code> 生成 —— 改数据必须重跑,包内断言会核对页面与数据是否同步。</p>
+    <p>上游许可与出处逐条记在 <code>data/*.json</code> 的 license / source_url;本包自产重述部分为 CC0-1.0。</p>
+  </footer>
+</div>
+<script>
+(function(){
+  var K="dsv-theme", root=document.documentElement, btn=document.getElementById("tt");
+  var forced=(new URLSearchParams(location.search).get("theme")||"").replace(/[^a-z]/g,"");
+  try{var v=forced||localStorage.getItem(K); if(v) root.setAttribute("data-theme", v);}catch(e){}
+  btn.hidden=false;
+  btn.addEventListener("click", function(){
+    var dark = root.getAttribute("data-theme")==="dark" ||
+      (!root.hasAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try{ localStorage.setItem(K, next); }catch(e){}
+  });
+  var cards=[].slice.call(document.querySelectorAll(".card")), shown=document.getElementById("shown");
+  document.querySelectorAll(".chip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      var f=chip.dataset.facet, n=0;
+      document.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed", String(c===chip)); });
+      cards.forEach(function(card){
+        var ok = f==="all" || card.dataset.facet===f;
+        card.hidden = !ok; if(ok) n++;
+      });
+      shown.textContent = "显示 " + n + " / " + cards.length + " 条";
+    });
+  });
+})();
+</script>
+</body>
+</html>

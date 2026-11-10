@@ -1,0 +1,127 @@
+{
+ "schema": 1,
+ "note": "纸白/炭黑取 skill://design-system §2.5 和色六景。badge ink 档按**实际叠加链**实测:页底 → 卡片 surface → 章色 12% 浅底,目标 ≥4.5:1;mix_pct 为该章色在 OKLab 里与墨/白的混合百分比(随章色自适应)。包内断言用同一模型复算。",
+ "neutral": {
+  "light": {
+   "bg": "#F5F3ED",
+   "ink": "#1A1A16",
+   "muted": "#5B5A53",
+   "surface": "rgba(26,26,22,0.045)",
+   "line": "rgba(26,26,22,0.10)",
+   "line2": "rgba(26,26,22,0.18)",
+   "surface_rgba": [
+    26,
+    26,
+    22,
+    0.045
+   ]
+  },
+  "dark": {
+   "bg": "#0E0E0C",
+   "ink": "#EDEBE4",
+   "muted": "#A3A199",
+   "surface": "rgba(237,235,228,0.055)",
+   "line": "rgba(237,235,228,0.12)",
+   "line2": "rgba(237,235,228,0.22)",
+   "surface_rgba": [
+    237,
+    235,
+    228,
+    0.055
+   ]
+  }
+ },
+ "accent": {
+  "c1": "#0C8B7A",
+  "c2": "#A77109",
+  "c3": "#CD5545",
+  "c4": "#3F7DCA",
+  "c5": "#678618",
+  "c6": "#A165AE"
+ },
+ "badge_soft_alpha": 0.12,
+ "groups": {
+  "verdict": {
+   "accent_var": "c1",
+   "accent": "#0C8B7A",
+   "ink_light": "#1E6759",
+   "mix_pct_light": 72,
+   "contrast_light": 4.81,
+   "badge_bg_light": "#D0DED6",
+   "ink_dark": "#449B8A",
+   "mix_pct_dark": 86,
+   "contrast_dark": 4.61,
+   "badge_bg_dark": "#182824"
+  },
+  "review": {
+   "accent_var": "c3",
+   "accent": "#CD5545",
+   "ink_light": "#944335",
+   "mix_pct_light": 72,
+   "contrast_light": 4.83,
+   "badge_bg_light": "#E7D7D0",
+   "ink_dark": "#D76E5D",
+   "mix_pct_dark": 86,
+   "contrast_dark": 4.63,
+   "badge_bg_dark": "#2F211D"
+  },
+  "guidelines": {
+   "accent_var": "c4",
+   "accent": "#3F7DCA",
+   "ink_light": "#345E90",
+   "mix_pct_light": 72,
+   "contrast_light": 4.82,
+   "badge_bg_light": "#D6DCE0",
+   "ink_dark": "#6294D3",
+   "mix_pct_dark": 82,
+   "contrast_dark": 4.89,
+   "badge_bg_dark": "#1E262D"
+  },
+  "motion": {
+   "accent_var": "c6",
+   "accent": "#A165AE",
+   "ink_light": "#764D7D",
+   "mix_pct_light": 72,
+   "contrast_light": 4.86,
+   "badge_bg_light": "#E2D9DD",
+   "ink_dark": "#B280BB",
+   "mix_pct_dark": 82,
+   "contrast_dark": 4.88,
+   "badge_bg_dark": "#2A232A"
+  },
+  "craft": {
+   "accent_var": "c5",
+   "accent": "#678618",
+   "ink_light": "#4E631B",
+   "mix_pct_light": 72,
+   "contrast_light": 4.87,
+   "badge_bg_light": "#DBDDCB",
+   "ink_dark": "#819B4A",
+   "mix_pct_dark": 82,
+   "contrast_dark": 4.89,
+   "badge_bg_dark": "#232718"
+  },
+  "rules": {
+   "accent_var": "c2",
+   "accent": "#A77109",
+   "ink_light": "#7A5516",
+   "mix_pct_light": 72,
+   "contrast_light": 4.86,
+   "badge_bg_light": "#E3DBC9",
+   "ink_dark": "#B4843C",
+   "mix_pct_dark": 86,
+   "contrast_dark": 4.61,
+   "badge_bg_dark": "#2B2416"
+  }
+ },
+ "text_contrast": {
+  "light": {
+   "ink_on_bg": 15.73,
+   "muted_on_bg": 6.24
+  },
+  "dark": {
+   "ink_on_bg": 16.2,
+   "muted_on_bg": 7.47
+  }
+ }
+}

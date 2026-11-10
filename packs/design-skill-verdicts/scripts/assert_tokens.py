@@ -180,6 +180,93 @@ if USAGE.is_file():
 else:
     fail("docs/usage.md 缺失")
 
+# ------------------------------------------------------------- 6 预览页 #
+PREVIEW = PACK / "preview" / "index.html"
+if PREVIEW.is_file():
+    html = PREVIEW.read_text(encoding="utf-8")
+    cards = html.count('<article class="card"')
+    if cards != EXPECT_TOTAL:
+        fail(f"preview 卡片 {cards} != 条目总数 {EXPECT_TOTAL}")
+    missing = [rid for rid in records if f'id="{rid}"' not in html]
+    if missing:
+        fail(f"preview 缺条目卡片: {missing[:5]}")
+    for pat, why in ((r"<script[^>]+src=\"https?://", "外链脚本"),
+                     (r"<link[^>]+href=\"https?://", "外链样式/资源"),
+                     (r"<img[^>]+src=\"https?://", "外链图片")):
+        if re.search(pat, html):
+            fail(f"preview 含{why}")
+    for need, why in (('id="tt"', "深浅切换按钮"), ('aria-label="切换深浅配色"', "切换按钮可访问名"),
+                      ('<section id="verdicts">', "判定段"), ('<section id="rules">', "判据段"),
+                      ('class="skip"', "skip link"), ("prefers-reduced-motion", "减少动效分支")):
+        if need not in html:
+            fail(f"preview 缺{why}({need})")
+    print(f"[preview] {len(html.encode()):d}B · 卡片 {cards} 张 · 46 条 id 全在 · 零外链子资源 · 切换按钮/skip link/reduced-motion 齐")
+else:
+    fail("preview/index.html 缺失")
+
+# ------------------------------------------------------------- 7 配色闸 #
+# 章色 ink 档与正文/次级文字必须逐档 ≥4.5:1(PACK-CONTRACT §5 文字档口径);
+# 数字从 tokens/palette.json 复算,不信记录值 —— 记录值只作对照。
+PALETTE = PACK / "tokens" / "palette.json"
+
+
+def _lum(hexv: str) -> float:
+    h = hexv.lstrip("#")
+    parts = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
+    lin = [c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4 for c in parts]
+    return 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2]
+
+
+def _contrast(fg: str, bg: str) -> float:
+    l1, l2 = _lum(fg), _lum(bg)
+    return (max(l1, l2) + 0.05) / (min(l1, l2) + 0.05)
+
+
+if PALETTE.is_file():
+    pal = json.loads(PALETTE.read_text(encoding="utf-8"))
+
+    def _hex2rgb(h: str) -> tuple[float, float, float]:
+        h = h.lstrip("#")
+        return tuple(int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
+
+    def _rgb2hex(rgb) -> str:
+        return "#" + "".join(f"{max(0, min(255, round(c * 255))):02X}" for c in rgb)
+
+    def _over(base_hex: str, layer_hex: str, alpha: float) -> str:
+        base, layer = _hex2rgb(base_hex), _hex2rgb(layer_hex)
+        return _rgb2hex(tuple(l * alpha + b * (1 - alpha) for l, b in zip(layer, base)))
+
+    soft = pal.get("badge_soft_alpha", 0.12)
+    worst, where = 99.0, ""
+    for mode in ("light", "dark"):
+        bg = pal["neutral"][mode]["bg"]
+        surf = pal["neutral"][mode]["surface"]
+        m_surf = re.match(r"rgba\((\d+),(\d+),(\d+),([\d.]+)\)", surf)
+        if not m_surf:
+            fail(f"palette {mode}/surface 不是 rgba() 写法:{surf}")
+            continue
+        card = _over(bg, "#%02X%02X%02X" % tuple(int(m_surf.group(i)) for i in (1, 2, 3)),
+                     float(m_surf.group(4)))
+        for key in ("ink", "muted"):
+            cr = _contrast(pal["neutral"][mode][key], bg)
+            if cr < worst:
+                worst, where = cr, f"{mode}/{key}"
+            if cr < 4.5:
+                fail(f"palette {mode}/{key} on bg 对比度 {cr:.2f}:1 < 4.5")
+        for g, spec in pal["groups"].items():
+            badge_bg = _over(card, spec["accent"], soft)
+            cr = _contrast(spec[f"ink_{mode}"], badge_bg)
+            if cr < worst:
+                worst, where = cr, f"{mode}/{g}"
+            if cr < 4.5:
+                fail(f"palette {mode}/{g}.ink on badge 底 对比度 {cr:.2f}:1 < 4.5")
+            # 记录值与复算值偏差 >0.05 = 有人手改了 hex 没重算
+            if abs(cr - spec[f"contrast_{mode}"]) > 0.05:
+                fail(f"palette {mode}/{g}: 记录 {spec[f'contrast_{mode}']} != 复算 {cr:.2f}")
+    print(f"[contrast] 2 模 × (正文+次级+{len(pal['groups'])} 章色 on 叠加底) 全部 ≥4.5:1,最低 {worst:.2f}:1 @ {where}")
+else:
+    fail("tokens/palette.json 缺失(预览页配色无真相源)")
+
 # ------------------------------------------------------------------ 结果 #
 if fails:
     for f in fails:
