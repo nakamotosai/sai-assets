@@ -43,8 +43,8 @@ def existing_tags() -> set[str]:
 
 def run_gate() -> None:
     out = subprocess.run([sys.executable, str(ROOT / "scripts" / "gate.py")], cwd=ROOT,
-                         capture_output=True, text=True)
-    print(out.stdout.strip() or out.stderr.strip())
+                         capture_output=True, text=True, encoding="utf-8", errors="replace")
+    print((out.stdout or "").strip() or (out.stderr or "").strip())
     if out.returncode != 0:
         print("FAIL gate 未过,拒绝打 tag", file=sys.stderr)
         sys.exit(1)
