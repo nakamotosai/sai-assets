@@ -13,7 +13,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[1]          # F:/projects/sai-assets
+REPO = Path(__file__).resolve().parents[1]          # 仓根(scripts/ 的上一级)
 PALETTE = json.loads((REPO / "packs" / "design-skill-verdicts" / "tokens" /
                       "palette.json").read_text(encoding="utf-8"))
 
