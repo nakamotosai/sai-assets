@@ -9,7 +9,7 @@
 | 内容本体 | 外部视频工程 `mv-studio`(Remotion 4.0.539) |
 | `external` | `true` |
 | `canonical_home` | `null` —— 外部工程**无远端**(单 commit、零备份),补双远端后回填 |
-| 本仓内容 | 无:`files` 全空数组 / `null`,零复制 |
+| 本仓内容 | 只有索引卡:`data/index.json`(22 张)与 `preview/index.html`;零源码、零图片、零视频 |
 
 ## 它管什么
 
@@ -22,6 +22,10 @@
 | 要做 MV / 歌词影像 / 音乐可视化 | 外部工程 `mv-studio` |
 | 要网页动效(CSS / WebGL / 粒子) | web-fx 类包 |
 | 要网页组件 / 版式 / 配色 | web-ui、themes 类包 |
+
+## 活预览
+
+`preview/index.html` —— 22 张索引卡(16 个 archetype + 风格包 + 节拍/摄影机库 + 成品曲目 + 边界),按五组筛选、深浅双模。**只登记名字与用途**,不含任何外部工程内容;由 `scripts/build_preview.py` 从 `data/index.json` 生成。
 
 ## 为什么不复制进本仓
 

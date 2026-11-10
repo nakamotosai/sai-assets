@@ -4,7 +4,7 @@
   "title": "Video Motion · mv-studio(外部包 · 只索引)",
   "kind": "meta",
   "category": "video-motion",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "本仓只有索引条目、不含内容;内容许可随本家(外部工程为私有 / UNLICENSED,渲染框架另有其上游条款)",
   "attribution": [
     {
@@ -28,11 +28,14 @@
   "files": {
     "tokens": [],
     "css": [],
-    "src": [],
+    "src": [
+      "data/index.json",
+      "scripts/build_preview.py"
+    ],
     "upstream": [],
     "usage": null,
-    "assert": null,
-    "preview": null
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
   },
   "tags": [
     "video-motion",
@@ -47,13 +50,14 @@
   "not_for": "当网页动效用(走 web-fx 类包)、当 CSS / JS 片段抄进网页(渲染模型不同:React + Remotion CLI,帧驱动而非 DOM)、或期望在本仓直接读到源码 —— 本仓只有索引条目,内容在外部工程里",
   "default_variant": null,
   "verified": {
-    "date": "2026-11-03",
-    "how": "本仓只做索引、未复制任何内容:清点外部工程结构(16 个 archetype 注册项 + riso 风格包 + beat / motion 库)后落一行索引;可达性检查记在 evidence",
-    "evidence": "本机私有、无远端、仅索引:外部工程只存在于本机(mv-studio,单 commit、零备份、无 git 远端),故 canonical_home = null;本仓 packs/video-motion 内 files 全空、零内容复制;补齐双远端后回填 canonical_home 并重跑 schema 校验"
+    "date": "2026-11-10",
+    "how": "python packs/video-motion/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens video-motion — 索引卡 22 张 · preview 24621B 卡片 22 张 · 零外部内容(源码/图片/视频)· 零本机路径 · 成形/许可口径不变:仅索引,内容仍在外部私有工程"
   },
   "canonical_home": null,
   "external": true,
   "changelog": [
-    "1.0.0 · 作为外部包登记索引:内容不在本仓,canonical_home 暂为 null(外部工程无远端),补远端后回填"
+    "1.0.0 · 作为外部包登记索引:内容不在本仓,canonical_home 暂为 null(外部工程无远端),补远端后回填",
+    "1.1.0 · 加索引卡预览:16 个 archetype + 风格包 + 节拍/摄影机库 + 成品曲目 + 边界,共 22 张卡;只登记名字与用途,仍未复制任何外部内容"
   ]
 }

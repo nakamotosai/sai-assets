@@ -64,4 +64,4 @@
 
 ## 维护
 
-新增 / 修订一条 = ① `data/<id>.json`(id 与文件名一致)② 更新 `data/index.json` 的 `count` / `groups` / `items` ③ 跑 `python packs/references/scripts/assert_tokens.py`。断言同时管三件事:条目数与索引一致、必备字段齐、包内无本机路径与内网标识。
+新增 / 修订一条 = ① `data/<id>.json`(id 与文件名一致)② 更新 `data/index.json` 的 `count` / `groups` / `items` ③ 跑 `python packs/references/scripts/assert_tokens.py`。断言同时管四件事:条目数与索引一致、必备字段齐、包内无本机路径与内网标识、预览页与 `data/` 同步。改完数据跑 `python packs/references/scripts/build_preview.py` 再跑断言。

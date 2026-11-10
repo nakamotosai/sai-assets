@@ -4,7 +4,7 @@
   "title": "References · 外部站点观测(40 条)",
   "kind": "meta",
   "category": "references",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "CC0-1.0",
   "attribution": [
     {
@@ -61,19 +61,32 @@
       "data/ref-s2-margins-canons.json",
       "data/ref-s3-gerstner-compound.json",
       "data/ref-s4-isotype.json",
-      "data/ref-s5-free-font-stack.json"
+      "data/ref-s5-free-font-stack.json",
+      "scripts/build_preview.py"
     ],
     "usage": "docs/usage.md",
-    "assert": "scripts/assert_tokens.py"
+    "assert": "scripts/assert_tokens.py",
+    "preview": "preview/index.html"
   },
-  "tags": ["references", "observation", "web", "print", "three", "news", "swiss"],
+  "tags": [
+    "references",
+    "observation",
+    "web",
+    "print",
+    "three",
+    "news",
+    "swiss"
+  ],
   "when": "选版式 / 定字号 / 定网格前先读的 40 条外部站点观测:网页 6 · 纸媒 7 · 三维 7 · 新闻 15 · 瑞士 5,给结构骨架、字阶与出处许可状态定依据",
   "not_for": "当色板用(要 hex 去 themes 包)、当代码或素材用、或据此复刻某个原站",
   "default_variant": null,
   "verified": {
-    "date": "2026-11-03",
+    "date": "2026-11-10",
     "how": "python packs/references/scripts/assert_tokens.py",
-    "evidence": "PASS assert_tokens references — 40 条 · index 40 条一致 · 必备字段齐 · 形态规则 8 条 0 命中 · index.json 13407B"
+    "evidence": "PASS assert_tokens references — 40 条 · index 40 条一致 · 必备字段齐 · 形态规则 8 条 0 命中 · preview 50674B 卡片 40 张 零外链 · index.json 13407B"
   },
-  "canonical_home": null
+  "canonical_home": null,
+  "changelog": [
+    "1.1.0 · 加活预览:40 条观测逐条成卡、按五组筛选、深浅双模(生成器 scripts/build_preview.py,样式走仓级 scripts/meta_preview.py)"
+  ]
 }

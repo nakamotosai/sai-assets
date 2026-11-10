@@ -40,7 +40,9 @@ description: 40 observation notes on public sites and specs (web / print / three
 | `data/<id>.json` | 逐条全文:加 `observed` / `layout` / `colorsDNA` |
 | `docs/usage.md` | 判读规则:字段语义、`when` 与 `matchTheme` 怎么读、用法示例、反模式 |
 | `README.md` | 人读入口 |
-| `scripts/assert_tokens.py` | 断言:40 条齐、索引一致、必备字段齐、无本机路径与内网标识 |
+| `preview/index.html` | 活预览:40 条逐条成卡、按五组筛选、深浅切换(生成物,勿手改) |
+| `scripts/build_preview.py` | 预览页生成器:`data/*.json` → `preview/index.html`(`--check` 验同步;样式走仓级 `scripts/meta_preview.py`) |
+| `scripts/assert_tokens.py` | 断言:40 条齐、索引一致、必备字段齐、无本机路径与内网标识、预览与数据同步 |
 
 ## Agent apply steps
 

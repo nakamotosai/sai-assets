@@ -1,0 +1,409 @@
+{
+ "schema": 1,
+ "pack": "video-motion",
+ "version": "1.1.0",
+ "note": "只登记名字与用途;不含外部工程的源码、图片、视频、路径或许可全文。取用前去私有工程 mv-studio 确认授权。",
+ "groups": [
+  [
+   "archetype",
+   "镜头 16 项"
+  ],
+  [
+   "style",
+   "风格包"
+  ],
+  [
+   "library",
+   "节拍与摄影机库"
+  ],
+  [
+   "songs",
+   "成品曲目"
+  ],
+  [
+   "boundary",
+   "边界与替代"
+  ]
+ ],
+ "section_notes": {
+  "archetype": "15 个成品镜头 + 1 个 Placeholder 兜底;名字取自外部工程 archetype 注册表,不含实现。",
+  "style": "一套孔版印刷外观,供整支片子统一调用。",
+  "library": "节拍网格与摄影机关键帧都是 frame 的纯函数,因此并行渲染帧准确。",
+  "songs": "外部工程 registry 登记的曲目数量。",
+  "boundary": "本仓的取用红线:只索引、不复制、不臆造远端地址。"
+ },
+ "cards": [
+  {
+   "id": "vm-a01",
+   "name": "Overture · 开场标题板",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。开场标题板;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a02",
+   "name": "Headline · 最响的标题行",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。最响的标题行;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a03",
+   "name": "PhotoStage · 单张照片推镜",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。单张照片推镜;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a04",
+   "name": "Collage · 剪贴簿拼贴",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。剪贴簿拼贴;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a05",
+   "name": "LyricType · 动态歌词排版",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。动态歌词排版;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a06",
+   "name": "Ledger · 单据清单",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。单据清单;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a07",
+   "name": "StampHit · 印章",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。印章;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a08",
+   "name": "Wheel · 表盘",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。表盘;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a09",
+   "name": "Cascade · 纸片倾泻",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。纸片倾泻;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a10",
+   "name": "Poem · 静态诗行(含竖排)",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。静态诗行(含竖排);由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a11",
+   "name": "Diagram · 注解图",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。注解图;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a12",
+   "name": "Bubbles · 对白气泡",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。对白气泡;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a13",
+   "name": "Spectro · 真实音频频谱",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。真实音频频谱;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a14",
+   "name": "Iris · 圆形遮罩过场",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。圆形遮罩过场;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a15",
+   "name": "EndCard · 结尾署名板",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。结尾署名板;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-a16",
+   "name": "Placeholder · 兜底占位(打印 shot id 与时间码)",
+   "tag": "archetype",
+   "kind": "镜头 archetype",
+   "summary": "外部工程注册项之一。兜底占位(打印 shot id 与时间码);由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。",
+   "meta": [
+    [
+     "运行模型",
+     "React + Remotion CLI,帧驱动"
+    ],
+    [
+     "取用位置",
+     "外部工程 mv-studio 的 archetype 注册表"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-b01",
+   "name": "riso 风格包 · 孔版印刷外观",
+   "tag": "style",
+   "kind": "风格包",
+   "summary": "四色专色 + 暖色纸 + 半调网点 + 故意套印错位 + 点阵字,一整套孔版印刷外观。",
+   "meta": [
+    [
+     "用途",
+     "整支片子的统一视觉层"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-b02",
+   "name": "beat 库 · 节拍网格",
+   "tag": "library",
+   "kind": "节拍库",
+   "summary": "每拍重音 + 小节 + 段落能量,接到镜头切换上。",
+   "meta": [
+    [
+     "特性",
+     "frame 的纯函数,并行渲染帧准确"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-b03",
+   "name": "motion 库 · 摄影机关键帧",
+   "tag": "library",
+   "kind": "摄影机库",
+   "summary": "推镜/摇移等关键帧,按时间线取值。",
+   "meta": [
+    [
+     "特性",
+     "frame 的纯函数"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-b04",
+   "name": "3 支成品曲目",
+   "tag": "songs",
+   "kind": "成品",
+   "summary": "外部工程 registry 里登记的 3 支可渲染曲目。",
+   "meta": [
+    [
+     "入口",
+     "外部工程 songs/registry.ts"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-b05",
+   "name": "为什么只索引",
+   "tag": "boundary",
+   "kind": "硬规则",
+   "summary": "运行模型不同、许可不同(私有/UNLICENSED)、单一真相源:复制进来必然漂移。",
+   "meta": [
+    [
+     "禁区",
+     "不为外部工程造 src/ css/;不臆造 canonical_home"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  },
+  {
+   "id": "vm-b06",
+   "name": "替代路径",
+   "tag": "boundary",
+   "kind": "硬规则",
+   "summary": "要网页动效走 web-fx,要组件/配色走 web-ui / themes。",
+   "meta": [
+    [
+     "禁区",
+     "不把镜头语言当 CSS 片段抄给浏览器"
+    ]
+   ],
+   "source": "索引卡 · 内容不在本仓"
+  }
+ ]
+}

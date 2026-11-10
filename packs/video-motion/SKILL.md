@@ -25,9 +25,13 @@ description: Index entry for the external Remotion video-motion project (mv-stud
 
 | path | use |
 |------|-----|
-| `pack.json` | 索引条目:`kind=meta` · `category=video-motion` · `external=true` · `canonical_home=null` · `files` 全空 |
+| `pack.json` | 索引条目:`kind=meta` · `category=video-motion` · `external=true` · `canonical_home=null` |
 | `README.md` | 人读首屏:它管什么、为什么只索引、替代品在哪 |
 | `SKILL.md` | 本文件:agent 的取用判据与硬规则 |
+| `data/index.json` | 22 张索引卡的真相源:16 个 archetype 名 + 风格包 + 节拍/摄影机库 + 成品曲目 + 边界,只记名字与用途 |
+| `preview/index.html` | 索引卡活预览:22 张卡、按五组筛选、深浅切换(生成物,勿手改) |
+| `scripts/build_preview.py` | 预览页生成器:`data/index.json` → `preview/index.html`(`--check` 验同步;样式走仓级 `scripts/meta_preview.py`) |
+| `scripts/assert_tokens.py` | 断言:22 卡字段齐 · 预览同步 · 零外链子资源 · 零音视频 · 零本机路径 |
 
 ## Agent apply steps
 
@@ -39,7 +43,8 @@ description: Index entry for the external Remotion video-motion project (mv-stud
 ## Hard rules
 
 - **禁**把该工程的内容复制进本仓(单一真相源;复制 = 第二份会漂移的真相)。
-- **禁**在本仓为它造 `src/` / `css/` / `preview/`(本包 `files` 全空是设计,不是待办)。
+- **禁**在本仓为它造 `src/` / `css/`(本包不承载任何可执行/可抄产物,这不是待办)。
+- **允许且只允许** `preview/index.html` 这一页**索引卡**:只登记名字与用途,零源码、零图片、零视频、零外部路径;由 `data/index.json` 生成,断言会卡零复制。
 - **禁**臆造 `canonical_home`:外部工程当前**无远端**,故为 `null`;补双远端并首推成功后回填,并同步 `verified.evidence`。
 - 取用前先确认许可:该工程为私有 / `UNLICENSED`,渲染框架另有一套上游条款(部分实体需公司授权)。
 - 本包不承载网页资产,不要把它的镜头语言当成 CSS 片段抄给浏览器。

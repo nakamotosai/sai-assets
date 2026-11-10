@@ -277,7 +277,7 @@
     },
     {
      "id": "references",
-     "version": "1.0.0",
+     "version": "1.1.0",
      "one_liner": "选版式 / 定字号 / 定网格…",
      "path": "packs/references/"
     }
@@ -290,7 +290,7 @@
    "items": [
     {
      "id": "video-motion",
-     "version": "1.0.0",
+     "version": "1.1.0",
      "one_liner": "要把一首歌排成一支「印刷质感」…",
      "path": "packs/video-motion/"
     }

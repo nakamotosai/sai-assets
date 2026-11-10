@@ -204,6 +204,30 @@ if USAGE.is_file():
 else:
     fail("docs/usage.md 缺失")
 
+# -------------------------------------------------------------- 5 预览页 #
+PREVIEW = PACK / "preview" / "index.html"
+if PREVIEW.is_file():
+    html = PREVIEW.read_text(encoding="utf-8")
+    ncards = html.count('<article class="card"')
+    if ncards != EXPECT_COUNT:
+        fail(f"preview 卡片 {ncards} != 条目 {EXPECT_COUNT}")
+    missing = [r.get("id") for r in records.values() if f'id="{r.get("id")}"' not in html]
+    if missing:
+        fail(f"preview 缺卡片: {missing[:5]}")
+    for pat, why in ((r'<script[^>]+src="https?://', "外链脚本"),
+                     (r'<link[^>]+href="https?://', "外链样式"),
+                     (r'<img[^>]+src="https?://', "外链图片")):
+        if re.search(pat, html):
+            fail(f"preview 含{why}")
+    for need, why in (('id="tt"', "深浅切换按钮"), ("切换深浅配色", "按钮可访问名"),
+                      ('class="skip"', "skip link"), ("prefers-reduced-motion", "减少动效分支"),
+                      ('section id="web"', '网页段'), ('section id="swiss"', '瑞士段')):
+        if need not in html:
+            fail(f"preview 缺{why}")
+    print(f"[preview] {len(html.encode()):d}B · 卡片 {ncards} 张 · 40 条 id 全在 · 零外链子资源 · 深浅切换/skip link 齐")
+else:
+    fail("preview/index.html 缺失")
+
 # ------------------------------------------------------------------ 结果 #
 if fails:
     for f in fails:

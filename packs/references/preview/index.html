@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>外部站点观测 · 40 条结构/版式/排印依据</title>
+<meta name="theme-color" content="#F5F3ED" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0E0C" media="(prefers-color-scheme: dark)">
+<style>
+/* 和色六景 · 纸白 / 炭黑(skill://design-system §2.5);token 由共用 palette.json 生成 */
+:root{
+  --bg:#F5F3ED; --ink:#1A1A16; --muted:#5B5A53; --surface:rgba(26,26,22,0.045);
+  --line:rgba(26,26,22,0.10); --line-2:rgba(26,26,22,0.18);
+  --c1:#0C8B7A; --c2:#A77109; --c3:#CD5545; --c4:#3F7DCA; --c5:#678618; --c6:#A165AE;
+  --accent:var(--c3);
+  --shadow:0 1px 2px rgba(26,26,22,.06), 0 12px 28px -18px rgba(26,26,22,.28);
+  color-scheme:light;
+}
+html[data-theme=dark]{
+  --bg:#0E0E0C; --ink:#EDEBE4; --muted:#A3A199; --surface:rgba(237,235,228,0.055);
+  --line:rgba(237,235,228,0.12); --line-2:rgba(237,235,228,0.22);
+  --c1:#0C8B7A; --c2:#A77109; --c3:#CD5545; --c4:#3F7DCA; --c5:#678618; --c6:#A165AE;
+  --accent:var(--c3);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 32px -20px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]){
+    --bg:#0E0E0C; --ink:#EDEBE4; --muted:#A3A199; --surface:rgba(237,235,228,0.055);
+    --line:rgba(237,235,228,0.12); --line-2:rgba(237,235,228,0.22);
+    --c1:#0C8B7A; --c2:#A77109; --c3:#CD5545; --c4:#3F7DCA; --c5:#678618; --c6:#A165AE;
+    --accent:var(--c3);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 32px -20px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+.g-web{--g:#3F7DCA; --g-soft:rgba(63,125,202,0.12); --g-line:rgba(63,125,202,0.28); --g-ink:#345E90}
+html[data-theme=dark] .g-web{--g-ink:#6294D3}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-web{--g-ink:#6294D3} }
+.g-print{--g:#A77109; --g-soft:rgba(167,113,9,0.12); --g-line:rgba(167,113,9,0.28); --g-ink:#7A5516}
+html[data-theme=dark] .g-print{--g-ink:#B4843C}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-print{--g-ink:#B4843C} }
+.g-three{--g:#A165AE; --g-soft:rgba(161,101,174,0.12); --g-line:rgba(161,101,174,0.28); --g-ink:#764D7D}
+html[data-theme=dark] .g-three{--g-ink:#B280BB}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-three{--g-ink:#B280BB} }
+.g-news{--g:#CD5545; --g-soft:rgba(205,85,69,0.12); --g-line:rgba(205,85,69,0.28); --g-ink:#944335}
+html[data-theme=dark] .g-news{--g-ink:#D76E5D}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-news{--g-ink:#D76E5D} }
+.g-swiss{--g:#678618; --g-soft:rgba(103,134,24,0.12); --g-line:rgba(103,134,24,0.28); --g-ink:#4E631B}
+html[data-theme=dark] .g-swiss{--g-ink:#819B4A}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-swiss{--g-ink:#819B4A} }
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink);
+  font-family:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:14px; font-weight:400; line-height:1.68; font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+a{color:inherit; text-decoration-color:var(--line-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.skip{position:absolute; left:-9999px; top:8px; padding:8px 16px; background:var(--bg); border:1px solid var(--line-2); border-radius:8px}
+.skip:focus{left:16px; z-index:9}
+.wrap{max-width:1180px; margin:0 auto; padding:40px 24px 64px}
+.head{display:flex; align-items:flex-start; gap:16px; justify-content:space-between}
+h1,h2,h3{margin:0; font-weight:600; line-height:1.28}
+h1{font-size:34px; line-height:1.2}
+h2{font-size:22px}
+h3{font-size:17px}
+p{margin:0}
+.lede{margin-top:12px; max-width:72ch; color:var(--muted)}
+.facts{margin-top:16px; font-size:13px; color:var(--muted)}
+.facts b{color:var(--ink); font-weight:600}
+.facts .sep{margin:0 8px; color:var(--line-2)}
+.tt{flex:none; width:44px; height:44px; display:grid; place-items:center;
+  background:transparent; border:0; color:var(--ink); border-radius:8px; cursor:pointer;
+  transition:opacity 120ms ease-out}
+.tt:hover{opacity:.72}
+.tt:active{opacity:.55}
+.sun,.moon{fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round}
+html[data-theme=dark] .sun{display:none}
+html:not([data-theme=dark]) .moon{display:none}
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]) .sun{display:none}
+  html:not([data-theme]) .moon{display:block}
+}
+.facets{position:sticky; top:0; z-index:5; background:var(--bg); padding:16px 0 8px; margin-top:24px; border-bottom:1px solid var(--line)}
+.chips{display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin:0; padding:0}
+.chip{min-height:44px; padding:0 16px; display:inline-flex; align-items:center; gap:8px;
+  background:transparent; border:1px solid var(--line-2); border-radius:8px;
+  color:var(--muted); font:inherit; font-size:13px; font-weight:500; cursor:pointer}
+.chip:hover{color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--surface); border-color:var(--ink); color:var(--ink)}
+.chip .n{font-weight:600}
+.shown{margin-top:8px; font-size:12px; color:var(--muted)}
+section{margin-top:32px}
+section + section{margin-top:96px}
+.sec-head{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:24px}
+.sec-head p{color:var(--muted); font-size:13px}
+.grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); align-items:start}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px; box-shadow:var(--shadow)}
+.card[hidden]{display:none}
+.card-top{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px}
+.badge{display:inline-flex; align-items:center; min-height:24px; padding:0 8px; border-radius:8px;
+  font-size:12px; font-weight:500; border:1px solid var(--g-line); background:var(--g-soft); color:var(--g-ink)}
+.num{font-size:12px; color:var(--muted); font-weight:400}
+.card p.body{margin-top:8px; max-width:68ch; line-height:1.68}
+.card dl{margin:16px 0 0; display:grid; gap:8px}
+.card dl div{display:grid; grid-template-columns:64px minmax(0, 1fr); gap:8px}
+.card dd, .card .body, .card .src{overflow-wrap:anywhere}
+.card dt{font-size:12px; color:var(--muted)}
+.card dd{margin:0; font-size:13px; color:var(--ink)}
+.card .src{margin-top:16px; font-size:12px; color:var(--muted)}
+.swatches{display:flex; gap:8px; margin-top:8px}
+.swatches i{width:24px; height:24px; border-radius:8px; border:1px solid var(--line-2); display:block}
+footer{margin-top:64px; padding-top:24px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); max-width:68ch}
+@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主内容</a>
+<div class="wrap">
+  <header class="head">
+    <div>
+      <h1>外部站点观测 · 40 条结构/版式/排印依据</h1>
+      <p class="lede">选版式、定字号、定网格之前先读这 40 条:别人怎么排、什么时候该翻它。全部是观测结论,零代码、零原图。</p>
+      <p class="facts"><b>40</b> 条外部观测<span class="sep">/</span><b>5</b> 组<span class="sep">/</span>零代码零原图<span class="sep">/</span>数据是真相源,页面是派生物</p>
+    </div>
+    <button class="tt" id="tt" type="button" aria-label="切换深浅配色" hidden>
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <circle class="sun" cx="12" cy="12" r="4.6"></circle>
+        <path class="sun" d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"></path>
+        <path class="moon" d="M20 14.4A8.2 8.2 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z"></path>
+      </svg>
+    </button>
+  </header>
+  <nav class="facets" aria-label="按分组筛选">
+    <ul class="chips">
+      <li><button class="chip" type="button" data-facet="all" aria-pressed="true">全部 <span class="n">40</span></button></li>
+      <li><button class="chip" type="button" data-facet="web" aria-pressed="false">网页 <span class="n">6</span></button></li>
+      <li><button class="chip" type="button" data-facet="print" aria-pressed="false">纸媒 <span class="n">7</span></button></li>
+      <li><button class="chip" type="button" data-facet="three" aria-pressed="false">三维 <span class="n">7</span></button></li>
+      <li><button class="chip" type="button" data-facet="news" aria-pressed="false">新闻 <span class="n">15</span></button></li>
+      <li><button class="chip" type="button" data-facet="swiss" aria-pressed="false">瑞士 <span class="n">5</span></button></li>
+    </ul>
+    <p class="shown" id="shown" role="status">显示 40 / 40 条</p>
+  </nav>
+  <main id="main">
+    <section id="web">
+      <div class="sec-head"><h2>网页 · 6 条观测</h2><p>tag=web;structure 骨架写在 layout,出处与许可状态写在 observed。</p></div>
+      <div class="grid">
+      <article class="card" id="ref-w1-typo-serif" data-facet="web">
+        <div class="card-top"><span class="badge g-web">网页 · web</span><span class="num">01</span></div>
+        <h3>排印·编辑衬线（一屏一句）</h3>
+        <p class="body">一屏一句；衬线回归；排印服务单一想法</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>hontran.dev 实读200：评委视角 art direction / 静帧即海报 / 排印服务单一想法，与'衬线回归、一屏一句'主张一致。全留·观测级放行，不搬图不抄码。</dd></div>
+          <div><dt>何时用</dt><dd>做纸媒/编辑风首屏标题时先对本条定调，再定字重与行距。许可：观测放行（不搬运原文/图/码）。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.hontran.dev/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-w1-typo-serif.json</p>
+      </article>
+      <article class="card" id="ref-w2-typo-mono" data-facet="web">
+        <div class="card-top"><span class="badge g-web">网页 · web</span><span class="num">02</span></div>
+        <h3>排印·等宽结构感</h3>
+        <p class="body">等宽字体承载结构感；工程 craft 气质</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>同源（hontran.dev）实读200：工程 craft / 开发者奖项维度，与'精确系统感'主张一致。观测级放行，不搬图不抄码。</dd></div>
+          <div><dt>何时用</dt><dd>做工具台/终端风界面时用等宽体系定结构感。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>gruvbox-dark</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.hontran.dev/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-w2-typo-mono.json</p>
+      </article>
+      <article class="card" id="ref-w3-bento-whitespace" data-facet="web">
+        <div class="card-top"><span class="badge g-web">网页 · web</span><span class="num">03</span></div>
+        <h3>Bento+留白</h3>
+        <p class="body">Bento grids 主布局；CSS Subgrid；留白分区</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>midrocket 实读200：Bento grids 主布局模式 + CSS Subgrid，主张一致。观测级放行，不搬图不抄码。</dd></div>
+          <div><dt>何时用</dt><dd>做功能分区墙/选型墙时用 Bento+留白骨架。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>gruvbox-dark</dd></div>
+        </dl>
+        <p class="src"><a href="https://midrocket.com/en/guides/ui-design-trends-2026" target="_blank" rel="noopener">回源核对 ↗</a> · ref-w3-bento-whitespace.json</p>
+      </article>
+      <article class="card" id="ref-w4-dark-cinematic" data-facet="web">
+        <div class="card-top"><span class="badge g-web">网页 · web</span><span class="num">04</span></div>
+        <h3>深色优先电影感</h3>
+        <p class="body">dark-first workflow；OLED 纯黑；语义 token</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>midrocket 实读200：dark-first workflow + OLED / 语义 token，主张一致。观测级放行，不搬图不抄码。</dd></div>
+          <div><dt>何时用</dt><dd>做深色电影感场景时先立 dark-first 基线与语义 token。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>fm-void</dd></div>
+        </dl>
+        <p class="src"><a href="https://midrocket.com/en/guides/ui-design-trends-2026" target="_blank" rel="noopener">回源核对 ↗</a> · ref-w4-dark-cinematic.json</p>
+      </article>
+      <article class="card" id="ref-w5-light-warm" data-facet="web">
+        <div class="card-top"><span class="badge g-web">网页 · web</span><span class="num">05</span></div>
+        <h3>浅色暖系</h3>
+        <p class="body">浅色暖系归纳 DNA；非原站取色搬运</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>awesome-design 同源交叉：主张为归纳 DNA 非搬运，留。观测级放行。</dd></div>
+          <div><dt>何时用</dt><dd>做浅色暖系主题时用归纳 DNA 起步，hex 以自站实测为准（输入未给 hex，不硬填）。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>slow-ride-cream</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/gztchan/awesome-design" target="_blank" rel="noopener">回源核对 ↗</a> · ref-w5-light-warm.json</p>
+      </article>
+      <article class="card" id="ref-w6-restrained-motion" data-facet="web">
+        <div class="card-top"><span class="badge g-web">网页 · web</span><span class="num">06</span></div>
+        <h3>动效克制·滚动叙事</h3>
+        <p class="body">动效克制；滚动叙事；prefers-reduced-motion 兜底</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>hontran 实读200：directed motion + prefers-reduced-motion 判据；motionkit / trivia 同源交叉，留。观测级放行。</dd></div>
+          <div><dt>何时用</dt><dd>任何主题做滚动叙事前先立克制基线并加 reduced-motion 兜底。注：motionkit/trivia 精确 URL 未在输入中给出，未另行钉死。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>all</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.hontran.dev/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-w6-restrained-motion.json</p>
+      </article>
+      </div>
+    </section>
+    <section id="print">
+      <div class="sec-head"><h2>纸媒 · 7 条观测</h2><p>tag=print;structure 骨架写在 layout,出处与许可状态写在 observed。</p></div>
+      <div class="grid">
+      <article class="card" id="ref-p1-title-floor" data-facet="print">
+        <div class="card-top"><span class="badge g-print">纸媒 · print</span><span class="num">01</span></div>
+        <h3>大字号地板-标题</h3>
+        <p class="body">标题字号地板 60-81px（移动端推导）；眼动验证</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>woshipm 实读200：百度大字版移动端 60-81px 字号体系 + 眼动验证，主张一致。规范观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做中老年/大字场景标题时先对地板值再定层级。许可：观测放行（规范归纳）。</dd></div>
+          <div><dt>联动主题</dt><dd>slow-ride-cream</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.woshipm.com/pd/5105282.html" target="_blank" rel="noopener">回源核对 ↗</a> · ref-p1-title-floor.json</p>
+      </article>
+      <article class="card" id="ref-p2-body-floor" data-facet="print">
+        <div class="card-top"><span class="badge g-print">纸媒 · print</span><span class="num">02</span></div>
+        <h3>大字号地板-正文</h3>
+        <p class="body">正文字号地板；对比度≥3:1；暖色偏好</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>同源（woshipm）实读200：易阅读 / 对比度≥3:1 / 暖色偏好，主张一致。规范观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做中老年正文时先对地板与对比度，再定行高。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>slow-ride-cream</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.woshipm.com/pd/5105282.html" target="_blank" rel="noopener">回源核对 ↗</a> · ref-p2-body-floor.json</p>
+      </article>
+      <article class="card" id="ref-p3-paper-texture" data-facet="print">
+        <div class="card-top"><span class="badge g-print">纸媒 · print</span><span class="num">03</span></div>
+        <h3>纸面质感</h3>
+        <p class="body">纸张纹理质感叠加；归纳非搬运</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>uisdc 同源交叉：色板为归纳非取色搬运，留。规范观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做纸媒质感时用纹理叠加思路，色板自归纳。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.uisdc.com/web-paper-texture" target="_blank" rel="noopener">回源核对 ↗</a> · ref-p3-paper-texture.json</p>
+      </article>
+      <article class="card" id="ref-p4-one-focal" data-facet="print">
+        <div class="card-top"><span class="badge g-print">纸媒 · print</span><span class="num">04</span></div>
+        <h3>一页一视觉重心</h3>
+        <p class="body">非对称多栏 CSS Grid；pull quote；语义 figure；一页一重心</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>freefrontend 实读200：非对称多栏 CSS Grid + pull quote + 语义 figure，主张一致。规范观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做杂志式版面时先定唯一视觉重心再排多栏。许可：观测放行（版式骨架可用，snippet 代码只当思路不入库）。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://freefrontend.com/css-magazine-layouts" target="_blank" rel="noopener">回源核对 ↗</a> · ref-p4-one-focal.json</p>
+      </article>
+      <article class="card" id="ref-p5-masthead" data-facet="print">
+        <div class="card-top"><span class="badge g-print">纸媒 · print</span><span class="num">05</span></div>
+        <h3>刊头范式</h3>
+        <p class="body">asymmetric grid；留白层级；刊头范式</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>同源（freefrontend）实读200：asymmetric grid + 留白层级，主张一致。规范观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做刊头区时用非对称网格+留白定层级。许可：观测放行（代码只当思路）。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://freefrontend.com/css-magazine-layouts" target="_blank" rel="noopener">回源核对 ↗</a> · ref-p5-masthead.json</p>
+      </article>
+      <article class="card" id="ref-p6-no-table-timeline" data-facet="print">
+        <div class="card-top"><span class="badge g-print">纸媒 · print</span><span class="num">06</span></div>
+        <h3>时间线禁表格</h3>
+        <p class="body">时间线用交互规范表达，禁表格</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>csdn 同源：主张为交互规范归纳，留。规范观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做时间线时禁表格（对 slide-master-senior 同款约束）。注：源站反爬未独立复核，待浏览器实读钉死。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>slow-ride-cream</dd></div>
+        </dl>
+        <p class="src"><a href="https://blog.csdn.net/weixin_42466857/article/details/155575574" target="_blank" rel="noopener">回源核对 ↗</a> · ref-p6-no-table-timeline.json</p>
+      </article>
+      <article class="card" id="ref-p7-height-print" data-facet="print">
+        <div class="card-top"><span class="badge g-print">纸媒 · print</span><span class="num">07</span></div>
+        <h3>高度预算与打印</h3>
+        <p class="body">高度预算；@media print / @page 打印样式</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>juejin 同源：@media print / @page 为通用 CSS 知识非独创代码，留。规范观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做需打印的研报/deck 先定高度预算再写 print 样式；Print.js 只作思路引用，真引入另核 MIT。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>slow-ride-cream</dd></div>
+        </dl>
+        <p class="src"><a href="https://juejin.cn/post/7398472542313611276" target="_blank" rel="noopener">回源核对 ↗</a> · ref-p7-height-print.json</p>
+      </article>
+      </div>
+    </section>
+    <section id="three">
+      <div class="sec-head"><h2>三维 · 7 条观测</h2><p>tag=three;structure 骨架写在 layout,出处与许可状态写在 observed。</p></div>
+      <div class="grid">
+      <article class="card" id="ref-t1-wgpu-roughness" data-facet="three">
+        <div class="card-top"><span class="badge g-three">三维 · three</span><span class="num">01</span></div>
+        <h3>WebGPU粗糙度反射</h3>
+        <p class="body">WebGPU 真反射 + 粗糙度；官方示例思路</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>threejs.org 实读200：webgpu_reflection_roughness 官方示例页存在，主张一致。一屏一效观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做金属/玻璃反射材质时先看官方示例思路再写。许可：观测放行（用时以仓库 LICENSE 为准，上游 three.js 为 MIT）。</dd></div>
+          <div><dt>联动主题</dt><dd>fm-void</dd></div>
+        </dl>
+        <p class="src"><a href="https://threejs.org/examples/webgpu_reflection_roughness.html" target="_blank" rel="noopener">回源核对 ↗</a> · ref-t1-wgpu-roughness.json</p>
+      </article>
+      <article class="card" id="ref-t2-render-pipeline" data-facet="three">
+        <div class="card-top"><span class="badge g-three">三维 · three</span><span class="num">02</span></div>
+        <h3>RenderPipeline后处理</h3>
+        <p class="body">TSL；bloom；MRT；后处理管线</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>threejsroadmap 同源交叉：TSL / bloom / MRT 为官方技术路线归纳，留。一屏一效观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做后处理管线时按 TSL/bloom/MRT 路线选型。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>fm-void</dd></div>
+        </dl>
+        <p class="src"><a href="https://threejsroadmap.com/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-t2-render-pipeline.json</p>
+      </article>
+      <article class="card" id="ref-t3-compute-galaxy" data-facet="three">
+        <div class="card-top"><span class="badge g-three">三维 · three</span><span class="num">03</span></div>
+        <h3>Compute粒子星系</h3>
+        <p class="body">Compute shader 粒子星系</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>同源交叉（threejsroadmap），留。一屏一效观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做星系/大粒子数场景时走 Compute 路线。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>fm-void</dd></div>
+        </dl>
+        <p class="src"><a href="https://threejsroadmap.com/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-t3-compute-galaxy.json</p>
+      </article>
+      <article class="card" id="ref-t4-fluid-xray" data-facet="three">
+        <div class="card-top"><span class="badge g-three">三维 · three</span><span class="num">04</span></div>
+        <h3>双场景流体X光</h3>
+        <p class="body">双场景流体 X 光揭示</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>codrops 2026-03 教程，免费可读，留。一屏一效观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做流体揭示转场时学思路；demo 源码不入库，用时按站内许可执行。许可：观测放行（源码禁入库）。</dd></div>
+          <div><dt>联动主题</dt><dd>fm-void</dd></div>
+        </dl>
+        <p class="src"><a href="https://tympanus.net/codrops/2026/03/23/building-a-dual-scene-fluid-x-ray-reveal-effect-in-three-js" target="_blank" rel="noopener">回源核对 ↗</a> · ref-t4-fluid-xray.json</p>
+      </article>
+      <article class="card" id="ref-t5-proc-geometry" data-facet="three">
+        <div class="card-top"><span class="badge g-three">三维 · three</span><span class="num">05</span></div>
+        <h3>程序化几何WebGPU</h3>
+        <p class="body">程序化几何；WebGPU</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>codrops 2026-08 教程，留。一屏一效观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做程序化几何时学思路；源码不入库。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>fm-void</dd></div>
+        </dl>
+        <p class="src"><a href="https://tympanus.net/codrops/2026/08/11/exploring-procedural-geometry-with-three-js-and-webgpu/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-t5-proc-geometry.json</p>
+      </article>
+      <article class="card" id="ref-t6-fluid-presets" data-facet="three">
+        <div class="card-top"><span class="badge g-three">三维 · three</span><span class="num">06</span></div>
+        <h3>粒子流体10+预设+GPU诊断</h3>
+        <p class="body">粒子流体 10+ 预设画廊；GPU 诊断；r184+ 无 fallback</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>github dgreenheck 实读200：readme 列 Wave / Dam Break / Honey Bunny 等 10+ 预设 + npm ci / run dev，主张一致；明确要求 three r184+ WebGPU 无 WebGL fallback。一屏一效观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做 GPU 粒子流体时先跑预设画廊定效果与基线。许可：MIT 放行（模型 CC0，Stanford bunny 致谢，见 THIRD_PARTY_NOTICES.md）。</dd></div>
+          <div><dt>联动主题</dt><dd>fm-void</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/dgreenheck/threejs-particle-fluids" target="_blank" rel="noopener">回源核对 ↗</a> · ref-t6-fluid-presets.json</p>
+      </article>
+      <article class="card" id="ref-t7-text-shatter" data-facet="three">
+        <div class="card-top"><span class="badge g-three">三维 · three</span><span class="num">07</span></div>
+        <h3>交互文字碎裂TSL</h3>
+        <p class="body">交互文字碎裂；TSL</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>codrops 2025-07 教程，留。一屏一效观测放行。</dd></div>
+          <div><dt>何时用</dt><dd>做文字碎裂一屏一效时学思路；源码不入库。许可：观测放行。</dd></div>
+          <div><dt>联动主题</dt><dd>fm-void</dd></div>
+        </dl>
+        <p class="src"><a href="https://tympanus.net/codrops/2025/07/22/interactive-text-destruction-with-three-js-webgpu-and-tsl/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-t7-text-shatter.json</p>
+      </article>
+      </div>
+    </section>
+    <section id="news">
+      <div class="sec-head"><h2>新闻 · 15 条观测</h2><p>tag=news;structure 骨架写在 layout,出处与许可状态写在 observed。</p></div>
+      <div class="grid">
+      <article class="card" id="ref-n1-sspai" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">01</span></div>
+        <h3>少数派sspai·中文双栏信息站观测</h3>
+        <p class="body">中文双栏信息流；派早报头条区+Matrix精选卡片</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>sspai.com 首页实读200：派早报+Matrix精选+双栏信息流；中文站自证中文2分无问题。观测归纳不搬码不抄文。得分11/12（2/2/2/2/2/1）。</dd></div>
+          <div><dt>何时用</dt><dd>做中文双栏信息站时先对本条定信息密度与栏宽，再定字栈。许可：观测归纳（不搬运原文/图/码）。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.sspai.com/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n1-sspai.json</p>
+      </article>
+      <article class="card" id="ref-n10-verge" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">02</span></div>
+        <h3>The Verge·快讯流+拼贴观测</h3>
+        <p class="body">快讯流；黑底拼贴（打印0分，仅参考）</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>theverge.com 首页实读200：导航+订阅结构；快讯流+黑底拼贴。黑底拼贴打印0分，仅参考。观测归纳不搬码不抄文。得分8/12（2/1/2/2/1/0）。</dd></div>
+          <div><dt>何时用</dt><dd>做快讯流时参考本条拼贴节奏；黑底块不进打印样式。许可：观测归纳（不搬运原文/图/码）。</dd></div>
+          <div><dt>联动主题</dt><dd>fm-void</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.theverge.com/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n10-verge.json</p>
+      </article>
+      <article class="card" id="ref-n11-newsblur" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">03</span></div>
+        <h3>NewsBlur·聚合多视图参考</h3>
+        <p class="body">聚合多视图；自托管</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>GitHub 实读200：MIT License - see LICENSE file。聚合多视图；英文为主中文0分无夸大；自托管重。得分7/12（2/1/2/1/0/1）。</dd></div>
+          <div><dt>何时用</dt><dd>做聚合多视图时参考本条；中文需另做。许可：MIT。</dd></div>
+          <div><dt>联动主题</dt><dd>saaaai-mono</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/samuelclay/NewsBlur" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n11-newsblur.json</p>
+      </article>
+      <article class="card" id="ref-n12-selfoss" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">04</span></div>
+        <h3>selfoss·轻量聚合参考（GPL注意）</h3>
+        <p class="body">轻量聚合stream墙；文章页/打印弱</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>GitHub 实读200：source code is licensed under GNU GPL v3（Resources列GPL-3.0），非AGPL。轻量聚合：stream墙+文章页；打印弱。得分6/12（1/1/2/1/1/0）。</dd></div>
+          <div><dt>何时用</dt><dd>做轻量聚合时参考本条；分发改动须开源。许可：GPL-3.0（可商用，分发改动须开源，copyleft注意）。</dd></div>
+          <div><dt>联动主题</dt><dd>saaaai-mono</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/fossar/selfoss" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n12-selfoss.json</p>
+      </article>
+      <article class="card" id="ref-n13-clreq" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">05</span></div>
+        <h3>W3C clreq·中文排权版威依据（基准）</h3>
+        <p class="body">禁则处理；标点挤压；直横排版</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>W3C Group Note Draft 2026-09-01版实读正常（单页135 sections/362.5KB）。全主题中文排版权威依据：禁则+标点挤压。基准不参排。规范实现可商用。</dd></div>
+          <div><dt>何时用</dt><dd>全主题中文排版先对本条禁则与挤压规则。许可：W3C Document License。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.w3.org/TR/clreq/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n13-clreq.json</p>
+      </article>
+      <article class="card" id="ref-n14-cntypeset" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">06</span></div>
+        <h3>中文排印参数双源·375基准（基准）</h3>
+        <p class="body">16-17px/行高1.8-1.9/34-38字/36-38rem；main720px+padding16px</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>imwsz实读：英文21px/行高1.5/680px不适合中文；汉字方块字靠行高行宽救。ftdesign台版响应式参数页55 sections实读正常，双源互证成立。参数：16-17px/行高1.8-1.9/34-38字/36-38rem/纸底#FBFAF7字#2E2A25/main720px+padding16px。基准不参排。数字参数自写CSS。</dd></div>
+          <div><dt>何时用</dt><dd>全主题375中文先对本条字号行高行宽三值；纸底#FBFAF7字#2E2A25。许可：文章版权归作者，数字参数自写CSS。第二源：https://ftdesign.tw/how-to-do-web-page-layout-master-the-key-points/。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://imwsz.com/posts/chinese-typesetting-on-web" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n14-cntypeset.json</p>
+      </article>
+      <article class="card" id="ref-n15-notosanssc" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">07</span></div>
+        <h3>Noto Sans SC自托管·全主题字栈（基准）</h3>
+        <p class="body">WOFF2按需分字重；font-display:swap</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>jfcherng分字重目录（black/bold/light/medium/regular/thin）+npm页Most fonts use SIL OFL v1.1 / Google Inc. OFL-1.1双验通过。字栈：Noto Sans SC,PingFang SC,Hiragino Sans GB,Microsoft YaHei,sans-serif；WOFF2按需+display:swap。基准不参排。</dd></div>
+          <div><dt>何时用</dt><dd>全主题中文先挂本字栈再调字重行距。第二源：https://www.npmjs.com/package/@fontsource/noto-sans-sc。许可：字体OFL-1.1+包MIT。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/jfcherng/Noto-Sans-SC-CSS" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n15-notosanssc.json</p>
+      </article>
+      <article class="card" id="ref-n2-papermod" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">08</span></div>
+        <h3>Hugo PaperMod·信息站三布局+Fuse搜索</h3>
+        <p class="body">三布局 Regular/Home-Info/Profile；Fuse客户端搜索；零JS构建依赖</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>GitHub 实读200：MIT license（topics含mit-license/multilingual）；Three layout modes Regular/Home-Info/Profile；Client-side search powered by Fuse.js；built-in language selector；i18n目录含多语言机制。但本次摘录无中文直接证据：中文2分加注pending，需文件级核对i18n/zh。得分10/12（2/2/1/2/2pending/1）。</dd></div>
+          <div><dt>何时用</dt><dd>信息站首选：三布局+Fuse搜索+零JS；中文先核i18n/zh再坐实2分。许可：MIT。</dd></div>
+          <div><dt>联动主题</dt><dd>saaaai-paper</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/adityatelange/hugo-PaperMod" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n2-papermod.json</p>
+      </article>
+      <article class="card" id="ref-n3-ghost" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">09</span></div>
+        <h3>Ghost·新闻整站tag+作者归档+newsletter</h3>
+        <p class="body">tag归档+作者归档+newsletter投递；整站新闻结构</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>GitHub 实读200：Copyright (c) 2013-2026 Ghost Foundation - Released under the MIT license。新闻整站结构：tag归档+作者归档+newsletter投递。得分10/12（2/2/2/2/1/1）。</dd></div>
+          <div><dt>何时用</dt><dd>做新闻整站时先对本条定归档与投递结构。许可：MIT。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/TryGhost/Ghost" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n3-ghost.json</p>
+      </article>
+      <article class="card" id="ref-n4-tailnews" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">10</span></div>
+        <h3>Tailnews·报纸多栏+分类网格12页</h3>
+        <p class="body">报纸多栏首页×2；分类网格；12+预建页</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>页面实读200：Free Template列Credit required对Premium列No attribution needed；Use in commercial projects。2 Home-Page Layouts+Grid-Style Layout+12+ Pre-Built Pages+for news &amp; magazine。得分10/12（2/2/2/2/1/1）。</dd></div>
+          <div><dt>何时用</dt><dd>做新闻杂志站时先对本条定多栏与网格；上线留署名。许可：ThemeWagon Free（Credit required，留署名可用）。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://themewagon.com/themes/tailnews/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n4-tailnews.json</p>
+      </article>
+      <article class="card" id="ref-n5-propublica" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">11</span></div>
+        <h3>ProPublica·专题成组+数据工具区观测</h3>
+        <p class="body">专题系列成组呈现；数据工具区</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>propublica.org 首页实读200：调查系列成组呈现+数据工具区。观测归纳不搬码不抄文。得分10/12（2/2/2/2/1/1）。</dd></div>
+          <div><dt>何时用</dt><dd>做新闻专题页成组呈现时先对本条定分组与工具区。许可：观测归纳（不搬运原文/图/码）。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.propublica.org/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n5-propublica.json</p>
+      </article>
+      <article class="card" id="ref-n6-quanta" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">12</span></div>
+        <h3>Quanta Magazine·长文版式观测</h3>
+        <p class="body">大头图+超大衬线标题；Latest横向流</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>quantamagazine.org 首页实读200：Latest Articles横向流；大头图+超大衬线标题长文版式。观测归纳不搬码不抄文。得分10/12（2/2/1/2/1/2）。</dd></div>
+          <div><dt>何时用</dt><dd>做长文版式时先对本条定头图与标题字阶。许可：观测归纳（不搬运原文/图/码）。</dd></div>
+          <div><dt>联动主题</dt><dd>paper-editorial</dd></div>
+        </dl>
+        <p class="src"><a href="https://www.quantamagazine.org/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n6-quanta.json</p>
+      </article>
+      <article class="card" id="ref-n7-massively" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">13</span></div>
+        <h3>HTML5 UP Massively·三栏卡片+单栏长文</h3>
+        <p class="body">三栏卡片流；单栏长文</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>主题页本身零授权词（JS页，属实）；/license页实读200：Creative Commons Attribution 3.0 License+give HTML5 UP credit；attribution-free走Pixelarity $19；Download计数756,149。三栏卡片+单栏长文。得分9/12（2/2/1/2/1/1）。</dd></div>
+          <div><dt>何时用</dt><dd>做信息站/博客时先对本条定卡片与长文结构；上线留署名（去署名才$19）。许可：CC BY 3.0（留署名可用）。</dd></div>
+          <div><dt>联动主题</dt><dd>saaaai-paper</dd></div>
+        </dl>
+        <p class="src"><a href="https://html5up.net/massively" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n7-massively.json</p>
+      </article>
+      <article class="card" id="ref-n8-miniflux" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">14</span></div>
+        <h3>Miniflux·聚合流Go单二进制参考</h3>
+        <p class="body">聚合流后端；Go单二进制；全文搜索+可读性提取</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>GitHub 实读200：Distributed under Apache 2.0 License（非MIT）。聚合特征命中：Atom/RSS/JSON订阅、OPML、categories、Postgres全文搜索、Readability提取。多语言机制有，但20语言含简繁中文本次摘录未验证：中文2分加注pending，待文件级核对。得分9/12（1/1/2/2/2pending/1）。</dd></div>
+          <div><dt>何时用</dt><dd>做聚合流后端时先对本条定订阅与搜索结构；严审时中文暂记1直至补证。许可：Apache-2.0。</dd></div>
+          <div><dt>联动主题</dt><dd>saaaai-mono</dd></div>
+        </dl>
+        <p class="src"><a href="https://github.com/miniflux/v2" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n8-miniflux.json</p>
+      </article>
+      <article class="card" id="ref-n9-cleanblog" data-facet="news">
+        <div class="card-top"><span class="badge g-news">新闻 · news</span><span class="num">15</span></div>
+        <h3>StartBootstrap Clean Blog·极简四页</h3>
+        <p class="body">极简四页：index/about/post/contact；打印最优</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>页面实读200：four HTML pages: index/about/post/contact+Free。MIT链成立。极简四页结构，汉化成本最低，打印最优。得分8/12（1/2/0/2/1/2）。</dd></div>
+          <div><dt>何时用</dt><dd>做极简信息站时先对本条定四页结构；汉化成本最低。许可：MIT。</dd></div>
+          <div><dt>联动主题</dt><dd>saaaai-paper</dd></div>
+        </dl>
+        <p class="src"><a href="https://startbootstrap.com/theme/clean-blog" target="_blank" rel="noopener">回源核对 ↗</a> · ref-n9-cleanblog.json</p>
+      </article>
+      </div>
+    </section>
+    <section id="swiss">
+      <div class="sec-head"><h2>瑞士 · 5 条观测</h2><p>tag=swiss;structure 骨架写在 layout,出处与许可状态写在 observed。</p></div>
+      <div class="grid">
+      <article class="card" id="ref-s1-grid-formula" data-facet="swiss">
+        <div class="card-top"><span class="badge g-swiss">瑞士 · swiss</span><span class="num">01</span></div>
+        <h3>瑞士网格构造公式（Müller-Brockmann）</h3>
+        <p class="body">构造法：字号行距定模块→量 N→定 k/g→解 m→回代；跨字号行高同模块；图上边压 cap-height、下边压 descender</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>MB 原著全文实读：网格是可推导的算术程序，不是美学。列深(行)=k·m+(k−1)·g=N，解 m=floor((N−(k−1)·g)/k)。worked example N=57,k=4,g=1→m=13→55行=24.7cm。字段(Field)≠栏(Column)；书用可变 8–32 字段；「12 栏」是网页惯例。</dd></div>
+          <div><dt>何时用</dt><dd>做任何瑞士/编辑/海报网格时先按公式推导，别套死 12 栏（详见本地实现文件）</dd></div>
+          <div><dt>联动主题</dt><dd>swiss-classic</dd></div>
+        </dl>
+        <p class="src"><a href="https://archive.org/stream/GridSystemsInGraphicDesignJosefMullerBrockmann/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-s1-grid-formula.json</p>
+      </article>
+      <article class="card" id="ref-s2-margins-canons" data-facet="swiss">
+        <div class="card-top"><span class="badge g-swiss">瑞士 · swiss</span><span class="num">02</span></div>
+        <h3>边距经典比（Van de Graaf / MB / 黄金）</h3>
+        <p class="body">边距比决定正文区位置与视觉重心；不对称边距是刻意的</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>正文区⊂页面，边距按经典比（内:上:外:下）：Van de Graaf 2:3:4:6（页宽高各 9 等分取 1/9、2/9，正文区高=页宽）；MB 偏好 1:1.5:2:3；黄金 3:5:5:8；中世纪 1:1:2:3。</dd></div>
+          <div><dt>何时用</dt><dd>印刷/海报/deck 定时先选一套 canon，别用均匀边距</dd></div>
+          <div><dt>联动主题</dt><dd>swiss-classic</dd></div>
+        </dl>
+        <p class="src"><a href="https://en.wikipedia.org/wiki/Canons_of_page_construction" target="_blank" rel="noopener">回源核对 ↗</a> · ref-s2-margins-canons.json</p>
+      </article>
+      <article class="card" id="ref-s3-gerstner-compound" data-facet="swiss">
+        <div class="card-top"><span class="badge g-swiss">瑞士 · swiss</span><span class="num">03</span></div>
+        <h3>Gerstner 复合网格与 mobile</h3>
+        <p class="body">LCM 单位取两套分栏边界并集；沟槽恒定</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>两套规则网格叠加→不等宽节奏列：2叠3→2|1|1|2；3叠4→3|1|2|2|1|3；4叠5→4|1|3|2|2|3|1|4。Gerstner mobile=58 单位正方形按 1–6 细分、沟槽恒定，是「版式程序」（参数矩阵+选择规则）而非一张固定版式。</dd></div>
+          <div><dt>何时用</dt><dd>需要比均匀栏更有张力的编辑/门类版面时用复合网格</dd></div>
+          <div><dt>联动主题</dt><dd>swiss-classic</dd></div>
+        </dl>
+        <p class="src"><a href="https://en.wikipedia.org/wiki/Karl_Gerstner" target="_blank" rel="noopener">回源核对 ↗</a> · ref-s3-gerstner-compound.json</p>
+      </article>
+      <article class="card" id="ref-s4-isotype" data-facet="swiss">
+        <div class="card-top"><span class="badge g-swiss">瑞士 · swiss</span><span class="num">04</span></div>
+        <h3>Isotype 客观统计图形（Otto Neurath）</h3>
+        <p class="body">图元重复成行/成块；图例与坐标左对齐；禁 3D/渐变</p>
+        <div class="swatches" aria-label="本条归纳过的配色"><i style="background:#EDEBE6" title="bg: #EDEBE6"></i><i style="background:#111111" title="ink: #111111"></i><i style="background:#D8232A" title="accent: #D8232A"></i></div>
+        <dl>
+          <div><dt>观测</dt><dd>用重复等大图元表示数量，绝不放大单个图元表数量；必须给「1 图=N」图例；暖米底+平黑剪影+单一饱和红作计量单位。是瑞士信息设计的直系祖先。</dd></div>
+          <div><dt>何时用</dt><dd>做统计图/信息图时，数量用重复图元而非放大面积；配合 Tufte 数据墨水比</dd></div>
+          <div><dt>联动主题</dt><dd>swiss-classic</dd></div>
+        </dl>
+        <p class="src"><a href="https://en.wikipedia.org/wiki/Isotype_(picture_language)" target="_blank" rel="noopener">回源核对 ↗</a> · ref-s4-isotype.json</p>
+      </article>
+      <article class="card" id="ref-s5-free-font-stack" data-facet="swiss">
+        <div class="card-top"><span class="badge g-swiss">瑞士 · swiss</span><span class="num">05</span></div>
+        <h3>可合法打包的瑞士字体栈</h3>
+        <p class="body">字体栈：'Helvetica Neue','Neue Haas Grotesk',Inter,'Noto Sans SC','Source Han Sans SC',sans-serif</p>
+        
+        <dl>
+          <div><dt>观测</dt><dd>可 @font-face 随包分发：Inter（OFL-1.1）、Noto Sans SC/思源黑体（OFL-1.1）、Geist/Public Sans/Archivo/Space Grotesk。付费不可分发：Neue Haas Grotesk/Helvetica Now/Univers（Monotype/Lineto）。系统 Helvetica Neue 只可本地列名，禁 @font-face。</dd></div>
+          <div><dt>何时用</dt><dd>要交付可分发的瑞士风格作品时，用 Inter+思源黑体，别捆 Helvetica</dd></div>
+          <div><dt>联动主题</dt><dd>swiss-classic</dd></div>
+        </dl>
+        <p class="src"><a href="https://rsms.me/inter/" target="_blank" rel="noopener">回源核对 ↗</a> · ref-s5-free-font-stack.json</p>
+      </article>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>本页由 <code>scripts/build_preview.py</code> 从 <code>data/*.json</code> 生成;改数据必须重跑,包内断言会核对页面与数据同步。</p>
+    <p>本包只写观测与结论:禁搬运原站 HTML/CSS/JS、原图、标题正文与 logo;要色值去 <code>themes</code> 包的 tokens/。</p>
+  </footer>
+</div>
+<script>
+(function(){
+  var K="dsv-theme", root=document.documentElement, btn=document.getElementById("tt");
+  var forced=(new URLSearchParams(location.search).get("theme")||"").replace(/[^a-z]/g,"");
+  try{var v=forced||localStorage.getItem(K); if(v) root.setAttribute("data-theme", v);}catch(e){}
+  btn.hidden=false;
+  btn.addEventListener("click", function(){
+    var dark = root.getAttribute("data-theme")==="dark" ||
+      (!root.hasAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try{ localStorage.setItem(K, next); }catch(e){}
+  });
+  var cards=[].slice.call(document.querySelectorAll(".card")), shown=document.getElementById("shown");
+  document.querySelectorAll(".chip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      var f=chip.dataset.facet, n=0;
+      document.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed", String(c===chip)); });
+      cards.forEach(function(card){
+        var ok = f==="all" || card.dataset.facet===f;
+        card.hidden = !ok; if(ok) n++;
+      });
+      shown.textContent = "显示 " + n + " / " + cards.length + " 条";
+    });
+  });
+})();
+</script>
+</body>
+</html>

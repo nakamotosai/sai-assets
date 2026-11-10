@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Video Motion · 外部视频工程索引卡</title>
+<meta name="theme-color" content="#F5F3ED" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0E0C" media="(prefers-color-scheme: dark)">
+<style>
+/* 和色六景 · 纸白 / 炭黑(skill://design-system §2.5);token 由共用 palette.json 生成 */
+:root{
+  --bg:#F5F3ED; --ink:#1A1A16; --muted:#5B5A53; --surface:rgba(26,26,22,0.045);
+  --line:rgba(26,26,22,0.10); --line-2:rgba(26,26,22,0.18);
+  --c1:#0C8B7A; --c2:#A77109; --c3:#CD5545; --c4:#3F7DCA; --c5:#678618; --c6:#A165AE;
+  --accent:var(--c3);
+  --shadow:0 1px 2px rgba(26,26,22,.06), 0 12px 28px -18px rgba(26,26,22,.28);
+  color-scheme:light;
+}
+html[data-theme=dark]{
+  --bg:#0E0E0C; --ink:#EDEBE4; --muted:#A3A199; --surface:rgba(237,235,228,0.055);
+  --line:rgba(237,235,228,0.12); --line-2:rgba(237,235,228,0.22);
+  --c1:#0C8B7A; --c2:#A77109; --c3:#CD5545; --c4:#3F7DCA; --c5:#678618; --c6:#A165AE;
+  --accent:var(--c3);
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 32px -20px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]){
+    --bg:#0E0E0C; --ink:#EDEBE4; --muted:#A3A199; --surface:rgba(237,235,228,0.055);
+    --line:rgba(237,235,228,0.12); --line-2:rgba(237,235,228,0.22);
+    --c1:#0C8B7A; --c2:#A77109; --c3:#CD5545; --c4:#3F7DCA; --c5:#678618; --c6:#A165AE;
+    --accent:var(--c3);
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 32px -20px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+.g-archetype{--g:#0C8B7A; --g-soft:rgba(12,139,122,0.12); --g-line:rgba(12,139,122,0.28); --g-ink:#1E6759}
+html[data-theme=dark] .g-archetype{--g-ink:#449B8A}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-archetype{--g-ink:#449B8A} }
+.g-style{--g:#0C8B7A; --g-soft:rgba(12,139,122,0.12); --g-line:rgba(12,139,122,0.28); --g-ink:#1E6759}
+html[data-theme=dark] .g-style{--g-ink:#449B8A}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-style{--g-ink:#449B8A} }
+.g-library{--g:#0C8B7A; --g-soft:rgba(12,139,122,0.12); --g-line:rgba(12,139,122,0.28); --g-ink:#1E6759}
+html[data-theme=dark] .g-library{--g-ink:#449B8A}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-library{--g-ink:#449B8A} }
+.g-songs{--g:#0C8B7A; --g-soft:rgba(12,139,122,0.12); --g-line:rgba(12,139,122,0.28); --g-ink:#1E6759}
+html[data-theme=dark] .g-songs{--g-ink:#449B8A}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-songs{--g-ink:#449B8A} }
+.g-boundary{--g:#0C8B7A; --g-soft:rgba(12,139,122,0.12); --g-line:rgba(12,139,122,0.28); --g-ink:#1E6759}
+html[data-theme=dark] .g-boundary{--g-ink:#449B8A}
+@media (prefers-color-scheme: dark){ html:not([data-theme]) .g-boundary{--g-ink:#449B8A} }
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg); color:var(--ink);
+  font-family:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:14px; font-weight:400; line-height:1.68; font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+a{color:inherit; text-decoration-color:var(--line-2); text-underline-offset:3px}
+a:hover{text-decoration-color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.skip{position:absolute; left:-9999px; top:8px; padding:8px 16px; background:var(--bg); border:1px solid var(--line-2); border-radius:8px}
+.skip:focus{left:16px; z-index:9}
+.wrap{max-width:1180px; margin:0 auto; padding:40px 24px 64px}
+.head{display:flex; align-items:flex-start; gap:16px; justify-content:space-between}
+h1,h2,h3{margin:0; font-weight:600; line-height:1.28}
+h1{font-size:34px; line-height:1.2}
+h2{font-size:22px}
+h3{font-size:17px}
+p{margin:0}
+.lede{margin-top:12px; max-width:72ch; color:var(--muted)}
+.facts{margin-top:16px; font-size:13px; color:var(--muted)}
+.facts b{color:var(--ink); font-weight:600}
+.facts .sep{margin:0 8px; color:var(--line-2)}
+.tt{flex:none; width:44px; height:44px; display:grid; place-items:center;
+  background:transparent; border:0; color:var(--ink); border-radius:8px; cursor:pointer;
+  transition:opacity 120ms ease-out}
+.tt:hover{opacity:.72}
+.tt:active{opacity:.55}
+.sun,.moon{fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round}
+html[data-theme=dark] .sun{display:none}
+html:not([data-theme=dark]) .moon{display:none}
+@media (prefers-color-scheme: dark){
+  html:not([data-theme]) .sun{display:none}
+  html:not([data-theme]) .moon{display:block}
+}
+.facets{position:sticky; top:0; z-index:5; background:var(--bg); padding:16px 0 8px; margin-top:24px; border-bottom:1px solid var(--line)}
+.chips{display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin:0; padding:0}
+.chip{min-height:44px; padding:0 16px; display:inline-flex; align-items:center; gap:8px;
+  background:transparent; border:1px solid var(--line-2); border-radius:8px;
+  color:var(--muted); font:inherit; font-size:13px; font-weight:500; cursor:pointer}
+.chip:hover{color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--surface); border-color:var(--ink); color:var(--ink)}
+.chip .n{font-weight:600}
+.shown{margin-top:8px; font-size:12px; color:var(--muted)}
+section{margin-top:32px}
+section + section{margin-top:96px}
+.sec-head{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; margin-bottom:24px}
+.sec-head p{color:var(--muted); font-size:13px}
+.grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); align-items:start}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:16px; box-shadow:var(--shadow)}
+.card[hidden]{display:none}
+.card-top{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px}
+.badge{display:inline-flex; align-items:center; min-height:24px; padding:0 8px; border-radius:8px;
+  font-size:12px; font-weight:500; border:1px solid var(--g-line); background:var(--g-soft); color:var(--g-ink)}
+.num{font-size:12px; color:var(--muted); font-weight:400}
+.card p.body{margin-top:8px; max-width:68ch; line-height:1.68}
+.card dl{margin:16px 0 0; display:grid; gap:8px}
+.card dl div{display:grid; grid-template-columns:64px minmax(0, 1fr); gap:8px}
+.card dd, .card .body, .card .src{overflow-wrap:anywhere}
+.card dt{font-size:12px; color:var(--muted)}
+.card dd{margin:0; font-size:13px; color:var(--ink)}
+.card .src{margin-top:16px; font-size:12px; color:var(--muted)}
+.swatches{display:flex; gap:8px; margin-top:8px}
+.swatches i{width:24px; height:24px; border-radius:8px; border:1px solid var(--line-2); display:block}
+footer{margin-top:64px; padding-top:24px; border-top:1px solid var(--line); font-size:12px; color:var(--muted); max-width:68ch}
+@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主内容</a>
+<div class="wrap">
+  <header class="head">
+    <div>
+      <h1>Video Motion · 外部视频工程索引卡</h1>
+      <p class="lede">把一首歌排成印刷质感 MV 时,先看这张索引卡确认有哪些镜头语言与风格包;本仓不承载内容,只告诉你去哪里取。</p>
+      <p class="facts"><b>22</b> 张索引卡<span class="sep">/</span><b>5</b> 组<span class="sep">/</span>外部工程只索引不承载<span class="sep">/</span>零源码零图片零视频</p>
+    </div>
+    <button class="tt" id="tt" type="button" aria-label="切换深浅配色" hidden>
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <circle class="sun" cx="12" cy="12" r="4.6"></circle>
+        <path class="sun" d="M12 2.4v2.2M12 19.4v2.2M2.4 12h2.2M19.4 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"></path>
+        <path class="moon" d="M20 14.4A8.2 8.2 0 0 1 9.6 4a8.4 8.4 0 1 0 10.4 10.4Z"></path>
+      </svg>
+    </button>
+  </header>
+  <nav class="facets" aria-label="按分组筛选">
+    <ul class="chips">
+      <li><button class="chip" type="button" data-facet="all" aria-pressed="true">全部 <span class="n">22</span></button></li>
+      <li><button class="chip" type="button" data-facet="archetype" aria-pressed="false">镜头 16 项 <span class="n">16</span></button></li>
+      <li><button class="chip" type="button" data-facet="style" aria-pressed="false">风格包 <span class="n">1</span></button></li>
+      <li><button class="chip" type="button" data-facet="library" aria-pressed="false">节拍与摄影机库 <span class="n">2</span></button></li>
+      <li><button class="chip" type="button" data-facet="songs" aria-pressed="false">成品曲目 <span class="n">1</span></button></li>
+      <li><button class="chip" type="button" data-facet="boundary" aria-pressed="false">边界与替代 <span class="n">2</span></button></li>
+    </ul>
+    <p class="shown" id="shown" role="status">显示 22 / 22 条</p>
+  </nav>
+  <main id="main">
+    <section id="archetype">
+      <div class="sec-head"><h2>镜头 16 项 · 16 项</h2><p>15 个成品镜头 + 1 个 Placeholder 兜底;名字取自外部工程 archetype 注册表,不含实现。</p></div>
+      <div class="grid">
+      <article class="card" id="vm-a01" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">01</span></div>
+        <h3>Overture · 开场标题板</h3>
+        <p class="body">外部工程注册项之一。开场标题板;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a02" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">02</span></div>
+        <h3>Headline · 最响的标题行</h3>
+        <p class="body">外部工程注册项之一。最响的标题行;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a03" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">03</span></div>
+        <h3>PhotoStage · 单张照片推镜</h3>
+        <p class="body">外部工程注册项之一。单张照片推镜;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a04" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">04</span></div>
+        <h3>Collage · 剪贴簿拼贴</h3>
+        <p class="body">外部工程注册项之一。剪贴簿拼贴;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a05" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">05</span></div>
+        <h3>LyricType · 动态歌词排版</h3>
+        <p class="body">外部工程注册项之一。动态歌词排版;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a06" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">06</span></div>
+        <h3>Ledger · 单据清单</h3>
+        <p class="body">外部工程注册项之一。单据清单;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a07" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">07</span></div>
+        <h3>StampHit · 印章</h3>
+        <p class="body">外部工程注册项之一。印章;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a08" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">08</span></div>
+        <h3>Wheel · 表盘</h3>
+        <p class="body">外部工程注册项之一。表盘;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a09" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">09</span></div>
+        <h3>Cascade · 纸片倾泻</h3>
+        <p class="body">外部工程注册项之一。纸片倾泻;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a10" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">10</span></div>
+        <h3>Poem · 静态诗行(含竖排)</h3>
+        <p class="body">外部工程注册项之一。静态诗行(含竖排);由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a11" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">11</span></div>
+        <h3>Diagram · 注解图</h3>
+        <p class="body">外部工程注册项之一。注解图;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a12" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">12</span></div>
+        <h3>Bubbles · 对白气泡</h3>
+        <p class="body">外部工程注册项之一。对白气泡;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a13" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">13</span></div>
+        <h3>Spectro · 真实音频频谱</h3>
+        <p class="body">外部工程注册项之一。真实音频频谱;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a14" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">14</span></div>
+        <h3>Iris · 圆形遮罩过场</h3>
+        <p class="body">外部工程注册项之一。圆形遮罩过场;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a15" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">15</span></div>
+        <h3>EndCard · 结尾署名板</h3>
+        <p class="body">外部工程注册项之一。结尾署名板;由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-a16" data-facet="archetype">
+        <div class="card-top"><span class="badge g-archetype">镜头 archetype</span><span class="num">16</span></div>
+        <h3>Placeholder · 兜底占位(打印 shot id 与时间码)</h3>
+        <p class="body">外部工程注册项之一。兜底占位(打印 shot id 与时间码);由 Remotion Sequence 按帧驱动,不是网页 CSS 动效。</p>
+        <dl><div><dt>运行模型</dt><dd>React + Remotion CLI,帧驱动</dd></div><div><dt>取用位置</dt><dd>外部工程 mv-studio 的 archetype 注册表</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      </div>
+    </section>
+    <section id="style">
+      <div class="sec-head"><h2>风格包 · 1 项</h2><p>一套孔版印刷外观,供整支片子统一调用。</p></div>
+      <div class="grid">
+      <article class="card" id="vm-b01" data-facet="style">
+        <div class="card-top"><span class="badge g-style">风格包</span><span class="num">01</span></div>
+        <h3>riso 风格包 · 孔版印刷外观</h3>
+        <p class="body">四色专色 + 暖色纸 + 半调网点 + 故意套印错位 + 点阵字,一整套孔版印刷外观。</p>
+        <dl><div><dt>用途</dt><dd>整支片子的统一视觉层</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      </div>
+    </section>
+    <section id="library">
+      <div class="sec-head"><h2>节拍与摄影机库 · 2 项</h2><p>节拍网格与摄影机关键帧都是 frame 的纯函数,因此并行渲染帧准确。</p></div>
+      <div class="grid">
+      <article class="card" id="vm-b02" data-facet="library">
+        <div class="card-top"><span class="badge g-library">节拍库</span><span class="num">01</span></div>
+        <h3>beat 库 · 节拍网格</h3>
+        <p class="body">每拍重音 + 小节 + 段落能量,接到镜头切换上。</p>
+        <dl><div><dt>特性</dt><dd>frame 的纯函数,并行渲染帧准确</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-b03" data-facet="library">
+        <div class="card-top"><span class="badge g-library">摄影机库</span><span class="num">02</span></div>
+        <h3>motion 库 · 摄影机关键帧</h3>
+        <p class="body">推镜/摇移等关键帧,按时间线取值。</p>
+        <dl><div><dt>特性</dt><dd>frame 的纯函数</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      </div>
+    </section>
+    <section id="songs">
+      <div class="sec-head"><h2>成品曲目 · 1 项</h2><p>外部工程 registry 登记的曲目数量。</p></div>
+      <div class="grid">
+      <article class="card" id="vm-b04" data-facet="songs">
+        <div class="card-top"><span class="badge g-songs">成品</span><span class="num">01</span></div>
+        <h3>3 支成品曲目</h3>
+        <p class="body">外部工程 registry 里登记的 3 支可渲染曲目。</p>
+        <dl><div><dt>入口</dt><dd>外部工程 songs/registry.ts</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      </div>
+    </section>
+    <section id="boundary">
+      <div class="sec-head"><h2>边界与替代 · 2 项</h2><p>本仓的取用红线:只索引、不复制、不臆造远端地址。</p></div>
+      <div class="grid">
+      <article class="card" id="vm-b05" data-facet="boundary">
+        <div class="card-top"><span class="badge g-boundary">硬规则</span><span class="num">01</span></div>
+        <h3>为什么只索引</h3>
+        <p class="body">运行模型不同、许可不同(私有/UNLICENSED)、单一真相源:复制进来必然漂移。</p>
+        <dl><div><dt>禁区</dt><dd>不为外部工程造 src/ css/;不臆造 canonical_home</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      <article class="card" id="vm-b06" data-facet="boundary">
+        <div class="card-top"><span class="badge g-boundary">硬规则</span><span class="num">02</span></div>
+        <h3>替代路径</h3>
+        <p class="body">要网页动效走 web-fx,要组件/配色走 web-ui / themes。</p>
+        <dl><div><dt>禁区</dt><dd>不把镜头语言当 CSS 片段抄给浏览器</dd></div></dl>
+        <p class="src">索引卡 · 内容不在本仓</p>
+      </article>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>本页只登记「有什么、管什么」,不复制外部工程任何内容;内容本体在私有工程 mv-studio,运行模型为 React + Remotion CLI,与网页 DOM/CSS 不同。</p>
+    <p>许可:外部工程私有 / UNLICENSED,渲染框架另有上游条款;取用前先确认授权。canonical_home 为空时不得臆造远端地址。</p>
+  </footer>
+</div>
+<script>
+(function(){
+  var K="dsv-theme", root=document.documentElement, btn=document.getElementById("tt");
+  var forced=(new URLSearchParams(location.search).get("theme")||"").replace(/[^a-z]/g,"");
+  try{var v=forced||localStorage.getItem(K); if(v) root.setAttribute("data-theme", v);}catch(e){}
+  btn.hidden=false;
+  btn.addEventListener("click", function(){
+    var dark = root.getAttribute("data-theme")==="dark" ||
+      (!root.hasAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var next = dark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try{ localStorage.setItem(K, next); }catch(e){}
+  });
+  var cards=[].slice.call(document.querySelectorAll(".card")), shown=document.getElementById("shown");
+  document.querySelectorAll(".chip").forEach(function(chip){
+    chip.addEventListener("click", function(){
+      var f=chip.dataset.facet, n=0;
+      document.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed", String(c===chip)); });
+      cards.forEach(function(card){
+        var ok = f==="all" || card.dataset.facet===f;
+        card.hidden = !ok; if(ok) n++;
+      });
+      shown.textContent = "显示 " + n + " / " + cards.length + " 条";
+    });
+  });
+})();
+</script>
+</body>
+</html>
