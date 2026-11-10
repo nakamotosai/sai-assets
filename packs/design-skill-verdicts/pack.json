@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "id": "design-skill-verdicts",
+  "title": "外部设计规则观测 · 13 skill 逐个评审 + 33 条可落地判据",
+  "kind": "meta",
+  "category": "references",
+  "version": "1.0.0",
+  "license": "CC0-1.0",
+  "attribution": [
+    {
+      "name": "pbakaus/impeccable",
+      "url": "https://github.com/pbakaus/impeccable",
+      "license": "Apache-2.0",
+      "what": "quieter / critique / polish / distill 四个命令的降噪、评分与打磨判据(只取结论,未搬原文)"
+    },
+    {
+      "name": "vercel-labs/web-interface-guidelines",
+      "url": "https://github.com/vercel-labs/web-interface-guidelines",
+      "license": "MIT",
+      "what": "Web Interface Guidelines 正本;web-design-guidelines 是外抓薄壳"
+    },
+    {
+      "name": "emilkowalski/skills",
+      "url": "https://github.com/emilkowalski/skills",
+      "license": "MIT",
+      "what": "emil-design-eng 动效时长/频率/曲线/手势数值;prototype 仅记观测"
+    },
+    {
+      "name": "jakubkrehel/make-interfaces-feel-better",
+      "url": "https://github.com/jakubkrehel/make-interfaces-feel-better",
+      "license": "MIT",
+      "what": "19 条打磨原则与 5 篇细则的数值判据"
+    },
+    {
+      "name": "jakubkrehel/oklch-skill",
+      "url": "https://github.com/jakubkrehel/oklch-skill",
+      "license": "MIT",
+      "what": "OKLCH 配色数学(本轮只记观测,未落包)"
+    },
+    {
+      "name": "raphaelsalaja/userinterface-wiki",
+      "url": "https://github.com/raphaelsalaja/userinterface-wiki",
+      "license": "MIT",
+      "what": "152 条规则库中的音效/容器/UX/OpenType 数值"
+    },
+    {
+      "name": "ibelick/ui-skills",
+      "url": "https://github.com/ibelick/ui-skills",
+      "license": "MIT",
+      "what": "fixing-metadata / improve-ui / fixing-motion-performance 三处增量"
+    },
+    {
+      "name": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "license": "Apache-2.0(逐 skill)",
+      "what": "canvas-design 仅记观测,未搬字体与原文"
+    },
+    {
+      "name": "arvindrk/extract-design-system",
+      "url": "https://github.com/arvindrk/extract-design-system",
+      "license": "MIT",
+      "what": "仅记观测,未搬 CLI 与依赖"
+    }
+  ],
+  "origin": {
+    "project": "sai-assets",
+    "path": "packs/design-skill-verdicts/",
+    "derived_from": null
+  },
+  "entry": "SKILL.md",
+  "files": {
+    "src": [
+      "data/index.json",
+      "data/r01.json",
+      "data/r02.json",
+      "data/r03.json",
+      "data/r04.json",
+      "data/r05.json",
+      "data/r06.json",
+      "data/r07.json",
+      "data/r08.json",
+      "data/r09.json",
+      "data/r10.json",
+      "data/r11.json",
+      "data/r12.json",
+      "data/r13.json",
+      "data/r14.json",
+      "data/r15.json",
+      "data/r16.json",
+      "data/r17.json",
+      "data/r18.json",
+      "data/r19.json",
+      "data/r20.json",
+      "data/r21.json",
+      "data/r22.json",
+      "data/r23.json",
+      "data/r24.json",
+      "data/r25.json",
+      "data/r26.json",
+      "data/r27.json",
+      "data/r28.json",
+      "data/r29.json",
+      "data/r30.json",
+      "data/r31.json",
+      "data/r32.json",
+      "data/r33.json",
+      "data/ref-ds01-canvas-design.json",
+      "data/ref-ds02-quieter.json",
+      "data/ref-ds03-distill.json",
+      "data/ref-ds04-critique.json",
+      "data/ref-ds05-polish.json",
+      "data/ref-ds06-web-design-guidelines.json",
+      "data/ref-ds07-prototype.json",
+      "data/ref-ds08-ui-skills.json",
+      "data/ref-ds09-emil-design-eng.json",
+      "data/ref-ds10-make-interfaces-feel-better.json",
+      "data/ref-ds11-userinterface-wiki.json",
+      "data/ref-ds12-oklch-skill.json",
+      "data/ref-ds13-extract-design-system.json"
+    ],
+    "usage": "docs/usage.md",
+    "assert": "scripts/assert_tokens.py",
+    "preview": null
+  },
+  "tags": [
+    "design-review",
+    "rules",
+    "observation",
+    "ui-audit",
+    "motion",
+    "references"
+  ],
+  "when": "评审或打磨 UI 前,先按 group 筛可量化判据;取用前对照自家正本,冲突项以自家为准",
+  "not_for": "当代码抄、当色板用、当许可裁定用,或据此复刻上游 skill 与原站",
+  "default_variant": null,
+  "verified": {
+    "date": "2026-11-10",
+    "how": "python packs/design-skill-verdicts/scripts/assert_tokens.py",
+    "evidence": "PASS assert_tokens design-skill-verdicts — verdict 13 条 · rule 33 条 · index 46 条一致 · 分组 33 条齐 · 必备字段齐 · 形态规则 0 命中 · 用法三节齐"
+  },
+  "canonical_home": null
+}

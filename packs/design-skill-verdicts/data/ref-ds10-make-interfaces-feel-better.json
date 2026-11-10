@@ -1,0 +1,12 @@
+{
+ "id": "ref-ds10-make-interfaces-feel-better",
+ "name": "jakubkrehel/make-interfaces-feel-better",
+ "tag": "craft",
+ "verdict": "收(提炼)",
+ "source_url": "https://github.com/jakubkrehel/make-interfaces-feel-better",
+ "license": "MIT",
+ "observed": "19 条编号原则 + 5 篇细则,数值型判据最密:同心圆角 padding>24px 例外、图片描边 1px oklch(0/1 0 0 /.1)+outline-offset:-1px、图标描边对字重三档(1.5/2/2.5px)、图标上下文动画 scale 0.25→1 + blur(4px) + bounce=0、text-wrap balance ≤6 行(Chromium)/≤10 行(Firefox)、press scale(0.96)/150ms、高频交互 ≤150ms、will-change 三限",
+ "when": "评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准",
+ "not_for": "当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站",
+ "own_counterpart": "见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准"
+}

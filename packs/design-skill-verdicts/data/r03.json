@@ -1,0 +1,11 @@
+{
+ "id": "r03",
+ "name": "降级必须显式可见",
+ "group": "review",
+ "source": "critique",
+ "rule": "评审必须由设计评审(A)与检测器/浏览器取证(B)两个隔离评估合成;任一降级(单上下文、检测器跳过)必须在报告首行打显式标记并写原因,静默降级=评审失败。 【可验锚点:报告首行 1 个显式降级标记;A/B 两个隔离评估,缺一即失败】",
+ "evidence": "critique.md: 'A silent degraded critique is a failed critique'; 首行 banner 契约",
+ "when": "分身评审、自检报告抬头时",
+ "own_gap": "自家'防假绿'缺降级可见性纪律",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

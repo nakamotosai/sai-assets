@@ -1,0 +1,11 @@
+{
+ "id": "r28",
+ "name": "规则库输出格式",
+ "group": "rules",
+ "source": "userinterface-wiki",
+ "rule": "评审报告统一 file:line - [rule-id] 描述,末尾附 Rule | Count | Severity 汇总表;每条规则带影响级(CRITICAL/HIGH/MEDIUM/LOW),先按影响级排序再按主题。 【可验锚点:每行 1 个 rule-id;汇总表 3 列(Rule/Count/Severity)】",
+ "evidence": "skills/AGENTS.md 文末 Output Format / Summary Table",
+ "when": "出评审报告时",
+ "own_gap": "自家 web_audit.py 有 48 项清单,缺统一 rule-id 引用格式",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

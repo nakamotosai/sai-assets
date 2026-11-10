@@ -1,0 +1,11 @@
+{
+ "id": "r10",
+ "name": "表单提交契约",
+ "group": "guidelines",
+ "source": "web-design-guidelines",
+ "rule": "提交按钮在请求开始前保持 enabled;请求中才 disable + spinner;写操作带幂等键;禁预禁用 submit;禁阻止粘贴;错误内联到字段旁并在提交时聚焦首个错误;输入框字号 ≥16px 防移动端聚焦缩放。",
+ "evidence": "command.md Forms / Anti-patterns 段",
+ "when": "做表单、做写操作时",
+ "own_gap": "自家 hard-gates-web 覆盖错误态,无提交契约与幂等键",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

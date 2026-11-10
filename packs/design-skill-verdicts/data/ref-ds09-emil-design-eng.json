@@ -1,0 +1,12 @@
+{
+ "id": "ref-ds09-emil-design-eng",
+ "name": "emilkowalski/emil-design-eng",
+ "tag": "motion",
+ "verdict": "收(提炼)",
+ "source_url": "https://github.com/emilkowalski/skills/tree/main/skills/emil-design-eng",
+ "license": "MIT",
+ "observed": "27.5KB 单文件,动效参数密度最高且可断言:按频率决定要不要动(100+/日 一律不动)、UI 动效 <300ms 分档(按压 100–160 / tooltip 125–200 / 下拉 150–250 /  modal 200–500)、禁 scale(0) 入场改 scale(0.95)+opacity、按压 scale(0.97)、stagger 30–80ms、退场快于进场、blur(2px) 遮瑕且 <20px、冬青 ease-out 曲线三条;自家只有 150–300ms 一条带",
+ "when": "评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准",
+ "not_for": "当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站",
+ "own_counterpart": "见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准"
+}

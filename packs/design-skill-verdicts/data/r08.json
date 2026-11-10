@@ -1,0 +1,11 @@
+{
+ "id": "r08",
+ "name": "减法三条硬边界",
+ "group": "review",
+ "source": "distill",
+ "rule": "禁 card 套 card;card 不是布局的默认容器(基础布局用间距与对齐);全站只允许一个间距刻度,禁任意 gap;语义色(success/warning/error)每个都必须配非颜色线索;禁'简化到看不懂'。 【可验锚点:3 条硬边界:0 层嵌套 card、1 个间距刻度、语义色各配 1 个非颜色线索】",
+ "evidence": "distill.md IA/视觉/布局三维; 'Cards aren't needed for basic layout'; 'Pick one spacing scale'",
+ "when": "极简/减法评审时",
+ "own_gap": "自家 design-system §3 已覆盖大部分,这三条是增量",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

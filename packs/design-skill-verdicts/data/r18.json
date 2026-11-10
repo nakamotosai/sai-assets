@@ -1,0 +1,11 @@
+{
+ "id": "r18",
+ "name": "10% 慢放逐态复检",
+ "group": "motion",
+ "source": "make-interfaces-feel-better",
+ "rule": "评审时把界面降到 10% 速度重放,逐个走 hover / focus / active / loading / empty 五态;10% 下才看得出的别扭就是问题。报告必须列'考虑过但否决'的 1–5 个真候选,并给 Block / Needs changes / Approve 三档判词。",
+ "evidence": "make-interfaces-feel-better/SKILL.md: 'replay motion at 10% speed'; Review Output Format",
+ "when": "动效评审时",
+ "own_gap": "自家'改前 baseline 截图'是静态,缺慢放逐态法",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

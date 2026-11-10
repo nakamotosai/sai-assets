@@ -1,0 +1,11 @@
+{
+ "id": "r06",
+ "name": "检测器结果只是缺陷证据",
+ "group": "review",
+ "source": "polish",
+ "rule": "检测器/静态扫描通过 ≠ 质量达标;必须看真实渲染与交互路径;禁止为了让打磨'看得见'而新增动画;禁止重复跑同一轮检测仪式。 【可验锚点:0 次为验收新增动画;clean scan 只记 1 票,不代替目视】",
+ "evidence": "polish.md: 'A detector result is defect evidence, not proof of quality'; 'A clean scan does not replace visual judgment'",
+ "when": "闸报全绿就宣布完工时",
+ "own_gap": "自家 motion 规则偏'怎么动',缺'不许为验收而动'",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

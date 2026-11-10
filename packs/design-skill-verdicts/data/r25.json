@@ -1,0 +1,11 @@
+{
+ "id": "r25",
+ "name": "UX 定律的可测值",
+ "group": "rules",
+ "source": "userinterface-wiki",
+ "rule": "交互响应 <400ms 才'即时'(乐观 UI);分组 5–9 项;组内间距 4px / 2px、组间 24px;命中目标 ≥32×32px + 8px padding;危险操作用独立样式做差异项;进度与未完成态要可见。",
+ "evidence": "rules/ux-doherty-under-400ms / ux-millers-chunking / ux-proximity-grouping / ux-fitts-target-size / ux-von-restorff-emphasis",
+ "when": "定交互节奏与分组时",
+ "own_gap": "自家有 44px 触区(更硬),余下 0 命中",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

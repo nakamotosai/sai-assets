@@ -1,0 +1,11 @@
+{
+ "id": "r24",
+ "name": "容器动画两 div 模式",
+ "group": "rules",
+ "source": "userinterface-wiki",
+ "rule": "禁对同一元素既测量又动画:外层负责动画、内层负责测量;bounds.width===0 时回退 'auto' 而不是写死数值;用 ResizeObserver + contentRect 并在卸载时 disconnect();容器 overflow:hidden;拖拽期对元素设 inert 并禁文本选中。",
+ "evidence": "rules/container-* 7 条; 'Never measure and animate the same element'",
+ "when": "做展开/折叠、列表重排时",
+ "own_gap": "自家 motion-kit 有量高 FAQ,无该模式",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

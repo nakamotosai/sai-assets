@@ -1,0 +1,11 @@
+{
+ "id": "r21",
+ "name": "表面与图片描边数值",
+ "group": "craft",
+ "source": "make-interfaces-feel-better",
+ "rule": "同心圆角 outer = inner + padding;当 padding >24px 时两层视为独立表面、各自定半径;图标侧内边距 = 文字侧 − 2px;播放三角右移 2px;图片描边用 outline: 1px solid oklch(0 0 0 / 0.1)(暗模 oklch(1 0 0 / 0.1)) + outline-offset:-1px,且必须纯黑/纯白不用近似中性色。",
+ "evidence": "surfaces.md; 'Color rules (non-negotiable)'",
+ "when": "定卡片/图片表面时",
+ "own_gap": "自家有同心圆角规则,缺 >24px 例外与描边数值;注意与 r26 冲突见 docs/usage.md",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

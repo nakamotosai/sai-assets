@@ -1,0 +1,11 @@
+{
+ "id": "r20",
+ "name": "图标上下文动画四值",
+ "group": "craft",
+ "source": "make-interfaces-feel-better",
+ "rule": "两图标交叉淡出:scale 0.25→1(不用 0.5/0.6)、opacity 0→1、blur(4px)→blur(0px)、spring duration 0.3 且 bounce 恒为 0;无动效库时用双图标常驻 DOM + cubic-bezier(0.2,0,0,1);一图多态用 currentColor + CSS 切 hover/selected/disabled,outline 默认、fill 只标选中。",
+ "evidence": "animations.md / icons.md",
+ "when": "做图标状态切换时",
+ "own_gap": "自家全库无,高增量",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

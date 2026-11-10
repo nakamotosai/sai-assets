@@ -1,0 +1,12 @@
+{
+ "id": "ref-ds06-web-design-guidelines",
+ "name": "vercel-labs/web-design-guidelines",
+ "tag": "guidelines",
+ "verdict": "收(提炼)",
+ "source_url": "https://github.com/vercel-labs/web-interface-guidelines",
+ "license": "MIT(web-interface-guidelines 正本);agent-skills 仓无 LICENSE 文件,仅 README 口头 MIT",
+ "observed": "SKILL.md 仅 1.2KB 薄壳,每次 review 外抓 command.md;正本在 vercel-labs/web-interface-guidelines(MIT)约 90 条。自家空白且可断言:URL 即状态/深链、表单提交契约(禁预禁用 submit + 幂等键)、spinner 150–300ms delay + 300–500ms 最短可见、Intl.* 本地化 + translate=\"no\"、touch-action/overscroll-behavior/safe-area、tooltip 首条延迟同伴即时",
+ "when": "评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准",
+ "not_for": "当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站",
+ "own_counterpart": "见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准"
+}

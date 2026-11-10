@@ -1,0 +1,11 @@
+{
+ "id": "r17",
+ "name": "入场不从 scale(0) 起",
+ "group": "motion",
+ "source": "emil-design-eng",
+ "rule": "入场起点 scale(0.95) + opacity 0,禁 scale(0);按压 scale(0.97)(范围 0.95–0.98);popover 的 transform-origin 跟触发器走,modal 保持居中;禁 transition: all,显式列属性;clip-path 可做按住进度(2s linear)与松手快回(200ms ease-out)。",
+ "evidence": "emil-design-eng Review Format 与 Component Building Principles 段",
+ "when": "写入场/按压动效时",
+ "own_gap": "自家 hard-gates-web 有 pressed scale(.96),缺起点与 origin 口径",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

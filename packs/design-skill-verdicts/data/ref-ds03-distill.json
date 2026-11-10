@@ -1,0 +1,12 @@
+{
+ "id": "ref-ds03-distill",
+ "name": "pbakaus/distill",
+ "tag": "review",
+ "verdict": "只记观测(摘 3 条)",
+ "source_url": "https://github.com/pbakaus/impeccable",
+ "license": "Apache-2.0",
+ "observed": "减法六维与自家 design-system §3 极简风(主色 ≤3/字族 ≤2/字重 ≤3/字号档 ≤6/8pt 间距/留白 40–60%)几乎逐条同构;仅'禁 card 套 card''card 非布局默认容器''一个间距刻度'三条有增量",
+ "when": "评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准",
+ "not_for": "当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站",
+ "own_counterpart": "见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准"
+}

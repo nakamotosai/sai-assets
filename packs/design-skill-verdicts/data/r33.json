@@ -1,0 +1,11 @@
+{
+ "id": "r33",
+ "name": "命中区与表面分层",
+ "group": "rules",
+ "source": "userinterface-wiki",
+ "rule": "命中目标 44×44px(密集桌面 40×40),两个命中区禁重叠;固定元素用 100dvh 不用 100vh 并尊重 safe-area-inset;z-index 用固定刻度禁任意值;空态必须给一个明确下一步动作;不可逆操作用确认弹层。",
+ "evidence": "userinterface-wiki rules/ux-fitts-* 与 ibelick/ui-skills baseline-ui; 与自家 front-rules §6 对齐",
+ "when": "定命中区与层级时",
+ "own_gap": "自家已覆盖 40/44px,此处把'固定刻度+空态动作'并成一条对照项",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

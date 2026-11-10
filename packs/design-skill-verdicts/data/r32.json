@@ -1,0 +1,11 @@
+{
+ "id": "r32",
+ "name": "动效频率与手势数值组",
+ "group": "motion",
+ "source": "emil-design-eng",
+ "rule": "键盘发起的动作一律不动;按压进度可慢(2s linear)但松手必须快(200ms ease-out);拖拽释放按速度否决:velocity>0.11 或位移 40–50% 或 velocity.y>500;dragElastic≈0.2;帧预算按 16.7ms(120Hz 为 8ms)设计;tooltip 首次有延迟、相邻同伴即时。",
+ "evidence": "emil-design-eng/SKILL.md 频率闸、gestures/SKILL.md、animation-performance/SKILL.md 与两张 cheatsheet",
+ "when": "做手势、拖拽、命令面板时",
+ "own_gap": "自家只有'动效=频率×幅度×缓动'概念,无按频次否决与手势阈值",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

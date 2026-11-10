@@ -1,0 +1,11 @@
+{
+ "id": "r23",
+ "name": "音效与合成的硬数值",
+ "group": "rules",
+ "source": "userinterface-wiki",
+ "rule": "默认音量 0.3;点击音 5–15ms;点击滤波 3000–6000Hz;Q=2–5;gain <1.0;AudioContext 全站单例且 suspended 必 resume;包络指数衰减目标 0.001(0 非法);打字/键盘导航不加音效;每个音效必须有视觉等价物、可关闭、有音量控制;高频确认/错误/装饰/惩罚性音效一律禁。",
+ "evidence": "userinterface-wiki skills/rules/ a11y-* / appropriate-* / param-* / context-* 共 27 条",
+ "when": "做音频反馈、做播放器时",
+ "own_gap": "自家全库无规则条文,整块空白",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

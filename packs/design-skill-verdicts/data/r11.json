@@ -1,0 +1,11 @@
+{
+ "id": "r11",
+ "name": "加载指示的防闪烁窗口",
+ "group": "guidelines",
+ "source": "web-design-guidelines",
+ "rule": "spinner 显示延迟 150–300ms,显示后最短可见 300–500ms,避免一闪而过;加载中按钮保留原标签;自动播放 >5s 的动效要有暂停/停止/隐藏控件。",
+ "evidence": "command.md Animation / Loading 段",
+ "when": "定加载态时",
+ "own_gap": "自家 front-rules §8 是 1s 阈值与形态,维度互补不冲突",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

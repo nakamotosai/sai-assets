@@ -1,0 +1,12 @@
+{
+ "id": "ref-ds12-oklch-skill",
+ "name": "jakubkrehel/oklch-skill",
+ "tag": "color",
+ "verdict": "只记观测",
+ "source_url": "https://github.com/jakubkrehel/oklch-skill",
+ "license": "MIT",
+ "observed": "配色数学增量最大(色阶 delta 0.4 / L clamp 0.05–0.95 / C=pct×maxChroma / 多色相同 C% / 越界只降 C / P3 两层兜底 / hue drift >10° / APCA Lc 60-45-30);但自家 packs 契约 §5 硬定'所有色值为 6 位 hex 或合法 rgba()',收 oklch 值需先改契约与 15 个 assert_tokens.py,本轮不改契约 → 记观测,算法不落包",
+ "when": "评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准",
+ "not_for": "当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站",
+ "own_counterpart": "见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准"
+}

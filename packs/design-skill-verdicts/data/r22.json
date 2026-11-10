@@ -1,0 +1,11 @@
+{
+ "id": "r22",
+ "name": "文本与性能细则",
+ "group": "craft",
+ "source": "make-interfaces-feel-better",
+ "rule": "text-wrap: balance 仅对 ≤6 行(Chromium)/≤10 行(Firefox)生效,text-wrap: pretty 作短中文本默认,10+ 行两者都不用;tabular-nums 只给计数器/计时器/变动价格/表格列/数字动效,静态数字与版本号不用;will-change 只给 transform/opacity/filter 且只在发现首帧卡顿时加,禁 will-change: all;字体平滑只在 html 根写一次。",
+ "evidence": "typography.md / performance.md",
+ "when": "排版与性能验收时",
+ "own_gap": "自家已用 tnum/balance,缺阈值与白名单",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

@@ -1,0 +1,11 @@
+{
+ "id": "r29",
+ "name": "发布元数据一致闸",
+ "group": "rules",
+ "source": "ui-skills",
+ "rule": "每页元数据只在一处定义且必须确定(禁随机值);og:url 必须等于 canonical;OG/Twitter 图片用绝对 URL;twitter:card 默认 summary_large_image;预览/预发页默认 noindex;JSON-LD 禁编造评分/评价/价格/组织信息;社交卡片在真实 URL 上验,不在 localhost。 【可验锚点:4 个字段一致(title/description/canonical/og:url);预发页 1 个 noindex】",
+ "evidence": "ibelick/ui-skills skills/fixing-metadata/SKILL.md 工作流与规则表",
+ "when": "静态站发布前收口",
+ "own_gap": "自家 option-lab-and-prod §10 已点名'漏抄 meta description 无闸门',但无成清单",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

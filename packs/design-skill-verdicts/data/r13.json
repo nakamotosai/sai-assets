@@ -1,0 +1,11 @@
+{
+ "id": "r13",
+ "name": "触控三件套与安全区",
+ "group": "guidelines",
+ "source": "web-design-guidelines",
+ "rule": "touch-action: manipulation 防双击缩放延迟;有意设置 -webkit-tap-highlight-color;模态/抽屉 overscroll-behavior: contain;橡皮筋压制只在 @media (pointer: fine) 下作用于 html,粗指针保留下拉刷新;全出血布局用 env(safe-area-inset-*)。 【可验锚点:3 件套 + 1 个安全区;橡皮筋压制只在 1 个媒体查询内生效】",
+ "evidence": "command.md Touch & Interaction / Safe Areas 段",
+ "when": "移动端验收时",
+ "own_gap": "自家仅在侧栏与媒体站零星出现,未成条",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

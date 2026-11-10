@@ -1,0 +1,11 @@
+{
+ "id": "r09",
+ "name": "状态必须进 URL",
+ "group": "guidelines",
+ "source": "web-design-guidelines",
+ "rule": "筛选、标签页、分页、展开面板等任何有状态的 UI 都要映射进 URL 查询参数;前进/后退要能恢复状态与滚动位置;破坏性操作给确认或 Undo 窗口,禁立即执行。 【可验锚点:状态 1:1 映射查询参数;前进/后退恢复 2 项(状态+滚动位置)】",
+ "evidence": "web-interface-guidelines/command.md Navigation & State 段",
+ "when": "做交互原型、SPA 收口时",
+ "own_gap": "自家全库 0 命中,属最大空白",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

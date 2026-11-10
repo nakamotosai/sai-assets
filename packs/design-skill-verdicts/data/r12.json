@@ -1,0 +1,11 @@
+{
+ "id": "r12",
+ "name": "本地化与标点微规",
+ "group": "guidelines",
+ "source": "web-design-guidelines",
+ "rule": "日期/数字/货币走 Intl.DateTimeFormat / Intl.NumberFormat,禁硬编码格式;语言取 Accept-Language / navigator.languages,禁靠 IP;品牌名与代码词包 translate=\"no\";单位与快捷键用 &nbsp; 粘连(10 MB、⌘ K);用弯引号与单个 … 字符;货币小数位全站统一 0 或 2 不得混用。",
+ "evidence": "command.md Locale & i18n / Content & Copy / Typography 段",
+ "when": "多语站收口、文案审计时",
+ "own_gap": "自家 design-system §6 只审小标题,无 i18n 与标点断言",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

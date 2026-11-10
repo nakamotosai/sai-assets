@@ -1,0 +1,11 @@
+{
+ "id": "r15",
+ "name": "按频率决定要不要动",
+ "group": "motion",
+ "source": "emil-design-eng",
+ "rule": "先问用户多久看一次:≥100 次/日(快捷键、命令面板切换)一律不动;高频交互给即时反馈或 ≤150ms 的 opacity/颜色过渡;常规 UI 动效一律 <300ms。",
+ "evidence": "emil-design-eng/SKILL.md The Animation Decision Framework: '100+ times/day … No animation. Ever.'; 'UI animations should stay under 300ms'",
+ "when": "写任何 animation/transition 之前",
+ "own_gap": "自家只有 150–300ms 一条带,缺频率维度",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

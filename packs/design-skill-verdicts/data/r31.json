@@ -1,0 +1,11 @@
+{
+ "id": "r31",
+ "name": "动效性能四条禁令",
+ "group": "rules",
+ "source": "ui-skills",
+ "rule": "同一帧内禁读写交错;禁从 scrollTop/scrollY/scroll 事件驱动动画;rAF 循环必须有停止条件;禁混用多套各自测量/改布局的动效系统;离屏暂停用 IntersectionObserver;禁动画继承型 CSS 变量;blur 动画 ≤8px 且一次性、不连续;View Transitions 只给导航级变化。",
+ "evidence": "ibelick/ui-skills skills/fixing-motion-performance/SKILL.md",
+ "when": "掉帧排查、动效性能验收时",
+ "own_gap": "自家 motion-scroll 有 scrub/采样口径,缺这四条显式禁令与 FLIP/View Timelines",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

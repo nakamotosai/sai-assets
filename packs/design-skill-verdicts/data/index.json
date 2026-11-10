@@ -1,0 +1,289 @@
+{
+ "schema": 1,
+ "pack": "design-skill-verdicts",
+ "version": "1.0.0",
+ "count": 46,
+ "groups": {
+  "verdict": 13,
+  "rules": 33
+ },
+ "fields": "verdict 条目:id/name/tag/verdict/license/source_url/observed/when/not_for/own_counterpart;规则条目:id/name/group/source/rule/evidence/when/own_gap/license_note",
+ "items": [
+  {
+   "id": "r01",
+   "name": "评审评分分母随实评项走",
+   "type": "rule",
+   "group": "review"
+  },
+  {
+   "id": "r02",
+   "name": "认知负荷三个可数阈值",
+   "type": "rule",
+   "group": "review"
+  },
+  {
+   "id": "r03",
+   "name": "降级必须显式可见",
+   "type": "rule",
+   "group": "review"
+  },
+  {
+   "id": "r04",
+   "name": "漂移四分类 + 最窄层修因",
+   "type": "rule",
+   "group": "review"
+  },
+  {
+   "id": "r05",
+   "name": "打磨按五档顺序走",
+   "type": "rule",
+   "group": "review"
+  },
+  {
+   "id": "r06",
+   "name": "检测器结果只是缺陷证据",
+   "type": "rule",
+   "group": "review"
+  },
+  {
+   "id": "r07",
+   "name": "降噪的可量数值带",
+   "type": "rule",
+   "group": "review"
+  },
+  {
+   "id": "r08",
+   "name": "减法三条硬边界",
+   "type": "rule",
+   "group": "review"
+  },
+  {
+   "id": "r09",
+   "name": "状态必须进 URL",
+   "type": "rule",
+   "group": "guidelines"
+  },
+  {
+   "id": "r10",
+   "name": "表单提交契约",
+   "type": "rule",
+   "group": "guidelines"
+  },
+  {
+   "id": "r11",
+   "name": "加载指示的防闪烁窗口",
+   "type": "rule",
+   "group": "guidelines"
+  },
+  {
+   "id": "r12",
+   "name": "本地化与标点微规",
+   "type": "rule",
+   "group": "guidelines"
+  },
+  {
+   "id": "r13",
+   "name": "触控三件套与安全区",
+   "type": "rule",
+   "group": "guidelines"
+  },
+  {
+   "id": "r14",
+   "name": "URL 与输入的可访问性底线",
+   "type": "rule",
+   "group": "guidelines"
+  },
+  {
+   "id": "r15",
+   "name": "按频率决定要不要动",
+   "type": "rule",
+   "group": "motion"
+  },
+  {
+   "id": "r16",
+   "name": "动效时长分档与曲线",
+   "type": "rule",
+   "group": "motion"
+  },
+  {
+   "id": "r17",
+   "name": "入场不从 scale(0) 起",
+   "type": "rule",
+   "group": "motion"
+  },
+  {
+   "id": "r18",
+   "name": "10% 慢放逐态复检",
+   "type": "rule",
+   "group": "motion"
+  },
+  {
+   "id": "r19",
+   "name": "图标描边对字重三档",
+   "type": "rule",
+   "group": "craft"
+  },
+  {
+   "id": "r20",
+   "name": "图标上下文动画四值",
+   "type": "rule",
+   "group": "craft"
+  },
+  {
+   "id": "r21",
+   "name": "表面与图片描边数值",
+   "type": "rule",
+   "group": "craft"
+  },
+  {
+   "id": "r22",
+   "name": "文本与性能细则",
+   "type": "rule",
+   "group": "craft"
+  },
+  {
+   "id": "r23",
+   "name": "音效与合成的硬数值",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "r24",
+   "name": "容器动画两 div 模式",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "r25",
+   "name": "UX 定律的可测值",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "r26",
+   "name": "阴影与伪元素方向",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "r27",
+   "name": "OpenType 与渲染六条",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "r28",
+   "name": "规则库输出格式",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "r29",
+   "name": "发布元数据一致闸",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "r30",
+   "name": "审计三证明门",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "r31",
+   "name": "动效性能四条禁令",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "r32",
+   "name": "动效频率与手势数值组",
+   "type": "rule",
+   "group": "motion"
+  },
+  {
+   "id": "r33",
+   "name": "命中区与表面分层",
+   "type": "rule",
+   "group": "rules"
+  },
+  {
+   "id": "ref-ds01-canvas-design",
+   "name": "anthropics/canvas-design",
+   "type": "verdict",
+   "group": "poster"
+  },
+  {
+   "id": "ref-ds02-quieter",
+   "name": "pbakaus/quieter(图作 quiter)",
+   "type": "verdict",
+   "group": "review"
+  },
+  {
+   "id": "ref-ds03-distill",
+   "name": "pbakaus/distill",
+   "type": "verdict",
+   "group": "review"
+  },
+  {
+   "id": "ref-ds04-critique",
+   "name": "pbakaus/critique",
+   "type": "verdict",
+   "group": "review"
+  },
+  {
+   "id": "ref-ds05-polish",
+   "name": "pbakaus/polish",
+   "type": "verdict",
+   "group": "review"
+  },
+  {
+   "id": "ref-ds06-web-design-guidelines",
+   "name": "vercel-labs/web-design-guidelines",
+   "type": "verdict",
+   "group": "guidelines"
+  },
+  {
+   "id": "ref-ds07-prototype",
+   "name": "emilkowalski/prototype",
+   "type": "verdict",
+   "group": "prototype"
+  },
+  {
+   "id": "ref-ds08-ui-skills",
+   "name": "ibelick/ui-skills",
+   "type": "verdict",
+   "group": "routing"
+  },
+  {
+   "id": "ref-ds09-emil-design-eng",
+   "name": "emilkowalski/emil-design-eng",
+   "type": "verdict",
+   "group": "motion"
+  },
+  {
+   "id": "ref-ds10-make-interfaces-feel-better",
+   "name": "jakubkrehel/make-interfaces-feel-better",
+   "type": "verdict",
+   "group": "craft"
+  },
+  {
+   "id": "ref-ds11-userinterface-wiki",
+   "name": "raphaelsalaja/userinterface-wiki",
+   "type": "verdict",
+   "group": "rules"
+  },
+  {
+   "id": "ref-ds12-oklch-skill",
+   "name": "jakubkrehel/oklch-skill",
+   "type": "verdict",
+   "group": "color"
+  },
+  {
+   "id": "ref-ds13-extract-design-system",
+   "name": "arvindrk/extract-design-system",
+   "type": "verdict",
+   "group": "tool"
+  }
+ ]
+}

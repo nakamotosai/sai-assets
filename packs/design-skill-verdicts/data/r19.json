@@ -1,0 +1,11 @@
+{
+ "id": "r19",
+ "name": "图标描边对字重三档",
+ "group": "craft",
+ "source": "make-interfaces-feel-better",
+ "rule": "24px 网格下:正文 400 / 14–16px → 描边 1.5px;500–600 → 2px;700 或强调独立 → 2.5px;一套图标只用一个描边档,禁混图标库;inline 图标取 1em–1.25em;只在最小实际尺寸(常为 16px)验收。",
+ "evidence": "icons.md 描边-字重表",
+ "when": "选/画图标时",
+ "own_gap": "自家各包预览固定 1.5/1.6px,无档位规则",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

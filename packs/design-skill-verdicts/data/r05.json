@@ -1,0 +1,11 @@
+{
+ "id": "r05",
+ "name": "打磨按五档顺序走",
+ "group": "review",
+ "source": "polish",
+ "rule": "triage 强制顺序:① 阻断任务/丢数据/误导状态/不可达 ② 缺 loading/empty/error/success/disabled/permission 态 ③ flow/层级/响应式/设计系统漂移 ④ 视觉与动效不一致 ⑤ 代码与资产清理。禁止把某个角落磨到满分而其余仍低于同一质量线。 【可验锚点:按 5 档顺序 triage,每档清零后才进下一档】",
+ "evidence": "polish.md 五档 triage; 'Do not perfect one corner while leaving the rest below the same quality bar'",
+ "when": "交付前最后一轮巡查",
+ "own_gap": "自家 hard-gates-web §4.0/§4.6 覆盖各态,缺强制顺序",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

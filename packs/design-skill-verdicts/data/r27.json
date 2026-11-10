@@ -1,0 +1,11 @@
+{
+ "id": "r27",
+ "name": "OpenType 与渲染六条",
+ "group": "rules",
+ "source": "userinterface-wiki",
+ "rule": "font-synthesis: none(禁合成字形);font-display: swap;可变字重用连续值(450/550);正文用 oldstyle-nums、表格用 lining-nums tabular-nums;text-underline-offset: 3px + text-decoration-skip-ink: auto;易混字符用 ss02、分数用 diagonal-fractions、0 用 slashed-zero。",
+ "evidence": "rules/type-* 16 条中自家未覆盖的 6 条",
+ "when": "中文/多语排版验收时",
+ "own_gap": "自家 front-rules §17 有可变字体与合成斜体回退,缺 OpenType 档位",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

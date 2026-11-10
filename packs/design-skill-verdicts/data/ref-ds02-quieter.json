@@ -1,0 +1,12 @@
+{
+ "id": "ref-ds02-quieter",
+ "name": "pbakaus/quieter(图作 quiter)",
+ "tag": "review",
+ "verdict": "收(提炼)",
+ "source_url": "https://github.com/pbakaus/impeccable",
+ "license": "Apache-2.0",
+ "observed": "降噪唯一给出可量数值带:饱和度降到 70–85%、位移幅度 40→10–20px、字重 900→600/700→500、Never bounce or elastic;自家只有'强调 ≤10% 面积/150–300ms',缺饱和度与位移幅度量化",
+ "when": "评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准",
+ "not_for": "当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站",
+ "own_counterpart": "见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准"
+}

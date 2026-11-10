@@ -1,0 +1,11 @@
+{
+ "id": "r07",
+ "name": "降噪的可量数值带",
+ "group": "review",
+ "source": "quieter",
+ "rule": "压视觉强度而不是压信息:饱和度降到 70–85%;动效位移幅度从 40px 降到 10–20px;字重 900→600、700→500;强调色面积 ≤10%;禁 bounce/elastic;禁'灰字压在彩色底上',改同色相深一档;禁把所有元素做成同尺寸同字重、禁把颜色全去掉。",
+ "evidence": "quieter.md 数值段; 'Never gray on color'; 'Quiet design is harder than bold design'",
+ "when": "评审判定'太吵/太刺激'时",
+ "own_gap": "自家只有 ≤10% 面积 / 150–300ms,缺饱和度与位移幅度量化",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

@@ -1,0 +1,11 @@
+{
+ "id": "r30",
+ "name": "审计三证明门",
+ "group": "rules",
+ "source": "ui-skills",
+ "rule": "审计他人既有界面时每条发现必须过三证明:Contract(引用有约束力的设计决定,'prefer/generally/命名/省略/重复'不算)、Runtime(沿可追踪运行路径证明能到达)、Correction(写出证据要求的一处改动);报告每条必带 Confidence,缺列即删行;最多报 3 条;只读源码,产物只写 design-plans/。",
+ "evidence": "ibelick/ui-skills skills/improve-ui/SKILL.md 三证明门与 Stop at three",
+ "when": "评审既有站点/外部设计系统时",
+ "own_gap": "自家闸主要面向新建项目,缺审计既有系统的证据契约",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

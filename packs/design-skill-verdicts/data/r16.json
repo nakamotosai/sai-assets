@@ -1,0 +1,11 @@
+{
+ "id": "r16",
+ "name": "动效时长分档与曲线",
+ "group": "motion",
+ "source": "emil-design-eng",
+ "rule": "按压反馈 100–160ms;tooltip/小 popover 125–200ms;下拉/select 150–250ms;modal/抽屉 200–500ms;入场 ease-out、退场 ease-in、禁 UI 用 ease-in 起手;退场比入场快(如 enter 2s / exit 200ms);stagger 间隔 30–80ms;blur 遮瑕 2px 且动画 blur 一律 <20px。",
+ "evidence": "emil-design-eng 时长表与 Performance Rules;ui-cheatsheet / performance-cheatsheet",
+ "when": "定 tokens 里的 duration/easing 时",
+ "own_gap": "自家 motion-scroll 有 d1/d2/d3 三档,缺按控件类型分档",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

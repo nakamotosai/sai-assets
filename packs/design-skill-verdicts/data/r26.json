@@ -1,0 +1,11 @@
+{
+ "id": "r26",
+ "name": "阴影与伪元素方向",
+ "group": "rules",
+ "source": "userinterface-wiki",
+ "rule": "阴影用≥3 层递增模糊递减透明度(0 1px 2px/.06, 0 4px 8px/.04, 0 12px 24px/.03);全站同一光照方向;投影禁用纯黑,改中性色;三档 elevation 对应 card/dropdown/modal;原生 ::backdrop / ::placeholder / ::selection / ::marker / ::first-line 优先于新增 DOM 节点;view-transition-name 必须唯一且切换后清理。",
+ "evidence": "rules/visual-* 9 条 / pseudo-* 5 条 / transition-name-* 3 条",
+ "when": "定表面层级、做视图过场时",
+ "own_gap": "与自家 design-system §3'阴影 1 套'及部分主题包纯黑投影冲突:按 docs/usage.md 的冲突表裁决,不自动生效",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

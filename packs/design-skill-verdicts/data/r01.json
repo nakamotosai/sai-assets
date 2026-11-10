@@ -1,0 +1,11 @@
+{
+ "id": "r01",
+ "name": "评审评分分母随实评项走",
+ "group": "review",
+ "source": "critique",
+ "rule": "Nielsen 十项各 0–4 分;总分分母必须写成 4×实评项数(全评 /40,两项 n/a 则 /32),禁止在部分评估上印 /40;档位 36–40 / 28–35 / 20–27 / 12–19 / 0–11,跨次比较先看分母是否一致。",
+ "evidence": "critique.md: 'Never print /40 over a partial set'; 'Most real interfaces score 20-32 out of 40'",
+ "when": "出评审报告、做趋势线时",
+ "own_gap": "自家 accept 只有红/绿,没有跨次可比的分数口径",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

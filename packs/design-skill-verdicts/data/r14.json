@@ -1,0 +1,11 @@
+{
+ "id": "r14",
+ "name": "URL 与输入的可访问性底线",
+ "group": "guidelines",
+ "source": "web-design-guidelines",
+ "rule": "图标按钮 aria-label;装饰图标 aria-hidden;异步结果 aria-live=\"polite\";语义 HTML 优先于 ARIA;标题层级 + skip link;标题锚点 scroll-margin-top;禁仅用颜色传达状态;禁 user-scalable=no / maximum-scale=1 禁缩放。",
+ "evidence": "command.md Accessibility / Anti-patterns 段",
+ "when": "无障碍闸时",
+ "own_gap": "多数自家已覆盖;此处合并成一条便于对照,冲突项以自家为准",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}

@@ -1,0 +1,12 @@
+{
+ "id": "ref-ds11-userinterface-wiki",
+ "name": "raphaelsalaja/userinterface-wiki",
+ "tag": "rules",
+ "verdict": "收(提炼)",
+ "source_url": "https://github.com/raphaelsalaja/userinterface-wiki",
+ "license": "MIT(license.md);rules/ 为自产规则文本,站点源码与 public/ 资产不收",
+ "observed": "152 条规则 / 12 类 / 四级影响;自家完全空白的整块:音效与合成 27 条(默认音量 0.3 / click 5–15ms / Q 2–5 / 3000–6000Hz / AudioContext 单例 / ramp 目标 0.001)、Morphing Icons 9 条、Container 两 div 模式 7 条、UX 定律可测值(400ms 响应/5–9 分块/组内 4px 组间 24px)、OpenType 6 条;输出格式 file:line - [rule-id]",
+ "when": "评审/打磨 UI 前按 tag 筛条目,取可量化判据进项目 design-lock.json.assertions;自家已有更硬口径时以自家为准",
+ "not_for": "当代码抄(本包零实现产物)、当色板用、当许可裁定用、或据此复刻上游原站",
+ "own_counterpart": "见 observed 内指名的自家条文;冲突项以 sai-frontend / design-system / PACK-CONTRACT 为准"
+}

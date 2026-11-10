@@ -1,0 +1,11 @@
+{
+ "id": "r04",
+ "name": "漂移四分类 + 最窄层修因",
+ "group": "review",
+ "source": "polish",
+ "rule": "把每处不一致先归类为:缺 token / 一次性实现 / 概念错位 / 局部缺陷;再在最窄的正确层修因(该建 token 就建 token,该换共享组件就换组件),禁止在下游逐个打补丁。 【可验锚点:把不一致归进 4 类之一,每处只修 1 个最窄层】",
+ "evidence": "polish.md: 'Fix the cause at the narrowest correct level'",
+ "when": "code review、发现同一视觉值多处重复时",
+ "own_gap": "自家 front-rules §10 有 tokens 单文件规则,缺上游归因分类",
+ "license_note": "本条为我方对上游公开规则的重述与取舍,不含上游原文、代码、图像;上游许可与出处见 13 个 ref-ds*.json 条目"
+}
